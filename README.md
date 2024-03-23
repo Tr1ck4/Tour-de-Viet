@@ -57,3 +57,6 @@
 		- CRUD for locations (Text, image)
 		- *Tickets Subpage*:
 			- Tiles of tickets (2 state Before/After Date)
+ 
+![image](https://github.com/Tr1ck4/Tour-de-Viet/assets/91774874/cd3c6f49-21f2-4a37-8887-8044cf60286c)
+
