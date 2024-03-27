@@ -1,34 +1,59 @@
 import './Parallax.css';
-import bg from './assets/background.png';
-import flight from './assets/flight.png';
-import f1 from './assets/fog1.png';
-import f2 from './assets/fog2.png';
-import l1 from './assets/left1.png';
-import l2 from './assets/left2.png';
-import l3 from './assets/left3.png';
-import r1 from './assets/right1.png';
-import r2 from './assets/right2.png';
-import r3 from './assets/right3.png';
+import bg from './assets/3/background.png';
+import f1 from './assets/3/front1.png';
+import f2 from './assets/3/front2.png';
+import f3 from './assets/3/front3.png';
+import f4 from './assets/3/front4.png';
+import o1 from './assets/3/object.png';
 
-function ParallaxPage() {
+
+export default function ParallaxPage() {
+  const arr = [
+    { src: bg, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     width:'2800px',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+    { src: f1, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  width:'100px',z: '6',  ctop: 'calc(50% + 150px)', cleft: 'calc(50% )'},
+    { src: f2, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  width:'100px',z: '5',  ctop: 'calc(50% + 150px)', cleft: 'calc(50% )'},
+    { src: f3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  width:'100px',z: '4',  ctop: 'calc(50% + 150px)', cleft: 'calc(50% )'},
+    { src: f4, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  width:'1000px',z: '3', ctop: 'calc(50% + 150px)', cleft: 'calc(50% )'},
+    { src: o1, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  width:'100px',z: '2',  ctop: 'calc(50% + 150px)', cleft: 'calc(50% )'},
+  ];
   return (
     <main>
-      <img src={bg} alt="Background" data-rotation="0" data-speedx="0.02" data-speedy="0.11" data-speedz="0" className="parallax bg-img" />
-      <img src={f1} alt="Fog 1" data-rotation="0" data-speedx="0.02" data-speedy="0.11" data-speedz="0" className="parallax bg-fog1" />
-      <img src={flight} alt="Flight" data-rotation="0.1" data-speedx="0.195" data-speedy="0.06" data-speedz="0.11" className="parallax tw-flight" />
-      <img src={f2} alt="Fog 2" data-rotation="0" data-speedx="0.03" data-speedy="0.12" data-speedz="0" className="parallax bg-fog2" />
-      <div className="text parallax" data-rotation="0.3" data-speedx="0.07" data-speedy="0.19" data-speedz="0.3">
-        <h2>Hello World</h2>
-        <h1>This is parallax</h1>
+      {arr.map((element, index) => (
+        <ParallaxElement key={index} {...element} />
+      ))}
+      <div className="text parallax" data-rotation="0.3" data-speedx="0.07" data-speedy="0.19" data-speedz="0.3" 
+      style={{
+        position: 'absolute',
+        zIndex: 2,
+        top: 'calc(50% -  20px)',
+        left: 'calc(50% + 120px)',
+        textAlign: 'center',
+        textTransform: 'uppercase',
+        color: '#000',
+      }}>
+        <h2 style={{fontWeight:'100', fontSize:'3em' }}>Welcome to</h2>
+        <h1 style={{fontWeight:'800', fontSize:'7em', lineHeight:'0.99'}}>ha tay</h1>
       </div>
-      <img src={r3} alt="Right 3" data-rotation="0.1" data-speedx="0.06" data-speedy="0.02" data-speedz="0.12" className="parallax tw-right3" />
-      <img src={r1} alt="Right 1" data-rotation="0.2" data-speedx="0.04" data-speedy="0.06" data-speedz="0.06" className="parallax tw-right1" />
-      <img src={r2} alt="Right 2" data-rotation="0.4" data-speedx="0.05" data-speedy="0.01" data-speedz="0.09" className="parallax tw-right2" />
-      <img src={l3} alt="Left 3" data-rotation="0.5" data-speedx="0.07" data-speedy="0.02" data-speedz="0.13" className="parallax tw-left3" />
-      <img src={l2} alt="Left 2" data-rotation="0.1" data-speedx="0.05" data-speedy="0.01" data-speedz="0.08" className="parallax tw-left2" />
-      <img src={l1} alt="Left 1" data-rotation="0.2" data-speedx="0.03" data-speedy="0.01" data-speedz="0.05" className="parallax tw-left1" />
     </main>
   )
 }
 
-export default ParallaxPage
+function ParallaxElement({ src, alt, rotation, speedx, speedy, speedz, w, z, ctop, cleft,h}) {
+  return (
+    <img src={src} 
+    alt={alt} data-rotation={rotation} 
+    data-speedx={speedx} 
+    data-speedy={speedy} 
+    data-speedz={speedz} 
+    className={`parallax ${alt}`} 
+    style={{ 
+      position: 'absolute', 
+      zIndex: z, 
+      top: ctop, 
+      left: cleft, 
+      width:w,
+      height:h, 
+      objectFit:'fill'
+      }} />
+  );
+}
