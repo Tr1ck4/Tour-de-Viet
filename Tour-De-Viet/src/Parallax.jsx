@@ -9,12 +9,12 @@ import o1 from './assets/3/object.png';
 
 export default function ParallaxPage() {
   const arr = [
-    { src: bg, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     width:'2800px',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
-    { src: f1, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  width:'100px',z: '6',  ctop: 'calc(50% + 150px)', cleft: 'calc(50% )'},
-    { src: f2, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  width:'100px',z: '5',  ctop: 'calc(50% + 150px)', cleft: 'calc(50% )'},
-    { src: f3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  width:'100px',z: '4',  ctop: 'calc(50% + 150px)', cleft: 'calc(50% )'},
-    { src: f4, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  width:'1000px',z: '3', ctop: 'calc(50% + 150px)', cleft: 'calc(50% )'},
-    { src: o1, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  width:'100px',z: '2',  ctop: 'calc(50% + 150px)', cleft: 'calc(50% )'},
+    { src: bg, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+    { src: f1, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+    { src: f2, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+    { src: f3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+    { src: f4, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+    { src: o1, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
   ];
   return (
     <main>
@@ -38,7 +38,7 @@ export default function ParallaxPage() {
   )
 }
 
-function ParallaxElement({ src, alt, rotation, speedx, speedy, speedz, w, z, ctop, cleft,h}) {
+function ParallaxElement({ src, alt, rotation, speedx, speedy, speedz, w, z, ctop, cleft}) {
   return (
     <img src={src} 
     alt={alt} data-rotation={rotation} 
@@ -52,7 +52,6 @@ function ParallaxElement({ src, alt, rotation, speedx, speedy, speedz, w, z, cto
       top: ctop, 
       left: cleft, 
       width:w,
-      height:h, 
       objectFit:'fill'
       }} />
   );
