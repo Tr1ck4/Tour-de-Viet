@@ -60,3 +60,14 @@
  
 ![image](https://github.com/Tr1ck4/Tour-de-Viet/assets/91774874/cd3c6f49-21f2-4a37-8887-8044cf60286c)
 
+Database design
+TownID - TownName - Tourname- Description - StartDate - EndDate - Price - Images
+
+FlightID - FlightName - StartDate - EndDate  - Price 
+
+UserName - Password - CitizenID - Name - Address - Age - Tel_num - Email 
+
+UserName - Tourname  - FlightID - CardID
+
+CardID - Cardnum - ExpirationDate - SecurityNum - OwnerName
+
