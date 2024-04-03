@@ -17,7 +17,7 @@ export default function ParallaxPage() {
     { src: f3_19, alt: "f3", rotation: "0",    speedx: "0.02",    speedy: "0.02",    speedz: "0.03",     w:'50%',z: '1',  ctop: 'calc(50% + 40px)', cleft: 'calc(50% - 270px)'},
     { src: f4_19, alt: "f4", rotation: "0",    speedx: "0.02",    speedy: "0.03",    speedz: "0.02",     w:'65%',z: '1',  ctop: 'calc(50% - 20px)', cleft: 'calc(50% + 280px)'},
     { src: f5_19, alt: "f4", rotation: "0",    speedx: "0.03",    speedy: "0.04",    speedz: "0.02",     w:'40%',z: '1',  ctop: 'calc(50% + 120px)', cleft: 'calc(50% - 50px)'},
-    { src: f6_19, alt: "f5", rotation: "0",    speedx: "0.04",    speedy: "0.05",    speedz: "0.02",     w:'50%',z: '1',  ctop: 'calc(50% + 130px)', cleft: 'calc(50% + 405px)'},
+    { src: f6_19, alt: "f5", rotation: "0",    speedx: "0.04",    speedy: "0.05",    speedz: "0.02",     w:'70%',z: '1',  ctop: 'calc(50% + 130px)', cleft: 'calc(50% + 230px)'},
     { src: f7_19, alt: "f5", rotation: "0",    speedx: "0.03",    speedy: "0.06",    speedz: "0.02",     w:'50%',z: '1',  ctop: 'calc(50% + 130px)', cleft: 'calc(50% - 405px)'},
 
   ];
