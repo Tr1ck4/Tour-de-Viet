@@ -13,7 +13,7 @@ export default function ParallaxPage() {
     { src: bg_18, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
     { src: f1_18, alt: "bg", rotation: "0",    speedx: "0.01",    speedy: "0",    speedz: "0.05",     w:'47%',z: '1',  ctop: 'calc(50% - 180px) ', cleft: 'calc(50% - 380px )'},
     { src: f2_18, alt: "bg", rotation: "0",    speedx: "0.02",    speedy: "0.03",    speedz: "0.1",     w:'28%',z: '1',  ctop: 'calc(50% - 250px) ', cleft: 'calc(50% - 40px )'},
-    { src: f3_18, alt: "bg", rotation: "0",    speedx: "0.03",    speedy: "0.01",    speedz: "0.05",     w:'55%',z: '1',  ctop: 'calc(50% - 120px) ', cleft: 'calc(50% + 330px )'},
+    { src: f3_18, alt: "bg", rotation: "0",    speedx: "0.03",    speedy: "0",    speedz: "0.05",     w:'55%',z: '1',  ctop: 'calc(50% - 120px) ', cleft: 'calc(50% + 330px )'},
     { src: f4_18, alt: "bg", rotation: "0",    speedx: "0.02",    speedy: "0.03",    speedz: "0.1",     w:'50%',z: '1',  ctop: 'calc(50% + 300px) ', cleft: 'calc(50% - 330px )'},
     { src: f5_18, alt: "bg", rotation: "0",    speedx: "0.05",    speedy: "0.05",    speedz: "0.1",     w:'55%',z: '1',  ctop: 'calc(50% + 150px) ', cleft: 'calc(50% + 200px )'},
 
