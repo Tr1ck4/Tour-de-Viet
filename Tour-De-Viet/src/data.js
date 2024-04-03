@@ -37,6 +37,13 @@ import f9_8 from './assets/8/back9.png';
 import f10_8 from './assets/8/back10.png';
 import f11_8 from './assets/8/back11.png';
 
+import bg_18 from './assets/18/background.png';
+import f1_18 from './assets/18/left 2.png';
+import f2_18 from './assets/18/back 1.png';
+import f3_18 from './assets/18/right 1.png';
+import f4_18 from './assets/18/left 1.png';
+import f5_18 from './assets/18/object.png';
+
 export const arr = [
     [
         { src: bg_6, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",    w:'2800px', z: '1', ctop: 'calc(50%)',  cleft: 'calc(50%)'},
@@ -85,6 +92,15 @@ export const arr = [
         { src: f8_8, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'46%',z: '9',  ctop: 'calc(50% - 120px)', cleft: 'calc(50% - 600px)'},
         { src: f9_8, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'26%',z: '10',  ctop: 'calc(50% - 120px)', cleft: 'calc(50% + 800px)'},
         { src: f10_8, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01", w:'33%',z: '11',  ctop: 'calc(50%  + 200px)', cleft: 'calc(50% + 750px)'},
+    ],
+    [
+        { src: bg_18, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_18, alt: "bg", rotation: "0",    speedx: "0.01",    speedy: "0",    speedz: "0.05",     w:'47%',z: '1',  ctop: 'calc(50% - 180px) ', cleft: 'calc(50% - 380px )'},
+        { src: f2_18, alt: "bg", rotation: "0",    speedx: "0.02",    speedy: "0.03",    speedz: "0.1",     w:'28%',z: '1',  ctop: 'calc(50% - 250px) ', cleft: 'calc(50% - 40px )'},
+        { src: f3_18, alt: "bg", rotation: "0",    speedx: "0.03",    speedy: "0.01",    speedz: "0.05",     w:'55%',z: '1',  ctop: 'calc(50% - 120px) ', cleft: 'calc(50% + 330px )'},
+        { src: f4_18, alt: "bg", rotation: "0",    speedx: "0.02",    speedy: "0.03",    speedz: "0.1",     w:'50%',z: '1',  ctop: 'calc(50% + 300px) ', cleft: 'calc(50% - 330px )'},
+        { src: f5_18, alt: "bg", rotation: "0",    speedx: "0.05",    speedy: "0.05",    speedz: "0.1",     w:'55%',z: '1',  ctop: 'calc(50% + 150px) ', cleft: 'calc(50% + 200px )'},
+
     ],
     
 
