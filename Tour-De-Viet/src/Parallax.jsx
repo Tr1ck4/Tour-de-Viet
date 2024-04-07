@@ -1,23 +1,33 @@
 import './Parallax.css';
-import bg_36 from './assets/36/bg.png';
-import r1_36 from './assets/36/rock_1.png';
-import r2_36 from './assets/36/rock_2.png';
-import r3_36 from './assets/36/rock_3.png';
-import r4_36 from './assets/36/rock_4.png';
-import c1_36 from './assets/36/cloud_1.png';
-import c2_36 from './assets/36/cloud_2.png';
-
+import bg from './assets/8/background.png';
+import f1 from './assets/8/back1.png';
+import f2 from './assets/8/back2.png';
+import f3 from './assets/8/back3.png';
+import f4 from './assets/8/back4.png';
+import f5 from './assets/8/back5.png';
+import f6 from './assets/8/back6.png';
+import f7 from './assets/8/back7.png';
+import f8 from './assets/8/back8.png';
+import f9 from './assets/8/back9.png';
+import f10 from './assets/8/back10.png';
+import f11 from './assets/8/back11.png';
+8
 
 
 export default function ParallaxPage() {
   const arr = [
-    { src: bg_36, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-    { src: r2_36, alt: "rock_2", rotation: "0.02",    speedx: "0.01", speedy: "0.07", speedz: "0.01",  w:'75%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-    { src: r1_36, alt: "rock_1", rotation: "0.02",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-    { src: r3_36, alt: "rock_3", rotation: "0.01",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '5',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-    { src: r4_36, alt: "rock_4", rotation: "0.01", speedx: "0.01", speedy: "0.01", speedz: "0.0",  w:'100%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-    { src: c1_36, alt: "cloud_1", rotation: "0",    speedx: "0.0", speedy: "0.01", speedz: "0",     w:'100%',z: '6',  ctop: 'calc(50% )', cleft: 'calc(50%)'},
-    { src: c2_36, alt: "cloud_2", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'100%',z: '7',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
+    { src: bg, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+    { src: f1, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'55%',z: '2',  ctop: 'calc(50% + 80px)', cleft: 'calc(50% - 580px)'},
+    { src: f2, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '3',  ctop: 'calc(50% + 2px)', cleft: 'calc(50% + 720px)'},
+    { src: f3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'100%',z: '4',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 150px)'},
+    { src: f4, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '5',  ctop: 'calc(50% - 350px)', cleft: 'calc(50% - 300px)'},
+    { src: f11, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '5',  ctop: 'calc(50% - 350px)', cleft: 'calc(50% + 100px)'},
+    { src: f5, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 4535px)', cleft: 'calc(50% + 750px)'},
+    { src: f6, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'66%',z: '7',  ctop: 'calc(50% - 100px)', cleft: 'calc(50% + 380px)'},
+    { src: f7, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'52%',z: '8',  ctop: 'calc(50% - 70px)', cleft: 'calc(50% - 550px)'},
+    { src: f8, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'46%',z: '9',  ctop: 'calc(50% - 120px)', cleft: 'calc(50% - 600px)'},
+    { src: f9, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'26%',z: '10',  ctop: 'calc(50% - 120px)', cleft: 'calc(50% + 800px)'},
+    { src: f10, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01", w:'33%',z: '11',  ctop: 'calc(50%  + 200px)', cleft: 'calc(50% + 750px)'},
   ];
   return (
     <main>

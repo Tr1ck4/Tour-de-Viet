@@ -36,6 +36,37 @@ import f8_8 from './assets/8/back8.png';
 import f9_8 from './assets/8/back9.png';
 import f10_8 from './assets/8/back10.png';
 import f11_8 from './assets/8/back11.png';
+
+import bg_18 from './assets/18/background.png';
+import f1_18 from './assets/18/left 2.png';
+import f2_18 from './assets/18/back 1.png';
+import f3_18 from './assets/18/right 1.png';
+import f4_18 from './assets/18/right 2.png';
+import f5_18 from './assets/18/left 1.png';
+import f6_18 from './assets/18/object.png';
+
+import bg_19 from './assets/19/background.png';
+import f1_19 from './assets/19/sky.png';
+import f2_19 from './assets/19/back.png';
+import f3_19 from './assets/19/left 2.png';
+import f4_19 from './assets/19/right 1.png';
+import f5_19 from './assets/19/right 2.png';
+import f6_19 from './assets/19/right 2.png';
+import f7_19 from './assets/19/left 1.png';
+
+import bg_20 from './assets/20/background.png';
+import f1_20 from './assets/20/sky.png';
+import f2_20 from './assets/20/right 1.png';
+import f3_20 from './assets/20/left 1.png';
+import f4_20 from './assets/20/object 2.png';
+import f5_20 from './assets/20/object.png';
+
+import bg_21 from './assets/21/background.png';
+import f1_21 from './assets/21/left 1.png';
+import f2_21 from './assets/21/left 2.png';
+import f3_21 from './assets/21/left 3.png';
+import f4_21 from './assets/21/right 1.png';
+import f5_21 from './assets/21/right 2.png';
 import bg_33 from './assets/3/bg.png';
 import br_33 from './assets/33/bridge.png';
 import brs_33 from './assets/33/brush_1.png';
@@ -117,47 +148,6 @@ export const arr = [
         { src: f9_8, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'26%',z: '10',  ctop: 'calc(50% - 120px)', cleft: 'calc(50% + 800px)'},
         { src: f10_8, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01", w:'33%',z: '11',  ctop: 'calc(50%  + 200px)', cleft: 'calc(50% + 750px)'},
     ],
-    [
-        { src: bg_33, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: m1_33, alt: "mount_1", rotation: "0",    speedx: "0.0", speedy: "0.07", speedz: "0.01",  w:'',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: s1_33, alt: "sky_1", rotation: "0.0",  speedx: "0.0", speedy: "0.02", speedz: "0.02",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: s2_33, alt: "sky_2", rotation: "0.0",  speedx: "0.0", speedy: "0.02", speedz: "0.02",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: m2_33, alt: "mount_2", rotation: "0", speedx: "0.0", speedy: "0.01", speedz: "0.0",  w:'100%',z: '5',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: br_33, alt: "bridge", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0",     w:'100%',z: '6',  ctop: 'calc(50% )', cleft: 'calc(50%)'},
-        { src: brs_33, alt: "brush_1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'100%',z: '7',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-    ],
-
-    [
-        { src: bg_34, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: l1_34, alt: "land1", rotation: "0.02",    speedx: "0.0", speedy: "0.07", speedz: "0.01",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: l2_34, alt: "land2", rotation: "0.02",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: l3_34, alt: "land3", rotation: "0.01",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '5',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: l4_34, alt: "land4", rotation: "0.01", speedx: "0.01", speedy: "0.01", speedz: "0.0",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-    ],
-    [   
-        { src: bg_35, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: s_35, alt: "sea", rotation: "0.02",    speedx: "0.01", speedy: "0.07", speedz: "0.01",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: l_35, alt: "land", rotation: "0.02",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: m_35, alt: "mountain", rotation: "0.01",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: b1_35, alt: "building_1", rotation: "0.01", speedx: "0.01", speedy: "0.01", speedz: "0.0",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: b2_35, alt: "building_2", rotation: "0",    speedx: "0.0", speedy: "0.01", speedz: "0",     w:'100%',z: '6',  ctop: 'calc(50% )', cleft: 'calc(50%)'},
-    ],
-    [
-        { src: bg_36, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: r2_36, alt: "rock_2", rotation: "0.02",    speedx: "0.01", speedy: "0.07", speedz: "0.01",  w:'75%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: r1_36, alt: "rock_1", rotation: "0.02",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: r3_36, alt: "rock_3", rotation: "0.01",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '5',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: r4_36, alt: "rock_4", rotation: "0.01", speedx: "0.01", speedy: "0.01", speedz: "0.0",  w:'100%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: c1_36, alt: "cloud_1", rotation: "0",    speedx: "0.0", speedy: "0.01", speedz: "0",     w:'100%',z: '6',  ctop: 'calc(50% )', cleft: 'calc(50%)'},
-        { src: c2_36, alt: "cloud_2", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'100%',z: '7',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-    ],
-    [
-        { src: bg_37, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: m4_37, alt: "mountain_4", rotation: "0.02",    speedx: "0.01", speedy: "0.07", speedz: "0.01",  w:'75%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: m3_37, alt: "mountain_3", rotation: "0.02",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: l_37, alt: "land", rotation: "0.01",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: m2_37, alt: "mountain_2", rotation: "0.01", speedx: "0.0", speedy: "0.01", speedz: "0.0",  w:'100%',z: '5',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: m1_37, alt: "mountain_1", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0",     w:'100%',z: '6',  ctop: 'calc(50% )', cleft: 'calc(50%)'},
-    ],
+    
 
 ];
