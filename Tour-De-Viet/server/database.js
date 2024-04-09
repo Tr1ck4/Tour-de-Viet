@@ -6,13 +6,16 @@ class UserModel {
       if (err) {  
         console.error('Error connecting to database:', err.message);
       } else {
-        this.db.run("CREATE TABLE IF NOT EXISTS comments (townID INT, tourName TEXT, comment TEXT, userName TEXT, rating REAL, PRIMARY KEY (townID, tourName), FOREIGN KEY (townID) REFERENCES tours(townID), FOREIGN KEY (tourName) REFERENCES tours(tourName), FOREIGN KEY (userName) REFERENCES books(userName))");
+        this.db.run("CREATE TABLE IF NOT EXISTS comments (townID INT, tourName TEXT, comment TEXT, userName TEXT, rating REAL, FOREIGN KEY (townID) REFERENCES tours(townID), FOREIGN KEY (tourName) REFERENCES tours(tourName), FOREIGN KEY (userName) REFERENCES books(userName))");
         this.db.run("CREATE TABLE IF NOT EXISTS tours    (townID INT, tourName TEXT, description TEXT, startDate TEXT, endDate TEXT, price REAL, images TEXT, PRIMARY KEY (townID, tourName))");
         this.db.run("CREATE TABLE IF NOT EXISTS flights (flightID INTEGER PRIMARY KEY AUTOINCREMENT, flightName TEXT, StartDate TEXT, EndDate TEXT, price REAL, destination TEXT, start TEXT)");
         this.db.run("CREATE TABLE IF NOT EXISTS accounts (userName TEXT UNIQUE, password TEXT, citizenID TEXT, name TEXT, address TEXT, age INT, telNum TEXT, email TEXT)");
         this.db.run("CREATE TABLE IF NOT EXISTS books (userName TEXT, tourName TEXT, flightID INT, cardID INT, FOREIGN KEY (tourName) REFERENCES tours(tourName),FOREIGN KEY (userName) REFERENCES accounts(userName), FOREIGN KEY (flightID) REFERENCES flights(flightID), FOREIGN KEY (cardID) REFERENCES cards(cardID))");
         console.log('Connected to the database.');
-        this.createBook('haha','Du lich',1, 123);
+        this.createComments(1,'Du lich','hihi','Fine',1.0);
+        this.createComments(1,'Du lich','haha','Cool one', null);
+        this.createComments(1,'Du lich','hoho','Fine',5.0);
+        this.createComments(1,'Du lich','qewqwe','Fasdasdaasdadqweine',2.0);
       }
     });
   }
@@ -35,7 +38,7 @@ class UserModel {
   }
 
   getComments(townID , tourName ,callback) {
-    this.db.get("SELECT * FROM comments WHERE townID = ? AND tourName = ?", [townID, tourName],callback)
+    this.db.all("SELECT * FROM comments WHERE townID = ? AND tourName = ?", [townID, tourName],callback)
   }
 
   createComments(townID , tourName , userName, comment, rating, callback) {

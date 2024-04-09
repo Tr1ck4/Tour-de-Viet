@@ -33,7 +33,6 @@ app.post('/api/bookings', (req, res) => {
       res.json({
           message: 'Booking created',
           data: req.body,
-          id: result.lastID
       });
   });
 });
@@ -63,7 +62,6 @@ app.post('/api/comments', (req, res) => {
       res.json({
           message: 'Comment created',
           data: req.body,
-          id: result.lastID
       });
   });
 });
