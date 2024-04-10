@@ -51,6 +51,26 @@ class UserModel {
     let sql = "UPDATE comments SET rating = ? WHERE townID = ? AND tourName = ?";
     this.db.run(sql, [rating, townID, tourName], callback);
   }
+
+  getTour(tourName, callback) {
+    this.db.get("SELECT townID, tourName, description, price , images  FROM tours WHERE tourName = ?", [tourName], callback);
+  }
+
+  createTour(townID, tourName, description, startDate, endDate, price, images, callback) {
+    this.db.run("INSERT INTO tours (townID, tourName, description, startDate, endDate, price, images) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [townID, tourName, description, startDate, endDate, price, images],
+      callback
+    );
+  }
+
+  updateTour(tourName, description, startDate, endDate, price, images, callback) {
+    let sql = "UPDATE tours SET tourName = ?, description=?, startDate=? , endDate=? , price=? , images=? WHERE tourName = ?"
+    this.db.run(sql, [tourName, description, startDate , endDate , price , images], callback);
+  }
+
+
+
+
   
   closeConnection() {
     this.db.close((err) => {
@@ -62,6 +82,8 @@ class UserModel {
     });
   }
 }
+
+
 
 export default UserModel;
 
