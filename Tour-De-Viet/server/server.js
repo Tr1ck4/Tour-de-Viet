@@ -1,36 +1,76 @@
-import express from 'express';
-import UserModel from './database.js';
-const userModel = new UserModel('./database.db');
+export default UserModel;
 
-const app = express();
-const PORT = 3000;
+const baseUrl = 'http://localhost:3000';
 
+export function fetchBookings(userName) {
+  return fetch(`${baseUrl}/api/bookings/${userName}`)
+    .then(response => response.json())
+    .catch(error => {
+      console.error('Error fetching bookings:', error);
+    });
+}
 
-userModel.con
-app.post('/users', (req, res) => {
-  const { name } = req.body;
-  userModel.createUser(name, (err) => {
-    if (err) {
-      console.error('Error creating user:', err.message);
-      res.status(500).send('Error creating user');
-    } else {
-      res.status(201).send('User created successfully');
-    }
-  });
-});
+export function createBooking(userName, tourName, flightID, cardID) {
+  const requestData = {
+    userName,
+    tourName,
+    flightID,
+    cardID
+  };
 
-// Example route to get all users
-app.get('/users', (req, res) => {
-  userModel.getUsers((err, users) => {
-    if (err) {
-      console.error('Error getting users:', err.message);
-      res.status(500).send('Error getting users');
-    } else {
-      res.json(users);
-    }
-  });
-});
+  return fetch(`${baseUrl}/api/bookings`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestData)
+  })
+    .then(response => response.json())
+    .catch(error => {
+      console.error('Error creating booking:', error);
+    });
+}
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+export function fetchComments(townID, tourName) {
+  return fetch(`${baseUrl}/api/comments/${townID}/${tourName}`)
+    .then(response => response.json())
+    .catch(error => {
+      console.error('Error fetching comments:', error);
+    });
+}
+
+export function createComment(townID,tourName,userName,comment,rating) {
+  const requestData = {
+    townID,
+    tourName,
+    userName,
+    comment,
+    rating
+  };
+
+  return fetch(`${baseUrl}/api/comments`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestData)
+  })
+    .then(response => response.json())
+    .catch(error => {
+      console.error('Error creating comment:', error);
+    });
+}
+
+export function updateCommentRating(townID, tourName, rating) {
+  return fetch(`${baseUrl}/api/comments/${townID}/${tourName}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ rating })
+  })
+    .then(response => response.json())
+    .catch(error => {
+      console.error('Error updating rating:', error);
+    });
+}
