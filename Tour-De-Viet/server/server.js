@@ -1,15 +1,10 @@
-export default UserModel;
+import express from 'express';
+import UserModel from './database.js';
+const userModel = new UserModel('./database.db');
+
 export const app = express();
 const PORT = 3000;
 
-
-export function fetchBookings(userName) {
-  return fetch(`${baseUrl}/api/bookings/${userName}`)
-    .then(response => response.json())
-    .catch(error => {
-      console.error('Error fetching bookings:', error);
-    });
-}
 
 app.use(express.json());
 
@@ -88,46 +83,6 @@ app.put('/api/comments/:townID/:tourName', (req, res) => {
   });
 });
 
-export function fetchComments(townID, tourName) {
-  return fetch(`${baseUrl}/api/comments/${townID}/${tourName}`)
-    .then(response => response.json())
-    .catch(error => {
-      console.error('Error fetching comments:', error);
-    });
-}
-
-export function createComment(townID,tourName,userName,comment,rating) {
-  const requestData = {
-    townID,
-    tourName,
-    userName,
-    comment,
-    rating
-  };
-
-  return fetch(`${baseUrl}/api/comments`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(requestData)
-  })
-    .then(response => response.json())
-    .catch(error => {
-      console.error('Error creating comment:', error);
-    });
-}
-
-export function updateCommentRating(townID, tourName, rating) {
-  return fetch(`${baseUrl}/api/comments/${townID}/${tourName}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ rating })
-  })
-    .then(response => response.json())
-    .catch(error => {
-      console.error('Error updating rating:', error);
-    });
-}
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
