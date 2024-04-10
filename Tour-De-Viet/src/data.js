@@ -15,7 +15,7 @@ import l3_2 from './assets/2/left3.png';
 import l4_2 from './assets/2/cloud.png';
 import ar_2 from './assets/2/arr.png';
 import f1_2 from './assets/2/front1.png';
-import r1_2 from './assets/2/rig_3ht1.png';
+import r1_2 from './assets/2/right1.png';
 import r2_2 from './assets/2/right2.png';
 import r3_2 from './assets/2/right3.png';
 import bg_3 from './assets/3/background.png';
@@ -67,7 +67,7 @@ import f2_21 from './assets/21/left 2.png';
 import f3_21 from './assets/21/left 3.png';
 import f4_21 from './assets/21/right 1.png';
 import f5_21 from './assets/21/right 2.png';
-import bg_33 from './assets/3/bg.png';
+import bg_33 from './assets/33/bg.png';
 import br_33 from './assets/33/bridge.png';
 import brs_33 from './assets/33/brush_1.png';
 import m1_33 from './assets/33/mountain_1.png';
@@ -99,42 +99,49 @@ import m3_37 from './assets/37/mountain_3.png';
 import m4_37 from './assets/37/mountain_4.png';
 import l_37 from './assets/37/land.png';
 
+export let current_id = 35;
 export const arr = [
-    [
-        { src: bg_6, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",    w:'2800px', z: '1', ctop: 'calc(50%)',  cleft: 'calc(50%)'},
-        { src: f1_6, alt: "f1", rotation: "0.1",  speedx: "0.03", speedy: "0.02", speedz: "0.05",             z: '6', ctop: 'calc(50% + 60px)', cleft: 'calc(50% + 120px )' },
-        { src: f2_6, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",             z: '5', ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 60px)'},
-        { src: f3_6, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",             z: '4', ctop: 'calc(50% + 210px)', cleft: 'calc(50% - 60px)' },
-        { src: f4_6, alt: "f4", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",             z: '4', ctop: 'calc(50% + 230px)', cleft: 'calc(50% + 400px)'},
-        { src: l1_6, alt: "l1", rotation: "0.01", speedx: "0.02", speedy: "0.01", speedz: "0.09",             z: '4', ctop: 'calc(50% - 60px)', cleft: 'calc(50%  - 950px)' },
-        { src: l2_6, alt: "l2", rotation: "0.01", speedx: "0.02", speedy: "0.01", speedz: "0.09",             z: '3', ctop: 'calc(50% - 100px)',cleft: 'calc(50% - 900px)'},
-        { src: b1_6, alt: "b1", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.02",               z: '2', ctop: 'calc(50% - 180px)', cleft: 'calc(50% - 40px)' },
-        { src: b2_6, alt: "b2", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.02",    w:'1200px',h:'200px',           z: '1', ctop: 'calc(50% - 210px)', cleft: 'calc(50% + 600px)' },
-        { src: r1_6, alt: "r1", rotation: "0.0",  speedx: "0.015",speedy: "0.01", speedz: "0.09",             z: '1', ctop: 'calc(50% - 100px)', cleft: 'calc(50% + 925px)' },
-    ],
-    [
-        { src: bg_2, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",                 z: '1', ctop: 'calc(50% - 120px)', cleft: 'calc(50%)'},
-        { src: l1_2, alt: "l1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'750px',  z: '4', ctop: 'calc(50% + 70px)',  cleft: 'calc(50% - 750px )' },
-        { src: l2_2, alt: "l2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'30px',   z: '6', ctop: 'calc(50% + 450px)', cleft: 'calc(50% - 670px)'},
-        { src: l3_2, alt: "l3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'400px',  z: '4', ctop: 'calc(50% - 150px)', cleft: 'calc(50% - 900px)' },
-        { src: l4_2, alt: "l4", rotation: "0.2",    speedx: "0.04", speedy: "0.02", speedz: "0.02",            z: '2', ctop: 'calc(50% - 70px)',  cleft: 'calc(50% + 20px)'},
-        { src: ar_2, alt: "ar", rotation: "0.01", speedx: "0.02", speedy: "0.01", speedz: "0.09",              z: '3', ctop: 'calc(50% + 260px)', cleft: 'calc(50%  )' },
-        { src: f1_2, alt: "f1", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'2200px', z: '5', ctop: 'calc(50% + 320px)', cleft: 'calc(50% - 5px)' },
-        { src: r1_2, alt: "r1", rotation: "0.01", speedx: "0.02", speedy: "0.01", speedz: "0.09",  w:'400px',  z: '5', ctop: 'calc(50% + 100px)', cleft: 'calc(50% + 900px)'},
-        { src: r2_2, alt: "r2", rotation: "0",  speedx: "0.01", speedy: "0.01", sp_8eedz: "0.02",    w:'200px',  z: '5', ctop: 'calc(50% + 350px)', cleft: 'calc(50% + 250px)' },
-        { src: r2_2, alt: "r2", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.02",    w:'200px',  z: '2', ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 1095px)' },
-        { src: r2_2, alt: "r2", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.02",    w:'200px',  z: '2', ctop: 'calc(50% + 350px)', cleft: 'calc(50% + 1040px)' },
-        { src: r3_2, alt: "r3", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.02",    w:'850px',  z: '3', ctop: 'calc(50% + 40px )', cleft: 'calc(50% + 600px)' },
-    ],
-    [
+    {
+        "id" : 6, 
+        "source": [
+            { src: bg_6, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",    w:'2800px', z: '1', ctop: 'calc(50%)',  cleft: 'calc(50%)'},
+            { src: f1_6, alt: "f1", rotation: "0.1",  speedx: "0.03", speedy: "0.02", speedz: "0.05",             z: '6', ctop: 'calc(50% + 60px)', cleft: 'calc(50% + 120px )' },
+            { src: f2_6, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",             z: '5', ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 60px)'},
+            { src: f3_6, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",             z: '4', ctop: 'calc(50% + 210px)', cleft: 'calc(50% - 60px)' },
+            { src: f4_6, alt: "f4", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",             z: '4', ctop: 'calc(50% + 230px)', cleft: 'calc(50% + 400px)'},
+            { src: l1_6, alt: "l1", rotation: "0.01", speedx: "0.02", speedy: "0.01", speedz: "0.09",             z: '4', ctop: 'calc(50% - 60px)', cleft: 'calc(50%  - 950px)' },
+            { src: l2_6, alt: "l2", rotation: "0.01", speedx: "0.02", speedy: "0.01", speedz: "0.09",             z: '3', ctop: 'calc(50% - 100px)',cleft: 'calc(50% - 900px)'},
+            { src: b1_6, alt: "b1", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.02",               z: '2', ctop: 'calc(50% - 180px)', cleft: 'calc(50% - 40px)' },
+            { src: b2_6, alt: "b2", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.02",    w:'1200px',h:'200px',           z: '1', ctop: 'calc(50% - 210px)', cleft: 'calc(50% + 600px)' },
+            { src: r1_6, alt: "r1", rotation: "0.0",  speedx: "0.015",speedy: "0.01", speedz: "0.09",             z: '1', ctop: 'calc(50% - 100px)', cleft: 'calc(50% + 925px)' },
+        ]
+    },
+    {
+        "id": 2, 
+        "source":[
+            { src: bg_2, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",                 z: '1', ctop: 'calc(50% - 120px)', cleft: 'calc(50%)'},
+            { src: l1_2, alt: "l1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'750px',  z: '4', ctop: 'calc(50% + 70px)',  cleft: 'calc(50% - 750px )' },
+            { src: l2_2, alt: "l2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'30px',   z: '6', ctop: 'calc(50% + 450px)', cleft: 'calc(50% - 670px)'},
+            { src: l3_2, alt: "l3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'400px',  z: '4', ctop: 'calc(50% - 150px)', cleft: 'calc(50% - 900px)' },
+            { src: l4_2, alt: "l4", rotation: "0.2",    speedx: "0.04", speedy: "0.02", speedz: "0.02",            z: '2', ctop: 'calc(50% - 70px)',  cleft: 'calc(50% + 20px)'},
+            { src: ar_2, alt: "ar", rotation: "0.01", speedx: "0.02", speedy: "0.01", speedz: "0.09",              z: '3', ctop: 'calc(50% + 260px)', cleft: 'calc(50%  )' },
+            { src: f1_2, alt: "f1", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'2200px', z: '5', ctop: 'calc(50% + 320px)', cleft: 'calc(50% - 5px)' },
+            { src: r1_2, alt: "r1", rotation: "0.01", speedx: "0.02", speedy: "0.01", speedz: "0.09",  w:'400px',  z: '5', ctop: 'calc(50% + 100px)', cleft: 'calc(50% + 900px)'},
+            { src: r2_2, alt: "r2", rotation: "0",  speedx: "0.01", speedy: "0.01", sp_8eedz: "0.02",    w:'200px',  z: '5', ctop: 'calc(50% + 350px)', cleft: 'calc(50% + 250px)' },
+            { src: r2_2, alt: "r2", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.02",    w:'200px',  z: '2', ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 1095px)' },
+            { src: r2_2, alt: "r2", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.02",    w:'200px',  z: '2', ctop: 'calc(50% + 350px)', cleft: 'calc(50% + 1040px)' },
+            { src: r3_2, alt: "r3", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.02",    w:'850px',  z: '3', ctop: 'calc(50% + 40px )', cleft: 'calc(50% + 600px)' },
+        ]
+    },
+    {"id":3,"source":[
         { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
         { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
         { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
         { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
         { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
-    ],
-    [
+    ]},
+    {"id":8,"source":[
         { src: bg_8, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_8, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'55%',z: '2',  ctop: 'calc(50% + 80px)', cleft: 'calc(50% - 580px)'},
         { src: f2_8, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '3',  ctop: 'calc(50% + 2px)', cleft: 'calc(50% + 720px)'},
@@ -147,10 +154,8 @@ export const arr = [
         { src: f8_8, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'46%',z: '9',  ctop: 'calc(50% - 120px)', cleft: 'calc(50% - 600px)'},
         { src: f9_8, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'26%',z: '10',  ctop: 'calc(50% - 120px)', cleft: 'calc(50% + 800px)'},
         { src: f10_8, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01", w:'33%',z: '11',  ctop: 'calc(50%  + 200px)', cleft: 'calc(50% + 750px)'},
-
-
-    ],
-    [
+    ]},
+    {"id":33,"source":[
         { src: bg_33, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: m1_33, alt: "mount_1", rotation: "0",    speedx: "0.0", speedy: "0.07", speedz: "0.01",  w:'',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: s1_33, alt: "sky_1", rotation: "0.0",  speedx: "0.0", speedy: "0.02", speedz: "0.02",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
@@ -158,24 +163,24 @@ export const arr = [
         { src: m2_33, alt: "mount_2", rotation: "0", speedx: "0.0", speedy: "0.01", speedz: "0.0",  w:'100%',z: '5',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: br_33, alt: "bridge", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0",     w:'100%',z: '6',  ctop: 'calc(50% )', cleft: 'calc(50%)'},
         { src: brs_33, alt: "brush_1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'100%',z: '7',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-    ],
+    ]},
 
-    [
+    {"id":34,"source":[
         { src: bg_34, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: l1_34, alt: "land1", rotation: "0.02",    speedx: "0.0", speedy: "0.07", speedz: "0.01",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: l2_34, alt: "land2", rotation: "0.02",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: l3_34, alt: "land3", rotation: "0.01",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '5',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: l4_34, alt: "land4", rotation: "0.01", speedx: "0.01", speedy: "0.01", speedz: "0.0",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-    ],
-    [   
+    ]},
+    {"id":35,"source":[   
         { src: bg_35, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: s_35, alt: "sea", rotation: "0.02",    speedx: "0.01", speedy: "0.07", speedz: "0.01",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: l_35, alt: "land", rotation: "0.02",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: m_35, alt: "mountain", rotation: "0.01",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: b1_35, alt: "building_1", rotation: "0.01", speedx: "0.01", speedy: "0.01", speedz: "0.0",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: b2_35, alt: "building_2", rotation: "0",    speedx: "0.0", speedy: "0.01", speedz: "0",     w:'100%',z: '6',  ctop: 'calc(50% )', cleft: 'calc(50%)'},
-    ],
-    [
+    ]},
+    {"id":36,"source":[
         { src: bg_36, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: r2_36, alt: "rock_2", rotation: "0.02",    speedx: "0.01", speedy: "0.07", speedz: "0.01",  w:'75%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: r1_36, alt: "rock_1", rotation: "0.02",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
@@ -183,16 +188,16 @@ export const arr = [
         { src: r4_36, alt: "rock_4", rotation: "0.01", speedx: "0.01", speedy: "0.01", speedz: "0.0",  w:'100%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: c1_36, alt: "cloud_1", rotation: "0",    speedx: "0.0", speedy: "0.01", speedz: "0",     w:'100%',z: '6',  ctop: 'calc(50% )', cleft: 'calc(50%)'},
         { src: c2_36, alt: "cloud_2", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'100%',z: '7',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-    ],
-    [
+    ]},
+    {"id":37,"source":[
         { src: bg_37, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: m4_37, alt: "mountain_4", rotation: "0.02",    speedx: "0.01", speedy: "0.07", speedz: "0.01",  w:'75%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: m3_37, alt: "mountain_3", rotation: "0.02",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: l_37, alt: "land", rotation: "0.01",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: m2_37, alt: "mountain_2", rotation: "0.01", speedx: "0.0", speedy: "0.01", speedz: "0.0",  w:'100%',z: '5',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: m1_37, alt: "mountain_1", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0",     w:'100%',z: '6',  ctop: 'calc(50% )', cleft: 'calc(50%)'},
-    ],
-    [
+    ]},
+    {"id":18,"source":[
         { src: bg_18, alt: "bg", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_18, alt: "f1", rotation: "0",    speedx: "0.02",    speedy: "0.02",    speedz: "0.05",     w:'47%',z: '1',  ctop: 'calc(50% - 180px) ', cleft: 'calc(50% - 380px )'},
         { src: f2_18, alt: "f2", rotation: "0",    speedx: "0.03",    speedy: "0.03",    speedz: "0.05",     w:'40%',z: '1',  ctop: 'calc(50% - 250px) ', cleft: 'calc(50% - 40px )'},
@@ -200,8 +205,8 @@ export const arr = [
         { src: f4_18, alt: "f4", rotation: "0",    speedx: "0.04",    speedy: "0.05",    speedz: "0.1",     w:'45%',z: '1',  ctop: 'calc(50% + 170px) ', cleft: 'calc(50% + 360px )'},
         { src: f5_18, alt: "f5", rotation: "0",    speedx: "0.04",    speedy: "0.03",    speedz: "0.1",     w:'50%',z: '1',  ctop: 'calc(50% + 300px) ', cleft: 'calc(50% - 330px )'},
         { src: f6_18, alt: "f6", rotation: "0",    speedx: "0.05",    speedy: "0.05",    speedz: "0.1",     w:'60%',z: '1',  ctop: 'calc(50% + 100px) ', cleft: 'calc(50% + 230px )'},
-    ],
-    [
+    ]},
+    {"id":19,"source":[
         { src: bg_19, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_19, alt: "f1", rotation: "0",    speedx: "0.01",    speedy: "0",    speedz: "0.01",     w:'100%',z: '1',  ctop: 'calc(50% - 380px)', cleft: 'calc(50%)'},
         { src: f2_19, alt: "f2", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0.03",     w:'100%',z: '1',  ctop: 'calc(50% - 120px)', cleft: 'calc(50%)'},
@@ -210,21 +215,21 @@ export const arr = [
         { src: f5_19, alt: "f5", rotation: "0",    speedx: "0.03",    speedy: "0.04",    speedz: "0.02",     w:'40%',z: '1',  ctop: 'calc(50% + 120px)', cleft: 'calc(50% - 50px)'},
         { src: f6_19, alt: "f6", rotation: "0",    speedx: "0.04",    speedy: "0.05",    speedz: "0.02",     w:'70%',z: '1',  ctop: 'calc(50% + 130px)', cleft: 'calc(50% + 230px)'},
         { src: f7_19, alt: "f7", rotation: "0",    speedx: "0.03",    speedy: "0.06",    speedz: "0.02",     w:'50%',z: '1',  ctop: 'calc(50% + 130px)', cleft: 'calc(50% - 405px)'},
-    ],
-    [
+    ]},
+    {"id":20,"source":[
         { src: bg_20, alt: "bg", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_20, alt: "f1", rotation: "0",    speedx: "0.01",    speedy: "0.02",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% - 150px )', cleft: 'calc(50% )'},
         { src: f2_20, alt: "f2", rotation: "0",    speedx: "0.05",    speedy: "0.03",    speedz: "0",     w:'65%',z: '1',  ctop: 'calc(50% - 160px )', cleft: 'calc(50% + 270px)'},
         { src: f3_20, alt: "f3", rotation: "0",    speedx: "0.02",    speedy: "0.03",    speedz: "0",     w:'70%',z: '1',  ctop: 'calc(50% - 130px )', cleft: 'calc(50% - 280px)'},
         { src: f4_20, alt: "f4", rotation: "0",    speedx: "0.03",    speedy: "0.04",    speedz: "0",     w:'20%',z: '1',  ctop: 'calc(50% - 50px )', cleft: 'calc(50% - 150px)'},
         { src: f5_20, alt: "f5", rotation: "0",    speedx: "0.04",    speedy: "0.04",    speedz: "0",     w:'25%',z: '1',  ctop: 'calc(50% - 50px )', cleft: 'calc(50% + 230px)'},
-    ],
-    [
+    ]},
+    {"id":21,"source":[
         { src: bg_21, alt: "bg", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0",  w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_21, alt: "f1", rotation: "0",    speedx: "0.02",    speedy: "0.02",    speedz: "0",     w:'33%',z: '1',  ctop: 'calc(50% - 70px )', cleft: 'calc(50% - 330px )'},
         { src: f2_21, alt: "f2", rotation: "0",    speedx: "0.03",    speedy: "0.03",    speedz: "0",     w:'33%',z: '1',  ctop: 'calc(50% + 120px)', cleft: 'calc(50% - 300px )'},
         { src: f3_21, alt: "f3", rotation: "0",    speedx: "0.04",    speedy: "0.03",    speedz: "0",     w:'15%',z: '1',  ctop: 'calc(50% + 200px)', cleft: 'calc(50% - 600px )'},
         { src: f4_21, alt: "f4", rotation: "0",    speedx: "0.02",    speedy: "0.02",    speedz: "0",     w:'70%',z: '1',  ctop: 'calc(50% - 100px)', cleft: 'calc(50% + 400px )'},
         { src: f5_21, alt: "f5", rotation: "0",    speedx: "0.03",    speedy: "0.03",    speedz: "0",     w:'75%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50% + 130px )'},
-    ],
+    ]},
 ];
