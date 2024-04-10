@@ -100,7 +100,7 @@ app.get('/api/flights/:flightID', (req, res) => {
 app.post('/api/flights', (req, res) => {
   const {flightName, startDate, endDate , price , goFrom , arriveAt } = req.body;
 
-  userModel.createFlight(flightName, startDate, endDate , price , goFrom , arriveAt, (err, result) => {
+  userModel.createFlights(flightName, startDate, endDate , price , goFrom , arriveAt, (err, result) => {
       if (err) {
           res.status(500).json({ error: err.message });
           return;
@@ -117,7 +117,7 @@ app.put('/api/flights/:flightID', (req, res) => {
   const { flightID } = req.params;
   const { flightName, startDate, endDate , price , goFrom , arriveAt } = req.body;
 
-  userModel.updateFlight(flightName, startDate, endDate , price , goFrom , arriveAt, (err) => {
+  userModel.updateFlights(flightName, startDate, endDate , price , goFrom , arriveAt, (err) => {
       if (err) {
           res.status(500).json({ error: err.message });
           return;
