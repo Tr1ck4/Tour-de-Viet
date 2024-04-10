@@ -6,7 +6,7 @@ const bookings = new BookingService();
 class UserModel {
   constructor(dbFilePath) {
     this.db = new sqlite3.Database(dbFilePath, (err) => {
-      if (err) {  
+      if (err) {
         console.error('Error connecting to database:', err.message);
       } else {
         this.db.run("CREATE TABLE IF NOT EXISTS comments (townID INT, tourName TEXT, comment TEXT, userName TEXT, rating REAL, FOREIGN KEY (townID) REFERENCES tours(townID), FOREIGN KEY (tourName) REFERENCES tours(tourName), FOREIGN KEY (userName) REFERENCES books(userName))");
@@ -23,35 +23,63 @@ class UserModel {
   getBook(userName, tourName, callback) {
     let sql = "SELECT userName, tourName, flightID FROM books WHERE userName = ?";
     if (tourName) {
-        sql += " AND tourName = ?";
+      sql += " AND tourName = ?";
     }
     this.db.all(sql, [userName, tourName], callback);
   }
 
 
-  createBook(UserName , Tourname  , FlightID , CardID ,callback) {
+  createBook(UserName, Tourname, FlightID, CardID, callback) {
     this.db.run("INSERT INTO books (userName, tourName, flightID, cardID) VALUES (?, ?, ?, ?)",
-      [UserName , Tourname  , FlightID , CardID],
+      [UserName, Tourname, FlightID, CardID],
       callback
     );
   }
 
-  getComments(townID , tourName ,callback) {
-    this.db.all("SELECT * FROM comments WHERE townID = ? AND tourName = ?", [townID, tourName],callback)
+  getComments(townID, tourName, callback) {
+    this.db.all("SELECT * FROM comments WHERE townID = ? AND tourName = ?", [townID, tourName], callback)
   }
 
-  createComments(townID , tourName , userName, comment, rating, callback) {
+  createComments(townID, tourName, userName, comment, rating, callback) {
     this.db.run("INSERT INTO comments (townID , tourName , comment, userName, rating) VALUES (?, ?, ?, ?, ?)",
-      [townID , tourName ,comment, userName, rating],
+      [townID, tourName, comment, userName, rating],
       callback
     );
   }
-  
+
   updateRating(townID, tourName, rating, callback) {
     let sql = "UPDATE comments SET rating = ? WHERE townID = ? AND tourName = ?";
     this.db.run(sql, [rating, townID, tourName], callback);
   }
-  
+
+  getUsernameAndPassword(username, password, callback) {
+    let sql = `SELECT * FROM accounts WHERE userName = ? AND password = ?`;
+    this.db.run(sql, [username, password], callback);
+  }
+
+  updateAccount(username, password, citizenID, name, address, age, tel, email, callback) {
+    let sql = `UPDATE accounts SET password = COALESCE(?, password),
+    citizenID = COALESCE(?, citizenID),
+    name = COALESCE(?, name),
+    address = COALESCE(?, address),
+    age = COALESCE(?, age),
+    telNum = COALESCE(?, telNum),
+    email = COALESCE(?, email)
+    WHERE userName = ?`
+    this.db.run(sql, [password, citizenID, name, address, age, tel, email, username], callback);
+  }
+
+  createAccounts(username, password, citizenID, name, address, age, tel, email, callback) {
+    let sql = `INSERT INTO accounts (username, password, citizenID, name, address, age, telNum, email)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    this.db.run(sql, [username, password, citizenID, name, address, age, tel, email], callback);
+  }
+
+  getEmail(username, callback) {
+    let sql = `SELECT email FROM accounts WHERE userName = ?`;
+    this.db.run(sql, username, callback);
+  }
+
   closeConnection() {
     this.db.close((err) => {
       if (err) {
