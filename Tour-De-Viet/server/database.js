@@ -1,4 +1,7 @@
 import sqlite3 from 'sqlite3';
+import BookingService from './BookingService.js';
+
+const bookings = new BookingService();
 
 class UserModel {
   constructor(dbFilePath) {
@@ -86,15 +89,4 @@ class UserModel {
 }
 
 export default UserModel;
-//getTownID
-//getTownName
-//getUserName&&Password
-//getflight
-//gettour
-//createCard
-//createTour
-//createAccount
-//createFlight
-//UpdateTour
-//updateFLight
-//update
+
