@@ -86,3 +86,47 @@ app.put('/api/comments/:townID/:tourName', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+app.get('/api/tours/:tourName', (req, res) => {
+    const {tourName} = req.params;
+  
+    userModel.getTour(tourName, (err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(row);
+    });
+  });
+
+  app.post('/api/tours', (req, res) => {
+    const { townID, tourName, description, startDate, endDate, price, images } = req.body;
+  
+    userModel.createTour(townID, tourName, description, startDate, endDate, price, images, (err, result) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json({
+            message: 'Tour created',
+            data: req.body,
+            result,
+        });
+    });
+  });
+
+  app.put('/api/tours/:tourName', (req, res) => {
+    const {tourName } = req.params;
+    const { description, startDate, endDate, price, images } = req.body;
+  
+    userModel.updateRating(tourName, description, startDate, endDate, price, images, (err) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json({
+            message: 'Tour updated',
+            data: req.body
+        });
+    });
+  });
