@@ -83,6 +83,52 @@ app.put('/api/comments/:townID/:tourName', (req, res) => {
   });
 });
 
+// Route to get flights
+app.get('/api/flights/:flightID', (req, res) => {
+  const { flightID} = req.params;
+
+  userModel.getFlights(flightID, (err, row) => {
+      if (err) {
+          res.status(500).json({ error: err.message });
+          return;
+      }
+      res.json(row);
+  });
+});
+
+// Route to create a flight
+app.post('/api/flights', (req, res) => {
+  const {flightName, startDate, endDate , price , goFrom , arriveAt } = req.body;
+
+  userModel.createFlight(flightName, startDate, endDate , price , goFrom , arriveAt, (err, result) => {
+      if (err) {
+          res.status(500).json({ error: err.message });
+          return;
+      }
+      res.json({
+          message: 'Flight created',
+          data: req.body,
+      });
+  });
+});
+
+// Route to update a flight's info
+app.put('/api/flights/:flightID', (req, res) => {
+  const { flightID } = req.params;
+  const { flightName, startDate, endDate , price , goFrom , arriveAt } = req.body;
+
+  userModel.updateFlight(flightName, startDate, endDate , price , goFrom , arriveAt, (err) => {
+      if (err) {
+          res.status(500).json({ error: err.message });
+          return;
+      }
+      res.json({
+          message: 'Flight updated',
+          data: req.body
+      });
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

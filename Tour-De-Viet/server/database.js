@@ -72,7 +72,6 @@ class UserModel {
   }
   
   updateFlights(flightID,flightName, startDate, endDate , price , goFrom , arriveAt ,callback) {
-    // let sql = "UPDATE flights SET rating = ? WHERE townID = ? AND tourName = ?";
     let sql = "UPDATE flights SET flightName = ?, startDate=?, endDate=? , price=? , goFrom=? , arriveAt=? WHERE flightID = ?"
     this.db.run(sql, [flightName, startDate, endDate , price , goFrom , arriveAt,flightID], callback);
   }
