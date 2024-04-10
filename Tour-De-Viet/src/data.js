@@ -280,7 +280,7 @@ export const arr = [
         { src: right_house_63, alt: "right_house", rotation: "0",  speedx: "0.01", speedy: "0", speedz: "0",  w:'110%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
     
     ]},
-    {60[
+    {"id":60,"source":[
         { src: sky_60, alt: "sky", rotation: "0",speedx: "0.01",speedy: "0",speedz: "0",w:'110%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: island1_60, alt: "island1", rotation: "0",  speedx: "0.01", speedy: "0", speedz: "0",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: island2_60, alt: "island2", rotation: "0",  speedx: "-0.02", speedy: "0", speedz: "0",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
