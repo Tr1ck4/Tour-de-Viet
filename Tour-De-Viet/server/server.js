@@ -2,7 +2,7 @@ import express from 'express';
 import UserModel from './database.js';
 const userModel = new UserModel('./database.db');
 
-const app = express();
+export const app = express();
 const PORT = 3000;
 
 
