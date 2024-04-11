@@ -2,20 +2,20 @@ import './Header.css'
 function Header(){
   return (
     <>
-      <header className = 'backdrop-blur'>
+      <header className = 'backdrop-blur bg-bone-white bg-opacity-50'>
         <nav>
-              <p class = "logo">WELCOME</p>
+              <p className = "logo">WELCOME</p>
               <ul>
                   <li><a href="#">Login</a></li>
                   <li><a href="#">Sign up</a></li>
-                  <li class = "search">
+                  <li className = "search">
                       <a href="#">
-                          <i class = "fa-solid fa-magnifying-glass"></i>
+                          <i className = "fa-solid fa-magnifying-glass"></i>
                       </a>
                   </li>
-                  <li class = "hamburger">
-                      <a href="#">
-                          <div class="bar"></div>
+                  <li className = "hamburger">
+                      <a href="#" className = "border-2 rounded-full border-black">
+                          <div className="bar"></div>
                       </a>
                   </li>
               </ul>
