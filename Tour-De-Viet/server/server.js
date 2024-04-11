@@ -1,12 +1,18 @@
 import express from 'express';
 import UserModel from './database.js';
+import path from 'path';
 const userModel = new UserModel('./database.db');
-
+const __dirname = path.resolve(path.dirname(''));
 export const app = express();
 const PORT = 3000;
 
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('/para', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  });
 
 app.get('/api/bookings/:userName', (req, res) => {
     const { userName } = req.params;

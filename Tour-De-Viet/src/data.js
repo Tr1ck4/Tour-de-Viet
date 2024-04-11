@@ -8,6 +8,7 @@ import l2_6 from './assets/6/left2.png';
 import b1_6 from './assets/6/back1.png';
 import b2_6 from './assets/6/back2.png';
 import r1_6 from './assets/6/right1.png';
+
 import bg_2 from './assets/2/background.png';
 import l1_2 from './assets/2/left1.png';
 import l2_2 from './assets/2/left2.png';
@@ -18,12 +19,14 @@ import f1_2 from './assets/2/front1.png';
 import r1_2 from './assets/2/right1.png';
 import r2_2 from './assets/2/right2.png';
 import r3_2 from './assets/2/right3.png';
+
 import bg_3 from './assets/3/background.png';
 import f1_3 from './assets/3/front1.png';
 import f2_3 from './assets/3/front2.png';
 import f3_3 from './assets/3/front3.png';
 import f4_3 from './assets/3/front4.png';
 import o1_3 from './assets/3/object.png';
+
 import bg_8 from './assets/8/background.png';
 import f1_8 from './assets/8/back1.png';
 import f2_8 from './assets/8/back2.png';
@@ -67,6 +70,7 @@ import f2_21 from './assets/21/left 2.png';
 import f3_21 from './assets/21/left 3.png';
 import f4_21 from './assets/21/right 1.png';
 import f5_21 from './assets/21/right 2.png';
+
 import bg_33 from './assets/33/bg.png';
 import br_33 from './assets/33/bridge.png';
 import brs_33 from './assets/33/brush_1.png';
@@ -74,17 +78,20 @@ import m1_33 from './assets/33/mountain_1.png';
 import m2_33 from './assets/33/mountain_2.png';
 import s1_33 from './assets/33/sky_1.png';
 import s2_33 from './assets/33/sky_2.png';
+
 import bg_34 from './assets/34/bg.png';
 import l1_34 from './assets/34/land_1.png';
 import l2_34 from './assets/34/land_2.png';
 import l3_34 from './assets/34/land_3.png';
 import l4_34 from './assets/34/land_4.png';
+
 import bg_35 from './assets/35/bg.png';
 import s_35 from './assets/35/sea.png';
 import l_35 from './assets/35/land.png';
 import m_35 from './assets/35/mountain.png';
 import b1_35 from './assets/35/building_1.png';
 import b2_35 from './assets/35/building_2.png';
+
 import bg_36 from './assets/36/bg.png';
 import r1_36 from './assets/36/rock_1.png';
 import r2_36 from './assets/36/rock_2.png';
@@ -92,6 +99,7 @@ import r3_36 from './assets/36/rock_3.png';
 import r4_36 from './assets/36/rock_4.png';
 import c1_36 from './assets/36/cloud_1.png';
 import c2_36 from './assets/36/cloud_2.png';
+
 import bg_37 from './assets/37/bg.png';
 import m1_37 from './assets/37/mountain_1.png';
 import m2_37 from './assets/37/mountain_2.png';
@@ -99,7 +107,6 @@ import m3_37 from './assets/37/mountain_3.png';
 import m4_37 from './assets/37/mountain_4.png';
 import l_37 from './assets/37/land.png';
 
-export let current_id = 35;
 import bg_46 from './assets/46/sky.png'
 import dinh_46 from './assets/46/dinh.png'
 import grass_46 from './assets/46/grass.png'
@@ -124,6 +131,12 @@ import island2_60 from './assets/60/island2.png'
 import island3_60 from './assets/60/island3.png'
 import ocean_60 from './assets/60/ocean.png'
 import sky_60 from './assets/60/sky.png'
+
+
+export let current_id = 35;
+export function updateID(newValue){
+    current_id = newValue;
+}
 
 export const arr = [
     {
