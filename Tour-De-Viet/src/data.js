@@ -133,7 +133,7 @@ import ocean_60 from './assets/60/ocean.png'
 import sky_60 from './assets/60/sky.png'
 
 
-export let current_id = 8;
+export let current_id = 60;
 export const arr = [
     {
         "id" : 6, 
@@ -210,6 +210,8 @@ export const arr = [
         { src: bg_35, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: s_35, alt: "sea", rotation: "0.02",    speedx: "0.01", speedy: "0.07", speedz: "0.01",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: l_35, alt: "land", rotation: "0.02",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
+        { src: l_35, alt: "land", rotation: "0.0",    speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
+        { src: b1_35, alt: "building_1", rotation: "0.0",    speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: m_35, alt: "mountain", rotation: "0.01",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: b1_35, alt: "building_1", rotation: "0.01", speedx: "0.01", speedy: "0.01", speedz: "0.0",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: b2_35, alt: "building_2", rotation: "0",    speedx: "0.0", speedy: "0.01", speedz: "0",     w:'100%',z: '6',  ctop: 'calc(50% )', cleft: 'calc(50%)'},
