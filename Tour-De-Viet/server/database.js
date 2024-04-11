@@ -52,9 +52,9 @@ class UserModel {
     this.db.run(sql, [rating, townID, tourName], callback);
   }
 
-  getUsernameAndPassword(username, password, callback) {
-    let sql = `SELECT * FROM accounts WHERE userName = ? AND password = ?`;
-    this.db.run(sql, [username, password], callback);
+  getAccount(username, callback) {
+    let sql = `SELECT * FROM accounts WHERE userName = ?`;
+    this.db.run(sql, username, callback);
   }
 
   updateAccount(username, password, citizenID, name, address, age, tel, email, callback) {
