@@ -1,11 +1,21 @@
+import { useState } from 'react';
 import './Parallax.css';
-import { current_id, arr } from './data';
-
+import { current_id, arr, updateID } from './data';
+import inc from  './assets/inc.png'
+import des from  './assets/des.png'
 
 
 export default function ParallaxPage() {
   const array = arr.find(item => item.id === current_id).source;
-  console.log(current_id);
+  const [state, setState] = useState(current_id);
+  const IncreaseClick = () =>{
+    updateID(current_id+1);
+    setState(current_id+1);
+  }
+  const DecreaseClick = () =>{
+    updateID(current_id-1);
+    setState(current_id-1);
+  }
   return (
     <main>
       {array.map((element, index) => (
@@ -24,6 +34,13 @@ export default function ParallaxPage() {
         <h2 style={{fontWeight:'100', fontSize:'3em' }}>Welcome to</h2>
         <h1 style={{fontWeight:'800', fontSize:'7em', lineHeight:'0.99'}}>Quang Nam</h1>
       </div>
+      <button className="z-10 size-14 rounded-full backdrop-blur absolute place-self-center mx-5 place-content-center" onClick={DecreaseClick}>
+        <img src={des} className='mx-2' alt="Decrement"></img>
+      </button>
+
+      <button className="z-10 size-14 rounded-full backdrop-blur absolute place-self-center inset-y-0 right-0 mx-5 place-content-center" onClick={IncreaseClick}> 
+        <img src={inc} className='mx-2' alt="Increment"></img>
+      </button>
     </main>
   )
 }

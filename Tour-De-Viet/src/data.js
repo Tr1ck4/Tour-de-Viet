@@ -133,7 +133,11 @@ import ocean_60 from './assets/60/ocean.png'
 import sky_60 from './assets/60/sky.png'
 
 
-export let current_id = 8;
+export let current_id = 35;
+export function updateID(newValue){
+    current_id = newValue;
+}
+
 export const arr = [
     {
         "id" : 6, 

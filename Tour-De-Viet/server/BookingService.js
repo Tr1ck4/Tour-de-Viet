@@ -18,8 +18,7 @@ class BookingService{
       tourName,
       flightID,
       cardID
-    };
-  
+    };  
     return fetch(`${this.baseUrl}/api/bookings`, {
       method: 'POST',
       headers: {
