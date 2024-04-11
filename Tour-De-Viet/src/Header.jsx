@@ -2,7 +2,7 @@ import './Header.css'
 function Header(){
   return (
     <>
-      <header>
+      <header className = 'backdrop-blur'>
         <nav>
               <p class = "logo">WELCOME</p>
               <ul>
