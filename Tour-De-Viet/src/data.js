@@ -133,7 +133,7 @@ import ocean_60 from './assets/60/ocean.png'
 import sky_60 from './assets/60/sky.png'
 
 
-export let current_id = 60;
+export let current_id = 33;
 export function updateID(newValue){
     current_id = newValue;
 }

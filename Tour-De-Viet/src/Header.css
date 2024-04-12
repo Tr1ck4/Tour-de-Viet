@@ -18,6 +18,7 @@ header{
   top: 0;
   left: 0;
   width: 100%;
+  min-width: 600px;
   border-bottom: 5px solid rgba(255,000,255,0.1);
 }
 header nav{
