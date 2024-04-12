@@ -12,11 +12,22 @@ class UserModel {
       } else {
         this.db.run("CREATE TABLE IF NOT EXISTS comments (townID INT, tourName TEXT, comment TEXT, userName TEXT, rating REAL, FOREIGN KEY (townID) REFERENCES tours(townID), FOREIGN KEY (tourName) REFERENCES tours(tourName), FOREIGN KEY (userName) REFERENCES books(userName))");
         this.db.run("CREATE TABLE IF NOT EXISTS tours    (townID INT, tourName TEXT, description TEXT, startDate TEXT, endDate TEXT, price REAL, images TEXT, PRIMARY KEY (townID, tourName))");
-        this.db.run("CREATE TABLE IF NOT EXISTS flights (flightID INTEGER PRIMARY KEY AUTOINCREMENT, flightName TEXT, StartDate TEXT, EndDate TEXT, price REAL, destination TEXT, start TEXT)");
+        this.db.run("CREATE TABLE IF NOT EXISTS flights (flightID INTEGER PRIMARY KEY AUTOINCREMENT, flightName TEXT, startDate TEXT, endDate TEXT, price REAL, goFrom TEXT, arriveAt TEXT)");
         this.db.run("CREATE TABLE IF NOT EXISTS accounts (userName TEXT UNIQUE, password TEXT, citizenID TEXT, name TEXT, address TEXT, age INT, telNum TEXT, email TEXT)");
-        this.db.run("CREATE TABLE IF NOT EXISTS books (userName TEXT, tourName TEXT, flightID INT, cardID INT, FOREIGN KEY (tourName) REFERENCES tours(tourName),FOREIGN KEY (userName) REFERENCES accounts(userName), FOREIGN KEY (flightID) REFERENCES flights(flightID), FOREIGN KEY (cardID) REFERENCES cards(cardID))");
+        this.db.run("CREATE TABLE IF NOT EXISTS books (userName TEXT, tourName TEXT, flightID INT, cardID INT, FOREIGN KEY (tourName) REFERENCES tours(tourName),FOREIGN KEY (userName) REFERENCES accounts(userName), FOREIGN KEY (flightID) REFERENCES flights(flightID))");
         console.log('Connected to the database.');
+
+        this.createComments(1,'Du lich','hihi','Fine',1.0);
+        this.createComments(1,'Du lich','haha','Cool one', null);
+        this.createComments(1,'Du lich','hoho','Fine',5.0);
+        this.createComments(1,'Du lich','qewqwe','Fasdasdaasdadqweine',2.0);
+        this.createFlights('VietnamAirline','10/4/2024','15/4/2024',1000000,'HCM','Vung Tau');
+        this.createFlights('VietnamAirline','10/4/2024','15/4/2024',1000000,'HCM','Ha Noi');
+        this.createFlights('VietnamAirline','10/4/2024','15/4/2024',1000000,'HCM','Dak Lak');
+        this.createFlights('VietnamAirline','10/4/2024','15/4/2024',1000000,'HCM','Da Nang');
+
         newTour.createTour(2,'dulichID2','sthing','12/02/2024','14/02/2024','200$','dulichID2images');S
+
       }
     });
   }
@@ -54,6 +65,23 @@ class UserModel {
     this.db.run(sql, [rating, townID, tourName], callback);
   }
 
+
+  getFlights(flightID,callback) {
+    this.db.all("SELECT * FROM flights WHERE flightID = ?", [flightID],callback)
+  }
+
+  createFlights(flightName, startDate, endDate , price , goFrom , arriveAt ,callback) {
+    this.db.run("INSERT INTO flights (flightName , startDate, endDate, price, goFrom, arriveAt) VALUES (?, ?, ?, ?, ?, ?)",
+      [flightName , startDate, endDate, price, goFrom, arriveAt],
+      callback
+    );
+  }
+  
+  updateFlights(flightID,flightName, startDate, endDate , price , goFrom , arriveAt ,callback) {
+    let sql = "UPDATE flights SET flightName = ?, startDate=?, endDate=? , price=? , goFrom=? , arriveAt=? WHERE flightID = ?"
+    this.db.run(sql, [flightName, startDate, endDate , price , goFrom , arriveAt,flightID], callback);
+  }
+
   getTour(tourName, callback) {
     this.db.get("SELECT townID, tourName, description, price , images  FROM tours WHERE tourName = ?", [tourName], callback);
   }
@@ -69,6 +97,7 @@ class UserModel {
     let sql = "UPDATE tours SET tourName = ?, description=?, startDate=? , endDate=? , price=? , images=? WHERE tourName = ?"
     this.db.run(sql, [tourName, description, startDate , endDate , price , images], callback);
   }
+
 
   
   getAccount(username, callback) {
