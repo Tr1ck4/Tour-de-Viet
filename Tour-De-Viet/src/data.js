@@ -134,6 +134,10 @@ import sky_60 from './assets/60/sky.png'
 
 
 export let current_id = 60;
+export function updateID(newValue){
+    current_id = newValue;
+}
+
 export const arr = [
     {
         "id" : 6, 
