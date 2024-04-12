@@ -1,3 +1,6 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 @font-face {
   font-family: "Kode Mono";
   font-style: normal; 
@@ -50,20 +53,19 @@ header ul a{
   width:37px;
   height: 39px;
   border-radius:50%;
-  background-color: rgba(115,115,115,0.7);
+  
   display : flex;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   justify-content: center;
   align-items: center;
+  background : transparent;
 }
 
 .hamburger .bar{
   position: relative;
   width: 52%;
   height:2px;
-  background-color: #fff;
-  border-radius:2px;
+  background-color: black;
+  border-radius:5px;
 }
 .hamburger .bar::before,
 .hamburger .bar::after{

@@ -1,20 +1,29 @@
+import './index.css'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import Header from './Header.jsx'
-import './index.css'
 import ParallaxPage from './Parallax.jsx'
+import HomePage from './Home.jsx'
 
-ReactDOM.createRoot(document.getElementById('header')).render(
+export default function App(){
+  return (
+    <Router>
+      <Header/>
+      <Routes>
+        <Route path = '/homepage' element={<HomePage/>} />
+        <Route path = '/parallax' element={<ParallaxPage/>} />
+      </Routes>
+    </Router>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Header />
+      <App/>
   </React.StrictMode>,
-)
+);
 
-ReactDOM.createRoot(document.getElementById('parallaxpage')).render(
-  <React.StrictMode>
-    <ParallaxPage />
-  </React.StrictMode>,
-)
 
 document.addEventListener('mousemove', parallax);
 
