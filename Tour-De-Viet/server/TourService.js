@@ -7,7 +7,7 @@ class ToursService{
         return fetch(`${this.baseUrl}/api/tours/${tourName}`)
         .then(response => response.json())
         .catch(error => {
-          console.error('Error fetching comments:', error);
+          console.error('Error fetching tours:', error);
         });
     }
 
@@ -25,7 +25,7 @@ class ToursService{
           })
             .then(response => response.json())
             .catch(error => {
-              console.error('Error creating comment:', error);
+              console.error('Error creating tour:', error);
             });
     }
 
@@ -39,7 +39,7 @@ class ToursService{
           })
             .then(response => response.json())
             .catch(error => {
-              console.error('Error updating rating:', error);
+              console.error('Error updating tour:', error);
             });
     }
 
