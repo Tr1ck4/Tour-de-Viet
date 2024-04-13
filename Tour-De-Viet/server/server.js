@@ -44,6 +44,15 @@ app.post('/api/bookings', (req, res) => {
 });
 
 // Route to get comments
+app.get('/api/comment', (req, res) => {
+    userModel.getAllComments((err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(row);
+    });
+});
 app.get('/api/comments/:townID/:tourName', (req, res) => {
     const { townID, tourName } = req.params;
 

@@ -1,5 +1,5 @@
 import './Home.css';
-import VNMap from './Test';
+import VNMap from './Map';
 
 export default function HomePage(){
     

@@ -1,7 +1,11 @@
 
 class BookingService{
-  constructor() {
-      this.baseUrl = 'http://localhost:3000';
+  constructor(userName, tourName, flightID, cardID) {
+      this.baseUrl  = 'http://localhost:3000';
+      this.userName = userName;
+      this.tourName = tourName;
+      this.flightID = flightID; 
+      this.cardID   = cardID;
   }
 
   async fetchBookings(userName) {
@@ -12,21 +16,20 @@ class BookingService{
       });
   }
 
-  async createBooking(userName, tourName, flightID, cardID) {
-    const requestData = {
-      userName,
-      tourName,
-      flightID,
-      cardID
-    };  
+  async createBooking(newData) {
     return fetch(`${this.baseUrl}/api/bookings`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(requestData)
+      body: JSON.stringify({
+        "userName" : newData.userName, 
+        "tourName" : newData.tourName, 
+        "flightID" : newData.flightID, 
+        "cardID" : newData.cardID,
+      })
     })
-      .then(response => response.json())
+      .then(response => response.status)
       .catch(error => {
         console.error('Error creating booking:', error);
       });

@@ -1,6 +1,6 @@
 import sqlite3 from 'sqlite3';
 import BookingService from './BookingService.js';
-import ToursService from './Tours.js';
+import ToursService from './TourService.js';
 
 const newTour = new ToursService();
 
@@ -16,7 +16,6 @@ class UserModel {
         this.db.run("CREATE TABLE IF NOT EXISTS accounts (userName TEXT UNIQUE, password TEXT, citizenID TEXT, name TEXT, address TEXT, age INT, telNum TEXT, email TEXT)");
         this.db.run("CREATE TABLE IF NOT EXISTS books (userName TEXT, tourName TEXT, flightID INT, cardID INT, FOREIGN KEY (tourName) REFERENCES tours(tourName),FOREIGN KEY (userName) REFERENCES accounts(userName), FOREIGN KEY (flightID) REFERENCES flights(flightID), FOREIGN KEY (cardID) REFERENCES cards(cardID))");
         console.log('Connected to the database.');
-        newTour.createTour(2,'dulichID2','sthing','12/02/2024','14/02/2024','200$','dulichID2images');S
       }
     });
   }
@@ -38,6 +37,9 @@ class UserModel {
     );
   }
 
+  getAllComments(callback) {
+    this.db.all("SELECT * FROM comments ", callback)
+  }
   getComments(townID, tourName, callback) {
     this.db.all("SELECT * FROM comments WHERE townID = ? AND tourName = ?", [townID, tourName], callback)
   }
