@@ -57,7 +57,7 @@ class UserModel {
   }
 
   getTour(tourName, callback) {
-    this.db.get("SELECT townID, tourName, description, price , images  FROM tours WHERE tourName = ?", [tourName], callback);
+    this.db.get("SELECT *  FROM tours WHERE tourName = ?", [tourName], callback);
   }
 
   createTour(townID, tourName, description, startDate, endDate, price, images, callback) {

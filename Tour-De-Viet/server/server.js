@@ -177,10 +177,10 @@ app.get('/api/tours/:tourName', (req, res) => {
   });
 
   app.put('/api/tours/:tourName', (req, res) => {
-    const {tourName } = req.params;
+    const { tourName } = req.params;
     const { description, startDate, endDate, price, images } = req.body;
   
-    userModel.updateRating(tourName, description, startDate, endDate, price, images, (err) => {
+    userModel.updateTour(tourName, description, startDate, endDate, price, images, (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
