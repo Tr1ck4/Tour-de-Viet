@@ -30,7 +30,6 @@ app.get('/api/bookings/:userName', (req, res) => {
 // Route to create a booking
 app.post('/api/bookings', (req, res) => {
     const { userName, tourName, flightID, cardID } = req.body;
-
     userModel.createBook(userName, tourName, flightID, cardID, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -44,6 +43,15 @@ app.post('/api/bookings', (req, res) => {
 });
 
 // Route to get comments
+app.get('/api/comment', (req, res) => {
+    userModel.getAllComments((err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(row);
+    });
+});
 app.get('/api/comments/:townID/:tourName', (req, res) => {
     const { townID, tourName } = req.params;
 
@@ -74,10 +82,10 @@ app.post('/api/comments', (req, res) => {
 
 // Route to update a comment's rating
 app.put('/api/comments/:townID/:tourName', (req, res) => {
-    const { townID, tourName } = req.params;
+    const { townID, tourName, userName } = req.params;
     const { rating } = req.body;
 
-    userModel.updateRating(townID, tourName, rating, (err) => {
+    userModel.updateRating(townID, tourName, userName, rating, (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -91,9 +99,9 @@ app.put('/api/comments/:townID/:tourName', (req, res) => {
 
 //create account
 app.post('/api/accounts', (req, res) => {
-    const { username, password, citizenID, name, address, age, tel, email } = req.body;
+    const { userName, password, citizenID, name, address, age, tel, email } = req.body;
 
-    userModel.createAccounts(username, password, citizenID, name, address, age, tel, email, (err, result) => {
+    userModel.createAccounts(userName, password, citizenID, name, address, age, tel, email, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -108,9 +116,9 @@ app.post('/api/accounts', (req, res) => {
 
 //get account info
 app.get('/api/accounts/:userName', (req, res) => {
-    const { username } = req.params;
+    const { userName } = req.params;
 
-    userModel.getAccount(username, (err, row) => {
+    userModel.getAccount(userName, (err, row) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -215,10 +223,10 @@ app.get('/api/tours/:tourName', (req, res) => {
   });
 
   app.put('/api/tours/:tourName', (req, res) => {
-    const {tourName } = req.params;
+    const { tourName } = req.params;
     const { description, startDate, endDate, price, images } = req.body;
   
-    userModel.updateRating(tourName, description, startDate, endDate, price, images, (err) => {
+    userModel.updateTour(tourName, description, startDate, endDate, price, images, (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;

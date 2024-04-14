@@ -133,25 +133,31 @@ import ocean_60 from './assets/60/ocean.png'
 import sky_60 from './assets/60/sky.png'
 
 
-export let current_id = 60;
+export let current_id = 33;
 export function updateID(newValue){
-    current_id = newValue;
+    if (newValue===0){
+        newValue = 64;
+        current_id = 64;
+    }
+    if (newValue===65){
+        newValue = 1;
+        current_id = 1;
+    }
+    if (newValue <=64 && newValue >=1){
+        current_id = newValue;
+    }
 }
 
 export const arr = [
     {
-        "id" : 6, 
-        "source": [
-            { src: bg_6, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",    w:'2800px', z: '1', ctop: 'calc(50%)',  cleft: 'calc(50%)'},
-            { src: f1_6, alt: "f1", rotation: "0.1",  speedx: "0.03", speedy: "0.02", speedz: "0.05",             z: '6', ctop: 'calc(50% + 60px)', cleft: 'calc(50% + 120px )' },
-            { src: f2_6, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",             z: '5', ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 60px)'},
-            { src: f3_6, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",             z: '4', ctop: 'calc(50% + 210px)', cleft: 'calc(50% - 60px)' },
-            { src: f4_6, alt: "f4", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",             z: '4', ctop: 'calc(50% + 230px)', cleft: 'calc(50% + 400px)'},
-            { src: l1_6, alt: "l1", rotation: "0.01", speedx: "0.02", speedy: "0.01", speedz: "0.09",             z: '4', ctop: 'calc(50% - 60px)', cleft: 'calc(50%  - 950px)' },
-            { src: l2_6, alt: "l2", rotation: "0.01", speedx: "0.02", speedy: "0.01", speedz: "0.09",             z: '3', ctop: 'calc(50% - 100px)',cleft: 'calc(50% - 900px)'},
-            { src: b1_6, alt: "b1", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.02",               z: '2', ctop: 'calc(50% - 180px)', cleft: 'calc(50% - 40px)' },
-            { src: b2_6, alt: "b2", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.02",    w:'1200px',h:'200px',           z: '1', ctop: 'calc(50% - 210px)', cleft: 'calc(50% + 600px)' },
-            { src: r1_6, alt: "r1", rotation: "0.0",  speedx: "0.015",speedy: "0.01", speedz: "0.09",             z: '1', ctop: 'calc(50% - 100px)', cleft: 'calc(50% + 925px)' },
+        "id":1,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+            { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+            { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+            { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+            { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+            { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'}, 
         ]
     },
     {
@@ -179,6 +185,54 @@ export const arr = [
         { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
         { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
     ]},
+    {
+        "id":4,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+            { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+            { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+            { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+            { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+            { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+        ]
+    },
+    {
+        "id":5,
+        "source":[{ src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+            { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+            { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+            { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+            { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+            { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+        ]
+    },
+    {
+        "id" : 6, 
+        "source": [
+            { src: bg_6, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",    w:'2800px', z: '1', ctop: 'calc(50%)',  cleft: 'calc(50%)'},
+            { src: f1_6, alt: "f1", rotation: "0.1",  speedx: "0.03", speedy: "0.02", speedz: "0.05",             z: '6', ctop: 'calc(50% + 60px)', cleft: 'calc(50% + 120px )' },
+            { src: f2_6, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",             z: '5', ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 60px)'},
+            { src: f3_6, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",             z: '4', ctop: 'calc(50% + 210px)', cleft: 'calc(50% - 60px)' },
+            { src: f4_6, alt: "f4", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",             z: '4', ctop: 'calc(50% + 230px)', cleft: 'calc(50% + 400px)'},
+            { src: l1_6, alt: "l1", rotation: "0.01", speedx: "0.02", speedy: "0.01", speedz: "0.09",             z: '4', ctop: 'calc(50% - 60px)', cleft: 'calc(50%  - 950px)' },
+            { src: l2_6, alt: "l2", rotation: "0.01", speedx: "0.02", speedy: "0.01", speedz: "0.09",             z: '3', ctop: 'calc(50% - 100px)',cleft: 'calc(50% - 900px)'},
+            { src: b1_6, alt: "b1", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.02",               z: '2', ctop: 'calc(50% - 180px)', cleft: 'calc(50% - 40px)' },
+            { src: b2_6, alt: "b2", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.02",    w:'1200px',h:'200px',           z: '1', ctop: 'calc(50% - 210px)', cleft: 'calc(50% + 600px)' },
+            { src: r1_6, alt: "r1", rotation: "0.0",  speedx: "0.015",speedy: "0.01", speedz: "0.09",             z: '1', ctop: 'calc(50% - 100px)', cleft: 'calc(50% + 925px)' },
+        ]
+    },
+    {
+        "id":7,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+            { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+            { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+            { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+            { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+            { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
     {"id":8,"source":[
         { src: bg_8, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_8, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'55%',z: '2',  ctop: 'calc(50% + 80px)', cleft: 'calc(50% - 580px)'},
@@ -193,6 +247,281 @@ export const arr = [
         { src: f9_8, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'26%',z: '10',  ctop: 'calc(50% - 120px)', cleft: 'calc(50% + 800px)'},
         { src: f10_8, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01", w:'33%',z: '11',  ctop: 'calc(50%  + 200px)', cleft: 'calc(50% + 750px)'},
     ]},
+    {
+        "id":9,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":10,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":11,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":12,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":13,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":14,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":15,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":16,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":17,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {"id":18,"source":[
+        { src: bg_18, alt: "bg", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_18, alt: "f1", rotation: "0",    speedx: "0.02",    speedy: "0.02",    speedz: "0.05",     w:'47%',z: '1',  ctop: 'calc(50% - 180px) ', cleft: 'calc(50% - 380px )'},
+        { src: f2_18, alt: "f2", rotation: "0",    speedx: "0.03",    speedy: "0.03",    speedz: "0.05",     w:'40%',z: '1',  ctop: 'calc(50% - 250px) ', cleft: 'calc(50% - 40px )'},
+        { src: f3_18, alt: "f3", rotation: "0",    speedx: "0.04",    speedy: "0.03",    speedz: "0.05",     w:'45%',z: '1',  ctop: 'calc(50% - 150px) ', cleft: 'calc(50% + 380px )'},
+        { src: f4_18, alt: "f4", rotation: "0",    speedx: "0.04",    speedy: "0.05",    speedz: "0.1",     w:'45%',z: '1',  ctop: 'calc(50% + 170px) ', cleft: 'calc(50% + 360px )'},
+        { src: f5_18, alt: "f5", rotation: "0",    speedx: "0.04",    speedy: "0.03",    speedz: "0.1",     w:'50%',z: '1',  ctop: 'calc(50% + 300px) ', cleft: 'calc(50% - 330px )'},
+        { src: f6_18, alt: "f6", rotation: "0",    speedx: "0.05",    speedy: "0.05",    speedz: "0.1",     w:'60%',z: '1',  ctop: 'calc(50% + 100px) ', cleft: 'calc(50% + 230px )'},
+    ]},
+    {"id":19,"source":[
+        { src: bg_19, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_19, alt: "f1", rotation: "0",    speedx: "0.01",    speedy: "0",    speedz: "0.01",     w:'100%',z: '1',  ctop: 'calc(50% - 380px)', cleft: 'calc(50%)'},
+        { src: f2_19, alt: "f2", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0.03",     w:'100%',z: '1',  ctop: 'calc(50% - 120px)', cleft: 'calc(50%)'},
+        { src: f3_19, alt: "f3", rotation: "0",    speedx: "0.02",    speedy: "0.02",    speedz: "0.03",     w:'50%',z: '1',  ctop: 'calc(50% + 40px)', cleft: 'calc(50% - 270px)'},
+        { src: f4_19, alt: "f4", rotation: "0",    speedx: "0.02",    speedy: "0.03",    speedz: "0.02",     w:'65%',z: '1',  ctop: 'calc(50% - 20px)', cleft: 'calc(50% + 280px)'},
+        { src: f5_19, alt: "f5", rotation: "0",    speedx: "0.03",    speedy: "0.04",    speedz: "0.02",     w:'40%',z: '1',  ctop: 'calc(50% + 120px)', cleft: 'calc(50% - 50px)'},
+        { src: f6_19, alt: "f6", rotation: "0",    speedx: "0.04",    speedy: "0.05",    speedz: "0.02",     w:'70%',z: '1',  ctop: 'calc(50% + 130px)', cleft: 'calc(50% + 230px)'},
+        { src: f7_19, alt: "f7", rotation: "0",    speedx: "0.03",    speedy: "0.06",    speedz: "0.02",     w:'50%',z: '1',  ctop: 'calc(50% + 130px)', cleft: 'calc(50% - 405px)'},
+    ]},
+    {"id":20,"source":[
+        { src: bg_20, alt: "bg", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_20, alt: "f1", rotation: "0",    speedx: "0.01",    speedy: "0.02",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% - 150px )', cleft: 'calc(50% )'},
+        { src: f2_20, alt: "f2", rotation: "0",    speedx: "0.05",    speedy: "0.03",    speedz: "0",     w:'65%',z: '1',  ctop: 'calc(50% - 160px )', cleft: 'calc(50% + 270px)'},
+        { src: f3_20, alt: "f3", rotation: "0",    speedx: "0.02",    speedy: "0.03",    speedz: "0",     w:'70%',z: '1',  ctop: 'calc(50% - 130px )', cleft: 'calc(50% - 280px)'},
+        { src: f4_20, alt: "f4", rotation: "0",    speedx: "0.03",    speedy: "0.04",    speedz: "0",     w:'20%',z: '1',  ctop: 'calc(50% - 50px )', cleft: 'calc(50% - 150px)'},
+        { src: f5_20, alt: "f5", rotation: "0",    speedx: "0.04",    speedy: "0.04",    speedz: "0",     w:'25%',z: '1',  ctop: 'calc(50% - 50px )', cleft: 'calc(50% + 230px)'},
+    ]},
+    {"id":21,"source":[
+        { src: bg_21, alt: "bg", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0",  w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_21, alt: "f1", rotation: "0",    speedx: "0.02",    speedy: "0.02",    speedz: "0",     w:'33%',z: '1',  ctop: 'calc(50% - 70px )', cleft: 'calc(50% - 330px )'},
+        { src: f2_21, alt: "f2", rotation: "0",    speedx: "0.03",    speedy: "0.03",    speedz: "0",     w:'33%',z: '1',  ctop: 'calc(50% + 120px)', cleft: 'calc(50% - 300px )'},
+        { src: f3_21, alt: "f3", rotation: "0",    speedx: "0.04",    speedy: "0.03",    speedz: "0",     w:'15%',z: '1',  ctop: 'calc(50% + 200px)', cleft: 'calc(50% - 600px )'},
+        { src: f4_21, alt: "f4", rotation: "0",    speedx: "0.02",    speedy: "0.02",    speedz: "0",     w:'70%',z: '1',  ctop: 'calc(50% - 100px)', cleft: 'calc(50% + 400px )'},
+        { src: f5_21, alt: "f5", rotation: "0",    speedx: "0.03",    speedy: "0.03",    speedz: "0",     w:'75%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50% + 130px )'},
+    ]},
+    {
+        "id":22,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":23,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":24,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":25,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":26,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":27,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":28,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":29,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":30,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":31,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":32,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
     {"id":33,"source":[
         { src: bg_33, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: m1_33, alt: "mount_1", rotation: "0",    speedx: "0.0", speedy: "0.07", speedz: "0.01",  w:'',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
@@ -237,41 +566,103 @@ export const arr = [
         { src: m2_37, alt: "mountain_2", rotation: "0.01", speedx: "0.0", speedy: "0.01", speedz: "0.0",  w:'100%',z: '5',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: m1_37, alt: "mountain_1", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0",     w:'100%',z: '6',  ctop: 'calc(50% )', cleft: 'calc(50%)'},
     ]},
-    {"id":18,"source":[
-        { src: bg_18, alt: "bg", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
-        { src: f1_18, alt: "f1", rotation: "0",    speedx: "0.02",    speedy: "0.02",    speedz: "0.05",     w:'47%',z: '1',  ctop: 'calc(50% - 180px) ', cleft: 'calc(50% - 380px )'},
-        { src: f2_18, alt: "f2", rotation: "0",    speedx: "0.03",    speedy: "0.03",    speedz: "0.05",     w:'40%',z: '1',  ctop: 'calc(50% - 250px) ', cleft: 'calc(50% - 40px )'},
-        { src: f3_18, alt: "f3", rotation: "0",    speedx: "0.04",    speedy: "0.03",    speedz: "0.05",     w:'45%',z: '1',  ctop: 'calc(50% - 150px) ', cleft: 'calc(50% + 380px )'},
-        { src: f4_18, alt: "f4", rotation: "0",    speedx: "0.04",    speedy: "0.05",    speedz: "0.1",     w:'45%',z: '1',  ctop: 'calc(50% + 170px) ', cleft: 'calc(50% + 360px )'},
-        { src: f5_18, alt: "f5", rotation: "0",    speedx: "0.04",    speedy: "0.03",    speedz: "0.1",     w:'50%',z: '1',  ctop: 'calc(50% + 300px) ', cleft: 'calc(50% - 330px )'},
-        { src: f6_18, alt: "f6", rotation: "0",    speedx: "0.05",    speedy: "0.05",    speedz: "0.1",     w:'60%',z: '1',  ctop: 'calc(50% + 100px) ', cleft: 'calc(50% + 230px )'},
-    ]},
-    {"id":19,"source":[
-        { src: bg_19, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
-        { src: f1_19, alt: "f1", rotation: "0",    speedx: "0.01",    speedy: "0",    speedz: "0.01",     w:'100%',z: '1',  ctop: 'calc(50% - 380px)', cleft: 'calc(50%)'},
-        { src: f2_19, alt: "f2", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0.03",     w:'100%',z: '1',  ctop: 'calc(50% - 120px)', cleft: 'calc(50%)'},
-        { src: f3_19, alt: "f3", rotation: "0",    speedx: "0.02",    speedy: "0.02",    speedz: "0.03",     w:'50%',z: '1',  ctop: 'calc(50% + 40px)', cleft: 'calc(50% - 270px)'},
-        { src: f4_19, alt: "f4", rotation: "0",    speedx: "0.02",    speedy: "0.03",    speedz: "0.02",     w:'65%',z: '1',  ctop: 'calc(50% - 20px)', cleft: 'calc(50% + 280px)'},
-        { src: f5_19, alt: "f5", rotation: "0",    speedx: "0.03",    speedy: "0.04",    speedz: "0.02",     w:'40%',z: '1',  ctop: 'calc(50% + 120px)', cleft: 'calc(50% - 50px)'},
-        { src: f6_19, alt: "f6", rotation: "0",    speedx: "0.04",    speedy: "0.05",    speedz: "0.02",     w:'70%',z: '1',  ctop: 'calc(50% + 130px)', cleft: 'calc(50% + 230px)'},
-        { src: f7_19, alt: "f7", rotation: "0",    speedx: "0.03",    speedy: "0.06",    speedz: "0.02",     w:'50%',z: '1',  ctop: 'calc(50% + 130px)', cleft: 'calc(50% - 405px)'},
-    ]},
-    {"id":20,"source":[
-        { src: bg_20, alt: "bg", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
-        { src: f1_20, alt: "f1", rotation: "0",    speedx: "0.01",    speedy: "0.02",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% - 150px )', cleft: 'calc(50% )'},
-        { src: f2_20, alt: "f2", rotation: "0",    speedx: "0.05",    speedy: "0.03",    speedz: "0",     w:'65%',z: '1',  ctop: 'calc(50% - 160px )', cleft: 'calc(50% + 270px)'},
-        { src: f3_20, alt: "f3", rotation: "0",    speedx: "0.02",    speedy: "0.03",    speedz: "0",     w:'70%',z: '1',  ctop: 'calc(50% - 130px )', cleft: 'calc(50% - 280px)'},
-        { src: f4_20, alt: "f4", rotation: "0",    speedx: "0.03",    speedy: "0.04",    speedz: "0",     w:'20%',z: '1',  ctop: 'calc(50% - 50px )', cleft: 'calc(50% - 150px)'},
-        { src: f5_20, alt: "f5", rotation: "0",    speedx: "0.04",    speedy: "0.04",    speedz: "0",     w:'25%',z: '1',  ctop: 'calc(50% - 50px )', cleft: 'calc(50% + 230px)'},
-    ]},
-    {"id":21,"source":[
-        { src: bg_21, alt: "bg", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0",  w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
-        { src: f1_21, alt: "f1", rotation: "0",    speedx: "0.02",    speedy: "0.02",    speedz: "0",     w:'33%',z: '1',  ctop: 'calc(50% - 70px )', cleft: 'calc(50% - 330px )'},
-        { src: f2_21, alt: "f2", rotation: "0",    speedx: "0.03",    speedy: "0.03",    speedz: "0",     w:'33%',z: '1',  ctop: 'calc(50% + 120px)', cleft: 'calc(50% - 300px )'},
-        { src: f3_21, alt: "f3", rotation: "0",    speedx: "0.04",    speedy: "0.03",    speedz: "0",     w:'15%',z: '1',  ctop: 'calc(50% + 200px)', cleft: 'calc(50% - 600px )'},
-        { src: f4_21, alt: "f4", rotation: "0",    speedx: "0.02",    speedy: "0.02",    speedz: "0",     w:'70%',z: '1',  ctop: 'calc(50% - 100px)', cleft: 'calc(50% + 400px )'},
-        { src: f5_21, alt: "f5", rotation: "0",    speedx: "0.03",    speedy: "0.03",    speedz: "0",     w:'75%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50% + 130px )'},
-    ]},
+    {
+        "id":38,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":39,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":40,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":41,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":42,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":43,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":44,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":45,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    
     {"id":46,"source":[
         { src: bg_46,         alt: "sky", rotation: "0",  speedx: "0", speedy: "0", speedz: "0",  w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: dinh_46,        alt: "dinh", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.05",  w:'110%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
@@ -280,6 +671,54 @@ export const arr = [
         { src: left_tree_46,   alt: "left_tree", rotation: "-0.1",  speedx: "0", speedy: "0.01", speedz: "0.02",  w:'110%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(52%)'},
         { src: right_tree_46,  alt: "right_tree", rotation: "-0.1",  speedx: "0", speedy: "0.01", speedz: "0.02",  w:'110%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(48%)'},
     ]},
+    {
+        "id":47,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":48,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":49,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":50,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
     {"id":51,"source":[
         { src: sky_51, alt: "sky", rotation: "0.0",    speedx: "0.01",    speedy: "0.02",    speedz: "0",     w:'110%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: sea_51, alt: "sea", rotation: "0",  speedx: "0.04", speedy: "0", speedz: "0",  w:'120%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50% - 120px)'},
@@ -287,14 +726,102 @@ export const arr = [
         { src: house_51, alt: "house", rotation: "0.2",  speedx: "0.02", speedy: "-0.03", speedz: "0",  w:'110%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
     
     ]},
-    {"id":63,"source":[
-        { src: sky_63, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
-        { src: left_stuff_63, alt: "left_stuff", rotation: "0",  speedx: "0.01", speedy: "0", speedz: "0",  w:'110%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: mid_house_63, alt: "mid_house", rotation: "0",  speedx: "-0.02", speedy: "0", speedz: "0",  w:'110%',z: '5',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
-        { src: lake_63, alt: "lake", rotation: "0",  speedx: "-0.03", speedy: "0", speedz: "0",  w:'120%',z: '6',  ctop: 'calc(48%)', cleft: 'calc(50%)'},
-        { src: right_house_63, alt: "right_house", rotation: "0",  speedx: "0.01", speedy: "0", speedz: "0",  w:'110%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
+    {
+        "id":52,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
     
-    ]},
+        ]
+    },
+    {
+        "id":53,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":54,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":55,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":56,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":57,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":58,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":59,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
     {"id":60,"source":[
         { src: sky_60, alt: "sky", rotation: "0",speedx: "0.01",speedy: "0",speedz: "0",w:'110%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: island1_60, alt: "island1", rotation: "0",  speedx: "0.01", speedy: "0", speedz: "0",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
@@ -303,5 +830,51 @@ export const arr = [
         { src: ocean_60, alt: "ocean", rotation: "0",  speedx: "0", speedy: "0", speedz: "0",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: main_island_60, alt: "main_island", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0",  w:'100%',z: '5',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
     ]},
+    {
+        "id":61,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":62,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    
+    {"id":63,"source":[
+        { src: sky_63, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: left_stuff_63, alt: "left_stuff", rotation: "0",  speedx: "0.01", speedy: "0", speedz: "0",  w:'110%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
+        { src: mid_house_63, alt: "mid_house", rotation: "0",  speedx: "-0.02", speedy: "0", speedz: "0",  w:'110%',z: '5',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
+        { src: lake_63, alt: "lake", rotation: "0",  speedx: "-0.03", speedy: "0", speedz: "0",  w:'120%',z: '6',  ctop: 'calc(48%)', cleft: 'calc(50%)'},
+        { src: right_house_63, alt: "right_house", rotation: "0",  speedx: "0.01", speedy: "0", speedz: "0",  w:'110%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
+    
+    ]},
+    {
+        "id":64,
+        "source":[
+            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    
 
 ];

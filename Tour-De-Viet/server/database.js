@@ -1,6 +1,6 @@
 import sqlite3 from 'sqlite3';
 import BookingService from './BookingService.js';
-import ToursService from './Tours.js';
+import ToursService from './TourService.js';
 
 const newTour = new ToursService();
 
@@ -16,18 +16,6 @@ class UserModel {
         this.db.run("CREATE TABLE IF NOT EXISTS accounts (userName TEXT UNIQUE, password TEXT, citizenID TEXT, name TEXT, address TEXT, age INT, telNum TEXT, email TEXT)");
         this.db.run("CREATE TABLE IF NOT EXISTS books (userName TEXT, tourName TEXT, flightID INT, cardID INT, FOREIGN KEY (tourName) REFERENCES tours(tourName),FOREIGN KEY (userName) REFERENCES accounts(userName), FOREIGN KEY (flightID) REFERENCES flights(flightID))");
         console.log('Connected to the database.');
-
-        this.createComments(1,'Du lich','hihi','Fine',1.0);
-        this.createComments(1,'Du lich','haha','Cool one', null);
-        this.createComments(1,'Du lich','hoho','Fine',5.0);
-        this.createComments(1,'Du lich','qewqwe','Fasdasdaasdadqweine',2.0);
-        this.createFlights('VietnamAirline','10/4/2024','15/4/2024',1000000,'HCM','Vung Tau');
-        this.createFlights('VietnamAirline','10/4/2024','15/4/2024',1000000,'HCM','Ha Noi');
-        this.createFlights('VietnamAirline','10/4/2024','15/4/2024',1000000,'HCM','Dak Lak');
-        this.createFlights('VietnamAirline','10/4/2024','15/4/2024',1000000,'HCM','Da Nang');
-
-        newTour.createTour(2,'dulichID2','sthing','12/02/2024','14/02/2024','200$','dulichID2images');S
-
       }
     });
   }
@@ -49,6 +37,9 @@ class UserModel {
     );
   }
 
+  getAllComments(callback) {
+    this.db.all("SELECT * FROM comments ", callback)
+  }
   getComments(townID, tourName, callback) {
     this.db.all("SELECT * FROM comments WHERE townID = ? AND tourName = ?", [townID, tourName], callback)
   }
@@ -60,9 +51,9 @@ class UserModel {
     );
   }
 
-  updateRating(townID, tourName, rating, callback) {
-    let sql = "UPDATE comments SET rating = ? WHERE townID = ? AND tourName = ?";
-    this.db.run(sql, [rating, townID, tourName], callback);
+  updateRating(townID, tourName, userName, rating, callback) {
+    let sql = "UPDATE comments SET rating = ? WHERE townID = ? AND tourName = ? and userName = ?";
+    this.db.run(sql, [rating, townID, tourName, userName], callback);
   }
 
 
@@ -83,7 +74,7 @@ class UserModel {
   }
 
   getTour(tourName, callback) {
-    this.db.get("SELECT townID, tourName, description, price , images  FROM tours WHERE tourName = ?", [tourName], callback);
+    this.db.get("SELECT *  FROM tours WHERE tourName = ?", [tourName], callback);
   }
 
   createTour(townID, tourName, description, startDate, endDate, price, images, callback) {

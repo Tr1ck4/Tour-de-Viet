@@ -1,9 +1,12 @@
-import './Parallax.css';
+import './Home.css';
+import VNMap from './Map';
+
 export default function HomePage(){
+    
     return (
         <>
             <main className = "bg-light-green">
-                <p >adaskdashd</p>
+                <VNMap></VNMap>
             </main>
         </>
     );
