@@ -1,20 +1,53 @@
 import express from 'express';
 import UserModel from './database.js';
 import path from 'path';
+import jwt from 'jsonwebtoken';
+import { expressjwt } from "express-jwt";
+ 
 const userModel = new UserModel('./database.db');
 const __dirname = path.resolve(path.dirname(''));
-export const app = express();
 const PORT = 3000;
+const secretKey = 'TQEWE31824'; 
 
+export const app = express();
+export const authenticateJWT = expressjwt({ secret: secretKey, algorithms: ['HS256'] });
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'dist')));
+
+
+function generateToken(user) {
+    return jwt.sign(user, secretKey, { expiresIn: '1h' });
+}
+
+function authenticateToken(req, res, next) {
+    const decoded = jwt.verify(token, secretKey);  
+    req.user = decoded;
+    next(); 
+}
+
+app.post('/api/login', (req, res) => {
+    const { username, password } = req.body;
+    const user = userModel.getUser(username, password); 
+
+    if (!user) {
+        return res.status(401).json({ message: 'Invalid username or password' });
+    }
+
+    const token = generateToken({ username: user.username });
+
+    res.json({ token });
+});
+
+app.get('/api/protected', authenticateJWT, (req, res) => {
+    res.json({ message: 'You are authorized', user: req.user });
+});
 
 app.get('/para', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
   });
 
-app.get('/api/bookings/:userName', (req, res) => {
+app.get('/api/bookings/:userName', authenticateJWT, (req, res) => {
     const { userName } = req.params;
     const { tourName } = req.query;
 
@@ -27,8 +60,7 @@ app.get('/api/bookings/:userName', (req, res) => {
     });
 });
 
-// Route to create a booking
-app.post('/api/bookings', (req, res) => {
+app.post('/api/bookings', authenticateJWT, (req, res) => {
     const { userName, tourName, flightID, cardID } = req.body;
     userModel.createBook(userName, tourName, flightID, cardID, (err, result) => {
         if (err) {
@@ -42,7 +74,6 @@ app.post('/api/bookings', (req, res) => {
     });
 });
 
-// Route to get comments
 app.get('/api/comment', (req, res) => {
     userModel.getAllComments((err, row) => {
         if (err) {
@@ -64,7 +95,6 @@ app.get('/api/comments/:townID/:tourName', (req, res) => {
     });
 });
 
-// Route to create a comment
 app.post('/api/comments', (req, res) => {
     const { townID, tourName, userName, comment, rating } = req.body;
 
@@ -80,7 +110,6 @@ app.post('/api/comments', (req, res) => {
     });
 });
 
-// Route to update a comment's rating
 app.put('/api/comments/:townID/:tourName', (req, res) => {
     const { townID, tourName, userName } = req.params;
     const { rating } = req.body;
@@ -97,11 +126,10 @@ app.put('/api/comments/:townID/:tourName', (req, res) => {
     });
 });
 
-//create account
 app.post('/api/accounts', (req, res) => {
     const { userName, password, citizenID, name, address, age, tel, email } = req.body;
 
-    userModel.createAccounts(userName, password, citizenID, name, address, age, tel, email, (err, result) => {
+    userModel.createAccount(userName, password, citizenID, name, address, age, tel, email, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -114,7 +142,6 @@ app.post('/api/accounts', (req, res) => {
     });
 });
 
-//get account info
 app.get('/api/accounts/:userName', (req, res) => {
     const { userName } = req.params;
 
@@ -127,8 +154,7 @@ app.get('/api/accounts/:userName', (req, res) => {
     });
 });
 
-//update account
-app.put('/api/accounts/:userName', (req, res) => {
+app.put('/api/accounts/:userName', authenticateJWT, (req, res) => {
     const { userName } = req.params;
     const { password, citizenID, name, address, age, tel, email } = req.body;
 
@@ -144,7 +170,6 @@ app.put('/api/accounts/:userName', (req, res) => {
     });
 });
 
-// Route to get flights
 app.get('/api/flights/:flightID', (req, res) => {
   const { flightID} = req.params;
 
@@ -157,8 +182,7 @@ app.get('/api/flights/:flightID', (req, res) => {
   });
 });
 
-// Route to create a flight
-app.post('/api/flights', (req, res) => {
+app.post('/api/flights', authenticateJWT, (req, res) => {
   const {flightName, startDate, endDate , price , goFrom , arriveAt } = req.body;
 
   userModel.createFlights(flightName, startDate, endDate , price , goFrom , arriveAt, (err, result) => {
@@ -173,8 +197,7 @@ app.post('/api/flights', (req, res) => {
   });
 });
 
-// Route to update a flight's info
-app.put('/api/flights/:flightID', (req, res) => {
+app.put('/api/flights/:flightID', authenticateJWT, (req, res) => {
   const { flightID } = req.params;
   const { flightName, startDate, endDate , price , goFrom , arriveAt } = req.body;
 
@@ -190,9 +213,6 @@ app.put('/api/flights/:flightID', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
 
 app.get('/api/tours/:tourName', (req, res) => {
     const {tourName} = req.params;
@@ -206,9 +226,9 @@ app.get('/api/tours/:tourName', (req, res) => {
     });
   });
 
-  app.post('/api/tours', (req, res) => {
+app.post('/api/tours', authenticateJWT, (req, res) => {
     const { townID, tourName, description, startDate, endDate, price, images } = req.body;
-  
+
     userModel.createTour(townID, tourName, description, startDate, endDate, price, images, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -220,12 +240,12 @@ app.get('/api/tours/:tourName', (req, res) => {
             result,
         });
     });
-  });
+});
 
-  app.put('/api/tours/:tourName', (req, res) => {
+app.put('/api/tours/:tourName', authenticateJWT, (req, res) => {
     const { tourName } = req.params;
     const { description, startDate, endDate, price, images } = req.body;
-  
+
     userModel.updateTour(tourName, description, startDate, endDate, price, images, (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -236,4 +256,9 @@ app.get('/api/tours/:tourName', (req, res) => {
             data: req.body
         });
     });
-  });
+});
+
+
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});

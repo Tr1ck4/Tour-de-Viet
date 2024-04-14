@@ -96,6 +96,19 @@ class UserModel {
     this.db.run(sql, username, callback);
   }
 
+  getUser(username, password) {
+    return new Promise((resolve, reject) => {
+        const query = 'SELECT * FROM accounts WHERE username = ? AND password = ?';
+        this.db.get(query, [username, password], (err, row) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(row);
+        });
+    });
+}
+
   updateAccount(username, password, citizenID, name, address, age, tel, email, callback) {
     let sql = `UPDATE accounts SET password = COALESCE(?, password),
     citizenID = COALESCE(?, citizenID),

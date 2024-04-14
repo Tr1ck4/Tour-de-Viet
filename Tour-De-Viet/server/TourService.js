@@ -23,8 +23,9 @@ class ToursService{
         return fetch(`${this.baseUrl}/api/tours`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
-          },
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
           body: JSON.stringify(
             {
               'townID':this.townID, 
@@ -47,8 +48,9 @@ class ToursService{
         return fetch(`${this.baseUrl}/api/tours/${newdata.tourName}`, {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json'
-          },
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
           body: JSON.stringify({ 
             'townID':newdata.townID, 
             'tourName':newdata.tourName, 

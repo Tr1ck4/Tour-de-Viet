@@ -45,10 +45,11 @@ class Account {
     }
 
     async updateAccount(newData) {
-        return fetch(`${this.baseUrl}/api/accounts/${username}`, {
+        return fetch(`${this.baseUrl}/api/accounts/${newData.susername}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ 
                 "username": newData.username, 

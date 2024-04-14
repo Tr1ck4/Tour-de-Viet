@@ -28,8 +28,9 @@ class CommentService{
       return fetch(`${this.baseUrl}/api/comments`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
-        },
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+      },
         body: JSON.stringify(
           {
             'townID': newData.townID,
@@ -50,8 +51,9 @@ class CommentService{
       return fetch(`${this.baseUrl}/api/comments/${townID}/${tourName}`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
-        },
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+      },
         body: JSON.stringify({ rating })
       })
         .then(response => response.status)

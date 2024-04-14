@@ -17,22 +17,30 @@ class BookingService{
   }
 
   async createBooking(newData) {
-    return fetch(`${this.baseUrl}/api/bookings`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        "userName" : newData.userName, 
-        "tourName" : newData.tourName, 
-        "flightID" : newData.flightID, 
-        "cardID" : newData.cardID,
-      })
-    })
-      .then(response => response.status)
-      .catch(error => {
+    try {
+        const response = await fetch(`${this.baseUrl}/api/bookings`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                "userName": newData.userName,
+                "tourName": newData.tourName,
+                "flightID": newData.flightID,
+                "cardID": newData.cardID,
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to create booking');
+        }
+
+        return response.status;
+    } catch (error) {
         console.error('Error creating booking:', error);
-      });
+        throw error; 
+    }
   }
 }
 
