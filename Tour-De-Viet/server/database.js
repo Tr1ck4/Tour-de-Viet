@@ -51,9 +51,9 @@ class UserModel {
     );
   }
 
-  updateRating(townID, tourName, rating, callback) {
-    let sql = "UPDATE comments SET rating = ? WHERE townID = ? AND tourName = ?";
-    this.db.run(sql, [rating, townID, tourName], callback);
+  updateRating(townID, tourName, userName, rating, callback) {
+    let sql = "UPDATE comments SET rating = ? WHERE townID = ? AND tourName = ? and userName = ?";
+    this.db.run(sql, [rating, townID, tourName, userName], callback);
   }
 
   getTour(tourName, callback) {
