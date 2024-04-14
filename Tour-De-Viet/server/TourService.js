@@ -19,7 +19,7 @@ class ToursService{
         });
     }
 
-    async createTour(){
+    async createTour(newData){
         return fetch(`${this.baseUrl}/api/tours`, {
           method: 'POST',
           headers: {
@@ -28,13 +28,13 @@ class ToursService{
         },
           body: JSON.stringify(
             {
-              'townID':this.townID, 
-              'tourName':this.tourName, 
-              'description':this.description, 
-              'startDate':this.startDate, 
-              'endDate':this.endDate, 
-              'price':this.price, 
-              'images':this.images
+              'townID':newData.townID, 
+              'tourName':newData.tourName, 
+              'description':newData.description, 
+              'startDate':newData.startDate, 
+              'endDate':newData.endDate, 
+              'price':newData.price, 
+              'images':newData.images
             }
           )
         })

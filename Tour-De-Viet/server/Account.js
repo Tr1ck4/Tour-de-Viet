@@ -45,6 +45,7 @@ class Account {
     }
 
     async updateAccount(newData) {
+        let token = localStorage.getItem('token');
         return fetch(`${this.baseUrl}/api/accounts/${newData.susername}`, {
             method: 'PUT',
             headers: {

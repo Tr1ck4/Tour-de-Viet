@@ -35,7 +35,6 @@ app.post('/api/login', (req, res) => {
     }
 
     const token = generateToken({ username: user.username });
-
     res.json({ token });
 });
 
