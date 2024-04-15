@@ -14,10 +14,8 @@ export const authenticateJWT = expressjwt({ secret: secretKey, algorithms: ['HS2
 
 app.use(express.json());
 
-app.use(express.static(path.resolve(__dirname, 'dist')));
-app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});
+app.use(express.static(path.join(__dirname, 'dist')));
+
 
 
 function generateToken(user) {
@@ -261,7 +259,11 @@ app.put('/api/tours/:tourName', authenticateJWT, (req, res) => {
     });
 });
 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "dist", "index.html"))
+})
 
-  app.listen(PORT, () => {
+
+app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
