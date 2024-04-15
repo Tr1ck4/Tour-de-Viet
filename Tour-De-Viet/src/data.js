@@ -495,7 +495,6 @@ export const arr = [
         { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
         { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
         { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
-    
         ]
     },
     {

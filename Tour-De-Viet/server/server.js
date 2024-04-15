@@ -13,7 +13,11 @@ export const app = express();
 export const authenticateJWT = expressjwt({ secret: secretKey, algorithms: ['HS256'] });
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'dist')));
+
+app.use(express.static(path.resolve(__dirname, 'dist')));
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
 
 function generateToken(user) {
@@ -44,7 +48,7 @@ app.get('/api/protected', authenticateJWT, (req, res) => {
 
 app.get('/para', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-  });
+});
 
 app.get('/api/bookings/:userName', authenticateJWT, (req, res) => {
     const { userName } = req.params;
@@ -73,7 +77,7 @@ app.post('/api/bookings', authenticateJWT, (req, res) => {
     });
 });
 
-app.get('/api/comment', (req, res) => {
+app.get('/api/comments', (req, res) => {
     userModel.getAllComments((err, row) => {
         if (err) {
             res.status(500).json({ error: err.message });
