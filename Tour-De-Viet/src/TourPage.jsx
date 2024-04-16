@@ -1,30 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import bg from './assets/Background/TourPage_bg.png';
 import Slider from 'react-slider'
 import './TourPage.css'
-import axios from 'axios';
 
 const MIN = 500000;
 const MAX = 20000000;
 
-export default function TourPage() {
+export default function TourPage(){
     const [values, setValue] = useState([MIN, MAX]);
-    const [tourList, SetTourList] = useState([]);
-    useEffect(() => {
-        const fetchAllTour = async () => {
-            try {
-                const response = await axios.get("http://localhost:3000/api/tours");
-                SetTourList(response.data);
-                console.log(response.data)
-            } catch (error) {
-                console.error("Error fetching tours", error);
-                // Handle the error as needed
-            }
-        };
 
-        fetchAllTour();
-
-    }, []);
     return (
         <>
             <main className='bg-fixed bg-cover' style={{ backgroundImage: `url(${bg})` }}>
@@ -57,17 +41,6 @@ export default function TourPage() {
                         </div>
                     </div>
             </main>
-            <ul>
-                {tourList.map((tourData, index) => (
-                    <li key={index}>
-                        <p>Town ID: {tourData.townID}</p>
-                        <p>Total Time: {tourData.totalTime}</p>
-                        <p>Transport: {tourData.transport}</p>
-                        <p>Price: {tourData.price}</p>
-                        <p>Average Rating: {tourData.avg_rating !== null ? tourData.avg_rating : "N/A"}</p>
-                    </li>
-                ))}
-            </ul>
         </>
     );
 }
