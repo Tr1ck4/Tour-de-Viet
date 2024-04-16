@@ -2,3 +2,22 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+.slider{
+    width: 75%;
+    height: 5px;
+    background-color: #ebebeb;
+    margin-top: 10px;
+}
+
+.slider .thumb{
+    height: 20px;
+    width: 20px;
+    cursor: pointer ;
+    background-color: #F5B750;
+    border-radius: 50%;
+    top: -8px;
+}
+
+.value {
+    align-items: center;
+}
