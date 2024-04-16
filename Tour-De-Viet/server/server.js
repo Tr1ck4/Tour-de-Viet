@@ -3,11 +3,11 @@ import UserModel from './database.js';
 import path from 'path';
 import jwt from 'jsonwebtoken';
 import { expressjwt } from "express-jwt";
- 
+
 const userModel = new UserModel('./database.db');
 const __dirname = path.resolve(path.dirname(''));
 const PORT = 3000;
-const secretKey = 'TQEWE31824'; 
+const secretKey = 'TQEWE31824';
 
 export const app = express();
 export const authenticateJWT = expressjwt({ secret: secretKey, algorithms: ['HS256'] });
@@ -23,14 +23,14 @@ function generateToken(user) {
 }
 
 function authenticateToken(req, res, next) {
-    const decoded = jwt.verify(token, secretKey);  
+    const decoded = jwt.verify(token, secretKey);
     req.user = decoded;
-    next(); 
+    next();
 }
 
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
-    const user = userModel.getUser(username, password); 
+    const user = userModel.getUser(username, password);
 
     if (!user) {
         return res.status(401).json({ message: 'Invalid username or password' });
@@ -172,52 +172,52 @@ app.put('/api/accounts/:userName', authenticateJWT, (req, res) => {
 });
 
 app.get('/api/flights/:flightID', (req, res) => {
-  const { flightID} = req.params;
+    const { flightID } = req.params;
 
-  userModel.getFlights(flightID, (err, row) => {
-      if (err) {
-          res.status(500).json({ error: err.message });
-          return;
-      }
-      res.json(row);
-  });
+    userModel.getFlights(flightID, (err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(row);
+    });
 });
 
 app.post('/api/flights', authenticateJWT, (req, res) => {
-  const {flightName, startDate, endDate , price , goFrom , arriveAt } = req.body;
+    const { flightName, startDate, endDate, price, goFrom, arriveAt } = req.body;
 
-  userModel.createFlights(flightName, startDate, endDate , price , goFrom , arriveAt, (err, result) => {
-      if (err) {
-          res.status(500).json({ error: err.message });
-          return;
-      }
-      res.json({
-          message: 'Flight created',
-          data: req.body,
-      });
-  });
+    userModel.createFlights(flightName, startDate, endDate, price, goFrom, arriveAt, (err, result) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json({
+            message: 'Flight created',
+            data: req.body,
+        });
+    });
 });
 
 app.put('/api/flights/:flightID', authenticateJWT, (req, res) => {
-  const { flightID } = req.params;
-  const { flightName, startDate, endDate , price , goFrom , arriveAt } = req.body;
+    const { flightID } = req.params;
+    const { flightName, startDate, endDate, price, goFrom, arriveAt } = req.body;
 
-  userModel.updateFlights(flightName, startDate, endDate , price , goFrom , arriveAt, (err) => {
-      if (err) {
-          res.status(500).json({ error: err.message });
-          return;
-      }
-      res.json({
-          message: 'Flight updated',
-          data: req.body
-      });
-  });
+    userModel.updateFlights(flightName, startDate, endDate, price, goFrom, arriveAt, (err) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json({
+            message: 'Flight updated',
+            data: req.body
+        });
+    });
 });
 
 
 app.get('/api/tours/:tourName', (req, res) => {
-    const {tourName} = req.params;
-  
+    const { tourName } = req.params;
+
     userModel.getTour(tourName, (err, row) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -225,12 +225,14 @@ app.get('/api/tours/:tourName', (req, res) => {
         }
         res.json(row);
     });
-  });
+});
+
+
 
 app.post('/api/tours', authenticateJWT, (req, res) => {
-    const { townID, tourName, description, startDate, endDate, price, images } = req.body;
+    const { townID, tourName, description, totalTime, transport, startDate, endDate, price, images } = req.body;
 
-    userModel.createTour(townID, tourName, description, startDate, endDate, price, images, (err, result) => {
+    userModel.createTour(townID, tourName, description, totalTime, transport, startDate, endDate, price, images, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -243,11 +245,21 @@ app.post('/api/tours', authenticateJWT, (req, res) => {
     });
 });
 
+app.get('/api/tours', (req, res) => {
+    userModel.getAllTour((err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(row);
+    });
+});
+
 app.put('/api/tours/:tourName', authenticateJWT, (req, res) => {
     const { tourName } = req.params;
-    const { description, startDate, endDate, price, images } = req.body;
+    const { description, totalTime, transport, startDate, endDate, price, images } = req.body;
 
-    userModel.updateTour(tourName, description, startDate, endDate, price, images, (err) => {
+    userModel.updateTour(tourName, description, totalTime, transport, startDate, endDate, price, images, (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
