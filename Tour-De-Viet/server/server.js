@@ -2,6 +2,7 @@ import express from 'express';
 import UserModel from './database.js';
 import path from 'path';
 import jwt from 'jsonwebtoken';
+import cors from 'cors';
 import { expressjwt } from "express-jwt";
 
 const userModel = new UserModel('./database.db');
@@ -13,7 +14,7 @@ export const app = express();
 export const authenticateJWT = expressjwt({ secret: secretKey, algorithms: ['HS256'] });
 
 app.use(express.json());
-
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'dist')));
 
 
