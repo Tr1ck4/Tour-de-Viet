@@ -6,17 +6,16 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './Header.jsx'
 import ParallaxPage from './Parallax.jsx'
 import HomePage from './Home.jsx'
+import TourPage from './TourPage.jsx'
 
 export default function App(){
   return (
     <Router>
       <Header/>
-      <a href='/homepage'>
-        asdasd
-      </a>
       <Routes>
         <Route path = '/homepage' element={<HomePage/>} />
         <Route path = '/parallax' element={<ParallaxPage/>} />
+        <Route path = '/tourpage' element={<TourPage/>} />
       </Routes>
     </Router>
   );
