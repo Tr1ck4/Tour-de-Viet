@@ -11,6 +11,9 @@ export default {
         'dark-green'  : '#335145',
         'bone-white'  : '#EBEBEB',
         'bright-yellow':'#F5B700',
+      },
+      fontFamily:{
+        itim:['Regular'],
       }
     },
   },
