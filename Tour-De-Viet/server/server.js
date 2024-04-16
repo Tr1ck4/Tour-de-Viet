@@ -215,10 +215,10 @@ app.put('/api/flights/:flightID', authenticateJWT, (req, res) => {
 });
 
 
-app.get('/api/tours/:tourName', (req, res) => {
-    const { tourName } = req.params;
+app.get('/api/tours/:townID/:tourName', (req, res) => {
+    const { townID, tourName } = req.params;
 
-    userModel.getTour(tourName, (err, row) => {
+    userModel.getTour(townID, tourName, (err, row) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;

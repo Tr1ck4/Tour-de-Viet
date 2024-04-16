@@ -73,8 +73,15 @@ class UserModel {
     this.db.run(sql, [flightName, startDate, endDate, price, goFrom, arriveAt, flightID], callback);
   }
 
-  getTour(tourName, callback) {
-    this.db.get("SELECT *  FROM tours WHERE tourName = ?", [tourName], callback);
+  getTour(townID, tourName, callback) {
+    let sql = `SELECT t.*, AVG(c.rating) AS avg_rating
+    FROM tours t
+    LEFT JOIN comments c ON t.townID = c.townID AND t.tourName = c.tourName
+    WHERE t.tourName = ? AND t.townID = ?
+    GROUP BY t.townID, t.tourName, t.description, t.totalTime, t.transport, t.startDate, t.endDate, t.price, t.images;
+    `
+
+    this.db.get(sql, [tourName, townID], callback);
   }
 
   getAllTour(callback) {
