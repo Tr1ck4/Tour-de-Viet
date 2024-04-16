@@ -129,15 +129,15 @@ app.put('/api/comments/:townID/:tourName', (req, res) => {
 });
 
 app.post('/api/accounts', (req, res) => {
-    const { userName, password, citizenID, name, address, age, tel, email } = req.body;
+    const { username, password, citizenID, name, address, age, tel, email } = req.body;
 
-    userModel.createAccount(userName, password, citizenID, name, address, age, tel, email, (err, result) => {
+    userModel.createAccount(username, password, citizenID, name, address, age, tel, email, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
         }
         res.json({
-            message: 'Tour created',
+            message: 'Account created',
             data: req.body,
             result,
         });
