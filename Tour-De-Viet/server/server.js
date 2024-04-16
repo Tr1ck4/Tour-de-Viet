@@ -2,6 +2,7 @@ import express from 'express';
 import UserModel from './database.js';
 import path from 'path';
 import jwt from 'jsonwebtoken';
+import cors from 'cors';
 import { expressjwt } from "express-jwt";
 
 const userModel = new UserModel('./database.db');
@@ -13,7 +14,7 @@ export const app = express();
 export const authenticateJWT = expressjwt({ secret: secretKey, algorithms: ['HS256'] });
 
 app.use(express.json());
-
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'dist')));
 
 
@@ -128,15 +129,15 @@ app.put('/api/comments/:townID/:tourName', (req, res) => {
 });
 
 app.post('/api/accounts', (req, res) => {
-    const { userName, password, citizenID, name, address, age, tel, email } = req.body;
+    const { username, password, citizenID, name, address, age, tel, email } = req.body;
 
-    userModel.createAccount(userName, password, citizenID, name, address, age, tel, email, (err, result) => {
+    userModel.createAccount(username, password, citizenID, name, address, age, tel, email, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
         }
         res.json({
-            message: 'Tour created',
+            message: 'Account created',
             data: req.body,
             result,
         });
