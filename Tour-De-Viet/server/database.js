@@ -78,7 +78,11 @@ class UserModel {
   }
 
   getAllTour(callback) {
-    this.db.all("SELECT *  FROM tours ", callback)
+    let sql = `SELECT t.townID, t.totalTime, t.transport, t.price, AVG(c.rating) AS avg_rating
+    FROM tours t
+    LEFT JOIN comments c ON t.townID = c.townID AND t.tourName = c.tourName
+    GROUP BY t.townID, t.totalTime, t.price;`
+    this.db.all(sql, callback)
   }
 
   createTour(townID, tourName, description, totalTime, transport, startDate, endDate, price, images, callback) {
