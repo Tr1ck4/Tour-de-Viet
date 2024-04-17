@@ -18,7 +18,6 @@ export default function TourPage() {
                 console.log(response.data)
             } catch (error) {
                 console.error("Error fetching tours", error);
-                // Handle the error as needed
             }
         };
 
@@ -26,36 +25,25 @@ export default function TourPage() {
 
     }, []);
 
-    // Initialize an empty array to store selected values
 let selectedValues = [];
 
-// Function to handle checkbox selection
 function handleCheckboxSelection(event) {
     const labelText = event.target.parentNode.textContent.trim();
     console.log("Selected label:", labelText);
-
-    // If the "All" checkbox is checked and another checkbox is checked, uncheck the "All" checkbox
     if (labelText !== 'All' && document.getElementById('all').checked) {
         document.getElementById('all').checked = false;
     }
-    
     const value = event.target.value;
-    
     if (event.target.checked) {
-        selectedValues.push(value); // Add value to selected values if checkbox is checked
+        selectedValues.push(value);
     } else {
-        selectedValues = selectedValues.filter(item => item !== value); // Remove value from selected values if checkbox is unchecked
+        selectedValues = selectedValues.filter(item => item !== value);
     }
-
-    // Log the selected values (you can replace this with your own logic)
     console.log(selectedValues);
 }
 
-// Function to handle selecting "All" checkbox
 function handleAllSelection(event) {
     const value = event.target.value;
-
-    // If "All" checkbox is checked, uncheck all other checkboxes
     if (event.target.checked) {
         const checkboxes = document.querySelectorAll('input[type="checkbox"][name="test"]');
         checkboxes.forEach(checkbox => {
@@ -63,22 +51,17 @@ function handleAllSelection(event) {
                 checkbox.checked = false;
             }
         });
-        selectedValues = [value]; // Update selected values with only "All"
+        selectedValues = [value];
     } else {
-        selectedValues = []; // Empty selected values if "All" is unchecked
+        selectedValues = [];
     }
-
-    // Log the selected values (you can replace this with your own logic)
     console.log(selectedValues);
 }
 
 let selectedTransportationValues = [];
 
-// Function to handle selecting "All" checkbox for transportation
 function handleAllTransportationSelection(event) {
     const value = event.target.value;
-
-    // If "All" checkbox for transportation is checked, uncheck all other transportation checkboxes
     if (event.target.checked) {
         const checkboxes = document.querySelectorAll('input[type="checkbox"][name="testTransportation"]');
         checkboxes.forEach(checkbox => {
@@ -86,34 +69,26 @@ function handleAllTransportationSelection(event) {
                 checkbox.checked = false;
             }
         });
-        selectedTransportationValues = [value]; // Update selected transportation values with only "All"
+        selectedTransportationValues = [value]; 
     } else {
-        selectedTransportationValues = []; // Empty selected transportation values if "All" is unchecked
+        selectedTransportationValues = []; 
     }
-
-    // Log the selected transportation values (you can replace this with your own logic)
     console.log(selectedTransportationValues);
 }
 
-// Function to handle checkbox selection for transportation
 function handleTransportationCheckboxSelection(event) {
     const labelText = event.target.parentNode.textContent.trim();
     console.log("Selected transportation:", labelText);
 
-    // If the "All" checkbox for transportation is checked and another transportation checkbox is checked, uncheck the "All" checkbox
     if (labelText !== 'All' && document.getElementById('allTransportation').checked) {
         document.getElementById('allTransportation').checked = false;
     }
-
     const value = event.target.value;
-
     if (event.target.checked) {
-        selectedTransportationValues.push(value); // Add value to selected transportation values if checkbox is checked
+        selectedTransportationValues.push(value);
     } else {
-        selectedTransportationValues = selectedTransportationValues.filter(item => item !== value); // Remove value from selected transportation values if checkbox is unchecked
+        selectedTransportationValues = selectedTransportationValues.filter(item => item !== value);
     }
-
-    // Log the selected transportation values (you can replace this with your own logic)
     console.log(selectedTransportationValues);
 }
 
@@ -221,17 +196,6 @@ function handleTransportationCheckboxSelection(event) {
                 ))}
                 </div>
             </main>
-            {/* <ul>
-                {tourList.map((tourData, index) => (
-                    <li key={index}>
-                        <p>Town ID: {tourData.townID}</p>
-                        <p>Total Time: {tourData.totalTime}</p>
-                        <p>Transport: {tourData.transport}</p>
-                        <p>Price: {tourData.price}</p>
-                        <p>Average Rating: {tourData.avg_rating !== null ? tourData.avg_rating : "N/A"}</p>
-                    </li>
-                ))}
-            </ul> */}
         </>
     );
 }
