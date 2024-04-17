@@ -72,11 +72,51 @@ function handleAllSelection(event) {
     console.log(selectedValues);
 }
 
+let selectedTransportationValues = [];
 
+// Function to handle selecting "All" checkbox for transportation
+function handleAllTransportationSelection(event) {
+    const value = event.target.value;
 
-    
+    // If "All" checkbox for transportation is checked, uncheck all other transportation checkboxes
+    if (event.target.checked) {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"][name="testTransportation"]');
+        checkboxes.forEach(checkbox => {
+            if (checkbox !== event.target) {
+                checkbox.checked = false;
+            }
+        });
+        selectedTransportationValues = [value]; // Update selected transportation values with only "All"
+    } else {
+        selectedTransportationValues = []; // Empty selected transportation values if "All" is unchecked
+    }
 
-    
+    // Log the selected transportation values (you can replace this with your own logic)
+    console.log(selectedTransportationValues);
+}
+
+// Function to handle checkbox selection for transportation
+function handleTransportationCheckboxSelection(event) {
+    const labelText = event.target.parentNode.textContent.trim();
+    console.log("Selected transportation:", labelText);
+
+    // If the "All" checkbox for transportation is checked and another transportation checkbox is checked, uncheck the "All" checkbox
+    if (labelText !== 'All' && document.getElementById('allTransportation').checked) {
+        document.getElementById('allTransportation').checked = false;
+    }
+
+    const value = event.target.value;
+
+    if (event.target.checked) {
+        selectedTransportationValues.push(value); // Add value to selected transportation values if checkbox is checked
+    } else {
+        selectedTransportationValues = selectedTransportationValues.filter(item => item !== value); // Remove value from selected transportation values if checkbox is unchecked
+    }
+
+    // Log the selected transportation values (you can replace this with your own logic)
+    console.log(selectedTransportationValues);
+}
+
     return (
         <>
             <main className='bg-fixed bg-cover' style={{ backgroundImage: `url(${bg})` }}>
@@ -132,34 +172,35 @@ function handleAllSelection(event) {
                         <h2 className='font-semibold text-xl ml-6 pt-2 pb-2' >Transportation</h2>
                         <div>
                             <label className='sidebar-label'>
-                                <input type='checkbox' id='all' name='test' onChange={handleAllSelection} style={{ display: 'none' }} defaultChecked /> <span className='circle'></span> All
+                                <input type='checkbox' id='allTransportation' name='testTransportation' onChange={handleAllTransportationSelection} style={{ display: 'none' }} defaultChecked /> <span className='circle'></span> All
                             </label>
                         </div>
                         <div>
                             <label className='sidebar-label'>
-                                <input type='checkbox' name='test' onChange={handleCheckboxSelection} style={{ display: 'none' }}/> <span className='circle'></span> Train
+                                <input type='checkbox' name='testTransportation' onChange={handleTransportationCheckboxSelection} style={{ display: 'none' }}/> <span className='circle'></span> Train
                             </label>
                         </div>
                         <div>
                             <label className='sidebar-label'>
-                                <input type='checkbox' name='test' onChange={handleCheckboxSelection} style={{ display: 'none' }}/> <span className='circle'></span> Airline
+                                <input type='checkbox' name='testTransportation' onChange={handleTransportationCheckboxSelection} style={{ display: 'none' }}/> <span className='circle'></span> Airline
                             </label>
                         </div>
                         <div>
                             <label className='sidebar-label'>
-                                <input type='checkbox' name='test' onChange={handleCheckboxSelection} style={{ display: 'none' }}/> <span className='circle'></span> Guess bus
+                                <input type='checkbox' name='testTransportation' onChange={handleTransportationCheckboxSelection} style={{ display: 'none' }}/> <span className='circle'></span> Guest bus
                             </label>
                         </div>
                         <div>
                             <label className='sidebar-label'>
-                                <input type='checkbox' name='test' onChange={handleCheckboxSelection} style={{ display: 'none' }}/> <span className='circle'></span> Boat
+                                <input type='checkbox' name='testTransportation' onChange={handleTransportationCheckboxSelection} style={{ display: 'none' }}/> <span className='circle'></span> Boat
                             </label>
                         </div>
                         <div>
                             <label className='sidebar-label'>
-                                <input type='checkbox' name='test' onChange={handleCheckboxSelection} style={{ display: 'none' }}/> <span className='circle'></span> None
+                                <input type='checkbox' name='testTransportation' onChange={handleTransportationCheckboxSelection} style={{ display: 'none' }}/> <span className='circle'></span> None
                             </label>
                         </div>
+
                         </div>
                     </div>
                 </div>
