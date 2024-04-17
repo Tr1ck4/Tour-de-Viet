@@ -13,7 +13,7 @@ class UserModel {
         this.db.run("CREATE TABLE IF NOT EXISTS comments (townID INT, tourName TEXT, comment TEXT, userName TEXT, rating REAL, FOREIGN KEY (townID) REFERENCES tours(townID), FOREIGN KEY (tourName) REFERENCES tours(tourName), FOREIGN KEY (userName) REFERENCES books(userName))");
         this.db.run("CREATE TABLE IF NOT EXISTS tours    (townID INT, tourName TEXT, description TEXT, startDate TEXT, endDate TEXT, price REAL, images TEXT, PRIMARY KEY (townID, tourName))");
         this.db.run("CREATE TABLE IF NOT EXISTS flights (flightID INTEGER PRIMARY KEY AUTOINCREMENT, flightName TEXT, startDate TEXT, endDate TEXT, price REAL, goFrom TEXT, arriveAt TEXT)");
-        this.db.run("CREATE TABLE IF NOT EXISTS accounts (userName TEXT UNIQUE, password TEXT, citizenID TEXT, name TEXT, address TEXT, age INT, telNum TEXT, email TEXT)");
+        this.db.run("CREATE TABLE IF NOT EXISTS accounts (userName TEXT PRIMARY KEY NOT NULL, password TEXT, citizenID TEXT, name TEXT, address TEXT, age INT, telNum TEXT, email TEXT)");
         this.db.run("CREATE TABLE IF NOT EXISTS books (userName TEXT, tourName TEXT, flightID INT, cardID INT, FOREIGN KEY (tourName) REFERENCES tours(tourName),FOREIGN KEY (userName) REFERENCES accounts(userName), FOREIGN KEY (flightID) REFERENCES flights(flightID))");
         console.log('Connected to the database.');
       }
@@ -21,12 +21,17 @@ class UserModel {
   }
 
 
-  getBook(userName, tourName, callback) {
-    let sql = "SELECT userName, tourName, flightID FROM books WHERE userName = ?";
-    if (tourName) {
-      sql += " AND tourName = ?";
-    }
-    this.db.all(sql, [userName, tourName], callback);
+  // getBook(userName, tourName, callback) {
+  //   let sql = "SELECT userName, tourName, flightID FROM books WHERE userName = ?";
+  //   if (tourName) {
+  //     sql += " AND tourName = ?";
+  //   }
+  //   this.db.all(sql, [userName, tourName], callback);
+  // }
+  getBook(userName, callback) {
+    let sql = "SELECT books.tourName, startDate, endDate, price FROM books JOIN tours ON books.tourName = tours.tourName WHERE userName = ?";
+
+    this.db.all(sql, [userName], callback);
   }
 
 
@@ -92,8 +97,8 @@ class UserModel {
 
   
   getAccount(username, callback) {
-    let sql = `SELECT * FROM accounts WHERE userName = ?`;
-    this.db.run(sql, username, callback);
+    this.db.get(`SELECT * FROM accounts WHERE userName = ?`,[username],callback);
+    
   }
 
   getUser(username, password) {

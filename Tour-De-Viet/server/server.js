@@ -48,11 +48,10 @@ app.get('/para', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-app.get('/api/bookings/:userName', authenticateJWT, (req, res) => {
+app.get('/api/bookings/:userName', (req, res) => {
     const { userName } = req.params;
-    const { tourName } = req.query;
 
-    userModel.getBook(userName, tourName, (err, rows) => {
+    userModel.getBook(userName, (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -60,6 +59,19 @@ app.get('/api/bookings/:userName', authenticateJWT, (req, res) => {
         res.json(rows);
     });
 });
+
+// app.get('/api/bookings/:userName', authenticateJWT, (req, res) => {
+//     const { userName } = req.params;
+//     const { tourName } = req.query;
+
+//     userModel.getBook(userName, tourName, (err, rows) => {
+//         if (err) {
+//             res.status(500).json({ error: err.message });
+//             return;
+//         }
+//         res.json(rows);
+//     });
+// });
 
 app.post('/api/bookings', authenticateJWT, (req, res) => {
     const { userName, tourName, flightID, cardID } = req.body;
@@ -74,6 +86,20 @@ app.post('/api/bookings', authenticateJWT, (req, res) => {
         });
     });
 });
+
+// app.post('/api/bookings', authenticateJWT, (req, res) => {
+//     const { userName, tourName, flightID, cardID } = req.body;
+//     userModel.createBook(userName, tourName, flightID, cardID, (err, res) => {
+//         if (err) {
+//             res.status(500).json({ error: err.message });
+//             return;
+//         }
+//         res.json({
+//             message: 'Booking created',
+//             data: req.body,
+//         });
+//     });
+// });
 
 app.get('/api/comments', (req, res) => {
     userModel.getAllComments((err, row) => {
@@ -128,15 +154,15 @@ app.put('/api/comments/:townID/:tourName', (req, res) => {
 });
 
 app.post('/api/accounts', (req, res) => {
-    const { userName, password, citizenID, name, address, age, tel, email } = req.body;
+    const { username, password, citizenID, name, address, age, tel, email } = req.body;
 
-    userModel.createAccount(userName, password, citizenID, name, address, age, tel, email, (err, result) => {
+    userModel.createAccount(username, password, citizenID, name, address, age, tel, email, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
         }
         res.json({
-            message: 'Tour created',
+            message: 'Account created',
             data: req.body,
             result,
         });

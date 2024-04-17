@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './Header.jsx'
 import ParallaxPage from './Parallax.jsx'
 import HomePage from './Home.jsx'
-
+import BookTourPage from './BookTourPage.jsx';
+import ProfilePage from './Profile.jsx';
 export default function App(){
   return (
     <Router>
@@ -17,6 +18,8 @@ export default function App(){
       <Routes>
         <Route path = '/homepage' element={<HomePage/>} />
         <Route path = '/parallax' element={<ParallaxPage/>} />
+        <Route path = '/bookinghistory' element = {<BookTourPage/>}/>
+        <Route path = '/profile' element = {<ProfilePage/>}/>
       </Routes>
     </Router>
   );
