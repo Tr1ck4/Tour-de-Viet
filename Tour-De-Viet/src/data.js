@@ -133,7 +133,7 @@ import ocean_60 from './assets/60/ocean.png'
 import sky_60 from './assets/60/sky.png'
 
 
-export let current_id = 33;
+export let current_id = 1;
 export function updateID(newValue){
     if (newValue===0){
         newValue = 64;
@@ -151,6 +151,12 @@ export function updateID(newValue){
 export const arr = [
     {
         "id":1,
+        "header":{
+            title: "Welcome to",
+            subtitle: "Hà Nội",
+            position: { top: 'calc(50%)', left: 'calc(50% )' },
+            z: 3
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
             { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -162,6 +168,12 @@ export const arr = [
     },
     {
         "id": 2, 
+        "header":{
+            title: "Welcome to",
+            subtitle: "Hà Tây",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 2
+        },
         "source":[
             { src: bg_2, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",                 z: '1', ctop: 'calc(50% - 120px)', cleft: 'calc(50%)'},
             { src: l1_2, alt: "l1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'750px',  z: '4', ctop: 'calc(50% + 70px)',  cleft: 'calc(50% - 750px )' },
@@ -177,7 +189,15 @@ export const arr = [
             { src: r3_2, alt: "r3", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.02",    w:'850px',  z: '3', ctop: 'calc(50% + 40px )', cleft: 'calc(50% + 600px)' },
         ]
     },
-    {"id":3,"source":[
+    {
+        "id":3,
+        "header":{
+            title: "Welcome to",
+            subtitle: "Vĩnh Phúc",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
+        "source":[
         { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
         { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
@@ -187,6 +207,12 @@ export const arr = [
     ]},
     {
         "id":4,
+        "header":{
+            title: "Welcome to",
+            subtitle: "Bắc Ninh",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
             { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -198,6 +224,12 @@ export const arr = [
     },
     {
         "id":5,
+        "header":{
+            title: "Welcome to",
+            subtitle: "Hưng Yên",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[{ src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
             { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
             { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
@@ -208,6 +240,12 @@ export const arr = [
     },
     {
         "id" : 6, 
+        "header":{
+            title: "Welcome to",
+            subtitle: "Hà Nam",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source": [
             { src: bg_6, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",    w:'2800px', z: '1', ctop: 'calc(50%)',  cleft: 'calc(50%)'},
             { src: f1_6, alt: "f1", rotation: "0.1",  speedx: "0.03", speedy: "0.02", speedz: "0.05",             z: '6', ctop: 'calc(50% + 60px)', cleft: 'calc(50% + 120px )' },
@@ -223,6 +261,12 @@ export const arr = [
     },
     {
         "id":7,
+        "header":{
+            title: "Welcome to",
+            subtitle: "Hải Dương",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
             { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -233,7 +277,14 @@ export const arr = [
     
         ]
     },
-    {"id":8,"source":[
+    {"id":8,
+    "header":{
+        title: "Welcome to",
+        subtitle: "Hải Phòng",
+        position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+        z: 8
+    },
+    "source":[
         { src: bg_8, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_8, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'55%',z: '2',  ctop: 'calc(50% + 80px)', cleft: 'calc(50% - 580px)'},
         { src: f2_8, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '3',  ctop: 'calc(50% + 2px)', cleft: 'calc(50% + 720px)'},
@@ -249,6 +300,12 @@ export const arr = [
     ]},
     {
         "id":9,
+        "header":{
+            title: "Welcome to",
+            subtitle: "Thái Bình",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -261,6 +318,12 @@ export const arr = [
     },
     {
         "id":10,
+        "header":{
+            title: "Welcome to",
+            subtitle: "Nam Định",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -273,6 +336,12 @@ export const arr = [
     },
     {
         "id":11,
+        "header":{
+            title: "Welcome to",
+            subtitle: "Ninh Bình",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -285,6 +354,12 @@ export const arr = [
     },
     {
         "id":12,
+        "header":{
+            title: "Welcome to",
+            subtitle: "Lai Châu",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -297,6 +372,12 @@ export const arr = [
     },
     {
         "id":13,
+        "header":{
+            title: "Welcome to",
+            subtitle: "Lào Cai",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -308,7 +389,12 @@ export const arr = [
         ]
     },
     {
-        "id":14,
+        "id":14,"header":{
+            title: "Welcome to",
+            subtitle: "Điện Biên",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -320,7 +406,12 @@ export const arr = [
         ]
     },
     {
-        "id":15,
+        "id":15,"header":{
+            title: "Welcome to",
+            subtitle: "Yên Bái",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -332,7 +423,12 @@ export const arr = [
         ]
     },
     {
-        "id":16,
+        "id":16,"header":{
+            title: "Welcome to",
+            subtitle: "Sơn La",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -344,7 +440,12 @@ export const arr = [
         ]
     },
     {
-        "id":17,
+        "id":17,"header":{
+            title: "Welcome to",
+            subtitle: "Hòa bình",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -355,7 +456,12 @@ export const arr = [
     
         ]
     },
-    {"id":18,"source":[
+    {"id":18,"header":{
+            title: "Welcome to",
+            subtitle: "Hà Giang",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },"source":[
         { src: bg_18, alt: "bg", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_18, alt: "f1", rotation: "0",    speedx: "0.02",    speedy: "0.02",    speedz: "0.05",     w:'47%',z: '1',  ctop: 'calc(50% - 180px) ', cleft: 'calc(50% - 380px )'},
         { src: f2_18, alt: "f2", rotation: "0",    speedx: "0.03",    speedy: "0.03",    speedz: "0.05",     w:'40%',z: '1',  ctop: 'calc(50% - 250px) ', cleft: 'calc(50% - 40px )'},
@@ -364,7 +470,12 @@ export const arr = [
         { src: f5_18, alt: "f5", rotation: "0",    speedx: "0.04",    speedy: "0.03",    speedz: "0.1",     w:'50%',z: '1',  ctop: 'calc(50% + 300px) ', cleft: 'calc(50% - 330px )'},
         { src: f6_18, alt: "f6", rotation: "0",    speedx: "0.05",    speedy: "0.05",    speedz: "0.1",     w:'60%',z: '1',  ctop: 'calc(50% + 100px) ', cleft: 'calc(50% + 230px )'},
     ]},
-    {"id":19,"source":[
+    {"id":19,"header":{
+            title: "Welcome to",
+            subtitle: "CAO BẰNG",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },"source":[
         { src: bg_19, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_19, alt: "f1", rotation: "0",    speedx: "0.01",    speedy: "0",    speedz: "0.01",     w:'100%',z: '1',  ctop: 'calc(50% - 380px)', cleft: 'calc(50%)'},
         { src: f2_19, alt: "f2", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0.03",     w:'100%',z: '1',  ctop: 'calc(50% - 120px)', cleft: 'calc(50%)'},
@@ -374,7 +485,12 @@ export const arr = [
         { src: f6_19, alt: "f6", rotation: "0",    speedx: "0.04",    speedy: "0.05",    speedz: "0.02",     w:'70%',z: '1',  ctop: 'calc(50% + 130px)', cleft: 'calc(50% + 230px)'},
         { src: f7_19, alt: "f7", rotation: "0",    speedx: "0.03",    speedy: "0.06",    speedz: "0.02",     w:'50%',z: '1',  ctop: 'calc(50% + 130px)', cleft: 'calc(50% - 405px)'},
     ]},
-    {"id":20,"source":[
+    {"id":20,"header":{
+            title: "Welcome to",
+            subtitle: "TUYÊN QUANG",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },"source":[
         { src: bg_20, alt: "bg", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_20, alt: "f1", rotation: "0",    speedx: "0.01",    speedy: "0.02",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% - 150px )', cleft: 'calc(50% )'},
         { src: f2_20, alt: "f2", rotation: "0",    speedx: "0.05",    speedy: "0.03",    speedz: "0",     w:'65%',z: '1',  ctop: 'calc(50% - 160px )', cleft: 'calc(50% + 270px)'},
@@ -382,7 +498,12 @@ export const arr = [
         { src: f4_20, alt: "f4", rotation: "0",    speedx: "0.03",    speedy: "0.04",    speedz: "0",     w:'20%',z: '1',  ctop: 'calc(50% - 50px )', cleft: 'calc(50% - 150px)'},
         { src: f5_20, alt: "f5", rotation: "0",    speedx: "0.04",    speedy: "0.04",    speedz: "0",     w:'25%',z: '1',  ctop: 'calc(50% - 50px )', cleft: 'calc(50% + 230px)'},
     ]},
-    {"id":21,"source":[
+    {"id":21,"header":{
+            title: "Welcome to",
+            subtitle: "BẮC KẠN",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },"source":[
         { src: bg_21, alt: "bg", rotation: "0",    speedx: "0.01",    speedy: "0.01",    speedz: "0",  w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_21, alt: "f1", rotation: "0",    speedx: "0.02",    speedy: "0.02",    speedz: "0",     w:'33%',z: '1',  ctop: 'calc(50% - 70px )', cleft: 'calc(50% - 330px )'},
         { src: f2_21, alt: "f2", rotation: "0",    speedx: "0.03",    speedy: "0.03",    speedz: "0",     w:'33%',z: '1',  ctop: 'calc(50% + 120px)', cleft: 'calc(50% - 300px )'},
@@ -391,7 +512,12 @@ export const arr = [
         { src: f5_21, alt: "f5", rotation: "0",    speedx: "0.03",    speedy: "0.03",    speedz: "0",     w:'75%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50% + 130px )'},
     ]},
     {
-        "id":22,
+        "id":22,"header":{
+            title: "Welcome to",
+            subtitle: "LẠNG SƠN",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -403,7 +529,12 @@ export const arr = [
         ]
     },
     {
-        "id":23,
+        "id":23,"header":{
+            title: "Welcome to",
+            subtitle: "THÁI NGUYÊN",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -415,7 +546,12 @@ export const arr = [
         ]
     },
     {
-        "id":24,
+        "id":24,"header":{
+            title: "Welcome to",
+            subtitle: "BẮC GIANG",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -427,7 +563,12 @@ export const arr = [
         ]
     },
     {
-        "id":25,
+        "id":25,"header":{
+            title: "Welcome to",
+            subtitle: "QUẢNG NINH",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -439,7 +580,12 @@ export const arr = [
         ]
     },
     {
-        "id":26,
+        "id":26,"header":{
+            title: "Welcome to",
+            subtitle: "PHÚ THỌ",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -451,7 +597,12 @@ export const arr = [
         ]
     },
     {
-        "id":27,
+        "id":27,"header":{
+            title: "Welcome to",
+            subtitle: "THANH HÓA",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -463,7 +614,12 @@ export const arr = [
         ]
     },
     {
-        "id":28,
+        "id":28,"header":{
+            title: "Welcome to",
+            subtitle: "NGHỆ AN",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -475,7 +631,12 @@ export const arr = [
         ]
     },
     {
-        "id":29,
+        "id":29,"header":{
+            title: "Welcome to",
+            subtitle: "HÀ TĨNH",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -487,7 +648,12 @@ export const arr = [
         ]
     },
     {
-        "id":30,
+        "id":30,"header":{
+            title: "Welcome to",
+            subtitle: "QUẢNG BÌNH",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -498,7 +664,12 @@ export const arr = [
         ]
     },
     {
-        "id":31,
+        "id":31,"header":{
+            title: "Welcome to",
+            subtitle: "QUẢNG TRỊ",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -510,7 +681,12 @@ export const arr = [
         ]
     },
     {
-        "id":32,
+        "id":32,"header":{
+            title: "Welcome to",
+            subtitle: "THỪA THIÊN HUẾ",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -521,7 +697,12 @@ export const arr = [
     
         ]
     },
-    {"id":33,"source":[
+    {"id":33,"header":{
+            title: "Welcome to",
+            subtitle: "ĐÀ NẴNG",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },"source":[
         { src: bg_33, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: m1_33, alt: "mount_1", rotation: "0",    speedx: "0.0", speedy: "0.07", speedz: "0.01",  w:'',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: s1_33, alt: "sky_1", rotation: "0.0",  speedx: "0.0", speedy: "0.02", speedz: "0.02",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
@@ -531,14 +712,24 @@ export const arr = [
         { src: brs_33, alt: "brush_1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'100%',z: '7',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
     ]},
 
-    {"id":34,"source":[
+    {"id":34,"header":{
+            title: "Welcome to",
+            subtitle: "QUẢNG NAM",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },"source":[
         { src: bg_34, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: l1_34, alt: "land1", rotation: "0.02",    speedx: "0.0", speedy: "0.07", speedz: "0.01",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: l2_34, alt: "land2", rotation: "0.02",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: l3_34, alt: "land3", rotation: "0.01",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '5',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: l4_34, alt: "land4", rotation: "0.01", speedx: "0.01", speedy: "0.01", speedz: "0.0",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
     ]},
-    {"id":35,"source":[   
+    {"id":35,"header":{
+            title: "Welcome to",
+            subtitle: "QUẢNG NGÃI",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },"source":[   
         { src: bg_35, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: s_35, alt: "sea", rotation: "0.02",    speedx: "0.01", speedy: "0.07", speedz: "0.01",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: l_35, alt: "land", rotation: "0.02",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
@@ -548,7 +739,12 @@ export const arr = [
         { src: b1_35, alt: "building_1", rotation: "0.01", speedx: "0.01", speedy: "0.01", speedz: "0.0",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: b2_35, alt: "building_2", rotation: "0",    speedx: "0.0", speedy: "0.01", speedz: "0",     w:'100%',z: '6',  ctop: 'calc(50% )', cleft: 'calc(50%)'},
     ]},
-    {"id":36,"source":[
+    {"id":36,"header":{
+            title: "Welcome to",
+            subtitle: "BÌNH ĐỊNH",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },"source":[
         { src: bg_36, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: r2_36, alt: "rock_2", rotation: "0.02",    speedx: "0.01", speedy: "0.07", speedz: "0.01",  w:'75%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: r1_36, alt: "rock_1", rotation: "0.02",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
@@ -557,7 +753,12 @@ export const arr = [
         { src: c1_36, alt: "cloud_1", rotation: "0",    speedx: "0.0", speedy: "0.01", speedz: "0",     w:'100%',z: '6',  ctop: 'calc(50% )', cleft: 'calc(50%)'},
         { src: c2_36, alt: "cloud_2", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'100%',z: '7',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
     ]},
-    {"id":37,"source":[
+    {"id":37,"header":{
+            title: "Welcome to",
+            subtitle: "PHÚ YÊN",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },"source":[
         { src: bg_37, alt: "bg", rotation: "0.0",  speedx: "0.0", speedy: "0.0", speedz: "0.0",  w:'100%',z: '1',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: m4_37, alt: "mountain_4", rotation: "0.02",    speedx: "0.01", speedy: "0.07", speedz: "0.01",  w:'75%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: m3_37, alt: "mountain_3", rotation: "0.02",  speedx: "0.01", speedy: "0.02", speedz: "0.02",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
@@ -566,7 +767,12 @@ export const arr = [
         { src: m1_37, alt: "mountain_1", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0",     w:'100%',z: '6',  ctop: 'calc(50% )', cleft: 'calc(50%)'},
     ]},
     {
-        "id":38,
+        "id":38,"header":{
+            title: "Welcome to",
+            subtitle: "KHÁNH HÒA",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -578,7 +784,12 @@ export const arr = [
         ]
     },
     {
-        "id":39,
+        "id":39,"header":{
+            title: "Welcome to",
+            subtitle: "NINH THUẬN",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -590,7 +801,12 @@ export const arr = [
         ]
     },
     {
-        "id":40,
+        "id":40,"header":{
+            title: "Welcome to",
+            subtitle: "BÌNH THUẬN",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -602,7 +818,12 @@ export const arr = [
         ]
     },
     {
-        "id":41,
+        "id":41,"header":{
+            title: "Welcome to",
+            subtitle: "GIA LAI",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -614,7 +835,12 @@ export const arr = [
         ]
     },
     {
-        "id":42,
+        "id":42,"header":{
+            title: "Welcome to",
+            subtitle: "KONTUM",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -626,7 +852,12 @@ export const arr = [
         ]
     },
     {
-        "id":43,
+        "id":43,"header":{
+            title: "Welcome to",
+            subtitle: "DAK LAK",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -638,7 +869,12 @@ export const arr = [
         ]
     },
     {
-        "id":44,
+        "id":44,"header":{
+            title: "Welcome to",
+            subtitle: "LÂM ĐỒNG",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -650,7 +886,12 @@ export const arr = [
         ]
     },
     {
-        "id":45,
+        "id":45,"header":{
+            title: "Welcome to",
+            subtitle: "DAK NÔNG",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -662,7 +903,12 @@ export const arr = [
         ]
     },
     
-    {"id":46,"source":[
+    {"id":46,"header":{
+            title: "Welcome to",
+            subtitle: "HỒ CHÍ MINH",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },"source":[
         { src: bg_46,         alt: "sky", rotation: "0",  speedx: "0", speedy: "0", speedz: "0",  w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: dinh_46,        alt: "dinh", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0.05",  w:'110%',z: '4',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: grass_46,       alt: "grass", rotation: "0",  speedx: "0.015", speedy: "0.01", speedz: "0.02",  w:'110%',z: '5',  ctop: 'calc(48%)', cleft: 'calc(50%)'},
@@ -671,7 +917,12 @@ export const arr = [
         { src: right_tree_46,  alt: "right_tree", rotation: "-0.1",  speedx: "0", speedy: "0.01", speedz: "0.02",  w:'110%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(48%)'},
     ]},
     {
-        "id":47,
+        "id":47,"header":{
+            title: "Welcome to",
+            subtitle: "BÌNH DƯƠNG",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -684,6 +935,31 @@ export const arr = [
     },
     {
         "id":48,
+        "header":{
+            title: "Welcome to",
+            subtitle: "BÌNH PHƯỚC",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: '8',
+            top: 'calc(50% - 20px)',
+            left: 'calc(50% + 120px)',
+        },
+        "source":[
+        { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
+        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
+        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
+        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
+        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
+        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
+    
+        ]
+    },
+    {
+        "id":49,"header":{
+            title: "Welcome to",
+            subtitle: "TÂY NINH",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -695,7 +971,12 @@ export const arr = [
         ]
     },
     {
-        "id":49,
+        "id":50,"header":{
+            title: "Welcome to",
+            subtitle: "ĐỒNG NAI",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -706,19 +987,12 @@ export const arr = [
     
         ]
     },
-    {
-        "id":50,
-        "source":[
-            { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
-        { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
-        { src: f2_3, alt: "f2", rotation: "0",    speedx: "0.01", speedy: "0.01", speedz: "0.01",  w:'',z: '5',  ctop: 'calc(50% + 370px)', cleft: 'calc(50% - 250px)'},
-        { src: f3_3, alt: "f3", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '3',  ctop: 'calc(50% + 350px)', cleft: 'calc(50% - 290px)'},
-        { src: f4_3, alt: "f4", rotation: "0.2",  speedx: "0.04", speedy: "0.02", speedz: "0.02",  w:'100%',z: '2',  ctop: 'calc(50% + 250px)', cleft: 'calc(50% - 70px)'},
-        { src: o1_3, alt: "o1", rotation: "0.01", speedx: "0.02", speedy: "0.02", speedz: "0.07",  w:'',z: '4',  ctop: 'calc(50% - 80px)', cleft: 'calc(50% - 330px)'},
-    
-        ]
-    },
-    {"id":51,"source":[
+    {"id":51,"header":{
+            title: "Welcome to",
+            subtitle: "BÀ RỊA - VŨNG TÀU",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },"source":[
         { src: sky_51, alt: "sky", rotation: "0.0",    speedx: "0.01",    speedy: "0.02",    speedz: "0",     w:'110%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: sea_51, alt: "sea", rotation: "0",  speedx: "0.04", speedy: "0", speedz: "0",  w:'120%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50% - 120px)'},
         { src: statue_51, alt: "statue", rotation: "0.2",  speedx: "0.02", speedy: "0.03", speedz: "0.06",  w:'110%',z: '10',  ctop: 'calc(45%)', cleft: 'calc(50%)'},
@@ -726,7 +1000,12 @@ export const arr = [
     
     ]},
     {
-        "id":52,
+        "id":52,"header":{
+            title: "Welcome to",
+            subtitle: "LONG AN",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -738,7 +1017,12 @@ export const arr = [
         ]
     },
     {
-        "id":53,
+        "id":53,"header":{
+            title: "Welcome to",
+            subtitle: "ĐỒNG THÁP",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -750,7 +1034,12 @@ export const arr = [
         ]
     },
     {
-        "id":54,
+        "id":54,"header":{
+            title: "Welcome to",
+            subtitle: "TIỀN GIANG",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -762,7 +1051,12 @@ export const arr = [
         ]
     },
     {
-        "id":55,
+        "id":55,"header":{
+            title: "Welcome to",
+            subtitle: "BẾN TRE",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -774,7 +1068,12 @@ export const arr = [
         ]
     },
     {
-        "id":56,
+        "id":56,"header":{
+            title: "Welcome to",
+            subtitle: "AN GIANG",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -786,7 +1085,12 @@ export const arr = [
         ]
     },
     {
-        "id":57,
+        "id":57,"header":{
+            title: "Welcome to",
+            subtitle: "CẦN THƠ",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -798,7 +1102,12 @@ export const arr = [
         ]
     },
     {
-        "id":58,
+        "id":58,"header":{
+            title: "Welcome to",
+            subtitle: "TRÀ VINH",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -810,7 +1119,12 @@ export const arr = [
         ]
     },
     {
-        "id":59,
+        "id":59,"header":{
+            title: "Welcome to",
+            subtitle: "VĨNH LONG",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -821,7 +1135,12 @@ export const arr = [
     
         ]
     },
-    {"id":60,"source":[
+    {"id":60,"header":{
+            title: "Welcome to",
+            subtitle: "KIÊN GIANG",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },"source":[
         { src: sky_60, alt: "sky", rotation: "0",speedx: "0.01",speedy: "0",speedz: "0",w:'110%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: island1_60, alt: "island1", rotation: "0",  speedx: "0.01", speedy: "0", speedz: "0",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: island2_60, alt: "island2", rotation: "0",  speedx: "-0.02", speedy: "0", speedz: "0",  w:'100%',z: '3',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
@@ -830,7 +1149,12 @@ export const arr = [
         { src: main_island_60, alt: "main_island", rotation: "0",  speedx: "0.01", speedy: "0.01", speedz: "0",  w:'100%',z: '5',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
     ]},
     {
-        "id":61,
+        "id":61,"header":{
+            title: "Welcome to",
+            subtitle: "HẬU GIANG",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -842,7 +1166,12 @@ export const arr = [
         ]
     },
     {
-        "id":62,
+        "id":62,"header":{
+            title: "Welcome to",
+            subtitle: "SÓC TRĂNG",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
@@ -854,7 +1183,12 @@ export const arr = [
         ]
     },
     
-    {"id":63,"source":[
+    {"id":63,"header":{
+            title: "Welcome to",
+            subtitle: "BẠC LIÊU",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },"source":[
         { src: sky_63, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: left_stuff_63, alt: "left_stuff", rotation: "0",  speedx: "0.01", speedy: "0", speedz: "0",  w:'110%',z: '2',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
         { src: mid_house_63, alt: "mid_house", rotation: "0",  speedx: "-0.02", speedy: "0", speedz: "0",  w:'110%',z: '5',  ctop: 'calc(50%)', cleft: 'calc(50%)'},
@@ -863,7 +1197,12 @@ export const arr = [
     
     ]},
     {
-        "id":64,
+        "id":64,"header":{
+            title: "Welcome to",
+            subtitle: "CÀ MAU",
+            position: { top: 'calc(50% - 20px)', left: 'calc(50% + 120px)' },
+            z: 8
+        },
         "source":[
             { src: bg_3, alt: "bg", rotation: "0",    speedx: "0",    speedy: "0",    speedz: "0",     w:'100%',z: '1',  ctop: 'calc(50% )', cleft: 'calc(50% )'},
         { src: f1_3, alt: "f1", rotation: "0.1",  speedx: "0.01", speedy: "0.02", speedz: "0.05",  w:'',z: '6',  ctop: 'calc(50% + 435px)', cleft: 'calc(50% + 750px)'},
