@@ -66,6 +66,9 @@ class Account {
         .then(response => response.status)
         .catch(error => {
             console.error('Error updating account:', error);
+            if (error.message === 'Token not found'){
+                window.location.href('/login');
+              }
             }
         );
     }
