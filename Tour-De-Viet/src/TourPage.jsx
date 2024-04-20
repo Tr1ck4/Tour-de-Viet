@@ -3,11 +3,13 @@ import bg from './assets/Background/TourPage_bg.png';
 import Slider from 'react-slider'
 import './TourPage.css'
 import axios from 'axios';
+import {Link, useParams} from 'react-router-dom'
 
 const MIN = 500000;
 const MAX = 20000000;
 
 export default function TourPage() {
+    const {current_id} = useParams();
     const [values, setValue] = useState([MIN, MAX]);
     const [tourList, SetTourList] = useState([]);
     useEffect(() => {
@@ -181,7 +183,8 @@ function handleTransportationCheckboxSelection(event) {
                 </div>
                 <div className='w-2/3 mt-28 ml-10 justify overflow-y-auto ' style={{ '-ms-overflow-style': 'none', 'scrollbar-width': 'none' }}>
                     {tourList.map((tourData, index) => (
-                        <div key={index} className='bg-light-green w-3/4 h-64 mt-6 rounded-[20px] flex'>
+                        <Link to={`/tourpage/${tourData.townID}/${tourData.tourName}`} key={index} className=''>
+                            <div key={index} className='bg-light-green w-3/4 h-64 mt-6 rounded-[20px] flex'>
                             <div className='w-2/5 bg-slate-700 h-full rounded-[20px]'></div>
                             <div className='w-3/5 h-full'>
                                 <div className='text-4xl font-itim font-semibold mt-6 ml-6 h-auto'>{tourData.townID}</div>
@@ -193,6 +196,7 @@ function handleTransportationCheckboxSelection(event) {
                                 </div>
                             </div>
                         </div>
+                        </Link>
                 ))}
                 </div>
             </main>

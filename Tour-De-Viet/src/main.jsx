@@ -9,6 +9,8 @@ import HomePage from './Home.jsx'
 import TourPage from './TourPage.jsx'
 import Register from './Register.jsx';
 
+
+
 export default function App() {
   return (
     <Router>
@@ -16,7 +18,7 @@ export default function App() {
       <Routes>
         <Route path='/homepage' element={<HomePage />} />
         <Route path='/parallax' element={<ParallaxPage />} />
-        <Route path='/tourpage' element={<TourPage />} />
+        <Route path='/tourpage/:current_id' element={<TourPage />} />
         <Route path='/register' element={<Register />} />
       </Routes>
     </Router>
