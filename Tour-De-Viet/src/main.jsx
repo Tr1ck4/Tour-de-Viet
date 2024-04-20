@@ -11,9 +11,6 @@ export default function App(){
   return (
     <Router>
       <Header/>
-      <a href='/homepage'>
-        asdasd
-      </a>
       <Routes>
         <Route path = '/homepage' element={<HomePage/>} />
         <Route path = '/parallax' element={<ParallaxPage/>} />
