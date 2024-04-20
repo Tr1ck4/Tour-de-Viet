@@ -10,37 +10,19 @@ class UserModel {
       if (err) {
         console.error('Error connecting to database:', err.message);
       } else {
-        this.db.run("CREATE TABLE IF NOT EXISTS \
-        comments (townID INT, tourName TEXT, comment TEXT, userName TEXT UNIQUE, rating REAL,\
-        FOREIGN KEY (townID) REFERENCES tours(townID),\
-         FOREIGN KEY (tourName) REFERENCES tours(tourName),\
-          FOREIGN KEY (userName) REFERENCES bookings(userName))");
-
-        this.db.run("CREATE TABLE IF NOT EXISTS \
-        tours(townID INT NOT NULL, tourName TEXT UNIQUE NOT NULL, description TEXT, startDate TEXT NOT NULL, endDate TEXT NOT NULL, price REAL, images BLOB, averageRating real, transportationID TEXT,\
-          PRIMARY KEY (townID, tourName),\
-          FOREIGN KEY (transportationID) REFERENCES transportation(ID))");
-
-        this.db.run("CREATE TABLE IF NOT EXISTS \
-        transportations (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, startDate TEXT NOT NULL, endDate TEXT NOT NULL, price REAL NOT NULL, goFrom TEXT NOT NULL, arriveAt TEXT NOT NULL)");
-
-        this.db.run("CREATE TABLE IF NOT EXISTS \
-        accounts (userName TEXT NOT NULL, password TEXT NOT NULL, citizenID TEXT, name TEXT, address TEXT, age INT, telNum TEXT, email TEXT,\
-        PRIMARY KEY(userName))");
-
-        this.db.run("CREATE TABLE IF NOT EXISTS \
-        bookings (userName TEXT NOT NULL, tourName TEXT NOT NULL, transportationID INT, cardID INT NOT NULL,\
-          FOREIGN KEY (tourName) REFERENCES tours(tourName),\
-          FOREIGN KEY (userName) REFERENCES accounts(userName),\
-          FOREIGN KEY (transportationID) REFERENCES transportations(ID))");
+        this.db.run("CREATE TABLE IF NOT EXISTS comments (townID INT, tourName TEXT, comment TEXT, userName TEXT, rating REAL, FOREIGN KEY (townID) REFERENCES tours(townID), FOREIGN KEY (tourName) REFERENCES tours(tourName), FOREIGN KEY (userName) REFERENCES books(userName))");
+        this.db.run("CREATE TABLE IF NOT EXISTS tours    (townID INT, tourName TEXT, description TEXT, startDate TEXT, endDate TEXT, price REAL, images TEXT, PRIMARY KEY (townID, tourName))");
+        this.db.run("CREATE TABLE IF NOT EXISTS flights (flightID INTEGER PRIMARY KEY AUTOINCREMENT, flightName TEXT, startDate TEXT, endDate TEXT, price REAL, goFrom TEXT, arriveAt TEXT)");
+        this.db.run("CREATE TABLE IF NOT EXISTS accounts (userName TEXT UNIQUE, password TEXT, citizenID TEXT, name TEXT, address TEXT, age INT, telNum TEXT, email TEXT)");
+        this.db.run("CREATE TABLE IF NOT EXISTS books (userName TEXT, tourName TEXT, flightID INT, cardID INT, FOREIGN KEY (tourName) REFERENCES tours(tourName),FOREIGN KEY (userName) REFERENCES accounts(userName), FOREIGN KEY (flightID) REFERENCES flights(flightID))");
         console.log('Connected to the database.');
       }
     });
   }
 
 
-  getBookings(userName, tourName, callback) {
-    let sql = "SELECT userName, tourName, transportationID FROM bookings WHERE userName = ?";
+  getBook(userName, tourName, callback) {
+    let sql = "SELECT userName, tourName, flightID FROM books WHERE userName = ?";
     if (tourName) {
       sql += " AND tourName = ?";
     }
@@ -48,9 +30,9 @@ class UserModel {
   }
 
 
-  createBooking(UserName, Tourname, transportationID, CardID, callback) {
-    this.db.run("INSERT INTO bookings (userName, tourName, transportationID, cardID) VALUES (?, ?, ?, ?)",
-      [UserName, Tourname, transportationID, CardID],
+  createBook(UserName, Tourname, FlightID, CardID, callback) {
+    this.db.run("INSERT INTO books (userName, tourName, flightID, cardID) VALUES (?, ?, ?, ?)",
+      [UserName, Tourname, FlightID, CardID],
       callback
     );
   }
@@ -75,24 +57,20 @@ class UserModel {
   }
 
 
-  getTranportations(ID,callback) {
-    this.db.all("SELECT * FROM transportations WHERE ID = ?", [ID],callback)
+  getFlights(flightID,callback) {
+    this.db.all("SELECT * FROM flights WHERE flightID = ?", [flightID],callback)
   }
 
-  createTransportations(Name, startDate, endDate , price , goFrom , arriveAt ,callback) {
-    this.db.run("INSERT INTO transportations (Name , startDate, endDate, price, goFrom, arriveAt) VALUES (?, ?, ?, ?, ?, ?)",
-      [Name , startDate, endDate, price, goFrom, arriveAt],
+  createFlights(flightName, startDate, endDate , price , goFrom , arriveAt ,callback) {
+    this.db.run("INSERT INTO flights (flightName , startDate, endDate, price, goFrom, arriveAt) VALUES (?, ?, ?, ?, ?, ?)",
+      [flightName , startDate, endDate, price, goFrom, arriveAt],
       callback
     );
   }
   
-  updateTransportations(ID,Name, startDate, endDate , price , goFrom , arriveAt ,callback) {
-    let sql = "UPDATE transportations SET Name = ?, startDate=?, endDate=? , price=? , goFrom=? , arriveAt=? WHERE ID = ?"
-    this.db.run(sql, [Name, startDate, endDate , price , goFrom , arriveAt,ID], callback);
-  }
-
-  getAllTour(callback){
-    this.db.all("SELECT * FROM tours", callback);
+  updateFlights(flightID,flightName, startDate, endDate , price , goFrom , arriveAt ,callback) {
+    let sql = "UPDATE flights SET flightName = ?, startDate=?, endDate=? , price=? , goFrom=? , arriveAt=? WHERE flightID = ?"
+    this.db.run(sql, [flightName, startDate, endDate , price , goFrom , arriveAt,flightID], callback);
   }
 
   getTour(tourName, callback) {
@@ -115,7 +93,7 @@ class UserModel {
   
   getAccount(username, callback) {
     let sql = `SELECT * FROM accounts WHERE userName = ?`;
-    this.db.get(sql, username, callback);
+    this.db.run(sql, username, callback);
   }
 
   getUser(username, password) {

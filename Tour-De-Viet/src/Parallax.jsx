@@ -7,6 +7,8 @@ import des from  './assets/des.png'
 
 export default function ParallaxPage() {
   const array = arr.find(item => item.id === current_id).source;
+  const head = arr.find(item => item.id === current_id).header;
+  console.log(head);
   const [state, setState] = useState(current_id);
   const IncreaseClick = () =>{
     updateID(current_id+1);
@@ -24,15 +26,16 @@ export default function ParallaxPage() {
       <div className="text parallax" data-rotation="0.3" data-speedx="0.07" data-speedy="0.19" data-speedz="0.3" 
       style={{
         position: 'absolute',
-        zIndex: 8,
-        top: 'calc(50% -  20px)',
-        left: 'calc(50% + 120px)',
+        zIndex: head.z,
+        top: head.position.top,
+        left: head.position.left,
         textAlign: 'center',
         textTransform: 'uppercase',
         color: 'white',
+        
       }}>
-        <h2 style={{fontWeight:'100', fontSize:'3em' }}>Welcome to</h2>
-        <h1 style={{fontWeight:'800', fontSize:'7em', lineHeight:'0.99'}}>Quang Nam</h1>
+        <h2 style={{fontWeight:'100', fontSize:'3em', textShadow: '2px 2px 2px black'}}>Welcome to</h2>
+        <h1 style={{fontWeight:'800', fontSize:'7em', lineHeight:'0.99',textShadow: '2px 2px 2px black'}}>{head.subtitle}</h1>
       </div>
       <button className="z-10 size-14 rounded-full backdrop-blur absolute place-self-center mx-5 place-content-center" onClick={DecreaseClick}>
         <img src={des} className='mx-2' alt="Decrement"></img>
