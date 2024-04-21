@@ -8,6 +8,7 @@ import ParallaxPage from './Parallax.jsx'
 import HomePage from './Home.jsx'
 import TourPage from './TourPage.jsx'
 import Register from './Register.jsx';
+import TourDetailPage from './TourDetailPage.jsx';
 
 
 
@@ -19,6 +20,7 @@ export default function App() {
         <Route path='/homepage' element={<HomePage />} />
         <Route path='/parallax' element={<ParallaxPage />} />
         <Route path='/tourpage/:current_id' element={<TourPage />} />
+        <Route path='/tourpage/:townID/:tourName' element={<TourDetailPage />} />
         <Route path='/register' element={<Register />} />
       </Routes>
     </Router>

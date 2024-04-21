@@ -3,24 +3,38 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const TourDetailPage = () => {
-    const { tourId } = useParams(); // Get the tourId from the route parameters
-    const [tourDetails, setTourDetails] = useState(null);
+    const { townID, tourName } = useParams(); // Get the tourId from the route parameters
+    const [tourDetails, setTourDetails] = useState([]);
+    const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchTourDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/tours/${tourId}`);
+                const response = await axios.get(`http://localhost:3000/api/tours/${townID}/${tourName}`);
                 setTourDetails(response.data);
-                setLoading(false);
             } catch (error) {
                 console.error("Error fetching tour details", error);
-                setLoading(false);
             }
         };
 
         fetchTourDetails();
-    }, [tourId]);
+    }, [townID, tourName]);
+
+    useEffect(() => {
+        const fetchComments = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3000/api/comments/${townID}/${tourName}`);
+                setComments(response.data);
+            } catch (error) {
+                console.error("Error fetching comments", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchComments();
+    }, [townID, tourName]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -32,8 +46,8 @@ const TourDetailPage = () => {
 
     return (
         <div>
-            {/* Render tour details here using tourDetails */}
-            <h1>{tourDetails.name}</h1>
+            {console.log(tourDetails, comments)}
+            <h1>{tourDetails.tourName}</h1>
             <p>{tourDetails.description}</p>
             {/* Add more details as needed */}
         </div>

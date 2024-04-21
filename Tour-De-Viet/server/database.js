@@ -11,35 +11,31 @@ class UserModel {
         console.error('Error connecting to database:', err.message);
       } else {
         this.db.run("CREATE TABLE IF NOT EXISTS \
-        comments (townID INT, tourName TEXT, comment TEXT, userName TEXT, rating REAL,\
-        FOREIGN KEY(townID,tourName) REFERENCES tours(townID,tourName))");
+        comments (townID INT, tourName TEXT, comment TEXT, userName TEXT UNIQUE, rating REAL,\
+          FOREIGN KEY (tourName) REFERENCES tours(tourName),\
+          FOREIGN KEY (userName) REFERENCES accounts(userName))");
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
-        tours(townID INT NOT NULL, tourName TEXT UNIQUE NOT NULL, description TEXT,  startDate DATETIME NOT NULL, endDate DATETIME NOT NULL, price REAL, images TEXT, averageRating REAL, transportationID INT,\
-          PRIMARY KEY (townID, tourName),\
+        tours(townID INT NOT NULL, tourName TEXT NOT NULL, description TEXT, price REAL, images TEXT, transportationID TEXT,\
+          PRIMARY KEY (tourName),\
           FOREIGN KEY (transportationID) REFERENCES transportations(ID))");
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
-        transportations (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, startDate DATETIME NOT NULL, endDate DATETIME NOT NULL, price REAL NOT NULL, goFrom TEXT NOT NULL, arriveAt TEXT NOT NULL)");
+        tour_date(tourName TEXT NOT NULL, startDate TEXT NOT NULL, endDate TEXT NOT NULL,\
+          FOREIGN KEY (tourName) REFERENCES tours(tourName))");
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
-        accounts (userName TEXT NOT NULL, password TEXT NOT NULL, citizenID TEXT, name TEXT, address TEXT, age INT, telNum TEXT, email TEXT,\
-        PRIMARY KEY(userName))");
+        transportations (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, startDate TEXT NOT NULL, endDate TEXT NOT NULL, price REAL NOT NULL, goFrom TEXT NOT NULL, arriveAt TEXT NOT NULL)");
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
-        bookings (userName TEXT, tourName TEXT, transportationID INT, cardID INT NOT NULL,\
+        accounts (userName TEXT UNIQUE NOT NULL, password TEXT NOT NULL, citizenID TEXT, name TEXT, address TEXT, age INT, telNum TEXT, email TEXT,\
+          PRIMARY KEY(userName))");
+
+        this.db.run("CREATE TABLE IF NOT EXISTS \
+        bookings (userName TEXT NOT NULL, tourName TEXT NOT NULL, transportationID INT, cardID INT NOT NULL,\
           FOREIGN KEY (tourName) REFERENCES tours(tourName),\
           FOREIGN KEY (userName) REFERENCES accounts(userName),\
           FOREIGN KEY (transportationID) REFERENCES transportations(ID))");
-
-        this.db.run(`CREATE TRIGGER IF NOT EXISTS enforce_booking_comment
-          BEFORE INSERT ON comments
-          WHEN NOT EXISTS (
-              SELECT 1 FROM bookings
-              WHERE userName = NEW.userName AND tourName = NEW.tourName)
-          BEGIN
-              SELECT RAISE(ABORT, 'User must book the tour before commenting');
-          END;`);
 
         console.log('Connected to the database.');
       }
@@ -104,40 +100,49 @@ class UserModel {
   }
 
   getTour(townID, tourName, callback) {
-    let sql = `SELECT t.*, AVG(c.rating) AS avg_rating
-    FROM tours t
-    LEFT JOIN comments c ON t.townID = c.townID AND t.tourName = c.tourName
-    WHERE t.tourName = ? AND t.townID = ?
-    GROUP BY t.townID, t.tourName, t.description, t.totalTime, t.transport, t.startDate, t.endDate, t.price, t.images;
-    `
+    let sql = `SELECT 
+    t.*,
+    tr.Name AS transportation,
+    td.startDate,
+    td.endDate,
+    AVG(c.rating) AS averageRating
+    FROM 
+        tours AS t
+    JOIN 
+        tour_date AS td ON t.tourName = td.tourName
+    JOIN 
+        transportations AS tr ON t.transportationID = tr.ID
+    LEFT JOIN 
+        comments AS c ON t.tourName = c.tourName AND t.townID = c.townID
+    WHERE 
+        t.townID = ? AND t.tourName = ?
+    GROUP BY 
+        t.tourName`
 
-    this.db.get(sql, [tourName, townID], callback);
+    this.db.get(sql, [townID, tourName], callback);
   }
 
-  getAllTour(callback) {
+  getAllTour(townID, callback) {
     let sql = `SELECT 
-    t.townID,
     t.tourName,
-    t.startDate,
-    t.endDate,
-    t.price,
+    CAST(julianday(td.endDate) - julianday(td.startDate) + 1 AS INTEGER) || ' day(s)' AS totalTime,
     tr.Name AS transport,
-    t.averageRating as avg_rating,
-    (
-        CAST(julianday(date(t.endDate)) - julianday(date(t.startDate)) AS INTEGER)
-        -
-        CASE
-            WHEN strftime('%H', t.startDate) > '00:00:00' AND strftime('%H', t.startDate) < '06' THEN 1
-            WHEN strftime('%H', t.endDate) >= '00:00:00' AND strftime('%H', t.endDate) < '06' THEN 1
-            ELSE 0
-        END
-    ) || " days" AS totalTime
-FROM 
-    tours AS t
+    t.price,
+    t.images,
+    t.townID,
+    AVG(c.rating) AS avg_rating
+    FROM 
+        tours AS t
     JOIN 
-    transportations AS tr ON t.transportationID = tr.ID;
-`;
-    this.db.all(sql, callback)
+        tour_date AS td ON t.tourName = td.tourName
+    JOIN 
+        transportations AS tr ON t.transportationID = tr.ID
+    LEFT JOIN 
+        comments AS c ON t.tourName = c.tourName
+    WHERE t.townID = ?
+    GROUP BY 
+        t.tourName`;
+    this.db.all(sql, townID, callback)
   }
 
   createTour(townID, tourName, description, totalTime, transport, startDate, endDate, price, images, callback) {

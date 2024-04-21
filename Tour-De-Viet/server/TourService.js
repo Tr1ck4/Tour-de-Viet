@@ -10,8 +10,16 @@ class ToursService {
     this.images = images;
   }
 
-  async fetchTour(tourName) {
-    return fetch(`${this.baseUrl}/api/tours/${tourName}`)
+  async fetchTour(townID, tourName) {
+    return fetch(`${this.baseUrl}/api/tours/${townID}/${tourName}`)
+      .then(response => response.json())
+      .catch(error => {
+        console.error('Error fetching tours:', error);
+      });
+  }
+
+  async fetchAllTour(townID) {
+    return fetch(`${this.baseUrl}/api/tours/${townID}`)
       .then(response => response.json())
       .catch(error => {
         console.error('Error fetching tours:', error);

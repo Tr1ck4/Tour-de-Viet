@@ -215,8 +215,9 @@ app.put('/api/transportations/:transportationID', authenticateJWT, (req, res) =>
     });
 });
 
-app.get('/api/tours', (req, res) => {
-    userModel.getAllTour((err, rows) => {
+app.get('/api/tours/:townID', (req, res) => {
+    const { townID } = req.params;
+    userModel.getAllTour(townID, (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -225,16 +226,16 @@ app.get('/api/tours', (req, res) => {
     });
 });
 
-app.get('/api/tours/:tourName', (req, res) => {
-    const { tourName } = req.params;
-
-    userModel.getTour(tourName, (err, row) => {
+app.get('/api/tours/:townID/:tourName', (req, res) => {
+    const { townID, tourName } = req.params;
+    userModel.getTour(townID, tourName, (err, row) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
         }
         res.json(row);
     });
+
 });
 
 app.post('/api/tours', authenticateJWT, (req, res) => {
