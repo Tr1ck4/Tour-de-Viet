@@ -3,6 +3,31 @@ import UserModel from './database.js';
 import path from 'path';
 import jwt from 'jsonwebtoken';
 import { expressjwt } from "express-jwt";
+import  nodemailer from 'nodemailer';
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'tbnrfragsprest123@gmail.com',
+    pass: 'vfrsjpltshlnarxd'
+  }
+});
+
+var mailOptions = {
+  from: 'tbnrfragsprest123@gmail.com',
+  to: 'triet0612@gmail.com',
+  subject: 'Sending Email using Node.js',
+  text: 'This is not a spam'
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
+
  
 const userModel = new UserModel('./database.db');
 const __dirname = path.resolve(path.dirname(''));
@@ -39,6 +64,23 @@ app.post('/api/login', (req, res) => {
     const token = generateToken({ username: user.username });
     res.json({ token });
 });
+
+
+app.post('/chat', async (req, res)=> {   
+    try {
+      const resp = await openai.completions.create({
+        model: "gpt-3.5-turbo",
+          messages: [
+            { role: "user", content: req.body.question}
+          ]  
+      })           
+          
+      res.status(200).json({message: resp.data.choices[0].message.content})
+    } catch(e) {
+        res.status(400).json({message: e.message})
+    }
+  })
+
 
 app.get('/api/protected', authenticateJWT, (req, res) => {
     res.json({ message: 'You are authorized', user: req.user });
