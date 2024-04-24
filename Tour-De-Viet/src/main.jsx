@@ -13,7 +13,6 @@ export default function App(){
     <Router>
       <Header/>
       <a href='/homepage'>
-
       </a>
       <Routes>
         <Route path = '/homepage' element={<HomePage/>} />
