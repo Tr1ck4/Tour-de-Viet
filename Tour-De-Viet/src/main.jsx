@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './Header.jsx'
 import ParallaxPage from './Parallax.jsx'
 import HomePage from './Home.jsx'
+import Bot from './Bot.jsx';
 
 export default function App(){
   return (
@@ -14,6 +15,7 @@ export default function App(){
       <Routes>
         <Route path = '/homepage' element={<HomePage/>} />
         <Route path = '/parallax' element={<ParallaxPage/>} />
+        <Route path = '/bot' element={<Bot/>} />
       </Routes>
     </Router>
   );

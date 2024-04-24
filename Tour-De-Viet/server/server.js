@@ -3,7 +3,15 @@ import UserModel from './database.js';
 import path from 'path';
 import jwt from 'jsonwebtoken';
 import { expressjwt } from "express-jwt";
- 
+import  cors from 'cors';
+import OpenAI from 'openai';
+
+const openai = new OpenAI({
+  baseURL: 'http://localhost:11434/v1',
+  apiKey: 'ollama',
+});
+
+
 const userModel = new UserModel('./database.db');
 const __dirname = path.resolve(path.dirname(''));
 const PORT = 3000;
@@ -16,7 +24,33 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
+app.use(cors({
+    origin: 'http://localhost:3000', // Adjust this to your frontend URL or use '*' to allow all origins
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-stainless-os'], // Add 'x-stainless-os' here
+}));
 
+app.post('/api/chat', async (req, res) => {
+    const { message } = req.body;
+  
+    try {
+        const chatCompletion = await openai.chat.completions.create({
+            messages: [{ role: 'user', content: message }],
+            model: 'gemma:2b',
+            stream: true,
+        })
+        for await (const chunk of stream){
+            setRespo
+        }
+        const aiMessages = chatCompletion.choices.map(choice => choice.message.content);
+        res.json({ messages: aiMessages });
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'An error occurred while processing the request.' });
+    }
+  });
+  
+  
 
 function generateToken(user) {
     return jwt.sign(user, secretKey, { expiresIn: '1h' });
@@ -27,6 +61,7 @@ function authenticateToken(req, res, next) {
     req.user = decoded;
     next(); 
 }
+
 
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
