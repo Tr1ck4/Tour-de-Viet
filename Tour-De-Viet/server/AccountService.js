@@ -11,38 +11,59 @@ class AccountService {
         this.tel = tel; 
         this.email = email;
     }
-
-    async fetchAccount(userName) {
-
-        const storedToken = localStorage.getItem('token');
-            if (storedToken) {
-                const parsedToken = JSON.parse(storedToken);
-                const tokenValue = parsedToken.token;
-                if (tokenValue) {
-                    console.log("Token found:", tokenValue);
-                    return fetch(`${this.baseUrl}/api/accounts/${userName}`,{
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${tokenValue}`
-                        }
-                    })
-                        .then(response => {
-                            response.status;
-                        })
-                        .then(data=>{
-                            console.log(data);
-                        })
-                        .catch(error => {
-                            console.error('Error fetching accounts:', error);
-                        }
-                    );
-                } else {
-                    console.log("Token value not found.");
-                }
-            } else {
-                console.log("Token not found in local storage.");
+    async login(username, password){
+        try {
+            const response = await fetch('http://localhost:3000/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to login');
             }
+    
+            const data = await response.json();
+            localStorage.setItem('token', JSON.stringify(data)); // Convert data to a JSON string before storing
+            
+
+
+        } catch (error) {
+            console.error('Login error:', error.message);
+        }
+    }
+    async fetchAccount(userName) {
+        const storedToken = localStorage.getItem('token');
+        if (storedToken) {
+            const parsedToken = JSON.parse(storedToken);
+            const tokenValue = parsedToken.token;
+            if (tokenValue) {
+                console.log("Token found:", tokenValue);
+                return fetch(`${this.baseUrl}/api/accounts/${userName}`,{
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${tokenValue}`
+                    }
+                })
+                    .then(response => {
+                        response.status;
+                    })
+                    .then(data=>{
+                        console.log(data);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching accounts:', error);
+                    }
+                );
+            } else {
+                console.log("Token value not found.");
+            }
+        } else {
+            console.log("Token not found in local storage.");
+        }
         
     }
 

@@ -51,7 +51,7 @@ app.get('/para', (req, res) => {
 app.get('/api/bookings/:userName', (req, res) => {
     const { userName } = req.params;
 
-    userModel.getBookings(userName, tourName, (err, rows) => {
+    userModel.getBookings(userName, (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
