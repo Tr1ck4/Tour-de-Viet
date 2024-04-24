@@ -26,9 +26,7 @@ class AccountService {
             }
     
             const data = await response.json();
-            localStorage.setItem('token', JSON.stringify(data)); // Convert data to a JSON string before storing
-            
-
+            localStorage.setItem('token', JSON.stringify(data));
 
         } catch (error) {
             console.error('Login error:', error.message);

@@ -48,7 +48,7 @@ app.get('/para', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-app.get('/api/bookings/:userName', (req, res) => {
+app.get('/api/bookings/:userName',authenticateJWT, (req, res) => {
     const { userName } = req.params;
 
     userModel.getBookings(userName, (err, rows) => {
