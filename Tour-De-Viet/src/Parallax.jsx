@@ -8,7 +8,6 @@ import des from  './assets/des.png'
 export default function ParallaxPage() {
   const array = arr.find(item => item.id === current_id).source;
   const head = arr.find(item => item.id === current_id).header;
-  console.log(head);
   const [state, setState] = useState(current_id);
   const IncreaseClick = () =>{
     updateID(current_id+1);
