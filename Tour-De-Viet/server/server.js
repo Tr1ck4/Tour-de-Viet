@@ -184,9 +184,9 @@ app.get('/api/transportations/:ID', (req, res) => {
 });
 
 app.post('/api/transportations', authenticateJWT, (req, res) => {
-  const {name, startDate, endDate , price , goFrom , arriveAt } = req.body;
+  const {name, startDate, endDate , price , goFrom , arriveAt,type } = req.body;
 
-  userModel.createTransportations(name, startDate, endDate , price , goFrom , arriveAt, (err, result) => {
+  userModel.createTransportations(name, startDate, endDate , price , goFrom , arriveAt,type, (err, result) => {
       if (err) {
           res.status(500).json({ error: err.message });
           return;
@@ -200,9 +200,9 @@ app.post('/api/transportations', authenticateJWT, (req, res) => {
 
 app.put('/api/transportations/:transportationID', authenticateJWT, (req, res) => {
   const {ID } = req.params;
-  const { name, startDate, endDate , price , goFrom , arriveAt } = req.body;
+  const { name, startDate, endDate , price , goFrom , arriveAt,type } = req.body;
 
-  userModel.updateTransportations(ID,name, startDate, endDate , price , goFrom , arriveAt, (err) => {
+  userModel.updateTransportations(ID,name, startDate, endDate , price , goFrom , arriveAt,type, (err) => {
       if (err) {
           res.status(500).json({ error: err.message });
           return;
