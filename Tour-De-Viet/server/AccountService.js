@@ -11,7 +11,29 @@ class AccountService {
         this.tel = tel; 
         this.email = email;
     }
+    async login(username, password){
+        try {
+            const response = await fetch('http://localhost:3000/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to login');
+            }
+    
+            const data = await response.json();
+            localStorage.setItem('token', JSON.stringify(data)); // Convert data to a JSON string before storing
+            
 
+
+        } catch (error) {
+            console.error('Login error:', error.message);
+        }
+    }
     async fetchAccount(userName)
     {
         const token = localStorage.getItem('token');
