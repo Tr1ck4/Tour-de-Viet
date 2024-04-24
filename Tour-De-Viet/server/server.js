@@ -239,9 +239,9 @@ app.get('/api/tours/:townID/:tourName', (req, res) => {
 });
 
 app.post('/api/tours', authenticateJWT, (req, res) => {
-    const { townID, tourName, description, transport, startDate, endDate, price, images } = req.body;
+    const { townID, tourName, description, price, images, transportationID } = req.body;
 
-    userModel.createTour(townID, tourName, description, transport, startDate, endDate, price, images, (err, result) => {
+    userModel.createTour(townID, tourName, description, price, images, transportationID, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;

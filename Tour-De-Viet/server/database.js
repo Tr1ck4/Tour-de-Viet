@@ -145,14 +145,14 @@ class UserModel {
     this.db.all(sql, townID, callback)
   }
 
-  createTour(townID, tourName, description, transportationID, startDate, endDate, price, images, callback) {
-    this.db.run("INSERT INTO tours (townID, tourName, description, transportationID, price, images) VALUES (?, ?, ?, ?, ?, ?)",
-      [townID, tourName, description, transportationID, price, images],
+  createTour(townID, tourName, description, price, images, transportationID, callback) {
+    this.db.run("INSERT INTO tours (townID, tourName, description, price, images, transportationID) VALUES (?, ?, ?, ?, ?, ?)",
+      [townID, tourName, description, price, images, transportationID],
       callback
     );
     this.db.run("INSERT INTO tour_date (tourName,startDate,endDate) VALUES(?,?,?)",
-    [tourName, startDate, endDate],
-    callback)
+      [tourName, startDate, endDate],
+      callback)
   }
 
   updateTour(tourName, description, transportationID, startDate, endDate, price, images, callback) {
