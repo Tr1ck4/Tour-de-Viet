@@ -169,6 +169,8 @@ app.post('/api/accounts', (req, res) => {
     });
 });
 
+
+
 app.get('/api/accounts/:userName', (req, res) => {
     const { userName } = req.params;
 
@@ -181,7 +183,7 @@ app.get('/api/accounts/:userName', (req, res) => {
     });
 });
 
-app.put('/api/accounts/:userName', authenticateJWT, (req, res) => {
+app.put('/api/accounts/:userName', (req, res) => {
     const { userName } = req.params;
     const { password, citizenID, name, address, age, tel, email } = req.body;
 

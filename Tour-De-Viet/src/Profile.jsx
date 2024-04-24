@@ -18,7 +18,17 @@ function ProfilePage() {
                 setProfile(data);
             })
     })
-
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        const blog = profile
+        fetch('http://localhost:3000/api/accounts/exampleUser',{
+            method: 'PUT',
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify(blog)
+        }).then(()=>{
+            console.log("Account updated")
+        })
+    }
     
     return (
         <div className='relative h-screen overflow-hidden'>
@@ -68,7 +78,7 @@ function ProfilePage() {
                     <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" name="name" defaultValue={profile.password}/>
                     
                 </form>
-                <button className='bg-light-green w-4/5 h-14 ml-16 mt-10 text-black text-2xl'>
+                <button className='bg-light-green w-4/5 h-14 ml-16 mt-10 text-black text-2xl 'onClick={handleSubmit}>
                     Update Info
                 </button>
             </div>
