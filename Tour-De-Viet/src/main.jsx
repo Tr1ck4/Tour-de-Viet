@@ -21,6 +21,7 @@ export default function App() {
         <Route path='/parallax' element={<ParallaxPage />} />
         <Route path='/tourpage/:current_id' element={<TourPage />} />
         <Route path='/tourpage/:townID/:tourName' element={<TourDetailPage />} />
+        {/* <Route path='/tourpagedetail/' element={<TourDetailPage />} /> */}
         <Route path='/register' element={<Register />} />
       </Routes>
     </Router>

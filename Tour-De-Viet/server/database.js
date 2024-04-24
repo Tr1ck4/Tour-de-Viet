@@ -145,16 +145,19 @@ class UserModel {
     this.db.all(sql, townID, callback)
   }
 
-  createTour(townID, tourName, description, totalTime, transport, startDate, endDate, price, images, callback) {
-    this.db.run("INSERT INTO tours (townID, tourName, description, totalTime, transport, startDate, endDate, price, images) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      [townID, tourName, description, totalTime, transport, startDate, endDate, price, images],
+  createTour(townID, tourName, description, transportationID, startDate, endDate, price, images, callback) {
+    this.db.run("INSERT INTO tours (townID, tourName, description, transportationID, price, images) VALUES (?, ?, ?, ?, ?, ?)",
+      [townID, tourName, description, transportationID, price, images],
       callback
     );
+    this.db.run("INSERT INTO tour_date (tourName,startDate,endDate) VALUES(?,?,?)",
+    [tourName, startDate, endDate],
+    callback)
   }
 
-  updateTour(tourName, description, totalTime, transport, startDate, endDate, price, images, callback) {
-    let sql = "UPDATE tours SET tourName = ?, description=?, totalTime = ?, transport = ?, startDate=? , endDate=? , price=? , images=? WHERE tourName = ?"
-    this.db.run(sql, [tourName, description, totalTime, transport, startDate, endDate, price, images], callback);
+  updateTour(tourName, description, transportationID, startDate, endDate, price, images, callback) {
+    let sql = "UPDATE tours SET tourName = ?, description=?, transportationID = ?, startDate=? , endDate=? , price=? , images=? WHERE tourName = ?"
+    this.db.run(sql, [tourName, description, transportationID, startDate, endDate, price, images], callback);
   }
 
 
