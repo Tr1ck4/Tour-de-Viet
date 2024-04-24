@@ -153,7 +153,7 @@ app.put('/api/comments/:townID/:tourName', (req, res) => {
     });
 });
 
-app.post('/api/accounts', (req, res) => {
+app.post('/api/accounts',authenticateJWT, (req, res) => {
     const { username, password, citizenID, name, address, age, tel, email } = req.body;
 
     userModel.createAccount(username, password, citizenID, name, address, age, tel, email, (err, result) => {
@@ -171,7 +171,7 @@ app.post('/api/accounts', (req, res) => {
 
 
 
-app.get('/api/accounts/:userName', (req, res) => {
+app.get('/api/accounts/:userName',authenticateJWT, (req, res) => {
     const { userName } = req.params;
 
     userModel.getAccount(userName, (err, row) => {
@@ -183,7 +183,7 @@ app.get('/api/accounts/:userName', (req, res) => {
     });
 });
 
-app.put('/api/accounts/:userName', (req, res) => {
+app.put('/api/accounts/:userName',authenticateJWT, (req, res) => {
     const { userName } = req.params;
     const { password, citizenID, name, address, age, tel, email } = req.body;
 

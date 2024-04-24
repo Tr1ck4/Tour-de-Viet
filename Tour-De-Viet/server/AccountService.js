@@ -12,38 +12,29 @@ class AccountService {
         this.email = email;
     }
 
-    async fetchAccount(userName) {
-
-        const storedToken = localStorage.getItem('token');
-            if (storedToken) {
-                const parsedToken = JSON.parse(storedToken);
-                const tokenValue = parsedToken.token;
-                if (tokenValue) {
-                    console.log("Token found:", tokenValue);
-                    return fetch(`${this.baseUrl}/api/accounts/${userName}`,{
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${tokenValue}`
-                        }
-                    })
-                        .then(response => {
-                            response.status;
-                        })
-                        .then(data=>{
-                            console.log(data);
-                        })
-                        .catch(error => {
-                            console.error('Error fetching accounts:', error);
-                        }
-                    );
-                } else {
-                    console.log("Token value not found.");
-                }
-            } else {
-                console.log("Token not found in local storage.");
+    async fetchAccount(userName)
+    {
+        const token = localStorage.getItem('token');
+        if (!token) {
+        throw new Error('Token not found');
+        }
+        const response = await fetch(`${this.baseUrl}/api/accounts/${userName}`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             }
-        
+        });
+        if (!response.ok) {
+            throw new Error('Failed to get user');
+        }
+        return response.json();
+    } catch (error) {
+        console.error('Error getting user:', error);
+        if (error.message === 'Token not found'){
+            window.location.href('/login');
+          }
+        throw error;
     }
 
     async createAccount(newData) {
