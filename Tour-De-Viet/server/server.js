@@ -253,17 +253,17 @@ app.put('/api/transportations/:transportationID', authenticateJWT, (req, res) =>
 //     });
 // });
 
-app.get('/api/tours/:tourName', (req, res) => {
-    const { tourName } = req.params;
+// app.get('/api/tours/:tourName', (req, res) => {
+//     const { tourName } = req.params;
 
-    userModel.getTour(tourName, (err, row) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(row);
-    });
-});
+//     userModel.getTour(tourName, (err, row) => {
+//         if (err) {
+//             res.status(500).json({ error: err.message });
+//             return;
+//         }
+//         res.json(row);
+//     });
+// });
 
 app.post('/api/transportations', authenticateJWT, (req, res) => {
     const { name, startDate, endDate, price, goFrom, arriveAt } = req.body;
@@ -298,7 +298,6 @@ app.put('/api/transportations/:transportationID', authenticateJWT, (req, res) =>
 
 app.get('/api/tours/:townID', (req, res) => {
     const { townID } = req.params;
-    console.log(townID);
     userModel.getAllTour(townID, (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
