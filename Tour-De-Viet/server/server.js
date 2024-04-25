@@ -36,19 +36,16 @@ app.post('/api/chat', async (req, res) => {
     try {
         const chatCompletion = await openai.chat.completions.create({
             messages: [{ role: 'user', content: message }],
-            model: 'gemma:2b',
-            stream: true,
+            model: 'gemma:2b-v1.1',
+            
         })
-        for await (const chunk of stream){
-            setRespo
-        }
         const aiMessages = chatCompletion.choices.map(choice => choice.message.content);
         res.json({ messages: aiMessages });
     } catch (error) {
       console.error('Error:', error);
       res.status(500).json({ error: 'An error occurred while processing the request.' });
     }
-  });
+});
   
   
 
