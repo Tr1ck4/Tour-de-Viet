@@ -3,6 +3,7 @@ import './Register.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import bg from './assets/Background/RegisterPage_bg.png';
+
 export default function Register() {
     const navigate = useNavigate();
 
@@ -36,7 +37,7 @@ export default function Register() {
                 email,
             });
 
-            if (response.data.message = 'Account created') {
+            if (response.data.message == 'Account created') {
                 alert(response.data.message)
                 navigate('/homepage')
             } else {
@@ -101,7 +102,7 @@ export default function Register() {
                             />
                         </div>
                         <div className='sm:w-[100px] lg:w-[400px] mx-auto mb-10 flex justify-center '>
-                            <button type='submit' className='button font-itim'>Register</button>
+                            <button type='submit' className='button font-itim '>Register</button>
                         </div>
                     </form>
                 </div>
