@@ -154,7 +154,7 @@ app.put('/api/comments/:townID/:tourName', (req, res) => {
     });
 });
 
-app.post('/api/accounts', authenticateJWT, (req, res) => {
+app.post('/api/accounts', (req, res) => {
     const { username, password, citizenID, name, address, age, tel, email } = req.body;
 
     userModel.createAccount(username, password, citizenID, name, address, age, tel, email, (err, result) => {
@@ -243,15 +243,15 @@ app.put('/api/transportations/:transportationID', authenticateJWT, (req, res) =>
     });
 });
 
-app.get('/api/tours', (req, res) => {
-    userModel.getAllTour((err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
-});
+// app.get('/api/tours/:townID', (req, res) => {
+//     userModel.getAllTour((err, rows) => {
+//         if (err) {
+//             res.status(500).json({ error: err.message });
+//             return;
+//         }
+//         res.json(rows);
+//     });
+// });
 
 app.get('/api/tours/:tourName', (req, res) => {
     const { tourName } = req.params;
@@ -298,6 +298,7 @@ app.put('/api/transportations/:transportationID', authenticateJWT, (req, res) =>
 
 app.get('/api/tours/:townID', (req, res) => {
     const { townID } = req.params;
+    console.log(townID);
     userModel.getAllTour(townID, (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });

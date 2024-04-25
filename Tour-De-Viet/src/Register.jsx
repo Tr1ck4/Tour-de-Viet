@@ -39,7 +39,7 @@ export default function Register() {
 
             if (response.data.message == 'Account created') {
                 alert(response.data.message)
-                navigate('/homepage')
+                window.location.href("http://localhost:5173/homepage")
             } else {
                 alert(response.data.message)
             }

@@ -7,3 +7,7 @@ input[type="email"] {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
+.formInput {
+  color: black;
+}
