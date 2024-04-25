@@ -54,14 +54,15 @@ const TourDetailPage = () => {
         //     {/* Add more details as needed */}
         // </div>
         <>
-            <main className='overflow-y-scroll h-screen w-screen'>
-                <div className='w-screen h-screen ' style={{ backgroundImage: `url(${bg})`, backgroundSize:'100% 100%', height:'200vh'}}>
-                <h1 className='text-dark-green text-5xl font-extrabold mt-36'>This is a place</h1>
+            <main className='overflow-y-scroll overflow-hidden h-screen w-screen'>
+            {console.log(tourDetails, comments)}
+                <div className='w-screen h-screen ' style={{ backgroundImage: `url(${bg})`, backgroundSize:'100% 100%', height:'175vh'}}>
+                <h1 className='text-dark-green text-5xl font-extrabold mt-36'>{tourDetails.tourName}</h1>
 
                     <div className=' h-auto w-3/5 mx-auto mt-10'>
 
                         <div className='w-auto h-[400px]  my-4 grid grid-cols-2 gap-2'>
-                            <div className='bg-green-500 rounded-2xl'></div>
+                            <div className='bg-neutral-400 rounded-2xl'></div>
                             <div className='grid grid-cols-2 grid-rows-2 gap-1'>
                                 <div className='bg-gray-400 rounded-tl-2xl'></div>
                                 <div className='bg-gray-400 rounded-tr-2xl'></div>
@@ -76,7 +77,7 @@ const TourDetailPage = () => {
                             <div className='bg-light-green row-span-2 col-span-2 rounded-2xl'></div>
                         </div>
                         
-                        <div className='w-auto h-40 bg-orange-400 grid grid-cols-10 gap-3 rounded-2xl'>
+                        <div className='w-auto h-40 bg-orange-400 grid grid-cols-10 gap-3 rounded-2xl mt-14'>
                             <div className='col-span-2'></div>
                             <div></div>
                             <div></div>
@@ -88,7 +89,6 @@ const TourDetailPage = () => {
                         </div>
                     </div>
                 </div>
-               
             </main>
         </>
     );
