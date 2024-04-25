@@ -47,9 +47,6 @@ export default function HomePage(){
     return (
         <>
             <main className = "bg-light-green">
-            <a href='/homepage'>
-                asdasd
-            </a>
                 <VNMap></VNMap>
                 <form className="absolute mx-4 my-28" onSubmit={handleSubmit}>
                     <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
