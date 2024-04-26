@@ -1,13 +1,4 @@
 
-.container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-
 
   form {
     display: flex;
@@ -55,7 +46,7 @@
     box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.3);
     transition: 300ms ease-in-out;
     color: #335145;
-    font-weight: normal;
+    font-weight: bold;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
   }
   
@@ -69,9 +60,11 @@
   .input::placeholder {
     color: #335145;
     font-weight: bold;
+    text-align: start;
+    opacity: 0.8;
   }
 
-  .input[type="text"] {
+  .input[type="text"],.input[type="password"], .input[type="email"] {
     padding-left: 20px; /* Adjusted padding-left */
   }
 
