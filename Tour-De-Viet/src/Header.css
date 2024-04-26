@@ -86,3 +86,8 @@ header ul a{
 .hamburger .bar::after{
   top:5px;
 }
+
+#loginButton:focus,
+#loginButton:active {
+  outline: none; /* Remove the outline/border */
+}

@@ -9,9 +9,10 @@ const LoginPopUp = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         await newAccount.login(username, password);
+        window.location.href("http://localhost:5173/homepage")
     };
     return (
-        <div className=' fixed inset-0 bg-opacity-25 backdrop-blur-sm flex justify-center items-center '>
+        <div className=' fixed inset-0 bg-opacity-25 backdrop-blur-sm flex justify-center items-center ' style={{ zIndex: 9999 }}>
             <div className='w-[400px] h-[300px] backdrop-blur-lg drop-shadow-xl bg-bone-white bg-opacity-10 shadow-lg stroke-rgba(255, 255, 255, 1) rounded-2xl'>
                 <div className='my-8'>
                     <form className='' onSubmit={handleSubmit}>
