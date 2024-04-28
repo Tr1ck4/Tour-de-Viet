@@ -2,14 +2,21 @@ import React, { Fragment, useState } from 'react';
 import './LoginPopUp.css';
 import AccountService from '../../server/AccountService';
 
-let newAccount = new AccountService();
+
 const LoginPopUp = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const handleSubmit = async (event) => {
         event.preventDefault();
-        await newAccount.login(username, password);
-        window.location.href("http://localhost:5173/homepage")
+        const  newAccount = new AccountService();
+        try{
+            const res = await newAccount.login(username, password);
+            window.location.reload();
+        }
+        catch(err){
+            alert('Login failed', err.message);
+        }
+        
     };
     return (
         <div className=' fixed inset-0 bg-opacity-25 backdrop-blur-sm flex justify-center items-center ' style={{ zIndex: 9999 }}>

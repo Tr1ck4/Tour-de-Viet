@@ -24,24 +24,71 @@ function generateToken(user) {
 }
 
 function authenticateToken(req, res, next) {
-    const decoded = jwt.verify(token, secretKey);
-    req.user = decoded;
-    next();
+    const token = getTokenFromCookie(req);
+
+    if (!token) {
+        return res.sendStatus(401);
+    }
+
+    jwt.verify(token, secretKey, (err, user) => {
+        if (err) {
+            return res.sendStatus(403);
+        }
+        req.user = user;
+        next();
+    });
 }
 
-app.post('/api/login', (req, res) => {
-    const { username, password } = req.body;
-    const user = userModel.getUser(username, password);
+function getTokenFromCookie(req) {
+    const cookieHeader = req.headers.cookie;
 
+    if (!cookieHeader) {
+        return null;
+    }
+
+    const cookies = cookieHeader.split(';').map(cookie => cookie.trim());
+
+    const jwtCookie = cookies.find(cookie => cookie.startsWith('token='));
+
+    if (!jwtCookie) {
+        return null;
+    }
+
+    return jwtCookie.split('=')[1];
+}
+
+app.get('/api/authenticate', authenticateToken,(req, res) => {
+    const token = getTokenFromCookie(req);
+
+    const userName = jwt.decode(token).username;
+
+
+    res.json(userName);
+});
+
+app.post('/api/logout', (req, res) => {
+    // Clear the 'token' cookie by setting its expiration to a past date
+    res.setHeader('Set-cookie', `token=deleted; Max-Age=3600; HttpOnly`);
+
+    // Send a response indicating success
+    res.json({ message: 'Logout successful' });
+});
+
+app.post('/api/login', async (req, res) => {
+    const { username, password } = req.body;
+    const user = await userModel.getUser(username, password)
+    .then(res => {
+        return res;
+    })
     if (!user) {
         return res.status(401).json({ message: 'Invalid username or password' });
     }
-
-    const token = generateToken({ username: user.username });
-    res.json({ token });
+    const token = generateToken({"username" : user.name});
+    res.setHeader('Set-cookie', `token=${token}; Max-Age=3600; HttpOnly`);
+    res.send('Cookie set successfully');
 });
 
-app.get('/api/protected', authenticateJWT, (req, res) => {
+app.get('/api/protected', authenticateToken, (req, res) => {
     res.json({ message: 'You are authorized', user: req.user });
 });
 
@@ -49,8 +96,10 @@ app.get('/para', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-app.get('/api/bookings/:userName', authenticateJWT, (req, res) => {
-    const { userName } = req.params;
+app.get('/api/bookings/info', authenticateToken, (req, res) => {
+    const token = getTokenFromCookie(req);
+
+    const userName = jwt.decode(token).username;
 
     userModel.getBookings(userName, (err, rows) => {
         if (err) {
@@ -61,20 +110,8 @@ app.get('/api/bookings/:userName', authenticateJWT, (req, res) => {
     });
 });
 
-// app.get('/api/bookings/:userName', authenticateJWT, (req, res) => {
-//     const { userName } = req.params;
-//     const { tourName } = req.query;
 
-//     userModel.getBook(userName, tourName, (err, rows) => {
-//         if (err) {
-//             res.status(500).json({ error: err.message });
-//             return;
-//         }
-//         res.json(rows);
-//     });
-// });
-
-app.post('/api/bookings', authenticateJWT, (req, res) => {
+app.post('/api/bookings', authenticateToken, (req, res) => {
     const { userName, tourName, transportationID, cardID } = req.body;
     userModel.createBooking(userName, tourName, transportationID, cardID, (err, result) => {
         if (err) {
@@ -172,8 +209,10 @@ app.post('/api/accounts', (req, res) => {
 
 
 
-app.get('/api/accounts/:userName', authenticateJWT, (req, res) => {
-    const { userName } = req.params;
+app.get('/api/accounts/info', authenticateToken, (req, res) => {
+    const token = getTokenFromCookie(req);
+
+    const userName = jwt.decode(token).username;
 
     userModel.getAccount(userName, (err, row) => {
         if (err) {
@@ -184,8 +223,10 @@ app.get('/api/accounts/:userName', authenticateJWT, (req, res) => {
     });
 });
 
-app.put('/api/accounts/:userName', authenticateJWT, (req, res) => {
-    const { userName } = req.params;
+app.put('/api/accounts/info', authenticateToken, (req, res) => {
+    const token = getTokenFromCookie(req);
+
+    const userName = jwt.decode(token).username;
     const { password, citizenID, name, address, age, tel, email } = req.body;
 
     userModel.updateRating(userName, password, citizenID, name, address, age, tel, email, (err) => {
@@ -212,7 +253,7 @@ app.get('/api/transportations/:ID', (req, res) => {
     });
 });
 
-app.post('/api/transportations', authenticateJWT, (req, res) => {
+app.post('/api/transportations', authenticateToken, (req, res) => {
     const { name, startDate, endDate, price, goFrom, arriveAt, type } = req.body;
 
     userModel.createTransportations(name, startDate, endDate, price, goFrom, arriveAt, type, (err, result) => {
@@ -227,7 +268,7 @@ app.post('/api/transportations', authenticateJWT, (req, res) => {
     });
 });
 
-app.put('/api/transportations/:transportationID', authenticateJWT, (req, res) => {
+app.put('/api/transportations/:transportationID', authenticateToken, (req, res) => {
     const { ID } = req.params;
     const { name, startDate, endDate, price, goFrom, arriveAt, type } = req.body;
 
@@ -265,7 +306,7 @@ app.put('/api/transportations/:transportationID', authenticateJWT, (req, res) =>
 //     });
 // });
 
-app.post('/api/transportations', authenticateJWT, (req, res) => {
+app.post('/api/transportations', authenticateToken, (req, res) => {
     const { name, startDate, endDate, price, goFrom, arriveAt } = req.body;
 
     userModel.createTransportations(name, startDate, endDate, price, goFrom, arriveAt, (err, result) => {
@@ -280,7 +321,7 @@ app.post('/api/transportations', authenticateJWT, (req, res) => {
     });
 });
 
-app.put('/api/transportations/:transportationID', authenticateJWT, (req, res) => {
+app.put('/api/transportations/:transportationID', authenticateToken, (req, res) => {
     const { ID } = req.params;
     const { name, startDate, endDate, price, goFrom, arriveAt } = req.body;
 
@@ -319,7 +360,7 @@ app.get('/api/tours/:townID/:tourName', (req, res) => {
 
 });
 
-app.post('/api/tours', authenticateJWT, (req, res) => {
+app.post('/api/tours', authenticateToken, (req, res) => {
     const { townID, tourName, description, price, images, transportationID } = req.body;
 
     userModel.createTour(townID, tourName, description, price, images, transportationID, (err, result) => {
@@ -345,7 +386,7 @@ app.get('/api/tours', (req, res) => {
     });
 });
 
-app.put('/api/tours/:tourName', authenticateJWT, (req, res) => {
+app.put('/api/tours/:tourName', authenticateToken, (req, res) => {
     const { tourName } = req.params;
     const { description, totalTime, transport, startDate, endDate, price, images } = req.body;
 
@@ -367,5 +408,5 @@ app.get("*", (req, res) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+        console.log(`Server is running on http://localhost:${PORT}`);
 });

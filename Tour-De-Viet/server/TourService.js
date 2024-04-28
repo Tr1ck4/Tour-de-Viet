@@ -28,15 +28,10 @@ class ToursService {
 
   async createTour(newData) {
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        throw new Error('Token not found');
-      }
       const response = await fetch(`${this.baseUrl}/api/tours`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
           'townID': newData.townID,
@@ -65,15 +60,10 @@ class ToursService {
 
   async updateTour(newData) {
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        throw new Error('Token not found');
-      }
       const response = await fetch(`${this.baseUrl}/api/tours/${newData.tourName}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
           'townID': newData.townID,
@@ -99,8 +89,6 @@ class ToursService {
       throw error;
     }
   }
-
-
 }
 
 export default ToursService;

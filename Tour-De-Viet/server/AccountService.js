@@ -24,25 +24,17 @@ class AccountService {
             if (!response.ok) {
                 throw new Error('Failed to login');
             }
-
-            const data = await response.json();
-            console.log(data);
-            localStorage.setItem('token', JSON.stringify(data));
+            return response;
 
         } catch (error) {
             console.error('Login error:', error.message);
         }
     }
     async fetchAccount(userName) {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            throw new Error('Token not found');
-        }
         const response = await fetch(`${this.baseUrl}/api/accounts/${userName}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
             }
         });
         if (!response.ok) {
@@ -77,12 +69,10 @@ class AccountService {
     }
 
     async updateAccount(newData) {
-        let token = localStorage.getItem('token');
         return fetch(`${this.baseUrl}/api/accounts/${newData.username}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
                 "username": newData.username,

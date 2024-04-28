@@ -6,9 +6,6 @@ import {useState} from 'react'
 import './BookTourPage.css'
 import BookingService from '../server/BookingService'
 import AccountService from '../server/AccountService'
-// import {authenticateJWT} from '../server/server.js'
-let account = new AccountService();
-account.login('exampleUser','examplePassword');
 function BookTourPage() {
     const [bookings, setBookings] = useState([]);
     const [ongoingBookings, setOngoingBookings] = useState([]);
