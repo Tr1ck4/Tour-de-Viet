@@ -17,6 +17,10 @@ export default function ParallaxPage() {
     updateID(current_id-1);
     setState(current_id-1);
   }
+
+  const CheckoutClick = () =>{
+    window.location = (`/tour/${state}`);
+  }
   return (
     <main>
       {array.map((element, index) => (
@@ -36,12 +40,16 @@ export default function ParallaxPage() {
         <h2 style={{fontWeight:'100', fontSize:'3em', textShadow: '2px 2px 2px black'}}>Welcome to</h2>
         <h1 style={{fontWeight:'800', fontSize:'7em', lineHeight:'0.99',textShadow: '2px 2px 2px black'}}>{head.subtitle}</h1>
       </div>
-      <button className="z-10 size-14 rounded-full backdrop-blur absolute place-self-center mx-5 place-content-center" onClick={DecreaseClick}>
+      <button className="size-14 rounded-full backdrop-blur mx-5 " onClick={DecreaseClick}>
         <img src={des} className='mx-2' alt="Decrement"></img>
       </button>
 
-      <button className="z-10 size-14 rounded-full backdrop-blur absolute place-self-center inset-y-0 right-0 mx-5 place-content-center" onClick={IncreaseClick}> 
+      <button className="size-14 rounded-full backdrop-blur inset-y-0 right-0 mx-5 " onClick={IncreaseClick}> 
         <img src={inc} className='mx-2' alt="Increment"></img>
+      </button>
+      
+      <button onClick={CheckoutClick} className='rounded-3xl inset-x-0 bottom-0 p-5 font-bold text-xl my-10 backdrop-blur'>
+        CHECK OUT
       </button>
     </main>
   )
