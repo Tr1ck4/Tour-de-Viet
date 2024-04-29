@@ -4,11 +4,12 @@
 
 
 main{
-    position: relative;
+    position: fixed;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
     display: flex;
+    top: 0px;
 }
 
 .parallax {

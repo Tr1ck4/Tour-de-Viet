@@ -17,12 +17,12 @@ class UserModel {
           FOREIGN KEY (userName) REFERENCES bookings(userName))");
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
-        tours(townID INT NOT NULL, tourName TEXT UNIQUE NOT NULL, description TEXT, startDate TEXT NOT NULL, endDate TEXT NOT NULL, price REAL, images BLOB, averageRating real, transportationID TEXT,\
+        tours(townID INT NOT NULL, tourName TEXT UNIQUE NOT NULL, description TEXT, startDate TEXT NOT NULL, endDate TEXT NOT NULL, price REAL, images TEXT, averageRating real, transportationID TEXT,\
           PRIMARY KEY (townID, tourName),\
           FOREIGN KEY (transportationID) REFERENCES transportation(ID))");
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
-        transportations (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, startDate TEXT NOT NULL, endDate TEXT NOT NULL, price REAL NOT NULL, goFrom TEXT NOT NULL, arriveAt TEXT NOT NULL)");
+        transportations (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, startDate TEXT NOT NULL, endDate TEXT NOT NULL, price REAL NOT NULL, goFrom TEXT NOT NULL, arriveAt TEXT NOT NULL, type TEXT)");
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
         accounts (userName TEXT NOT NULL, password TEXT NOT NULL, citizenID TEXT, name TEXT, address TEXT, age INT, telNum TEXT, email TEXT,\
@@ -79,16 +79,16 @@ class UserModel {
     this.db.all("SELECT * FROM transportations WHERE ID = ?", [ID],callback)
   }
 
-  createTransportations(Name, startDate, endDate , price , goFrom , arriveAt ,callback) {
-    this.db.run("INSERT INTO transportations (Name , startDate, endDate, price, goFrom, arriveAt) VALUES (?, ?, ?, ?, ?, ?)",
-      [Name , startDate, endDate, price, goFrom, arriveAt],
+  createTransportations(Name, startDate, endDate , price , goFrom , arriveAt,type ,callback) {
+    this.db.run("INSERT INTO transportations (Name , startDate, endDate, price, goFrom, arriveAt,type) VALUES (?, ?, ?, ?, ?, ?,?)",
+      [Name , startDate, endDate, price, goFrom, arriveAt,type],
       callback
     );
   }
   
-  updateTransportations(ID,Name, startDate, endDate , price , goFrom , arriveAt ,callback) {
-    let sql = "UPDATE transportations SET Name = ?, startDate=?, endDate=? , price=? , goFrom=? , arriveAt=? WHERE ID = ?"
-    this.db.run(sql, [Name, startDate, endDate , price , goFrom , arriveAt,ID], callback);
+  updateTransportations(ID,Name, startDate, endDate , price , goFrom , arriveAt,type ,callback) {
+    let sql = "UPDATE transportations SET Name = ?, startDate=?, endDate=? , price=? , goFrom=? , arriveAt=?,type=? WHERE ID = ?"
+    this.db.run(sql, [Name, startDate, endDate , price , goFrom , arriveAt,type,ID], callback);
   }
 
   getAllTour(callback){

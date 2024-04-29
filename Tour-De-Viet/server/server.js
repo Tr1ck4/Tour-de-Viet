@@ -3,7 +3,10 @@ import UserModel from './database.js';
 import path from 'path';
 import jwt from 'jsonwebtoken';
 import { expressjwt } from "express-jwt";
+
 import  nodemailer from 'nodemailer';
+import  cors from 'cors';
+import OpenAI from 'openai';
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -28,7 +31,12 @@ transporter.sendMail(mailOptions, function(error, info){
   }
 });
 
- 
+
+const openai = new OpenAI({
+  baseURL: 'http://localhost:11434/v1',
+  apiKey: 'ollama',
+});
+
 const userModel = new UserModel('./database.db');
 const __dirname = path.resolve(path.dirname(''));
 const PORT = 3000;
@@ -41,7 +49,30 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
+app.use(cors({
+    origin: 'http://localhost:3000', // Adjust this to your frontend URL or use '*' to allow all origins
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-stainless-os'], // Add 'x-stainless-os' here
+}));
 
+app.post('/api/chat', async (req, res) => {
+    const { message } = req.body;
+  
+    try {
+        const chatCompletion = await openai.chat.completions.create({
+            messages: [{ role: 'user', content: message }],
+            model: 'gemma:2b-v1.1',
+            
+        })
+        const aiMessages = chatCompletion.choices.map(choice => choice.message.content);
+        res.json({ messages: aiMessages });
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'An error occurred while processing the request.' });
+    }
+});
+  
+  
 
 function generateToken(user) {
     return jwt.sign(user, secretKey, { expiresIn: '1h' });
@@ -52,6 +83,7 @@ function authenticateToken(req, res, next) {
     req.user = decoded;
     next(); 
 }
+
 
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
@@ -226,9 +258,9 @@ app.get('/api/transportations/:ID', (req, res) => {
 });
 
 app.post('/api/transportations', authenticateJWT, (req, res) => {
-  const {name, startDate, endDate , price , goFrom , arriveAt } = req.body;
+  const {name, startDate, endDate , price , goFrom , arriveAt,type } = req.body;
 
-  userModel.createTransportations(name, startDate, endDate , price , goFrom , arriveAt, (err, result) => {
+  userModel.createTransportations(name, startDate, endDate , price , goFrom , arriveAt,type, (err, result) => {
       if (err) {
           res.status(500).json({ error: err.message });
           return;
@@ -242,9 +274,9 @@ app.post('/api/transportations', authenticateJWT, (req, res) => {
 
 app.put('/api/transportations/:transportationID', authenticateJWT, (req, res) => {
   const {ID } = req.params;
-  const { name, startDate, endDate , price , goFrom , arriveAt } = req.body;
+  const { name, startDate, endDate , price , goFrom , arriveAt,type } = req.body;
 
-  userModel.updateTransportations(ID,name, startDate, endDate , price , goFrom , arriveAt, (err) => {
+  userModel.updateTransportations(ID,name, startDate, endDate , price , goFrom , arriveAt,type, (err) => {
       if (err) {
           res.status(500).json({ error: err.message });
           return;
