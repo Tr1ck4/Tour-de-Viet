@@ -5,30 +5,51 @@ import wave_down from './images/wavedown.png'
 import './Profile.css'
 import { useEffect } from 'react'
 import {useState} from 'react'
-
+import AccountService from '../server/AccountService'
 function ProfilePage() {
-    const [profile,setProfile] = useState([]);
-
-    useEffect(()=>{
-        fetch('http://localhost:3000/api/accounts/exampleUser')
-            .then(res=>{
-                return res.json();
-            })
-            .then(data=>{
-                setProfile(data);
-            })
-    })
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        const blog = profile
-        fetch('http://localhost:3000/api/accounts/exampleUser',{
-            method: 'PUT',
-            headers: {"Content-Type":"application/json"},
-            body: JSON.stringify(blog)
-        }).then(()=>{
-            console.log("Account updated")
-        })
+    const [profile,setProfile] = useState({
+        name: '',
+        age: '',
+        telNum: '',
+        address:'',
+        email:'',
+        citizenID:'',
+        userName:'',
+        password:''
+    });
+    const accountService = new AccountService();
+    useEffect(() => {
+        
+        const userName = 'exampleUser'; // or fetch it dynamically
+        const AccountPromise = accountService.fetchAccount(userName);
+    
+        AccountPromise.then(account => {
+            // console.log('Fetched accounts:', account); // Add this line to verify the fetched bookings
+            setProfile(account);
+        }).catch(error => {
+            console.error('Error fetching account:', error);
+        });
+    },[]);
+    const handleSumit = async(event)=>{
+        event.preventDefault();
+        try {
+            await accountService.updateAccount(profile); // Call updateAccount() with profile
+            console.log('Profile updated successfully!');
+            // Handle successful update (e.g., clear form, show confirmation)
+          } catch (error) {
+            console.error('Error updating profile:', error);
+            // Handle errors (e.g., display error message to user)
+          }
     }
+    const handleChange = (event) => {
+        const { id, value } = event.target;
+        setProfile((prevState) => ({
+            ...prevState,
+            [id]: value,
+        }));
+    };
+    
+
     
     return (
         <div className='relative h-screen overflow-hidden'>
@@ -42,43 +63,43 @@ function ProfilePage() {
                     <label className=''> 
                         Name:
                     </label>
-                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" name="name" defaultValue={profile.name}/>
+                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" id="name" defaultValue={profile.name} onChange={handleChange}/>
                     <label className=''> 
                         Age:  
                     </label>
-                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" name="name" defaultValue={profile.age}/>
+                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" id="age" defaultValue={profile.age} onChange={handleChange}/>
                     <label className=''> 
                         Tel: 
                     </label>
-                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" name="name" defaultValue={profile.telNum}/>
+                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" id="telNum" defaultValue={profile.telNum} onChange={handleChange}/>
                     <label className=''> 
                         Address: 
                         
                     </label>
-                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" name="name" defaultValue={profile.address}/>
+                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" id="address" defaultValue={profile.address} onChange={handleChange}/>
                     <label className=''> 
                         Email: 
                         
                     </label>
-                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" name="name" defaultValue={profile.email}/>
+                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" id="email" defaultValue={profile.email} onChange={handleChange}/>
                     <label className=''> 
                         CitizenID: 
                         
                     </label>
-                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" name="name" defaultValue={profile.citizenID}/>
+                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" id="citizenID" defaultValue={profile.citizenID} onChange={handleChange}/>
                     <label className=''> 
                         Username: 
                         
                     </label>
-                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" name="name" defaultValue={profile.userName}/>
+                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" id="name" readOnly={true}  defaultValue={profile.userName} onChange={handleChange}/>
                     <label className=''> 
                         Password: 
                         
                     </label>
-                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" name="name" defaultValue={profile.password}/>
+                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" id="name" defaultValue={profile.password} onChange={handleChange}/>
                     
                 </form>
-                <button className='bg-light-green w-4/5 h-14 ml-16 mt-10 text-black text-2xl 'onClick={handleSubmit}>
+                <button className='bg-light-green w-4/5 h-14 ml-16 mt-5 text-black text-2xl' onClick={handleSumit}>
                     Update Info
                 </button>
             </div>

@@ -261,7 +261,7 @@ app.put('/api/accounts/:userName',authenticateJWT, (req, res) => {
     const { userName } = req.params;
     const { password, citizenID, name, address, age, tel, email } = req.body;
 
-    userModel.updateRating(userName, password, citizenID, name, address, age, tel, email, (err) => {
+    userModel.updateAccount(userName, password, citizenID, name, address, age, tel, email, (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
