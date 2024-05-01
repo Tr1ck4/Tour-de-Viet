@@ -58,7 +58,7 @@ function Header() {
             {isLoggedIn ? (
               <>
                 <li><div className="px-5 py-2 text-xl font-bold">{username}</div></li>
-                <li><button id="loginButton" className='border-none text-black text-opacity-65 outline-none' onClick={toggleLoggedOut}>Log Out</button></li>
+                <li><button id="loginButton" className='border-none text-black text-opacity-65 outline-none' onClick={toggleLoggedOut}>LOG OUT</button></li>
               </>
             ) : (
               <>
