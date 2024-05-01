@@ -23,17 +23,17 @@ var mailOptions = {
   text: 'This is not a spam'
 };
 
-transporter.sendMail(mailOptions, function(error, info){
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-  }
-});
+// transporter.sendMail(mailOptions, function(error, info){
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log('Email sent: ' + info.response);
+//   }
+// });
 
 
 const openai = new OpenAI({
-  baseURL: 'http://localhost:11434/v1',
+  baseURL: 'http://ollama:11434/v1',
   apiKey: 'ollama',
 });
 
@@ -61,7 +61,7 @@ app.post('/api/chat', async (req, res) => {
     try {
         const chatCompletion = await openai.chat.completions.create({
             messages: [{ role: 'user', content: message }],
-            model: 'gemma:2b-v1.1',
+            model: 'gemma:2b',
             
         })
         const aiMessages = chatCompletion.choices.map(choice => choice.message.content);
