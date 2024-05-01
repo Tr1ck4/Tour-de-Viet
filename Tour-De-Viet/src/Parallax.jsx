@@ -48,7 +48,7 @@ export default function ParallaxPage() {
         <img src={inc} className='mx-2' alt="Increment"></img>
       </button>
       
-      <button onClick={CheckoutClick} className='rounded-3xl inset-x-0 bottom-0 p-5 font-bold text-xl my-10 backdrop-blur'>
+      <button id='checkout' onClick={CheckoutClick} className='rounded-3xl inset-x-0 bottom-0 p-5 font-bold text-xl my-10 backdrop-blur'>
         CHECK OUT
       </button>
     </main>
