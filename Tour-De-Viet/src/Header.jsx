@@ -1,6 +1,5 @@
 import './Header.css'
 function Header(){
-
   return (
     <>
       <header className = 'backdrop-blur bg-bone-white bg-opacity-50'>

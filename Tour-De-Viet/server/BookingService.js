@@ -10,7 +10,7 @@ class BookingService{
 
   async fetchBookings(userName) {
     try {
-      const token = JSON.parse(localStorage.getItem('token')).token;
+      const token = localStorage.getItem('token');
       if (!token) {
         throw new Error('Token not found');
       }

@@ -1,5 +1,5 @@
 
-class AccountService {
+class Account {
     constructor(username, password, citizenID, name, address, age, tel, email) {
         this.baseUrl = 'http://localhost:3000';
         this.username = username; 
@@ -32,29 +32,13 @@ class AccountService {
             console.error('Login error:', error.message);
         }
     }
-    async fetchAccount(userName)
-    {
-        const token = JSON.parse(localStorage.getItem('token')).token;
-        if (!token) {
-        throw new Error('Token not found');
-        }
-        const response = await fetch(`${this.baseUrl}/api/accounts/${userName}`,{
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+    async fetchAccount(userName) {
+        return fetch(`${this.baseUrl}/api/accounts/${userName}`)
+            .then(response => response.status)
+            .catch(error => {
+                console.error('Error fetching accounts:', error);
             }
-        });
-        if (!response.ok) {
-            throw new Error('Failed to get user');
-        }
-        return response.json();
-    } catch (error) {
-        console.error('Error getting user:', error);
-        if (error.message === 'Token not found'){
-            window.location.href('/login');
-          }
-        throw error;
+        );
     }
 
     async createAccount(newData) {
@@ -80,45 +64,9 @@ class AccountService {
             });
     }
 
-    // async updateAccount(newData) {
-    //     const token = JSON.parse(localStorage.getItem('token')).token;
-    //     if (!token) {
-    //         throw new Error('Token not found');
-    //     }
-    //     return fetch(`${this.baseUrl}/api/accounts/${newData.username}`, {
-    //         method: 'PUT',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': `Bearer ${token}`
-    //         },
-    //         body: JSON.stringify({ 
-    //             "username": newData.username, 
-    //             "password": newData.password, 
-    //             "citizenID": newData.citizenID, 
-    //             "name": newData.name, 
-    //             "address": newData.address, 
-    //             "age": newData.age, 
-    //             "tel": newData.tel, 
-    //             "email": newData.email,
-    //          })
-    //     })
-    //     .then(response => response.status)
-    //     .catch(error => {
-    //         console.error('Error updating account:', error);
-    //         if (error.message === 'Token not found'){
-    //             window.location.href('/login');
-    //           }
-    //         }
-    //     );
-    // }
-    async updateAccount(newData)
-    {
-        const token = JSON.parse(localStorage.getItem('token')).token;
-        if (!token) {
-        throw new Error('Token not found');
-        }
-        console.log(token);
-        const response = await fetch(`${this.baseUrl}/api/accounts/${newData.userName}`,{
+    async updateAccount(newData) {
+        let token = localStorage.getItem('token');
+        return fetch(`${this.baseUrl}/api/accounts/${newData.susername}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -148,7 +96,7 @@ class AccountService {
 
 }
 
-export default AccountService;
+export default Account;
 
 
 

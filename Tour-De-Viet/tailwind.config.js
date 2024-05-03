@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-
 export default {
   content: [
     "./index.html",
@@ -12,10 +11,6 @@ export default {
         'dark-green'  : '#335145',
         'bone-white'  : '#EBEBEB',
         'bright-yellow':'#F5B700',
-        'light-green-2':'#84A96C',
-      },
-      fontFamily:{
-        Itim: ['Itim']
       }
     },
   },

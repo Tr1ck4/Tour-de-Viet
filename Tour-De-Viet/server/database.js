@@ -39,9 +39,12 @@ class UserModel {
   }
 
 
-  getBookings(userName, callback) {
-    let sql = "SELECT * FROM bookings JOIN tours ON (bookings.tourName = tours.tourName) WHERE userName = ?";
-    this.db.all(sql, [userName], callback);
+  getBookings(userName, tourName, callback) {
+    let sql = "SELECT userName, tourName, transportationID FROM bookings WHERE userName = ?";
+    if (tourName) {
+      sql += " AND tourName = ?";
+    }
+    this.db.all(sql, [userName, tourName], callback);
   }
 
 
@@ -111,8 +114,8 @@ class UserModel {
 
   
   getAccount(username, callback) {
-    this.db.get(`SELECT * FROM accounts WHERE userName = ?`,[username],callback);
-    
+    let sql = `SELECT * FROM accounts WHERE userName = ?`;
+    this.db.get(sql, username, callback);
   }
 
   getUser(username, password) {

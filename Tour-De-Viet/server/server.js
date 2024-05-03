@@ -33,7 +33,7 @@ var mailOptions = {
 
 
 const openai = new OpenAI({
-  baseURL: 'http://ollama:11434/v1',
+  baseURL: 'http://localhost:11434/v1',
   apiKey: 'ollama',
 });
 
@@ -113,19 +113,15 @@ app.post('/chat', async (req, res)=> {
     }
   })
 
-
-app.get('/api/protected', authenticateJWT, (req, res) => {
-    res.json({ message: 'You are authorized', user: req.user });
-});
-
 app.get('/para', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-app.get('/api/bookings/:userName',authenticateJWT, (req, res) => {
+app.get('/api/bookings/:userName', authenticateJWT, (req, res) => {
     const { userName } = req.params;
+    const { tourName } = req.query;
 
-    userModel.getBookings(userName, (err, rows) => {
+    userModel.getBookings(userName, tourName, (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -133,19 +129,6 @@ app.get('/api/bookings/:userName',authenticateJWT, (req, res) => {
         res.json(rows);
     });
 });
-
-// app.get('/api/bookings/:userName', authenticateJWT, (req, res) => {
-//     const { userName } = req.params;
-//     const { tourName } = req.query;
-
-//     userModel.getBook(userName, tourName, (err, rows) => {
-//         if (err) {
-//             res.status(500).json({ error: err.message });
-//             return;
-//         }
-//         res.json(rows);
-//     });
-// });
 
 app.post('/api/bookings', authenticateJWT, (req, res) => {
     const { userName, tourName, transportationID, cardID } = req.body;
@@ -160,20 +143,6 @@ app.post('/api/bookings', authenticateJWT, (req, res) => {
         });
     });
 });
-
-// app.post('/api/bookings', authenticateJWT, (req, res) => {
-//     const { userName, tourName, flightID, cardID } = req.body;
-//     userModel.createBook(userName, tourName, flightID, cardID, (err, res) => {
-//         if (err) {
-//             res.status(500).json({ error: err.message });
-//             return;
-//         }
-//         res.json({
-//             message: 'Booking created',
-//             data: req.body,
-//         });
-//     });
-// });
 
 app.get('/api/comments', (req, res) => {
     userModel.getAllComments((err, row) => {
@@ -227,7 +196,7 @@ app.put('/api/comments/:townID/:tourName', (req, res) => {
     });
 });
 
-app.post('/api/accounts',authenticateJWT, (req, res) => {
+app.post('/api/accounts', (req, res) => {
     const { username, password, citizenID, name, address, age, tel, email } = req.body;
 
     userModel.createAccount(username, password, citizenID, name, address, age, tel, email, (err, result) => {
@@ -243,9 +212,7 @@ app.post('/api/accounts',authenticateJWT, (req, res) => {
     });
 });
 
-
-
-app.get('/api/accounts/:userName',authenticateJWT, (req, res) => {
+app.get('/api/accounts/:userName', (req, res) => {
     const { userName } = req.params;
 
     userModel.getAccount(userName, (err, row) => {
@@ -257,7 +224,7 @@ app.get('/api/accounts/:userName',authenticateJWT, (req, res) => {
     });
 });
 
-app.put('/api/accounts/:userName',authenticateJWT, (req, res) => {
+app.put('/api/accounts/:userName', authenticateJWT, (req, res) => {
     const { userName } = req.params;
     const { password, citizenID, name, address, age, tel, email } = req.body;
 
