@@ -83,7 +83,7 @@ app.post('/api/login', async (req, res) => {
     if (!user) {
         return res.status(401).json({ message: 'Invalid username or password' });
     }
-    const token = generateToken({"username" : user.name});
+    const token = generateToken({"username" : user.name, "accountname" : username});
     res.setHeader('Set-cookie', `token=${token}; Max-Age=3600; HttpOnly`);
     res.send('Cookie set successfully');
 });
@@ -112,7 +112,10 @@ app.get('/api/bookings/info', authenticateToken, (req, res) => {
 
 
 app.post('/api/bookings', authenticateToken, (req, res) => {
-    const { userName, tourName, transportationID, cardID } = req.body;
+    const token = getTokenFromCookie(req);
+
+    const userName = jwt.decode(token).username;
+    const { tourName, transportationID, cardID } = req.body;
     userModel.createBooking(userName, tourName, transportationID, cardID, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -124,20 +127,6 @@ app.post('/api/bookings', authenticateToken, (req, res) => {
         });
     });
 });
-
-// app.post('/api/bookings', authenticateJWT, (req, res) => {
-//     const { userName, tourName, flightID, cardID } = req.body;
-//     userModel.createBook(userName, tourName, flightID, cardID, (err, res) => {
-//         if (err) {
-//             res.status(500).json({ error: err.message });
-//             return;
-//         }
-//         res.json({
-//             message: 'Booking created',
-//             data: req.body,
-//         });
-//     });
-// });
 
 app.get('/api/comments', (req, res) => {
     userModel.getAllComments((err, row) => {
@@ -207,14 +196,10 @@ app.post('/api/accounts', (req, res) => {
     });
 });
 
-
-
 app.get('/api/accounts/info', authenticateToken, (req, res) => {
     const token = getTokenFromCookie(req);
-
-    const userName = jwt.decode(token).username;
-
-    userModel.getAccount(userName, (err, row) => {
+    const accountName = jwt.decode(token).accountname;
+    userModel.getAccount(accountName, (err, row) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -225,11 +210,11 @@ app.get('/api/accounts/info', authenticateToken, (req, res) => {
 
 app.put('/api/accounts/info', authenticateToken, (req, res) => {
     const token = getTokenFromCookie(req);
-
-    const userName = jwt.decode(token).username;
+    const accountName = jwt.decode(token).accountname;
+    console.log(accountName);
     const { password, citizenID, name, address, age, tel, email } = req.body;
 
-    userModel.updateRating(userName, password, citizenID, name, address, age, tel, email, (err) => {
+    userModel.updateAccount(accountName, password, citizenID, name, address, age, tel, email, (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;

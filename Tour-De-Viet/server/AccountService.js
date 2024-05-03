@@ -11,9 +11,26 @@ class AccountService {
         this.tel = tel;
         this.email = email;
     }
+    async logout(){
+        try {
+            const response = await fetch(`${this.baseUrl}/api/logout`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok){
+                throw new Error('Cannot logout');
+            }
+            return response;
+        }catch (error){
+            console.error('Logout error:', error.message);
+        }
+        
+    }
     async login(username, password) {
         try {
-            const response = await fetch('http://localhost:3000/api/login', {
+            const response = await fetch(`${this.baseUrl}/api/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -30,8 +47,8 @@ class AccountService {
             console.error('Login error:', error.message);
         }
     }
-    async fetchAccount(userName) {
-        const response = await fetch(`${this.baseUrl}/api/accounts/${userName}`, {
+    async fetchAccount() {
+        const response = await fetch(`${this.baseUrl}/api/accounts/info}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,13 +86,12 @@ class AccountService {
     }
 
     async updateAccount(newData) {
-        return fetch(`${this.baseUrl}/api/accounts/${newData.username}`, {
+        return fetch(`${this.baseUrl}/api/accounts/info`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                "username": newData.username,
                 "password": newData.password,
                 "citizenID": newData.citizenID,
                 "name": newData.name,
