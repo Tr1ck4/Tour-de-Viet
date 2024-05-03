@@ -8,16 +8,13 @@ class BookingService{
       this.cardID   = cardID;
   }
 
-  async fetchBookings(userName) {
+  async fetchBookings() {
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
+      const res = await fetch(`${this.baseUrl}/api/authenticate`);
+      if (!res.data) {
         throw new Error('Token not found');
       }
-      const response = await fetch(`${this.baseUrl}/api/bookings/${userName}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
+      const response = await fetch(`${this.baseUrl}/api/bookings/info}`, {
       });
       if (!response.ok) {
         throw new Error('Failed to fetch bookings');
@@ -35,8 +32,8 @@ class BookingService{
   
   async createBooking(newData) {
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
+      const res = await fetch(`${this.baseUrl}/api/authenticate`);
+      if (!res.data) {
         throw new Error('Token not found');
       }
       const response = await fetch(`${this.baseUrl}/api/bookings`, {
