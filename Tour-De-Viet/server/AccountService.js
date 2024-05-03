@@ -47,16 +47,13 @@ class Account {
             console.error('Login error:', error.message);
         }
     }
-    async fetchAccount(userName) {
-        return fetch(`${this.baseUrl}/api/accounts/${userName}`)
-            .then(response => response.status)
-            .catch(error => {
-                console.error('Error fetching accounts:', error);
-            if (!response.ok) {
-                throw new Error('Failed to login');
+    async fetchAccount() {
+        const response = await fetch(`${this.baseUrl}/api/accounts/info}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
             }
-            return response;
-        })
+        );
     }
 
     async createAccount(newData) {
@@ -83,19 +80,21 @@ class Account {
     }
 
     async updateAccount(newData) {
-        return fetch(`${this.baseUrl}/api/accounts/info`, {
+        let token = localStorage.getItem('token');
+        return fetch(`${this.baseUrl}/api/accounts/${newData.susername}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({
-                "password": newData.password,
-                "citizenID": newData.citizenID,
-                "name": newData.name,
-                "address": newData.address,
-                "age": newData.age,
-                "tel": newData.tel,
+            body: JSON.stringify({ 
+                "username": newData.username, 
+                "password": newData.password, 
+                "citizenID": newData.citizenID, 
+                "name": newData.name, 
+                "address": newData.address, 
+                "age": newData.age, 
+                "tel": newData.tel, 
                 "email": newData.email,
              })
         })
