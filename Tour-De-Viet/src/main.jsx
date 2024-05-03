@@ -9,10 +9,18 @@ import ParallaxPage from './Parallax.jsx'
 import HomePage from './Home.jsx'
 import Bot from './Bot.jsx';
 
+import TourPage from './TourPage.jsx'
+import Register from './Register.jsx';
+import TourDetailPage from './TourDetailPage.jsx';
+import TestUI from './testUI.jsx';
+import BookTourPage from './BookTourPage.jsx';
+import ProfilePage from './Profile.jsx';
+
+
 export default function App() {
   return (
     <Router>
-      <Header/>
+      <Header />
       <Routes>
         <Route path='/homepage' element={<HomePage />} />
         <Route path='/parallax' element={<ParallaxPage />} />
