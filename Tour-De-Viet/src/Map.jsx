@@ -17,7 +17,6 @@ export default function VNMap(){
     const clickedID = event.target.getAttribute('id');
     if(clickedID) {
       updateID(clickedID);
-      window.location = `/tour/${clickedID}`;
     }
   }
 

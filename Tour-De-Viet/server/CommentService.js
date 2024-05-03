@@ -26,10 +26,15 @@ class CommentService{
     
     async createComment(newData) {
       try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('Token not found');
+        }
         const response = await fetch(`${this.baseUrl}/api/comments`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({
             'townID': newData.townID,
@@ -56,10 +61,15 @@ class CommentService{
     
     async updateCommentRating(townID, tourName, rating) {
       try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('Token not found');
+        }
         const response = await fetch(`${this.baseUrl}/api/comments/${townID}/${tourName}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({ rating })
         });
