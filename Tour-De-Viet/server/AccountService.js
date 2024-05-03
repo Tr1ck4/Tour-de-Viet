@@ -47,13 +47,16 @@ class Account {
             console.error('Login error:', error.message);
         }
     }
-    async fetchAccount() {
-        const response = await fetch(`${this.baseUrl}/api/accounts/info}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
+    async fetchAccount(userName) {
+        return fetch(`${this.baseUrl}/api/accounts/${userName}`)
+            .then(response => response.status)
+            .catch(error => {
+                console.error('Error fetching accounts:', error);
+            if (!response.ok) {
+                throw new Error('Failed to login');
             }
-        );
+            return response;
+        })
     }
 
     async createAccount(newData) {
