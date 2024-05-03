@@ -17,6 +17,10 @@ export default function ParallaxPage() {
     updateID(current_id-1);
     setState(current_id-1);
   }
+
+  const CheckoutClick = () =>{
+    window.location = (`/tour/${state}`);
+  }
   return (
     <main>
       {array.map((element, index) => (

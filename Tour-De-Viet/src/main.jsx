@@ -12,12 +12,12 @@ import TourDetailPage from './TourDetailPage.jsx';
 import TestUI from './testUI.jsx';
 import BookTourPage from './BookTourPage.jsx';
 import ProfilePage from './Profile.jsx';
-import Bot from './Bot.jsx';
 
-export default function App(){
+
+export default function App() {
   return (
     <Router>
-      <Header/>
+      <Header />
       <Routes>
         <Route path='/homepage' element={<HomePage />} />
         <Route path='/parallax' element={<ParallaxPage />} />
@@ -28,7 +28,6 @@ export default function App(){
         <Route path='/testUI' element={<TestUI />} />
         <Route path='/bookinghistory' element={<BookTourPage />} />
         <Route path='/profile' element={<ProfilePage />} />
-        <Route path = '/bot' element={<Bot/>} />
       </Routes>
     </Router>
   );
