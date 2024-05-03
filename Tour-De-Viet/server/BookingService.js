@@ -8,12 +8,13 @@ class BookingService{
       this.cardID   = cardID;
   }
 
-  async fetchBookings(userName) {
+  async fetchBookings() {
     try {
-      if (!token) {
+      const res = await fetch(`${this.baseUrl}/api/authenticate`);
+      if (!res.data) {
         throw new Error('Token not found');
       }
-      const response = await fetch(`${this.baseUrl}/api/bookings/${userName}`, {
+      const response = await fetch(`${this.baseUrl}/api/bookings/info}`, {
       });
       if (!response.ok) {
         throw new Error('Failed to fetch bookings');
@@ -31,6 +32,10 @@ class BookingService{
   
   async createBooking(newData) {
     try {
+      const res = await fetch(`${this.baseUrl}/api/authenticate`);
+      if (!res.data) {
+        throw new Error('Token not found');
+      }
       const response = await fetch(`${this.baseUrl}/api/bookings`, {
           method: 'POST',
           headers: {
