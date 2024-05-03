@@ -15,11 +15,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-@font-face {
-  font-family: "Regular" ;
-  src: local("Itim"),
-  url('./assets/font/Itim.ttf') format("truetype"); 
-}
 
 a {
   font-weight: 500;
