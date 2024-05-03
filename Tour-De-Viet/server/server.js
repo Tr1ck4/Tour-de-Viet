@@ -108,9 +108,9 @@ app.post('/api/login', async (req, res) => {
     if (!user) {
         return res.status(401).json({ message: 'Invalid username or password' });
     }
-    const token = generateToken({"username" : user.name, "accountname" : username});
-    res.setHeader('Set-cookie', `token=${token}; Max-Age=3600; HttpOnly`);
-    res.send('Cookie set successfully');
+
+    const token = generateToken({ username: user.username });
+    res.json({ token });
 });
 
 app.get('/api/protected', authenticateToken, (req, res) => {
@@ -238,7 +238,7 @@ app.put('/api/accounts/info', authenticateToken, (req, res) => {
     console.log(accountName);
     const { password, citizenID, name, address, age, tel, email } = req.body;
 
-    userModel.updateAccount(accountName, password, citizenID, name, address, age, tel, email, (err) => {
+    userModel.updateRating(userName, password, citizenID, name, address, age, tel, email, (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
