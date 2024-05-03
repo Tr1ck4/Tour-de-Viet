@@ -33,7 +33,7 @@ var mailOptions = {
 
 
 const openai = new OpenAI({
-  baseURL: 'http://ollama:11434/v1',
+  baseURL: 'http://localhost:11434/v1',
   apiKey: 'ollama',
 });
 
@@ -112,11 +112,6 @@ app.post('/chat', async (req, res)=> {
         res.status(400).json({message: e.message})
     }
   })
-
-
-app.get('/api/protected', authenticateJWT, (req, res) => {
-    res.json({ message: 'You are authorized', user: req.user });
-});
 
 app.get('/para', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
