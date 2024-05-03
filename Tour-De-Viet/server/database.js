@@ -12,40 +12,39 @@ class UserModel {
       } else {
         this.db.run("CREATE TABLE IF NOT EXISTS \
         comments (townID INT, tourName TEXT, comment TEXT, userName TEXT UNIQUE, rating REAL,\
-          FOREIGN KEY (tourName) REFERENCES tours(tourName),\
-          FOREIGN KEY (userName) REFERENCES accounts(userName))");
+        FOREIGN KEY (townID) REFERENCES tours(townID),\
+         FOREIGN KEY (tourName) REFERENCES tours(tourName),\
+          FOREIGN KEY (userName) REFERENCES bookings(userName))");
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
-        tours(townID INT NOT NULL, tourName TEXT NOT NULL, description TEXT, price REAL, images TEXT, transportationID TEXT,\
-          PRIMARY KEY (tourName),\
-          FOREIGN KEY (transportationID) REFERENCES transportations(ID))");
-
-        this.db.run("CREATE TABLE IF NOT EXISTS \
-        tour_date(tourName TEXT NOT NULL, startDate TEXT NOT NULL, endDate TEXT NOT NULL,\
-          FOREIGN KEY (tourName) REFERENCES tours(tourName))");
+        tours(townID INT NOT NULL, tourName TEXT UNIQUE NOT NULL, description TEXT, startDate TEXT NOT NULL, endDate TEXT NOT NULL, price REAL, images TEXT, averageRating real, transportationID TEXT,\
+          PRIMARY KEY (townID, tourName),\
+          FOREIGN KEY (transportationID) REFERENCES transportation(ID))");
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
         transportations (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, startDate TEXT NOT NULL, endDate TEXT NOT NULL, price REAL NOT NULL, goFrom TEXT NOT NULL, arriveAt TEXT NOT NULL, type TEXT)");
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
-        accounts (userName TEXT UNIQUE NOT NULL, password TEXT NOT NULL, citizenID TEXT, name TEXT, address TEXT, age INT, telNum TEXT, email TEXT,\
-          PRIMARY KEY(userName))");
+        accounts (userName TEXT NOT NULL, password TEXT NOT NULL, citizenID TEXT, name TEXT, address TEXT, age INT, telNum TEXT, email TEXT,\
+        PRIMARY KEY(userName))");
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
         bookings (userName TEXT NOT NULL, tourName TEXT NOT NULL, transportationID INT, cardID INT NOT NULL,\
           FOREIGN KEY (tourName) REFERENCES tours(tourName),\
           FOREIGN KEY (userName) REFERENCES accounts(userName),\
           FOREIGN KEY (transportationID) REFERENCES transportations(ID))");
-
         console.log('Connected to the database.');
       }
     });
   }
 
 
-  getBookings(userName, callback) {
-    let sql = "SELECT * FROM bookings JOIN tours ON (bookings.tourName = tours.tourName) WHERE userName = ?";
-    this.db.all(sql, [userName], callback);
+  getBookings(userName, tourName, callback) {
+    let sql = "SELECT userName, tourName, transportationID FROM bookings WHERE userName = ?";
+    if (tourName) {
+      sql += " AND tourName = ?";
+    }
+    this.db.all(sql, [userName, tourName], callback);
   }
 
 
@@ -76,106 +75,61 @@ class UserModel {
   }
 
 
-  getTranportations(ID, callback) {
-    this.db.all("SELECT * FROM transportations WHERE ID = ?", [ID], callback)
+  getTranportations(ID,callback) {
+    this.db.all("SELECT * FROM transportations WHERE ID = ?", [ID],callback)
   }
 
-  createTransportations(Name, startDate, endDate, price, goFrom, arriveAt, type, callback) {
+  createTransportations(Name, startDate, endDate , price , goFrom , arriveAt,type ,callback) {
     this.db.run("INSERT INTO transportations (Name , startDate, endDate, price, goFrom, arriveAt,type) VALUES (?, ?, ?, ?, ?, ?,?)",
-      [Name, startDate, endDate, price, goFrom, arriveAt, type],
+      [Name , startDate, endDate, price, goFrom, arriveAt,type],
       callback
     );
   }
-
-  updateTransportations(ID, Name, startDate, endDate, price, goFrom, arriveAt, type, callback) {
+  
+  updateTransportations(ID,Name, startDate, endDate , price , goFrom , arriveAt,type ,callback) {
     let sql = "UPDATE transportations SET Name = ?, startDate=?, endDate=? , price=? , goFrom=? , arriveAt=?,type=? WHERE ID = ?"
-    this.db.run(sql, [Name, startDate, endDate, price, goFrom, arriveAt, type, ID], callback);
+    this.db.run(sql, [Name, startDate, endDate , price , goFrom , arriveAt,type,ID], callback);
   }
 
-  getAllTour(callback) {
+  getAllTour(callback){
     this.db.all("SELECT * FROM tours", callback);
   }
 
-  getTour(townID, tourName, callback) {
-    let sql = `SELECT 
-    t.*,
-    tr.Name AS transportation,
-    td.startDate,
-    td.endDate,
-    AVG(c.rating) AS averageRating
-    FROM 
-        tours AS t
-    JOIN 
-        tour_date AS td ON t.tourName = td.tourName
-    JOIN 
-        transportations AS tr ON t.transportationID = tr.ID
-    LEFT JOIN 
-        comments AS c ON t.tourName = c.tourName AND t.townID = c.townID
-    WHERE 
-        t.townID = ? AND t.tourName = ?
-    GROUP BY 
-        t.tourName`
-
-    this.db.get(sql, [townID, tourName], callback);
+  getTour(tourName, callback) {
+    this.db.get("SELECT *  FROM tours WHERE tourName = ?", [tourName], callback);
   }
 
-  getAllTour(townID, callback) {
-    let sql = `SELECT 
-    t.tourName,
-    CAST(julianday(td.endDate) - julianday(td.startDate) + 1 AS INTEGER) || ' day(s)' AS totalTime,
-    tr.Name AS transport,
-    t.price,
-    t.images,
-    t.townID,
-    AVG(c.rating) AS avg_rating
-    FROM 
-        tours AS t
-    JOIN 
-        tour_date AS td ON t.tourName = td.tourName
-    JOIN 
-        transportations AS tr ON t.transportationID = tr.ID
-    LEFT JOIN 
-        comments AS c ON t.tourName = c.tourName
-    WHERE t.townID = ?
-    GROUP BY 
-        t.tourName`;
-    this.db.all(sql, townID, callback)
-  }
-
-  createTour(townID, tourName, description, price, images, transportationID, callback) {
-    this.db.run("INSERT INTO tours (townID, tourName, description, price, images, transportationID) VALUES (?, ?, ?, ?, ?, ?)",
-      [townID, tourName, description, price, images, transportationID],
+  createTour(townID, tourName, description, startDate, endDate, price, images, callback) {
+    this.db.run("INSERT INTO tours (townID, tourName, description, startDate, endDate, price, images) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [townID, tourName, description, startDate, endDate, price, images],
       callback
     );
-    this.db.run("INSERT INTO tour_date (tourName,startDate,endDate) VALUES(?,?,?)",
-      [tourName, startDate, endDate],
-      callback)
   }
 
-  updateTour(tourName, description, transportationID, startDate, endDate, price, images, callback) {
-    let sql = "UPDATE tours SET tourName = ?, description=?, transportationID = ?, startDate=? , endDate=? , price=? , images=? WHERE tourName = ?"
-    this.db.run(sql, [tourName, description, transportationID, startDate, endDate, price, images], callback);
+  updateTour(tourName, description, startDate, endDate, price, images, callback) {
+    let sql = "UPDATE tours SET tourName = ?, description=?, startDate=? , endDate=? , price=? , images=? WHERE tourName = ?"
+    this.db.run(sql, [tourName, description, startDate , endDate , price , images], callback);
   }
 
 
-
+  
   getAccount(username, callback) {
-    this.db.get(`SELECT * FROM accounts WHERE userName = ?`, [username], callback);
-
+    let sql = `SELECT * FROM accounts WHERE userName = ?`;
+    this.db.get(sql, username, callback);
   }
 
   getUser(username, password) {
     return new Promise((resolve, reject) => {
-      const query = 'SELECT * FROM accounts WHERE username = ? AND password = ?';
-      this.db.get(query, [username, password], (err, row) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve(row);
-      });
+        const query = 'SELECT * FROM accounts WHERE username = ? AND password = ?';
+        this.db.get(query, [username, password], (err, row) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(row);
+        });
     });
-  }
+}
 
   updateAccount(username, password, citizenID, name, address, age, tel, email, callback) {
     let sql = `UPDATE accounts SET password = COALESCE(?, password),

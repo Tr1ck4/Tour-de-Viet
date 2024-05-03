@@ -11,11 +11,11 @@
 }
 
 svg path:hover{
-  fill: #F5B700;
+  fill: #EBEBEB;
   transform: translateY(-10px);
   transition: 0.45s cubic-bezier(0.075, 0.49, 0.32, 1);
   filter: drop-shadow(0px 10px 4px rgba(0, 0, 0, 0.5));
-  transition:0.5s ease;
+  transition-delay:0.5s;
   z-index: 2;
 }
 
