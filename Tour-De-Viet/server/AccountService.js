@@ -47,8 +47,8 @@ class AccountService {
             console.error('Login error:', error.message);
         }
     }
-    async fetchAccount(userName) {
-        return fetch(`${this.baseUrl}/api/accounts/${userName}`)
+    async fetchAccount() {
+        return fetch(`${this.baseUrl}/api/accounts/info`)
             .then(response => response.status)
             .catch(error => {
                 console.error('Error fetching accounts:', error);
@@ -56,10 +56,6 @@ class AccountService {
                 throw new Error('Failed to login');
             }
         });
-        if (!response.ok) {
-            throw new Error('Failed to get user');
-        }
-        return response.json();
     } catch(error) {
         console.error('Error getting user:', error);
         if (error.message === 'Token not found') {
