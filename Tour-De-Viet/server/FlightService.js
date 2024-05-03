@@ -19,15 +19,10 @@ class Flight{
     
     async createFlights(newData) {
         try {
-            const token = localStorage.getItem('token');
-            if (!token) {
-            throw new Error('Token not found');
-            }
             const response = await fetch(`${baseUrl}/api/flights`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     "flightID": newData.flightID,
@@ -54,15 +49,10 @@ class Flight{
     
     async updateFlights(flightID, newData) {
         try {
-            const token = localStorage.getItem('token');
-            if (!token) {
-            throw new Error('Token not found');
-            }
             const response = await fetch(`${baseUrl}/api/flights/${flightID}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     "flightID": newData.flightID,
