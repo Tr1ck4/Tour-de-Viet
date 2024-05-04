@@ -1,0 +1,21 @@
+.message-user{
+    text-align: right;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.message-bot{
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+}
+
+.Bot-input{
+    width: 100%;
+    height: 40px;
+    border: none;
+    font-size: 1.2rem;
+}
+.input:focus{
+    outline: none;
+}

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-
+import './Bot.css';
 export default function Bot() {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [isTyping, setIsTyped] = useState(true);
 
   const sendMessage = async () => {
     if (inputValue.trim() === '') return;
@@ -36,11 +37,11 @@ export default function Bot() {
   };
 
   return (
-    <div className="Bot-container">
+    <div className="container">
       <div className="Bot-messages">
         {messages.map((message, index) => (
-          <div key={index} className={`message ${message.sender.toLowerCase()}`}>
-            <span className="message-sender">{message.sender}:</span> {message.content}
+          <div key={index} className={`message-${message.sender.toLowerCase()}`}>
+            <span className="message-sender">{message.sender}</span> <span>:</span><span>{message.content}</span>
           </div>
         ))}
       </div>
