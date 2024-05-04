@@ -31,15 +31,10 @@ class BookingService{
   
   async createBooking(newData) {
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        throw new Error('Token not found');
-      }
       const response = await fetch(`${this.baseUrl}/api/bookings`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({
               "userName": newData.userName,
