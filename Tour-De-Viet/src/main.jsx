@@ -12,7 +12,7 @@ import TourDetailPage from './TourDetailPage.jsx';
 import TestUI from './testUI.jsx';
 import BookTourPage from './BookTourPage.jsx';
 import ProfilePage from './Profile.jsx';
-
+import Bot from './Bot.jsx';
 
 export default function App() {
   return (
@@ -28,6 +28,7 @@ export default function App() {
         <Route path='/testUI' element={<TestUI />} />
         <Route path='/bookinghistory' element={<BookTourPage />} />
         <Route path='/profile' element={<ProfilePage />} />
+        <Route path='/bot' element={<Bot/>}/>
       </Routes>
     </Router>
   );
