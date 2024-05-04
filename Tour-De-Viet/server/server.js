@@ -6,7 +6,6 @@ import cors from 'cors';
 import { expressjwt } from "express-jwt";
 
 import  nodemailer from 'nodemailer';
-import  cors from 'cors';
 import OpenAI from 'openai';
 
 var transporter = nodemailer.createTransport({
@@ -24,13 +23,13 @@ var mailOptions = {
   text: 'This is not a spam'
 };
 
-transporter.sendMail(mailOptions, function(error, info){
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-  }
-});
+// transporter.sendMail(mailOptions, function(error, info){
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log('Email sent: ' + info.response);
+//   }
+// });
 
 
 const openai = new OpenAI({
