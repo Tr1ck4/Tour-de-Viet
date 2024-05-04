@@ -5,6 +5,39 @@ import jwt from 'jsonwebtoken';
 import cors from 'cors';
 import { expressjwt } from "express-jwt";
 
+import  nodemailer from 'nodemailer';
+import  cors from 'cors';
+import OpenAI from 'openai';
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'tbnrfragsprest123@gmail.com',
+    pass: 'vfrsjpltshlnarxd'
+  }
+});
+
+var mailOptions = {
+  from: 'tbnrfragsprest123@gmail.com',
+  to: 'triet0612@gmail.com',
+  subject: 'Sending Email using Node.js',
+  text: 'This is not a spam'
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
+
+
+const openai = new OpenAI({
+  baseURL: 'http://localhost:11434/v1',
+  apiKey: 'ollama',
+});
+
 const userModel = new UserModel('./database.db');
 const __dirname = path.resolve(path.dirname(''));
 const PORT = 3000;
