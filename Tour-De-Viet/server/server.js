@@ -131,8 +131,9 @@ app.post('/api/login', async (req, res) => {
         return res.status(401).json({ message: 'Invalid username or password' });
     }
 
-    const token = generateToken({ username: user.username });
-    res.json({ token });
+    const token = generateToken({ username: user.name, accountname: username });
+    res.setHeader('Set-cookie', `token=${token}; Max-Age=3600; HttpOnly`);
+    res.json({ message: 'Logout successful' });
 });
 
 app.get('/api/protected', authenticateToken, (req, res) => {
