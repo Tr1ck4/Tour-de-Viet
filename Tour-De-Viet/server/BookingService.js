@@ -10,11 +10,7 @@ class BookingService{
 
   async fetchBookings(userName) {
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        throw new Error('Token not found');
-      }
-      const response = await fetch(`${this.baseUrl}/api/bookings/${userName}`, {
+      const response = await fetch(`${this.baseUrl}/api/bookings/info`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

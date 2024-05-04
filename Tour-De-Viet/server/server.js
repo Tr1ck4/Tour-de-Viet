@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 import { expressjwt } from "express-jwt";
 
 import  nodemailer from 'nodemailer';
-import  cors from 'cors';
 import OpenAI from 'openai';
 
 var transporter = nodemailer.createTransport({
@@ -49,12 +48,6 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use(cors({
-    origin: 'http://localhost:3000', // Adjust this to your frontend URL or use '*' to allow all origins
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'x-stainless-os'], // Add 'x-stainless-os' here
-}));
-
 app.post('/api/chat', async (req, res) => {
     const { message } = req.body;
   
@@ -71,8 +64,6 @@ app.post('/api/chat', async (req, res) => {
       res.status(500).json({ error: 'An error occurred while processing the request.' });
     }
 });
-  
-  
 
 function generateToken(user) {
     return jwt.sign(user, secretKey, { expiresIn: '1h' });
@@ -82,36 +73,50 @@ function authenticateToken(req, res, next) {
     const decoded = jwt.verify(token, secretKey);  
     req.user = decoded;
     next(); 
+    const jwtCookie = cookies.find(cookie => cookie.startsWith('token='));
+
+    if (!jwtCookie) {
+        return null;
+    }
+
+    return jwtCookie.split('=')[1];
 }
 
+app.get('/api/authenticate', authenticateToken,(req, res) => {
+    const token = getTokenFromCookie(req);
 
-app.post('/api/login', (req, res) => {
+    const userName = jwt.decode(token).username;
+
+
+    res.json(userName);
+});
+
+app.post('/api/logout', (req, res) => {
+    // Clear the 'token' cookie by setting its expiration to a past date
+    res.setHeader('Set-cookie', `token=deleted; Max-Age=3600; HttpOnly`);
+
+    // Send a response indicating success
+    res.json({ message: 'Logout successful' });
+});
+
+app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
-    const user = userModel.getUser(username, password); 
-
+    const user = await userModel.getUser(username, password)
+    .then(res => {
+        return res;
+    })
     if (!user) {
         return res.status(401).json({ message: 'Invalid username or password' });
     }
 
-    const token = generateToken({ username: user.username });
-    res.json({ token });
+    const token = generateToken({ username: user.name, accountname: username });
+    res.setHeader('Set-cookie', `token=${token}; Max-Age=3600; HttpOnly`);
+    res.json({ message: 'Logout successful' });
 });
 
-
-app.post('/chat', async (req, res)=> {   
-    try {
-      const resp = await openai.completions.create({
-        model: "gpt-3.5-turbo",
-          messages: [
-            { role: "user", content: req.body.question}
-          ]  
-      })           
-          
-      res.status(200).json({message: resp.data.choices[0].message.content})
-    } catch(e) {
-        res.status(400).json({message: e.message})
-    }
-  })
+app.get('/api/protected', authenticateToken, (req, res) => {
+    res.json({ message: 'You are authorized', user: req.user });
+});
 
 app.get('/para', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
@@ -130,8 +135,12 @@ app.get('/api/bookings/:userName', authenticateJWT, (req, res) => {
     });
 });
 
-app.post('/api/bookings', authenticateJWT, (req, res) => {
-    const { userName, tourName, transportationID, cardID } = req.body;
+
+app.post('/api/bookings', authenticateToken, (req, res) => {
+    const token = getTokenFromCookie(req);
+
+    const userName = jwt.decode(token).username;
+    const { tourName, transportationID, cardID } = req.body;
     userModel.createBooking(userName, tourName, transportationID, cardID, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -212,10 +221,10 @@ app.post('/api/accounts', (req, res) => {
     });
 });
 
-app.get('/api/accounts/:userName', (req, res) => {
-    const { userName } = req.params;
-
-    userModel.getAccount(userName, (err, row) => {
+app.get('/api/accounts/info', authenticateToken, (req, res) => {
+    const token = getTokenFromCookie(req);
+    const accountName = jwt.decode(token).accountname;
+    userModel.getAccount(accountName, (err, row) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -224,8 +233,10 @@ app.get('/api/accounts/:userName', (req, res) => {
     });
 });
 
-app.put('/api/accounts/:userName', authenticateJWT, (req, res) => {
-    const { userName } = req.params;
+app.put('/api/accounts/info', authenticateToken, (req, res) => {
+    const token = getTokenFromCookie(req);
+    const accountName = jwt.decode(token).accountname;
+    console.log(accountName);
     const { password, citizenID, name, address, age, tel, email } = req.body;
 
     userModel.updateAccount(userName, password, citizenID, name, address, age, tel, email, (err) => {

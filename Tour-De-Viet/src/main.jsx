@@ -2,25 +2,37 @@ import './index.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { gsap } from 'gsap';
 
 import Header from './Header.jsx'
 import ParallaxPage from './Parallax.jsx'
 import HomePage from './Home.jsx'
+import Bot from './Bot.jsx';
+
+import TourPage from './TourPage.jsx'
+import Register from './Register.jsx';
+import TourDetailPage from './TourDetailPage.jsx';
+import TestUI from './testUI.jsx';
 import BookTourPage from './BookTourPage.jsx';
 import ProfilePage from './Profile.jsx';
-import Bot from './Bot.jsx';
 
 export default function App(){
   return (
     <Router>
       <Header/>
       <Routes>
-        <Route path = '/homepage' element={<HomePage/>} />
-        <Route path = '/parallax' element={<ParallaxPage/>} />
         <Route path = '/bookinghistory' element = {<BookTourPage/>}/>
         <Route path = '/profile' element = {<ProfilePage/>}/>
-        <Route path = '/bot' element={<Bot/>} />
+
+        <Route path='/homepage' element={<HomePage />} />
+        <Route path='/parallax' element={<ParallaxPage />} />
+        <Route path='/tourpage/:current_id' element={<TourPage />} />
+        {/* <Route path='/tourpage/:townID/:tourName' element={<TourDetailPage />} /> */}
+        <Route path='/tourpagedetail/' element={<TourDetailPage />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/testUI' element={<TestUI />} />
+        <Route path='/bookinghistory' element={<BookTourPage />} />
+        <Route path='/profile' element={<ProfilePage />} />
+        <Route path='/bot' element={<Bot/>}/>
       </Routes>
     </Router>
   );
