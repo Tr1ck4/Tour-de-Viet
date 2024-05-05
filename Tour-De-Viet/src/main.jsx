@@ -9,7 +9,6 @@ import HomePage from './Home.jsx'
 import TourPage from './TourPage.jsx'
 import Register from './Register.jsx';
 import TourDetailPage from './TourDetailPage.jsx';
-import TestUI from './testUI.jsx';
 import BookTourPage from './BookTourPage.jsx';
 import ProfilePage from './Profile.jsx';
 
@@ -25,9 +24,10 @@ export default function App() {
         {/* <Route path='/tourpage/:townID/:tourName' element={<TourDetailPage />} /> */}
         <Route path='/tourpagedetail/' element={<TourDetailPage />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/testUI' element={<TestUI />} />
         <Route path='/bookinghistory' element={<BookTourPage />} />
-        <Route path='/profile' element={<ProfilePage />} />
+        <Route path = '/tourpagedetail/' element={<TourDetailPage />} />
+        <Route path = '/register' element={<Register />} />
+        <Route path = '/bookinghistory' element={<BookTourPage />} />
       </Routes>
     </Router>
   );
