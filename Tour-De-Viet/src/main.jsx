@@ -1,6 +1,8 @@
 import './index.css'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+
+import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Header from './Header.jsx'
@@ -14,6 +16,7 @@ import TourDetailPage from './TourDetailPage.jsx';
 import TestUI from './testUI.jsx';
 import BookTourPage from './BookTourPage.jsx';
 import ProfilePage from './Profile.jsx';
+
 
 
 export default function App() {
@@ -35,11 +38,15 @@ export default function App() {
     </Router>
   );
 }
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+// ReactDOM.createRoot(document.getElementById('root')).render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>,
+// );
+
+const root = createRoot(document.getElementById('root'),);
+root.render(<App></App>);
+
 
 
 document.addEventListener('mousemove', parallax);

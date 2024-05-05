@@ -8,27 +8,20 @@ class BookingService{
       this.cardID   = cardID;
   }
 
-  async fetchBookings(userName) {
-    try {
-      const response = await fetch(`${this.baseUrl}/api/bookings/info`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      if (!response.ok) {
-        throw new Error('Failed to fetch bookings');
+  async fetchBookings() {
+    try{
+      const response = await fetch(`${this.baseUrl}/api/bookings/info`);
+      if(response.status === 200){
+        return response.json();
       }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching bookings:', error);
-      if (error.message === 'Token not found'){
-        window.location.href('/login');
+      else{
+        throw new Error(response.status);
       }
-      throw error; 
+    }catch(error){
+      throw error;
     }
+    
   }
-  
   async createBooking(newData) {
     try {
       const response = await fetch(`${this.baseUrl}/api/bookings`, {

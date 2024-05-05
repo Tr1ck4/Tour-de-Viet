@@ -1,34 +1,32 @@
+import React, { useEffect, useState } from 'react';
+import BookingService from '../../Tour-De-Viet/server/BookingService'
 import background from './images/background.png'
 import corner from './images/corner.png'
 import table_bg from './images/bg.png'
-import { useEffect } from 'react'
-import {useState} from 'react'
 import './BookTourPage.css'
-import BookingService from '../server/BookingService'
-import AccountService from '../server/AccountService'
-function BookTourPage() {
-    const [bookings, setBookings] = useState([]);
-    const [ongoingBookings, setOngoingBookings] = useState([]);
-    const [historyBookings, setHistoryBookings] = useState([]);
+
+export default function History() {
+    const [allBooks, setBooks] = useState([]);
+    const [onBook, setOn] = useState([]);
+    const [closeBook, setClose] = useState([]);
     const [showOngoing, setShowOngoing] = useState(true);
 
     useEffect(() => {
-        const bookingService = new BookingService();
-        const userName = 'exampleUser'; // or fetch it dynamically
-        const allBookingsPromise = bookingService.fetchBookings(userName);
-    
-        allBookingsPromise.then(allBookings => {
-            console.log('Fetched bookings:', allBookings); // Add this line to verify the fetched bookings
-            setBookings(allBookings);
-            const currentDate = Date.parse(new Date());
-            const ongoing = allBookings.filter(booking => Date.parse(booking.endDate) > currentDate);
-            const history = allBookings.filter(booking => Date.parse(booking.endDate) < currentDate);
-
-            setOngoingBookings(ongoing);
-            setHistoryBookings(history);
-        }).catch(error => {
-            console.error('Error fetching bookings:', error);
-        });
+        const fetchData = async () => {
+            try {
+                const service = new BookingService();
+                const response = await service.fetchBookings();
+                setBooks(response);   
+                const currentDate = Date.parse(new Date());
+                const ongoing = response.filter(booking => Date.parse(booking.endDate) > currentDate);
+                const history = response.filter(booking => Date.parse(booking.endDate) < currentDate);
+                setOn(ongoing);
+                setClose(history);           
+            } catch (error) {
+                console.error('Error fetching bookings:', error);
+            }
+        }
+        fetchData();
     }, []);
 
     return (
@@ -50,7 +48,7 @@ function BookTourPage() {
                                 <p>Total payment</p>
                             </li>
 
-                            {ongoingBookings.map((booking) => {
+                            {onBook.map((booking) => {
                                     return (
                                         <li className='w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-light-green-2 inset-0 mx-auto mt-7 font-Itim text-black  content-center pl-10 '>
                                             <p>{booking.tourName}</p>
@@ -69,7 +67,7 @@ function BookTourPage() {
                                 <p >End Date</p>
                                 <p>Total payment</p>
                             </li>
-                            {historyBookings.map((booking) => {
+                            {closeBook.map((booking) => {
                                 return (
                                     <li className='w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-light-green-2 inset-0 mx-auto mt-7 font-Itim text-black  content-center pl-10 '>
                                         <p>{booking.tourName}</p>
@@ -88,4 +86,3 @@ function BookTourPage() {
 
     )
 }
-export default BookTourPage
