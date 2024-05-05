@@ -1,8 +1,7 @@
 import './index.css'
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { gsap } from 'gsap';
 
 import Header from './Header.jsx'
 import ParallaxPage from './Parallax.jsx'
@@ -36,12 +35,10 @@ export default function App() {
     </Router>
   );
 }
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+
+const root = createRoot(document.getElementById('root'),);
+root.render(<App></App>);
+
 
 const parallax_el = document.querySelectorAll(".parallax");
 

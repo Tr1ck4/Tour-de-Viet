@@ -147,7 +147,7 @@ app.get('/para', (req, res) => {
 app.get('/api/bookings/info', authenticateToken, (req, res) => {
     const token = getTokenFromCookie(req);
 
-    const userName = jwt.decode(token).username;
+    const userName = jwt.decode(token).accountname;
 
     userModel.getBookings(userName, (err, rows) => {
         if (err) {

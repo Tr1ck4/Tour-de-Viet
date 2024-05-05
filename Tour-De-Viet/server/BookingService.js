@@ -8,26 +8,33 @@ class BookingService{
       this.cardID   = cardID;
   }
 
-  async fetchBookings(userName) {
+  async fetchBookings() {
     try {
-      const response = await fetch(`${this.baseUrl}/api/bookings/info`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
+        const response = await fetch(`${this.baseUrl}/api/bookings/info`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch bookings');
         }
-      });
-      if (!response.ok) {
-        throw new Error('Failed to fetch bookings');
-      }
-      const data = await response.json();
-      return data;
+
+        // Here, you should first check if the response is valid JSON
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+            // If the response is JSON, parse and return it
+            const data = await response.json();
+            console.log('Data:', data);
+            return data;
+        } else {
+            // If the response is not JSON, throw an error
+            throw new Error('Invalid response format');
+        }
     } catch (error) {
-      console.error('Error fetching bookings:', error);
-      if (error.message === 'Token not found'){
-        window.location.href('/login');
-      }
-      throw error; 
+        console.error('Error fetching bookings:', error);
+        if (error.message === 'Token not found') {
+            window.location.href = '/login';
+        }
+        throw error;
     }
-  }
+}
+
   
   async createBooking(newData) {
     try {
