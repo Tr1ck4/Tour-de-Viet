@@ -1,9 +1,4 @@
 import sqlite3 from 'sqlite3';
-import BookingService from './BookingService.js';
-import ToursService from './TourService.js';
-
-const newTour = new ToursService();
-
 class UserModel {
   constructor(dbFilePath) {
     this.db = new sqlite3.Database(dbFilePath, (err) => {
@@ -44,7 +39,7 @@ class UserModel {
 
 
   getBookings(userName, callback) {
-    let sql = "SELECT * FROM bookings JOIN tours ON (bookings.tourName = tours.tourName) WHERE userName = ?";
+    let sql = "SELECT userName, bookings.tourName, bookings.transportationID, cardID, townID, startDate, endDate, price FROM bookings JOIN tours ON (bookings.tourName = tours.tourName) JOIN tour_date ON (tours.tourName = tour_date.tourName) WHERE userName = ?";
     this.db.all(sql, [userName], callback);
   }
 
