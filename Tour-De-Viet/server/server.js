@@ -49,7 +49,22 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'dist')));
 
-
+app.post('/api/chat', async (req, res) => {
+    const { message } = req.body;
+  
+    try {
+        const chatCompletion = await openai.chat.completions.create({
+            messages: [{ role: 'user', content: message }],
+            model: 'gemma:2b',
+            
+        })
+        const aiMessages = chatCompletion.choices.map(choice => choice.message.content);
+        res.json({ messages: aiMessages });
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'An error occurred while processing the request.' });
+    }
+});
 
 function generateToken(user) {
     return jwt.sign(user, secretKey, { expiresIn: '1h' });
