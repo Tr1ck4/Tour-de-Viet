@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import './LoginPopUp.css';
 import AccountService from '../../server/AccountService';
 
@@ -8,15 +8,15 @@ const LoginPopUp = () => {
     const [password, setPassword] = useState('');
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const  newAccount = new AccountService();
-        try{
+        const newAccount = new AccountService();
+        try {
             const res = await newAccount.login(username, password);
             window.location.reload();
         }
-        catch(err){
+        catch (err) {
             alert('Login failed', err.message);
         }
-        
+
     };
     return (
         <div className=' fixed inset-0 bg-opacity-25 backdrop-blur-sm flex justify-center items-center ' style={{ zIndex: 9999 }}>

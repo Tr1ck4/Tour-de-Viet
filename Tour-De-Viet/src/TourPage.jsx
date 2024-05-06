@@ -10,14 +10,36 @@ const MAX = 20000000;
 
 export default function TourPage() {
     const { current_id } = useParams();
-    const [values, setValue] = useState([MIN, MAX]);
     const [tourList, SetTourList] = useState([]);
+    const [values, setValue] = useState([MIN, MAX]); //price
+    const [selectedTransportationValues, setSelectedTransportationValues] = useState([]); // transportation
+    const [selectedValues, setSelectedValues] = useState([]); // category
+    const [filterTour, setFilterTour] = useState([]);
+
+    const filterObjects = (tourList, selectedValues, selectedTransportationValues, values) => {
+        return tourList.filter(tour => {
+            // Check if the object meets all filter criteria
+            // const meetsSelectedValues = selectedValues.length === 0 || (selectedValues.length === 1 && selectedValues[0] === "All") ||
+            //     (selectedValues.length > 1 && selectedValues[0] === "All" && selectedValues.slice(1).includes(tour.avg_rating));
+
+            const meetsTransportationValues = selectedTransportationValues.length === 0 ||
+                (selectedTransportationValues.length === 1 && selectedTransportationValues[0] === "All") ||
+                (selectedTransportationValues.includes(tour.transport));
+
+            const meetsPriceValue = values === null || (tour.price <= values[1] && tour.price >= values[0]);
+
+            return meetsTransportationValues && meetsPriceValue;
+        });
+    };
+
     useEffect(() => {
         const fetchAllTour = async () => {
             try {
                 const response = await axios.get(`http://localhost:3000/api/tours/${current_id}`);
                 SetTourList(response.data);
-                console.log(response.data)
+                const tmpFilterTour = filterObjects(response.data, selectedValues, selectedTransportationValues, values);
+                setFilterTour(tmpFilterTour);
+
             } catch (error) {
                 console.error("Error fetching tours", error);
             }
@@ -27,7 +49,6 @@ export default function TourPage() {
 
     }, []);
 
-    let selectedValues = [];
 
     function handleCheckboxSelection(event) {
         const labelText = event.target.parentNode.textContent.trim();
@@ -36,13 +57,25 @@ export default function TourPage() {
             document.getElementById('all').checked = false;
         }
         const value = event.target.value;
+
+        // Create a copy of selectedValues
+        let updatedSelectedValues = [...selectedValues];
+
         if (event.target.checked) {
-            selectedValues.push(value);
+            updatedSelectedValues.push(value);
         } else {
-            selectedValues = selectedValues.filter(item => item !== value);
+            updatedSelectedValues = updatedSelectedValues.filter(item => item !== value);
         }
-        console.log(selectedValues);
+        console.log(updatedSelectedValues);
+
+        // Update selectedValues using the setter function
+        setSelectedValues(updatedSelectedValues);
+
+        // Filter the tour list based on updated selectedValues and selectedTransportationValues
+        const tmpFilterTour = filterObjects(tourList, updatedSelectedValues, selectedTransportationValues, values);
+        setFilterTour(tmpFilterTour);
     }
+
 
     function handleAllSelection(event) {
         const value = event.target.value;
@@ -53,14 +86,19 @@ export default function TourPage() {
                     checkbox.checked = false;
                 }
             });
-            selectedValues = [value];
+            // Update selectedValues using the setter function
+            setSelectedValues([value]);
         } else {
-            selectedValues = [];
+            // Update selectedValues using the setter function
+            setSelectedValues([]);
         }
-        console.log(selectedValues);
+        // Filter the tour list based on updated selectedValues and selectedTransportationValues
+        const tmpFilterTour = filterObjects(tourList, selectedValues, selectedTransportationValues, values);
+        setFilterTour(tmpFilterTour);
     }
 
-    let selectedTransportationValues = [];
+
+
 
     function handleAllTransportationSelection(event) {
         const value = event.target.value;
@@ -71,12 +109,18 @@ export default function TourPage() {
                     checkbox.checked = false;
                 }
             });
-            selectedTransportationValues = [value];
+            // Update selectedTransportationValues using the setter function
+            setSelectedTransportationValues([value]);
         } else {
-            selectedTransportationValues = [];
+            // Update selectedTransportationValues using the setter function
+            setSelectedTransportationValues([]);
         }
-        console.log(selectedTransportationValues);
+
+        // Filter the tour list based on updated selectedTransportationValues
+        const tmpFilterTour = filterObjects(tourList, selectedValues, selectedTransportationValues, values);
+        setFilterTour(tmpFilterTour);
     }
+
 
     function handleTransportationCheckboxSelection(event) {
         const labelText = event.target.parentNode.textContent.trim();
@@ -86,13 +130,30 @@ export default function TourPage() {
             document.getElementById('allTransportation').checked = false;
         }
         const value = event.target.value;
+        let updatedTransportationValues = [...selectedTransportationValues]; // Create a copy of selectedTransportationValues
+
         if (event.target.checked) {
-            selectedTransportationValues.push(value);
+            updatedTransportationValues.push(value);
         } else {
-            selectedTransportationValues = selectedTransportationValues.filter(item => item !== value);
+            updatedTransportationValues = updatedTransportationValues.filter(item => item !== value);
         }
-        console.log(selectedTransportationValues);
+        console.log(updatedTransportationValues);
+
+        // Update selectedTransportationValues using the setter function
+        setSelectedTransportationValues(updatedTransportationValues);
+
+        // Filter the tour list based on updated selectedTransportationValues
+        const tmpFilterTour = filterObjects(tourList, selectedValues, updatedTransportationValues, values);
+        setFilterTour(tmpFilterTour);
     }
+
+    const handleSlider = (newValue) => {
+        // newValue is an array containing the new range values selected by the slider
+        setValue(newValue); // Assuming setValue is the function to update the slider values
+        const tmpFilterTour = filterObjects(tourList, selectedValues, selectedValues, values);
+        setFilterTour(tmpFilterTour);
+    };
+
 
     return (
         <>
@@ -105,7 +166,7 @@ export default function TourPage() {
                             <div className={"value font-itim text-xl justify-s"}>${values[0]} - ${values[1]}</div>
                             <div className='flex items-center justify-center pb-4'>
                                 <Slider className='slider'
-                                    value={values} min={MIN} max={MAX} onChange={setValue} />
+                                    value={values} min={MIN} max={MAX} onChange={handleSlider} />
                             </div>
                         </div>
                     </div>
@@ -114,32 +175,32 @@ export default function TourPage() {
                             <h2 className='font-semibold text-xl ml-6 pt-2 pb-2' >Category</h2>
                             <div>
                                 <label className='sidebar-label'>
-                                    <input type='checkbox' id='all' name='test' onChange={handleAllSelection} style={{ display: 'none' }} defaultChecked /> <span className='circle'></span> All
+                                    <input type='checkbox' id='all' name='test' onChange={handleAllSelection} style={{ display: 'none' }} value='All' defaultChecked /> <span className='circle'></span> All
                                 </label>
                             </div>
                             <div>
                                 <label className='sidebar-label'>
-                                    <input type='checkbox' name='test' onChange={handleCheckboxSelection} style={{ display: 'none' }} /> <span className='circle'></span> Tourism location
+                                    <input type='checkbox' name='test' onChange={handleCheckboxSelection} style={{ display: 'none' }} value='Tourism location' /> <span className='circle'></span> Tourism location
                                 </label>
                             </div>
                             <div>
                                 <label className='sidebar-label'>
-                                    <input type='checkbox' name='test' onChange={handleCheckboxSelection} style={{ display: 'none' }} /> <span className='circle'></span> Entertainment location
+                                    <input type='checkbox' name='test' onChange={handleCheckboxSelection} style={{ display: 'none' }} value='Entertainment location' /> <span className='circle'></span> Entertainment location
                                 </label>
                             </div>
                             <div>
                                 <label className='sidebar-label'>
-                                    <input type='checkbox' name='test' onChange={handleCheckboxSelection} style={{ display: 'none' }} /> <span className='circle'></span> Spa
+                                    <input type='checkbox' name='test' onChange={handleCheckboxSelection} style={{ display: 'none' }} value='Spa' /> <span className='circle'></span> Spa
                                 </label>
                             </div>
                             <div>
                                 <label className='sidebar-label'>
-                                    <input type='checkbox' name='test' onChange={handleCheckboxSelection} style={{ display: 'none' }} /> <span className='circle'></span> Sporting activity
+                                    <input type='checkbox' name='test' onChange={handleCheckboxSelection} style={{ display: 'none' }} value='Sporting activity' /> <span className='circle'></span> Sporting activity
                                 </label>
                             </div>
                             <div>
                                 <label className='sidebar-label'>
-                                    <input type='checkbox' name='test' onChange={handleCheckboxSelection} style={{ display: 'none' }} /> <span className='circle'></span> Culinary
+                                    <input type='checkbox' name='test' onChange={handleCheckboxSelection} style={{ display: 'none' }} value='Culinary' /> <span className='circle'></span> Culinary
                                 </label>
                             </div>
                         </div>
@@ -149,32 +210,32 @@ export default function TourPage() {
                             <h2 className='font-semibold text-xl ml-6 pt-2 pb-2' >Transportation</h2>
                             <div>
                                 <label className='sidebar-label'>
-                                    <input type='checkbox' id='allTransportation' name='testTransportation' onChange={handleAllTransportationSelection} style={{ display: 'none' }} defaultChecked /> <span className='circle'></span> All
+                                    <input type='checkbox' id='allTransportation' name='testTransportation' onChange={handleAllTransportationSelection} style={{ display: 'none' }} value='All' defaultChecked /> <span className='circle'></span> All
                                 </label>
                             </div>
                             <div>
                                 <label className='sidebar-label'>
-                                    <input type='checkbox' name='testTransportation' onChange={handleTransportationCheckboxSelection} style={{ display: 'none' }} /> <span className='circle'></span> Train
+                                    <input type='checkbox' name='testTransportation' onChange={handleTransportationCheckboxSelection} style={{ display: 'none' }} value='Train' /> <span className='circle'></span> Train
                                 </label>
                             </div>
                             <div>
                                 <label className='sidebar-label'>
-                                    <input type='checkbox' name='testTransportation' onChange={handleTransportationCheckboxSelection} style={{ display: 'none' }} /> <span className='circle'></span> Airline
+                                    <input type='checkbox' name='testTransportation' onChange={handleTransportationCheckboxSelection} style={{ display: 'none' }} value='Plane' /> <span className='circle'></span> Airline
                                 </label>
                             </div>
                             <div>
                                 <label className='sidebar-label'>
-                                    <input type='checkbox' name='testTransportation' onChange={handleTransportationCheckboxSelection} style={{ display: 'none' }} /> <span className='circle'></span> Guest bus
+                                    <input type='checkbox' name='testTransportation' onChange={handleTransportationCheckboxSelection} style={{ display: 'none' }} value='Bus' /> <span className='circle'></span> Guest bus
                                 </label>
                             </div>
                             <div>
                                 <label className='sidebar-label'>
-                                    <input type='checkbox' name='testTransportation' onChange={handleTransportationCheckboxSelection} style={{ display: 'none' }} /> <span className='circle'></span> Boat
+                                    <input type='checkbox' name='testTransportation' onChange={handleTransportationCheckboxSelection} style={{ display: 'none' }} value='Boat' /> <span className='circle'></span> Boat
                                 </label>
                             </div>
                             <div>
                                 <label className='sidebar-label'>
-                                    <input type='checkbox' name='testTransportation' onChange={handleTransportationCheckboxSelection} style={{ display: 'none' }} /> <span className='circle'></span> None
+                                    <input type='checkbox' name='testTransportation' onChange={handleTransportationCheckboxSelection} style={{ display: 'none' }} value='None' /> <span className='circle'></span> None
                                 </label>
                             </div>
 
@@ -182,7 +243,7 @@ export default function TourPage() {
                     </div>
                 </div>
                 <div className='w-2/3 mt-28 ml-10 justify overflow-y-auto ' style={{ '-ms-overflow-style': 'none', 'scrollbar-width': 'none' }}>
-                    {tourList.map((tourData, index) => (
+                    {filterTour.map((tourData, index) => (
                         <Link to={`/tourpage/${tourData.townID}/${tourData.tourName}`} key={index} className=''>
                             <div key={index} className='bg-light-green w-3/4 h-64 mt-6 rounded-[20px] flex'>
                                 <div className='w-2/5 bg-slate-700 h-full rounded-[20px]'></div>

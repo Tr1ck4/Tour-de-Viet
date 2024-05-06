@@ -11,22 +11,22 @@ class AccountService {
         this.tel = tel;
         this.email = email;
     }
-    async logout(){
+    async logout() {
         try {
-            const response = await fetch(`${this.baseUrl}/api/logout`,{
+            const response = await fetch(`${this.baseUrl}/api/logout`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-            if (!response.ok){
+            if (!response.ok) {
                 throw new Error('Cannot logout');
             }
             return response;
-        }catch (error){
+        } catch (error) {
             console.error('Logout error:', error.message);
         }
-        
+
     }
     async login(username, password) {
         try {
@@ -48,14 +48,16 @@ class AccountService {
         }
     }
     async fetchAccount() {
-        return fetch(`${this.baseUrl}/api/accounts/info`)
-            .then(response => response.status)
-            .catch(error => {
-                console.error('Error fetching accounts:', error);
-            if (!response.ok) {
-                throw new Error('Failed to login');
+        const response = await fetch(`${this.baseUrl}/api/accounts/info}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
             }
         });
+        if (!response.ok) {
+            throw new Error('Failed to get user');
+        }
+        return response.json();
     } catch(error) {
         console.error('Error getting user:', error);
         if (error.message === 'Token not found') {
@@ -84,20 +86,18 @@ class AccountService {
     }
 
     async updateAccount(newData) {
-        let token = localStorage.getItem('token');
-        return fetch(`${this.baseUrl}/api/accounts/${newData.susername}`, {
+        return fetch(`${this.baseUrl}/api/accounts/info`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ 
-                "username": newData.username, 
-                "password": newData.password, 
-                "citizenID": newData.citizenID, 
-                "name": newData.name, 
-                "address": newData.address, 
-                "age": newData.age, 
-                "tel": newData.tel, 
+            body: JSON.stringify({
+                "password": newData.password,
+                "citizenID": newData.citizenID,
+                "name": newData.name,
+                "address": newData.address,
+                "age": newData.age,
+                "tel": newData.tel,
                 "email": newData.email,
             })
         })

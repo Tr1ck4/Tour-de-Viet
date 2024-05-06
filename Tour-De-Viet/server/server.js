@@ -5,23 +5,22 @@ import jwt from 'jsonwebtoken';
 import cors from 'cors';
 import { expressjwt } from "express-jwt";
 
-import  nodemailer from 'nodemailer';
-import  cors from 'cors';
+import nodemailer from 'nodemailer';
 import OpenAI from 'openai';
 
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'tbnrfragsprest123@gmail.com',
-    pass: 'vfrsjpltshlnarxd'
-  }
+    service: 'gmail',
+    auth: {
+        user: 'tbnrfragsprest123@gmail.com',
+        pass: 'vfrsjpltshlnarxd'
+    }
 });
 
 var mailOptions = {
-  from: 'tbnrfragsprest123@gmail.com',
-  to: 'triet0612@gmail.com',
-  subject: 'Sending Email using Node.js',
-  text: 'This is not a spam'
+    from: 'tbnrfragsprest123@gmail.com',
+    to: 'triet0612@gmail.com',
+    subject: 'Sending Email using Node.js',
+    text: 'This is not a spam'
 };
 
 // transporter.sendMail(mailOptions, function(error, info){
@@ -34,8 +33,8 @@ var mailOptions = {
 
 
 const openai = new OpenAI({
-  baseURL: 'http://localhost:11434/v1',
-  apiKey: 'ollama',
+    baseURL: 'http://localhost:11434/v1',
+    apiKey: 'ollama',
 });
 
 const userModel = new UserModel('./database.db');
@@ -58,22 +57,22 @@ app.use(cors({
 
 app.post('/api/chat', async (req, res) => {
     const { message } = req.body;
-  
+
     try {
         const chatCompletion = await openai.chat.completions.create({
             messages: [{ role: 'user', content: message }],
             model: 'gemma:2b',
-            
+
         })
         const aiMessages = chatCompletion.choices.map(choice => choice.message.content);
         res.json({ messages: aiMessages });
     } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ error: 'An error occurred while processing the request.' });
+        console.error('Error:', error);
+        res.status(500).json({ error: 'An error occurred while processing the request.' });
     }
 });
-  
-  
+
+
 
 function generateToken(user) {
     return jwt.sign(user, secretKey, { expiresIn: '1h' });
@@ -104,29 +103,46 @@ function getTokenFromCookie(req) {
 
     const cookies = cookieHeader.split(';').map(cookie => cookie.trim());
 
+    const jwtCookie = cookies.find(cookie => cookie.startsWith('token='));
+
+    if (!jwtCookie) {
+        return null;
+    }
+
+    return jwtCookie.split('=')[1];
+}
+app.get('/api/authenticate', authenticateToken, (req, res) => {
+    const token = getTokenFromCookie(req);
+
+    const userName = jwt.decode(token).username;
+
+
+    res.json(userName);
+});
+
+app.post('/api/logout', (req, res) => {
+    // Clear the 'token' cookie by setting its expiration to a past date
+    res.setHeader('Set-cookie', `token=deleted; Max-Age=3600; HttpOnly`);
+
+    // Send a response indicating success
+    res.json({ message: 'Logout successful' });
+});
+
+app.post('/api/login', async (req, res) => {
+    const { username, password } = req.body;
+    const user = await userModel.getUser(username, password)
+        .then(res => {
+            return res;
+        })
     if (!user) {
         return res.status(401).json({ message: 'Invalid username or password' });
     }
 
-    const token = generateToken({ username: user.username });
-    res.json({ token });
-};
+    const token = generateToken({ username: user.name, accountname: username });
+    res.setHeader('Set-cookie', `token=${token}; Max-Age=3600; HttpOnly`);
+    res.json({ message: 'Logout successful' });
+});
 
-
-app.post('/chat', async (req, res)=> {   
-    try {
-      const resp = await openai.completions.create({
-        model: "gpt-3.5-turbo",
-          messages: [
-            { role: "user", content: req.body.question}
-          ]  
-      })           
-          
-      res.status(200).json({message: resp.data.choices[0].message.content})
-    } catch(e) {
-        res.status(400).json({message: e.message})
-    }
-  })
 app.get('/api/protected', authenticateToken, (req, res) => {
     res.json({ message: 'You are authorized', user: req.user });
 });
@@ -138,7 +154,7 @@ app.get('/para', (req, res) => {
 app.get('/api/bookings/info', authenticateToken, (req, res) => {
     const token = getTokenFromCookie(req);
 
-    const userName = jwt.decode(token).username;
+    const userName = jwt.decode(token).accountname;
 
     userModel.getBookings(userName, (err, rows) => {
         if (err) {
@@ -432,5 +448,5 @@ app.get("*", (req, res) => {
 
 
 app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });

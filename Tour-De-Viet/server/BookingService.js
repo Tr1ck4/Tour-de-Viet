@@ -8,37 +8,22 @@ class BookingService{
       this.cardID   = cardID;
   }
 
-  async fetchBookings(userName) {
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        throw new Error('Token not found');
+  async fetchBookings() {
+    try{
+      const response = await fetch(`${this.baseUrl}/api/bookings/info`);
+      if(response.status === 200){
+        return response.json();
       }
-      const response = await fetch(`${this.baseUrl}/api/bookings/${userName}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      if (!response.ok) {
-        throw new Error('Failed to fetch bookings');
+      else{
+        throw new Error(response.status);
       }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching bookings:', error);
-      if (error.message === 'Token not found'){
-        window.location.href('/login');
-      }
-      throw error; 
+    }catch(error){
+      throw error;
     }
+    
   }
-  
   async createBooking(newData) {
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        throw new Error('Token not found');
-      }
       const response = await fetch(`${this.baseUrl}/api/bookings`, {
           method: 'POST',
           headers: {

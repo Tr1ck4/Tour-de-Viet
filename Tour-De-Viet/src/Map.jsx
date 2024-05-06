@@ -2,22 +2,22 @@ import React from 'react';
 import './Home.css'
 import { useState, useRef } from 'react';
 import { updateID } from './data'
-import { useNavigate    } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export default function VNMap(){
+export default function VNMap() {
   const [scale, setScale] = useState(1);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [startY, setStartY] = useState(0);
   const [translateX, setTranslateX] = useState(0);
   const [translateY, setTranslateY] = useState(0);
-  const navigate  = useNavigate();
-  
+  const navigate = useNavigate();
+
   function handleClick(event) {
     const clickedID = event.target.getAttribute('id');
-    if(clickedID) {
+    if (clickedID) {
       updateID(clickedID);
-      window.location = `/tour/${clickedID}`;
+      window.location = `/tourpage/${clickedID}`;
     }
   }
 
@@ -187,7 +187,7 @@ export default function VNMap(){
           </path>
         </svg>
       </div>
-      <button className = "size-24 bg-bone-white absolute my-24 mx-8 backdrop-blur text-black bg-opacity-40" onClick={nav}> View landscape</button>
+      <button className="size-24 bg-bone-white absolute my-24 mx-8 backdrop-blur text-black bg-opacity-40" onClick={nav}> View landscape</button>
     </>
   );
 }
