@@ -11,6 +11,7 @@ import Register from './Register.jsx';
 import TourDetailPage from './TourDetailPage.jsx';
 import BookTourPage from './BookTourPage.jsx';
 import ProfilePage from './Profile.jsx';
+import Bot from './Bot.jsx';
 
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
         <Route path='/homepage' element={<HomePage />} />
         <Route path='/parallax' element={<ParallaxPage />} />
         <Route path='/tourpage/:current_id' element={<TourPage />} />
-        {/* <Route path='/tourpage/:townID/:tourName' element={<TourDetailPage />} /> */}
+        <Route path='/tourpage/:townID/:tourName' element={<TourDetailPage />} />
         <Route path='/tourpagedetail/' element={<TourDetailPage />} />
         <Route path='/register' element={<Register />} />
         <Route path='/bookinghistory' element={<BookTourPage />} />

@@ -204,7 +204,6 @@ app.get('/api/comments', (req, res) => {
 });
 app.get('/api/comments/:townID/:tourName', (req, res) => {
     const { townID, tourName } = req.params;
-
     userModel.getComments(townID, tourName, (err, row) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -248,7 +247,7 @@ app.put('/api/comments/:townID/:tourName', (req, res) => {
 app.post('/api/accounts', (req, res) => {
     const { username, password, citizenID, name, address, age, tel, email } = req.body;
 
-    userModel.createAccount(username, password, citizenID, name, address, age, tel, email, (err, result) => {
+    userModel.createAccount(username, password, citizenID, name, address, age, tel, email, (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -256,7 +255,6 @@ app.post('/api/accounts', (req, res) => {
         res.json({
             message: 'account created',
             data: req.body,
-            result,
         });
     });
 });

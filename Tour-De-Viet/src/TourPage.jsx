@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import bg from './assets/Background/TourPage_bg.png';
 import Slider from 'react-slider'
 import './TourPage.css'
-import axios from 'axios';
 import { Link, useParams } from 'react-router-dom'
+import ToursService from '../server/TourService';
 
 const MIN = 500000;
 const MAX = 20000000;
@@ -35,9 +35,10 @@ export default function TourPage() {
     useEffect(() => {
         const fetchAllTour = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/tours/${current_id}`);
-                SetTourList(response.data);
-                const tmpFilterTour = filterObjects(response.data, selectedValues, selectedTransportationValues, values);
+                const service = new ToursService();
+                const response = await service.fetchAllTour(current_id);
+                SetTourList(response);
+                const tmpFilterTour = filterObjects(response, selectedValues, selectedTransportationValues, values);
                 setFilterTour(tmpFilterTour);
 
             } catch (error) {
