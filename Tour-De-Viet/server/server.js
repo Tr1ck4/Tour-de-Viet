@@ -5,23 +5,22 @@ import jwt from 'jsonwebtoken';
 import cors from 'cors';
 import { expressjwt } from "express-jwt";
 
-import nodemailer from 'nodemailer';
-import cors from 'cors';
+import  nodemailer from 'nodemailer';
 import OpenAI from 'openai';
 
 var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'tbnrfragsprest123@gmail.com',
-        pass: 'vfrsjpltshlnarxd'
-    }
+  service: 'gmail',
+  auth: {
+    user: 'tbnrfragsprest123@gmail.com',
+    pass: 'vfrsjpltshlnarxd'
+  }
 });
 
 var mailOptions = {
-    from: 'tbnrfragsprest123@gmail.com',
-    to: 'triet0612@gmail.com',
-    subject: 'Sending Email using Node.js',
-    text: 'This is not a spam'
+  from: 'tbnrfragsprest123@gmail.com',
+  to: 'triet0612@gmail.com',
+  subject: 'Sending Email using Node.js',
+  text: 'This is not a spam'
 };
 
 // transporter.sendMail(mailOptions, function(error, info){
@@ -34,8 +33,8 @@ var mailOptions = {
 
 
 const openai = new OpenAI({
-    baseURL: 'http://localhost:11434/v1',
-    apiKey: 'ollama',
+  baseURL: 'http://localhost:11434/v1',
+  apiKey: 'ollama',
 });
 
 const userModel = new UserModel('./database.db');
@@ -50,30 +49,22 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use(cors({
-    origin: 'http://localhost:3000', // Adjust this to your frontend URL or use '*' to allow all origins
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'x-stainless-os'], // Add 'x-stainless-os' here
-}));
-
 app.post('/api/chat', async (req, res) => {
     const { message } = req.body;
-
+  
     try {
         const chatCompletion = await openai.chat.completions.create({
             messages: [{ role: 'user', content: message }],
             model: 'gemma:2b',
-
+            
         })
         const aiMessages = chatCompletion.choices.map(choice => choice.message.content);
         res.json({ messages: aiMessages });
     } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'An error occurred while processing the request.' });
+      console.error('Error:', error);
+      res.status(500).json({ error: 'An error occurred while processing the request.' });
     }
 });
-
-
 
 function generateToken(user) {
     return jwt.sign(user, secretKey, { expiresIn: '1h' });
@@ -104,29 +95,46 @@ function getTokenFromCookie(req) {
 
     const cookies = cookieHeader.split(';').map(cookie => cookie.trim());
 
+    const jwtCookie = cookies.find(cookie => cookie.startsWith('token='));
+
+    if (!jwtCookie) {
+        return null;
+    }
+
+    return jwtCookie.split('=')[1];
+}
+
+app.get('/api/authenticate', authenticateToken,(req, res) => {
+    const token = getTokenFromCookie(req);
+
+    const userName = jwt.decode(token).username;
+
+
+    res.json(userName);
+});
+
+app.post('/api/logout', (req, res) => {
+    // Clear the 'token' cookie by setting its expiration to a past date
+    res.setHeader('Set-cookie', `token=deleted; Max-Age=3600; HttpOnly`);
+
+    // Send a response indicating success
+    res.json({ message: 'Logout successful' });
+});
+
+app.post('/api/login', async (req, res) => {
+    const { username, password } = req.body;
+    const user = await userModel.getUser(username, password)
+    .then(res => {
+        return res;
+    })
     if (!user) {
         return res.status(401).json({ message: 'Invalid username or password' });
     }
+    const token = generateToken({"username" : user.name});
+    res.setHeader('Set-cookie', `token=${token}; Max-Age=3600; HttpOnly`);
+    res.send('Cookie set successfully');
+});
 
-    const token = generateToken({ username: user.username });
-    res.json({ token });
-};
-
-
-app.post('/chat', async (req, res) => {
-    try {
-        const resp = await openai.completions.create({
-            model: "gpt-3.5-turbo",
-            messages: [
-                { role: "user", content: req.body.question }
-            ]
-        })
-
-        res.status(200).json({ message: resp.data.choices[0].message.content })
-    } catch (e) {
-        res.status(400).json({ message: e.message })
-    }
-})
 app.get('/api/protected', authenticateToken, (req, res) => {
     res.json({ message: 'You are authorized', user: req.user });
 });
@@ -151,10 +159,7 @@ app.get('/api/bookings/info', authenticateToken, (req, res) => {
 
 
 app.post('/api/bookings', authenticateToken, (req, res) => {
-    const token = getTokenFromCookie(req);
-
-    const userName = jwt.decode(token).username;
-    const { tourName, transportationID, cardID } = req.body;
+    const { userName, tourName, transportationID, cardID } = req.body;
     userModel.createBooking(userName, tourName, transportationID, cardID, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -166,6 +171,20 @@ app.post('/api/bookings', authenticateToken, (req, res) => {
         });
     });
 });
+
+// app.post('/api/bookings', authenticateJWT, (req, res) => {
+//     const { userName, tourName, flightID, cardID } = req.body;
+//     userModel.createBook(userName, tourName, flightID, cardID, (err, res) => {
+//         if (err) {
+//             res.status(500).json({ error: err.message });
+//             return;
+//         }
+//         res.json({
+//             message: 'Booking created',
+//             data: req.body,
+//         });
+//     });
+// });
 
 app.get('/api/comments', (req, res) => {
     userModel.getAllComments((err, row) => {
@@ -235,10 +254,14 @@ app.post('/api/accounts', (req, res) => {
     });
 });
 
+
+
 app.get('/api/accounts/info', authenticateToken, (req, res) => {
     const token = getTokenFromCookie(req);
-    const accountName = jwt.decode(token).accountname;
-    userModel.getAccount(accountName, (err, row) => {
+
+    const userName = jwt.decode(token).username;
+
+    userModel.getAccount(userName, (err, row) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -249,8 +272,8 @@ app.get('/api/accounts/info', authenticateToken, (req, res) => {
 
 app.put('/api/accounts/info', authenticateToken, (req, res) => {
     const token = getTokenFromCookie(req);
-    const accountName = jwt.decode(token).accountname;
-    console.log(accountName);
+
+    const userName = jwt.decode(token).username;
     const { password, citizenID, name, address, age, tel, email } = req.body;
 
     userModel.updateRating(userName, password, citizenID, name, address, age, tel, email, (err) => {
@@ -432,5 +455,5 @@ app.get("*", (req, res) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+        console.log(`Server is running on http://localhost:${PORT}`);
 });
