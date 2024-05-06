@@ -1,6 +1,6 @@
 import './index.css'
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Header from './Header.jsx'
@@ -11,7 +11,7 @@ import Register from './Register.jsx';
 import TourDetailPage from './TourDetailPage.jsx';
 import BookTourPage from './BookTourPage.jsx';
 import ProfilePage from './Profile.jsx';
-import Bot from './Bot.jsx';
+
 
 export default function App() {
   return (
@@ -25,20 +25,18 @@ export default function App() {
         <Route path='/tourpagedetail/' element={<TourDetailPage />} />
         <Route path='/register' element={<Register />} />
         <Route path='/bookinghistory' element={<BookTourPage />} />
-        <Route path = '/tourpagedetail/' element={<TourDetailPage />} />
-        <Route path = '/register' element={<Register />} />
-        <Route path = '/bookinghistory' element={<BookTourPage />} />
+        <Route path='/tourpagedetail/' element={<TourDetailPage />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/bookinghistory' element={<BookTourPage />} />
         <Route path='/profile' element={<ProfilePage />} />
-        <Route path='/bot' element={<Bot/>}/>
+        <Route path='/bot' element={<Bot />} />
       </Routes>
     </Router>
   );
 }
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+
+const root = createRoot(document.getElementById('root'),);
+root.render(<App></App>);
 
 
 document.addEventListener('mousemove', parallax);

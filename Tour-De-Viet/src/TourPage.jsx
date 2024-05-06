@@ -53,7 +53,6 @@ export default function TourPage() {
     function handleCheckboxSelection(event) {
         const labelText = event.target.parentNode.textContent.trim();
         console.log("Selected label:", labelText);
-
         if (labelText !== 'All' && document.getElementById('all').checked) {
             document.getElementById('all').checked = false;
         }
@@ -261,7 +260,6 @@ export default function TourPage() {
                         </Link>
                     ))}
                 </div>
-
             </main>
         </>
     );
