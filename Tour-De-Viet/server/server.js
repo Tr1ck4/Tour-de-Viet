@@ -5,22 +5,22 @@ import jwt from 'jsonwebtoken';
 import cors from 'cors';
 import { expressjwt } from "express-jwt";
 
-import  nodemailer from 'nodemailer';
+import nodemailer from 'nodemailer';
 import OpenAI from 'openai';
 
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'tbnrfragsprest123@gmail.com',
-    pass: 'vfrsjpltshlnarxd'
-  }
+    service: 'gmail',
+    auth: {
+        user: 'tbnrfragsprest123@gmail.com',
+        pass: 'vfrsjpltshlnarxd'
+    }
 });
 
 var mailOptions = {
-  from: 'tbnrfragsprest123@gmail.com',
-  to: 'triet0612@gmail.com',
-  subject: 'Sending Email using Node.js',
-  text: 'This is not a spam'
+    from: 'tbnrfragsprest123@gmail.com',
+    to: 'triet0612@gmail.com',
+    subject: 'Sending Email using Node.js',
+    text: 'This is not a spam'
 };
 
 // transporter.sendMail(mailOptions, function(error, info){
@@ -33,8 +33,8 @@ var mailOptions = {
 
 
 const openai = new OpenAI({
-  baseURL: 'http://localhost:11434/v1',
-  apiKey: 'ollama',
+    baseURL: 'http://localhost:11434/v1',
+    apiKey: 'ollama',
 });
 
 const userModel = new UserModel('./database.db');
@@ -49,22 +49,30 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'dist')));
 
+app.use(cors({
+    origin: 'http://localhost:3000', // Adjust this to your frontend URL or use '*' to allow all origins
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-stainless-os'], // Add 'x-stainless-os' here
+}));
+
 app.post('/api/chat', async (req, res) => {
     const { message } = req.body;
-  
+
     try {
         const chatCompletion = await openai.chat.completions.create({
             messages: [{ role: 'user', content: message }],
             model: 'gemma:2b',
-            
+
         })
         const aiMessages = chatCompletion.choices.map(choice => choice.message.content);
         res.json({ messages: aiMessages });
     } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ error: 'An error occurred while processing the request.' });
+        console.error('Error:', error);
+        res.status(500).json({ error: 'An error occurred while processing the request.' });
     }
 });
+
+
 
 function generateToken(user) {
     return jwt.sign(user, secretKey, { expiresIn: '1h' });
@@ -103,8 +111,7 @@ function getTokenFromCookie(req) {
 
     return jwtCookie.split('=')[1];
 }
-
-app.get('/api/authenticate', authenticateToken,(req, res) => {
+app.get('/api/authenticate', authenticateToken, (req, res) => {
     const token = getTokenFromCookie(req);
 
     const userName = jwt.decode(token).username;
@@ -124,9 +131,9 @@ app.post('/api/logout', (req, res) => {
 app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await userModel.getUser(username, password)
-    .then(res => {
-        return res;
-    })
+        .then(res => {
+            return res;
+        })
     if (!user) {
         return res.status(401).json({ message: 'Invalid username or password' });
     }
@@ -441,5 +448,5 @@ app.get("*", (req, res) => {
 
 
 app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });

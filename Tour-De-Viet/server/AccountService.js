@@ -11,22 +11,22 @@ class AccountService {
         this.tel = tel;
         this.email = email;
     }
-    async logout(){
+    async logout() {
         try {
-            const response = await fetch(`${this.baseUrl}/api/logout`,{
+            const response = await fetch(`${this.baseUrl}/api/logout`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-            if (!response.ok){
+            if (!response.ok) {
                 throw new Error('Cannot logout');
             }
             return response;
-        }catch (error){
+        } catch (error) {
             console.error('Logout error:', error.message);
         }
-        
+
     }
     async login(username, password) {
         try {
