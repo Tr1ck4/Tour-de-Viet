@@ -55,6 +55,7 @@ export default function TourPage() {
 
     }, []);
 
+<<<<<<< Updated upstream
     function handleCheckboxSelection(event) {
         const labelText = event.target.parentNode.textContent.trim();
         console.log("Selected label:", labelText);
@@ -82,27 +83,107 @@ export default function TourPage() {
     }
 
 
+=======
+>>>>>>> Stashed changes
     function handleAllSelection(event) {
         const value = event.target.value;
-        if (event.target.checked) {
+        if (value === 'All' && event.target.checked) {
+            // If "All" checkbox is checked, uncheck all other checkboxes
             const checkboxes = document.querySelectorAll('input[type="checkbox"][name="test"]');
             checkboxes.forEach(checkbox => {
                 if (checkbox !== event.target) {
                     checkbox.checked = false;
                 }
             });
-            // Update selectedValues using the setter function
-            setSelectedValues([value]);
         } else {
-            // Update selectedValues using the setter function
-            setSelectedValues([]);
+            // If any other checkbox is checked, check the "All" checkbox
+            const allCheckbox = document.querySelector('input[type="checkbox"][name="test"][value="All"]');
+            if (allCheckbox) {
+                const checkboxes = document.querySelectorAll('input[type="checkbox"][name="test"]:checked');
+                const allChecked = checkboxes.length === document.querySelectorAll('input[type="checkbox"][name="test"]').length;
+                allCheckbox.checked = allChecked;
+            }
         }
+        
+        // Update selectedValues using the setter function
+        const selectedValues = event.target.checked ? [value] : [];
+        setSelectedValues(selectedValues);
+    
         // Filter the tour list based on updated selectedValues and selectedTransportationValues
         const tmpFilterTour = filterObjects(tourList, selectedValues, selectedTransportationValues, values);
         setFilterTour(tmpFilterTour);
     }
+    
+    function handleCheckboxSelection(event) {
+        const labelText = event.target.parentNode.textContent.trim();
+        console.log("Selected label:", labelText);
+    
+        // Create a copy of selectedValues
+        let updatedSelectedValues = [...selectedValues];
+        const value = event.target.value;
+    
+        if (event.target.checked) {
+            updatedSelectedValues.push(value);
+        } else {
+            updatedSelectedValues = updatedSelectedValues.filter(item => item !== value);
+        }
+        console.log(updatedSelectedValues);
+    
+        // Update selectedValues using the setter function
+        setSelectedValues(updatedSelectedValues);
+    
+        // If any other checkbox is unchecked, uncheck the "All" checkbox
+        if (event.target.value !== 'All') {
+            const allCheckbox = document.getElementById('all');
+            allCheckbox.checked = false;
+        }
+    
+        // Check if all options beside "All" are checked
+        const allOthersChecked = [...document.querySelectorAll('input[type="checkbox"][name="test"]')]
+            .filter(checkbox => checkbox.value !== 'All')
+            .every(checkbox => checkbox.checked);
+    
+        // If all options beside "All" are checked, uncheck all others and check the "All" checkbox
+        if (allOthersChecked) {
+            const allCheckbox = document.getElementById('all');
+            allCheckbox.checked = true;
+    
+            const checkboxes = document.querySelectorAll('input[type="checkbox"][name="test"]');
+            checkboxes.forEach(checkbox => {
+                if (checkbox !== allCheckbox) {
+                    checkbox.checked = false;
+                }
+            });
+        }
+    
+        // Filter the tour list based on updated selectedValues and selectedTransportationValues
+        const tmpFilterTour = filterObjects(tourList, updatedSelectedValues, selectedTransportationValues, values);
+        setFilterTour(tmpFilterTour);
+    }
+    
+    
+    
+    
+    // Check if all checkboxes are unchecked and update "All" accordingly
+    function checkAllUnchecked() {
+        const allCheckbox = document.getElementById('all');
+        const allUnchecked = ![...document.querySelectorAll('input[type="checkbox"][name="test"]')]
+            .some(checkbox => checkbox.checked);
+        allCheckbox.checked = allUnchecked;
 
+        // If all checkboxes are unchecked, check the "All" checkbox
+        if (allUnchecked) {
+            allCheckbox.checked = true;
+        }
+    }
 
+    
+    // Attach event listener to all checkboxes to call checkAllUnchecked function
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][name="test"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', checkAllUnchecked);
+    });
+    
 
 
     function handleAllTransportationSelection(event) {

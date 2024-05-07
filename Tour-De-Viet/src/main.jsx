@@ -11,7 +11,11 @@ import Register from './Register.jsx';
 import TourDetailPage from './TourDetailPage.jsx';
 import BookTourPage from './BookTourPage.jsx';
 import ProfilePage from './Profile.jsx';
+<<<<<<< Updated upstream
 import Bot from './Bot.jsx';
+=======
+import Bot from './Bot.jsx'
+>>>>>>> Stashed changes
 
 
 export default function App() {

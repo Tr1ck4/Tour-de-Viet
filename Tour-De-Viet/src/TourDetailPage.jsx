@@ -82,9 +82,15 @@ const TourDetailPage = () => {
         // </div>
         <>
             <main className='overflow-y-scroll overflow-hidden h-screen w-screen'>
+<<<<<<< Updated upstream
                 {console.log(tourDetails, comments)}
                 <div className='w-screen h-screen ' style={{ backgroundImage: `url(${bg})`, backgroundSize: '100% 100%', height: '175vh' }}>
                     <h1 className='text-dark-green text-5xl font-extrabold mt-36'>{tourDetails.tourName}</h1>
+=======
+            {console.log(tourDetails, comments)}
+                <div className='w-screen h-screen ' style={{ backgroundImage: `url(${bg})`, backgroundSize:'100% 100%', height:'175vh'}}>
+                <h1 className='text-dark-green text-5xl font-extrabold mt-36 ml-96'>{tourDetails.tourName}</h1>
+>>>>>>> Stashed changes
 
                     <div className=' h-auto w-3/5 mx-auto mt-10'>
 
@@ -113,6 +119,7 @@ const TourDetailPage = () => {
                         <div className='w-auto h-[400px] inline-flex gap-1'>
                             <div className='bg-light-green row-span-3 col-span-6 rounded-2xl h-[400px] w-[856px]'></div>
                             <div>
+<<<<<<< Updated upstream
                                 <div className='rateStar bg-bright-yellow rounded-2xl flex flex-col items-center justify-center w-[280px] h-[100px] mb-1 relative'>
                                     <div className="stars mb-4">
                                         <i className='fa-solid fa-star mx-2'></i>
@@ -125,6 +132,36 @@ const TourDetailPage = () => {
                                 </div>
                                 <div className='bg-light-green h-[296px] w-[280px] rounded-2xl'>
 
+=======
+                            <div className='rateStar bg-bright-yellow rounded-2xl flex flex-col items-center justify-center w-[280px] h-[100px] mb-1 relative'>
+                            <div className="stars flex items-center justify-center">
+                                <div className="text-4xl mr-2 font-bold ml-2">1</div>
+                                <i className='fa-solid fa-star mx-2'></i>
+                                <i className='fa-solid fa-star mx-2'></i>
+                                <i className='fa-solid fa-star mx-2'></i>
+                                <i className='fa-solid fa-star mx-2'></i>
+                                <i className='fa-solid fa-star mx-2'></i>
+                            </div>
+                                    {/* <div className="number absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-2 text-2xl">1</div> */}
+                                </div>
+                                <div className='bg-light-green h-[296px] w-[280px] rounded-2xl flex flex-col'>
+                                    <div className='mt-5 mb-3 flex ml-6 border-b-2 h-[45px] w-[230px]'>
+                                        <div className='bg-dark-green h-8 w-10 rounded-xl mr-2 flex flex-col justify-center items-center'>
+                                            <div className='bg-bone-white h-1 w-5 rounded-lg'></div>
+                                            <div className='bg-bone-white h-1 w-5 rounded-lg my-1'></div>
+                                            <div className='bg-bone-white h-1 w-5 rounded-lg'></div>
+                                        </div>
+                                            <div className='font-itim text-3xl'>Comment</div>
+                                    </div>
+                                    <div className='bg-bone-white w-[250px] h-[60px] comment self-center my-1 rounded-lg commentBox'>
+                                        <div className='userName text-dark-green font-semibold ml-2 m'>Loc An</div>
+                                        <div className='info text-dark-green mx-3 overflow-hidden whitespace-nowrap text-overflow-ellipsis'>
+                                            This is a very beautiful place to visit, I am sure to comeback.
+                                        </div>
+                                    </div>
+                                    <div className='bg-bone-white w-[250px] h-[60px] comment self-center my-1 rounded-lg'></div>
+                                    <div className='bg-bone-white w-[250px] h-[60px] comment self-center my-1 rounded-lg'></div>
+>>>>>>> Stashed changes
                                 </div>
                             </div>
                             {/* <div className='rateStar bg-bright-yellow col-span-2 rounded-2xl flex items-center justify-center'>
