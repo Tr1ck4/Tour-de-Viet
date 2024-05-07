@@ -18,9 +18,9 @@ export default function TourPage() {
 
     const filterObjects = (tourList, selectedValues, selectedTransportationValues, values) => {
         return tourList.filter(tour => {
-            // Check if the object meets all filter criteria
-            // const meetsSelectedValues = selectedValues.length === 0 || (selectedValues.length === 1 && selectedValues[0] === "All") ||
-            //     (selectedValues.length > 1 && selectedValues[0] === "All" && selectedValues.slice(1).includes(tour.avg_rating));
+            const meetsSelectedValues = selectedValues.length === 0 ||
+                (selectedValues.length === 1 && selectedValues[0] === "All") ||
+                (selectedValues.includes(tour.description.Type));
 
             const meetsTransportationValues = selectedTransportationValues.length === 0 ||
                 (selectedTransportationValues.length === 1 && selectedTransportationValues[0] === "All") ||
@@ -28,7 +28,7 @@ export default function TourPage() {
 
             const meetsPriceValue = values === null || (tour.price <= values[1] && tour.price >= values[0]);
 
-            return meetsTransportationValues && meetsPriceValue;
+            return meetsSelectedValues && meetsTransportationValues && meetsPriceValue;
         });
     };
 
@@ -37,9 +37,14 @@ export default function TourPage() {
             try {
                 const service = new ToursService();
                 const response = await service.fetchAllTour(current_id);
-                SetTourList(response);
-                const tmpFilterTour = filterObjects(response, selectedValues, selectedTransportationValues, values);
+                const parsedResponse = response.map(item => {
+                    const parsedDescription = JSON.parse(item.description);
+                    return { ...item, description: parsedDescription };
+                });
+                SetTourList(parsedResponse);
+                const tmpFilterTour = filterObjects(parsedResponse, selectedValues, selectedTransportationValues, values);
                 setFilterTour(tmpFilterTour);
+
 
             } catch (error) {
                 console.error("Error fetching tours", error);
@@ -49,7 +54,6 @@ export default function TourPage() {
         fetchAllTour();
 
     }, []);
-
 
     function handleCheckboxSelection(event) {
         const labelText = event.target.parentNode.textContent.trim();
@@ -250,7 +254,8 @@ export default function TourPage() {
                                 <div className='w-2/5 bg-slate-700 h-full rounded-[20px]'></div>
                                 <div className='w-3/5 h-full'>
                                     <div className='text-4xl font-itim font-semibold mt-6 ml-6 h-auto'>{tourData.tourName}</div>
-                                    <div className='text-2xl font-itim mt-12 ml-6 h-auto'>{tourData.totalTime}</div>
+                                    <div className='text-2xl font-itim mt-3 ml-6 h-auto'>{tourData.description.Type}</div>
+                                    <div className='text-2xl font-itim mt-3 ml-6 h-auto'>{tourData.totalTime}</div>
                                     <div className='text-2xl font-itim mt-3 ml-6 h-auto'>{tourData.transport}</div>
                                     <div className='text-2xl font-itim mt-3 ml-6 h-auto grid-cols-2 gap-4 flex justify-between'>
                                         <div>{tourData.avg_rating !== null ? tourData.avg_rating : "N/A"}</div>

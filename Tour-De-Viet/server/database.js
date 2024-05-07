@@ -117,6 +117,7 @@ class UserModel {
   getAllTour(townID, callback) {
     let sql = `SELECT 
     t.tourName,
+    t.description,
     CAST(julianday(td.endDate) - julianday(td.startDate) + 1 AS INTEGER) || ' day(s)' AS totalTime,
     tr.Name AS transport,
     t.price,
