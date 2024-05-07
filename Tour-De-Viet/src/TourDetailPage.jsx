@@ -14,8 +14,8 @@ const TourDetailPage = () => {
     useEffect(() => {
         const fetchTourDetails = async () => {
             try {
-                const service = new ToursService();
-                const response = await service.fetchTour(townID, tourName);
+                // const service = new ToursService();
+                // const response = await service.fetchTour(townID, tourName);
                 setTourDetails(response);
             } catch (error) {
                 console.error("Error fetching tour details", error);
@@ -28,8 +28,8 @@ const TourDetailPage = () => {
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                const Cservice = new CommentService();
-                const response = await Cservice.fetchComments(townID, tourName);
+                // const Cservice = new CommentService();
+                // const response = await Cservice.fetchComments(townID, tourName);
                 setComments(response);
             } catch (error) {
                 console.error("Error fetching comments", error);

@@ -131,29 +131,27 @@ export default function TourPage() {
         setFilterTour(tmpFilterTour);
     }
     
-    
-    
-    
     // Check if all checkboxes are unchecked and update "All" accordingly
     function checkAllUnchecked() {
-        const allCheckbox = document.getElementById('all');
-        const allUnchecked = ![...document.querySelectorAll('input[type="checkbox"][name="test"]')]
-            .some(checkbox => checkbox.checked);
-        allCheckbox.checked = allUnchecked;
+    const allCheckbox = document.getElementById('all');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][name="test"]:not([value="All"])');
+    const allUnchecked = ![...checkboxes].some(checkbox => checkbox.checked);
+    allCheckbox.checked = allUnchecked;
 
-        // If all checkboxes are unchecked, check the "All" checkbox
-        if (allUnchecked) {
-            allCheckbox.checked = true;
-        }
+    // If all checkboxes are unchecked, check the "All" checkbox
+    if (allUnchecked) {
+        allCheckbox.checked = true;
     }
-
-    
+}
     // Attach event listener to all checkboxes to call checkAllUnchecked function
     const checkboxes = document.querySelectorAll('input[type="checkbox"][name="test"]');
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', checkAllUnchecked);
     });
     
+
+
+
 
 
     function handleAllTransportationSelection(event) {
@@ -165,18 +163,14 @@ export default function TourPage() {
                     checkbox.checked = false;
                 }
             });
-            // Update selectedTransportationValues using the setter function
             setSelectedTransportationValues([value]);
         } else {
-            // Update selectedTransportationValues using the setter function
             setSelectedTransportationValues([]);
         }
 
-        // Filter the tour list based on updated selectedTransportationValues
         const tmpFilterTour = filterObjects(tourList, selectedValues, selectedTransportationValues, values);
         setFilterTour(tmpFilterTour);
     }
-
 
     function handleTransportationCheckboxSelection(event) {
         const labelText = event.target.parentNode.textContent.trim();
@@ -185,23 +179,49 @@ export default function TourPage() {
         if (labelText !== 'All' && document.getElementById('allTransportation').checked) {
             document.getElementById('allTransportation').checked = false;
         }
+
         const value = event.target.value;
-        let updatedTransportationValues = [...selectedTransportationValues]; // Create a copy of selectedTransportationValues
+        let updatedTransportationValues = [...selectedTransportationValues];
 
         if (event.target.checked) {
             updatedTransportationValues.push(value);
         } else {
             updatedTransportationValues = updatedTransportationValues.filter(item => item !== value);
         }
-        console.log(updatedTransportationValues);
 
-        // Update selectedTransportationValues using the setter function
+        const allCheckboxes = document.querySelectorAll('input[type="checkbox"][name="testTransportation"]:not(#allTransportation)');
+        const allChecked = Array.from(allCheckboxes).every(checkbox => checkbox.checked);
+
+        if (allChecked && !document.getElementById('allTransportation').checked) {
+            allCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+        }
+
         setSelectedTransportationValues(updatedTransportationValues);
 
-        // Filter the tour list based on updated selectedTransportationValues
         const tmpFilterTour = filterObjects(tourList, selectedValues, updatedTransportationValues, values);
         setFilterTour(tmpFilterTour);
     }
+
+    function checkAllUncheckedTransportation() {
+        const allCheckbox = document.getElementById('allTransportation');
+        const checkboxes = document.querySelectorAll('input[type="checkbox"][name="testTransportation"]:not([value="All"])');
+        const allUnchecked = ![...checkboxes].some(checkbox => checkbox.checked);
+        allCheckbox.checked = allUnchecked;
+
+        if (allUnchecked) {
+            allCheckbox.checked = true;
+        }
+    }
+
+    const checkboxesTransportation = document.querySelectorAll('input[type="checkbox"][name="testTransportation"]');
+    checkboxesTransportation.forEach(checkbox => {
+        checkbox.addEventListener('change', checkAllUncheckedTransportation);
+    });
+
+    
+    
 
     const handleSlider = (newValue) => {
         // newValue is an array containing the new range values selected by the slider
