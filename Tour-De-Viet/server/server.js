@@ -413,9 +413,9 @@ app.get('/api/tours/:townID/:tourName', (req, res) => {
 });
 
 app.post('/api/tours', authenticateToken, (req, res) => {
-    const { townID, tourName, description, price, images, transportationID } = req.body;
+    const { townID, tourName, description, price, images, transportationID, startDate, endDate } = req.body;
 
-    userModel.createTour(townID, tourName, description, price, images, transportationID, (err, result) => {
+    userModel.createTour(townID, tourName, description, price, images, transportationID, startDate, endDate, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;

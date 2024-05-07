@@ -137,12 +137,18 @@ class UserModel {
     this.db.all(sql, townID, callback)
   }
 
-  createTour(townID, tourName, description, price, images, transportationID, callback) {
+  createTour(townID, tourName, description, price, images, transportationID, startDate, endDate, callback) {
+    let newDescription = JSON.stringify(description);
     this.db.run("INSERT INTO tours (townID, tourName, description, price, images, transportationID) VALUES (?, ?, ?, ?, ?, ?)",
-      [townID, tourName, description, price, images, transportationID],
-      callback
+      [townID, tourName, newDescription, price, images, transportationID],
+      function (err) {
+        if (err) {
+          callback(err);
+          return;
+        }
+      }
     );
-    this.db.run("INSERT INTO tour_date (tourName,startDate,endDate) VALUES(?,?,?)",
+    this.db.run("INSERT INTO tour_date (tourName, startDate, endDate) VALUES(?, ?, ?)",
       [tourName, startDate, endDate],
       callback)
   }
