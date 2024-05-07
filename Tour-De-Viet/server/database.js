@@ -11,7 +11,7 @@ class UserModel {
           FOREIGN KEY (userName) REFERENCES accounts(userName))");
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
-        tours(townID INT NOT NULL, tourName TEXT NOT NULL, description TEXT, price REAL,  transportationID TEXT,\
+        tours(townID INT NOT NULL, tourName TEXT NOT NULL, description TEXT, category NVARCHAR(15) NOT NULL, price REAL,  transportationID TEXT,\
           PRIMARY KEY (tourName),\
           FOREIGN KEY (transportationID) REFERENCES transportations(ID))");
 
@@ -117,6 +117,7 @@ class UserModel {
   getAllTour(townID, callback) {
     let sql = `SELECT 
     t.tourName,
+    t.category,
     CAST(julianday(td.endDate) - julianday(td.startDate) + 1 AS INTEGER) || ' day(s)' AS totalTime,
     tr.Name AS transport,
     t.price,
@@ -136,8 +137,8 @@ class UserModel {
     this.db.all(sql, townID, callback)
   }
 
-  createTour(townID, tourName, description, price, transportationID, callback) {
-    this.db.run("INSERT INTO tours (townID, tourName, description, price, transportationID) VALUES (?, ?, ?, ?, ?, ?)",
+  createTour(townID, tourName, category, description, price, transportationID, callback) {
+    this.db.run("INSERT INTO tours (townID, tourName, description, category, price, transportationID) VALUES (?, ?, ?, ?, ?, ?, ?)",
       [townID, tourName, description, price, transportationID],
       callback
     );
@@ -146,9 +147,9 @@ class UserModel {
       callback)
   }
 
-  updateTour(tourName, description, transportationID, startDate, endDate, price, callback) {
-    let sql = "UPDATE tours SET tourName = ?, description=?, transportationID = ?, startDate=? , endDate=? , price=?  WHERE tourName = ?"
-    this.db.run(sql, [tourName, description, transportationID, startDate, endDate, price], callback);
+  updateTour(tourName, description, category, transportationID, startDate, endDate, price, callback) {
+    let sql = "UPDATE tours SET tourName = ?, description=?, category = ?, transportationID = ?, startDate=? , endDate=? , price=?  WHERE tourName = ?"
+    this.db.run(sql, [tourName, description, category, transportationID, startDate, endDate, price], callback);
   }
 
 
