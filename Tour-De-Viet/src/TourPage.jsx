@@ -55,36 +55,6 @@ export default function TourPage() {
 
     }, []);
 
-<<<<<<< Updated upstream
-    function handleCheckboxSelection(event) {
-        const labelText = event.target.parentNode.textContent.trim();
-        console.log("Selected label:", labelText);
-        if (labelText !== 'All' && document.getElementById('all').checked) {
-            document.getElementById('all').checked = false;
-        }
-        const value = event.target.value;
-
-        // Create a copy of selectedValues
-        let updatedSelectedValues = [...selectedValues];
-
-        if (event.target.checked) {
-            updatedSelectedValues.push(value);
-        } else {
-            updatedSelectedValues = updatedSelectedValues.filter(item => item !== value);
-        }
-        console.log(updatedSelectedValues);
-
-        // Update selectedValues using the setter function
-        setSelectedValues(updatedSelectedValues);
-
-        // Filter the tour list based on updated selectedValues and selectedTransportationValues
-        const tmpFilterTour = filterObjects(tourList, updatedSelectedValues, selectedTransportationValues, values);
-        setFilterTour(tmpFilterTour);
-    }
-
-
-=======
->>>>>>> Stashed changes
     function handleAllSelection(event) {
         const value = event.target.value;
         if (value === 'All' && event.target.checked) {
