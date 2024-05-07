@@ -1,7 +1,7 @@
 import './index.css'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 import Header from './Header.jsx'
 import ParallaxPage from './Parallax.jsx'
@@ -13,9 +13,11 @@ import TourDetailPage from './TourDetailPage.jsx';
 import TestUI from './testUI.jsx';
 import BookTourPage from './BookTourPage.jsx';
 import ProfilePage from './Profile.jsx';
-
+import AdminPage from './Admin.jsx';
+import axios from 'axios';
 
 export default function App() {
+  
   return (
     <Router>
       <Header />
@@ -29,7 +31,8 @@ export default function App() {
         <Route path='/testUI' element={<TestUI />} />
         <Route path='/bookinghistory' element={<BookTourPage />} />
         <Route path='/profile' element={<ProfilePage />} />
-        <Route path='/bot' element={<Bot />} />
+        <Route path='/bot' element={<Bot />}/>
+        <Route path='/admin' element={<AdminPage />}/>
       </Routes>
     </Router>
   );
@@ -38,7 +41,6 @@ export default function App() {
 const root = createRoot(document.getElementById('root'),);
 root.render(<App></App>);
 
-const parallax_el = document.querySelectorAll(".parallax");
 
 
 document.addEventListener('mousemove', parallax);

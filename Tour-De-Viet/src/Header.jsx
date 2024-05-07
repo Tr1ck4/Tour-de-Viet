@@ -12,7 +12,7 @@ function Header() {
     const fetchUsername = async () => {
       try {
         const response = await axios.get('/api/authenticate');
-        setUsername(response.data);
+        setUsername(response.data.username);
         setIsLogged(true);
       } catch (error) {
         console.error('Error fetching username:', error);
