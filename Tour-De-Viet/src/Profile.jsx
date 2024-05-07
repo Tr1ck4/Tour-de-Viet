@@ -10,7 +10,7 @@ function ProfilePage() {
     const [profile,setProfile] = useState([]);
 
     useEffect(()=>{
-        fetch('http://localhost:3000/api/accounts/exampleUser')
+        fetch('http://localhost:3000/api/accounts/info')
             .then(res=>{
                 return res.json();
             })
@@ -21,7 +21,7 @@ function ProfilePage() {
     const handleSubmit = (e)=>{
         e.preventDefault();
         const blog = profile
-        fetch('http://localhost:3000/api/accounts/exampleUser',{
+        fetch('http://localhost:3000/api/accounts/info',{
             method: 'PUT',
             headers: {"Content-Type":"application/json"},
             body: JSON.stringify(blog)
