@@ -1,0 +1,20 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+
+.rateStar i{
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.stars i{
+    color: #ebebeb;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.stars i.active {
+    color: yellow;
+}

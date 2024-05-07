@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './Register.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import bg from './assets/Background/RegisterPage_bg.png';
+import AccountService from '../server/AccountService';
 
 export default function Register() {
     const navigate = useNavigate();
@@ -29,19 +29,20 @@ export default function Register() {
             return;
         }
         try {
-            let name = formData.name, username = formData.username, email = formData.email, password = formData.password;
-            const response = await axios.post('http://localhost:3000/api/accounts', {
-                username,
-                password,
-                name,
-                email,
-            });
+            const service = new AccountService();
+            const newData = {
+                "username": formData.username,
+                "password": formData.password,
+                "name": formData.name,
+                "email": formData.email
+            }
+            console.log(newData);
+            const response = await service.createAccount(newData);
 
-            if (response.data.message == 'Account created') {
-                alert(response.data.message)
-                window.location.href("http://localhost:5173/homepage")
+            if (response == 200) {
+                alert("Account created")
             } else {
-                alert(response.data.message)
+                alert("Error")
             }
 
         } catch (err) {

@@ -6,13 +6,13 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Header from './Header.jsx'
 import ParallaxPage from './Parallax.jsx'
 import HomePage from './Home.jsx'
-import Bot from './Bot.jsx';
 import TourPage from './TourPage.jsx'
 import Register from './Register.jsx';
 import TourDetailPage from './TourDetailPage.jsx';
-import TestUI from './testUI.jsx';
 import BookTourPage from './BookTourPage.jsx';
 import ProfilePage from './Profile.jsx';
+import Bot from './Bot.jsx';
+
 import AdminPage from './Admin.jsx';
 import axios from 'axios';
 
@@ -25,10 +25,12 @@ export default function App() {
         <Route path='/homepage' element={<HomePage />} />
         <Route path='/parallax' element={<ParallaxPage />} />
         <Route path='/tourpage/:current_id' element={<TourPage />} />
-        {/* <Route path='/tourpage/:townID/:tourName' element={<TourDetailPage />} /> */}
+        <Route path='/tourpage/:townID/:tourName' element={<TourDetailPage />} />
         <Route path='/tourpagedetail/' element={<TourDetailPage />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/testUI' element={<TestUI />} />
+        <Route path='/bookinghistory' element={<BookTourPage />} />
+        <Route path='/tourpagedetail/' element={<TourDetailPage />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/bookinghistory' element={<BookTourPage />} />
         <Route path='/profile' element={<ProfilePage />} />
         <Route path='/bot' element={<Bot />}/>
@@ -40,7 +42,6 @@ export default function App() {
 
 const root = createRoot(document.getElementById('root'),);
 root.render(<App></App>);
-
 
 
 document.addEventListener('mousemove', parallax);
@@ -66,5 +67,4 @@ function parallax(e) {
     perspective(2300px) translateZ(${zValue * speedz}px) rotateY(${rotateDeg * rote}deg)`;
   });
 }
-
 

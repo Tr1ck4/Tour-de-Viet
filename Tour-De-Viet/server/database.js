@@ -117,6 +117,7 @@ class UserModel {
   getAllTour(townID, callback) {
     let sql = `SELECT 
     t.tourName,
+    t.description,
     t.category,
     CAST(julianday(td.endDate) - julianday(td.startDate) + 1 AS INTEGER) || ' day(s)' AS totalTime,
     tr.Name AS transport,
@@ -137,12 +138,18 @@ class UserModel {
     this.db.all(sql, townID, callback)
   }
 
-  createTour(townID, tourName, category, description, price, transportationID, callback) {
-    this.db.run("INSERT INTO tours (townID, tourName, description, category, price, transportationID) VALUES (?, ?, ?, ?, ?, ?, ?)",
-      [townID, tourName, description, price, transportationID],
-      callback
+  createTour(townID, tourName, description, category, price, images, transportationID, startDate, endDate, callback) {
+    let newDescription = JSON.stringify(description);
+    this.db.run("INSERT INTO tours (townID, tourName, description, category, price, images, transportationID) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [townID, tourName, newDescription, category, price, images, transportationID],
+      function (err) {
+        if (err) {
+          callback(err);
+          return;
+        }
+      }
     );
-    this.db.run("INSERT INTO tour_date (tourName,startDate,endDate) VALUES(?,?,?)",
+    this.db.run("INSERT INTO tour_date (tourName, startDate, endDate) VALUES(?, ?, ?)",
       [tourName, startDate, endDate],
       callback)
   }
