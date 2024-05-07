@@ -1,9 +1,10 @@
 class ToursService {
-  constructor(townID, tourName, description, startDate, endDate, price, images) {
+  constructor(townID, tourName, description, category, startDate, endDate, price, images) {
     this.baseUrl = 'http://localhost:3000';
     this.townID = townID;
     this.tourName = tourName;
     this.description = description;
+    this.category = category;
     this.startDate = startDate;
     this.endDate = endDate;
     this.price = price;
@@ -37,6 +38,7 @@ class ToursService {
           'townID': newData.townID,
           'tourName': newData.tourName,
           'description': newData.description,
+          'category' : newData.category,
           'startDate': newData.startDate,
           'endDate': newData.endDate,
           'price': newData.price,
@@ -69,6 +71,7 @@ class ToursService {
           'townID': newData.townID,
           'tourName': newData.tourName,
           'description': newData.description,
+          'category' : newData.category,
           'startDate': newData.startDate,
           'endDate': newData.endDate,
           'price': newData.price,

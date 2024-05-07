@@ -115,9 +115,9 @@ app.get('/api/authenticate', authenticateToken, (req, res) => {
     const token = getTokenFromCookie(req);
 
     const userName = jwt.decode(token).username;
+    const accountname = jwt.decode(token).accountname;
 
-
-    res.json(userName);
+    res.json({"username":userName, "accountname" :accountname});
 });
 
 app.post('/api/logout', (req, res) => {
@@ -134,12 +134,14 @@ app.post('/api/login', async (req, res) => {
         .then(res => {
             return res;
         })
+
+    
     if (!user) {
         return res.status(401).json({ message: 'Invalid username or password' });
     }
     const token = generateToken({ username: user.name, accountname: username });
     res.setHeader('Set-cookie', `token=${token}; Max-Age=3600; HttpOnly`);
-    res.json({ message: 'Logout successful' });
+    res.json({ message: 'Login successful' });
 });
 
 app.get('/api/protected', authenticateToken, (req, res) => {

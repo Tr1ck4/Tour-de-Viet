@@ -6,12 +6,12 @@ class UserModel {
         console.error('Error connecting to database:', err.message);
       } else {
         this.db.run("CREATE TABLE IF NOT EXISTS \
-        comments (townID INT, tourName TEXT, comment TEXT, userName TEXT UNIQUE, rating REAL,\
+        comments (townID INT, tourName TEXT, comment TEXT, userName TEXT, rating REAL,\
           FOREIGN KEY (tourName) REFERENCES tours(tourName),\
           FOREIGN KEY (userName) REFERENCES accounts(userName))");
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
-        tours(townID INT NOT NULL, tourName TEXT NOT NULL, description TEXT, price REAL, images TEXT, transportationID TEXT,\
+        tours(townID INT NOT NULL, tourName TEXT NOT NULL, description TEXT, category NVARCHAR(15) NOT NULL, price REAL,  transportationID TEXT,\
           PRIMARY KEY (tourName),\
           FOREIGN KEY (transportationID) REFERENCES transportations(ID))");
 
@@ -118,10 +118,10 @@ class UserModel {
     let sql = `SELECT 
     t.tourName,
     t.description,
+    t.category,
     CAST(julianday(td.endDate) - julianday(td.startDate) + 1 AS INTEGER) || ' day(s)' AS totalTime,
     tr.Name AS transport,
     t.price,
-    t.images,
     t.townID,
     AVG(c.rating) AS avg_rating
     FROM 
@@ -138,10 +138,10 @@ class UserModel {
     this.db.all(sql, townID, callback)
   }
 
-  createTour(townID, tourName, description, price, images, transportationID, startDate, endDate, callback) {
+  createTour(townID, tourName, description, category, price, images, transportationID, startDate, endDate, callback) {
     let newDescription = JSON.stringify(description);
-    this.db.run("INSERT INTO tours (townID, tourName, description, price, images, transportationID) VALUES (?, ?, ?, ?, ?, ?)",
-      [townID, tourName, newDescription, price, images, transportationID],
+    this.db.run("INSERT INTO tours (townID, tourName, description, category, price, images, transportationID) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [townID, tourName, newDescription, category, price, images, transportationID],
       function (err) {
         if (err) {
           callback(err);
@@ -154,9 +154,9 @@ class UserModel {
       callback)
   }
 
-  updateTour(tourName, description, transportationID, startDate, endDate, price, images, callback) {
-    let sql = "UPDATE tours SET tourName = ?, description=?, transportationID = ?, startDate=? , endDate=? , price=? , images=? WHERE tourName = ?"
-    this.db.run(sql, [tourName, description, transportationID, startDate, endDate, price, images], callback);
+  updateTour(tourName, description, category, transportationID, startDate, endDate, price, callback) {
+    let sql = "UPDATE tours SET tourName = ?, description=?, category = ?, transportationID = ?, startDate=? , endDate=? , price=?  WHERE tourName = ?"
+    this.db.run(sql, [tourName, description, category, transportationID, startDate, endDate, price], callback);
   }
 
 
