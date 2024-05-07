@@ -149,11 +149,6 @@ export default function TourPage() {
         checkbox.addEventListener('change', checkAllUnchecked);
     });
     
-
-
-
-
-
     function handleAllTransportationSelection(event) {
         const value = event.target.value;
         if (event.target.checked) {

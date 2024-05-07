@@ -168,7 +168,10 @@ app.get('/api/bookings/info', authenticateToken, (req, res) => {
 
 
 app.post('/api/bookings', authenticateToken, (req, res) => {
-    const { userName, tourName, transportationID, cardID } = req.body;
+    const token = getTokenFromCookie(req);
+
+    const userName = jwt.decode(token).accountname;
+    const { tourName, transportationID, cardID } = req.body;
     userModel.createBooking(userName, tourName, transportationID, cardID, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -266,7 +269,7 @@ app.post('/api/accounts', (req, res) => {
 app.get('/api/accounts/info', authenticateToken, (req, res) => {
     const token = getTokenFromCookie(req);
 
-    const userName = jwt.decode(token).username;
+    const userName = jwt.decode(token).accountname;
 
     userModel.getAccount(userName, (err, row) => {
         if (err) {
@@ -280,7 +283,7 @@ app.get('/api/accounts/info', authenticateToken, (req, res) => {
 app.put('/api/accounts/info', authenticateToken, (req, res) => {
     const token = getTokenFromCookie(req);
 
-    const userName = jwt.decode(token).username;
+    const userName = jwt.decode(token).accountname;
     const { password, citizenID, name, address, age, tel, email } = req.body;
 
     userModel.updateRating(userName, password, citizenID, name, address, age, tel, email, (err) => {
@@ -415,9 +418,9 @@ app.get('/api/tours/:townID/:tourName', (req, res) => {
 });
 
 app.post('/api/tours', authenticateToken, (req, res) => {
-    const { townID, tourName, description, price, images, transportationID, startDate, endDate } = req.body;
+    const { townID, tourName, description, category, price, images, transportationID, startDate, endDate } = req.body;
 
-    userModel.createTour(townID, tourName, description, price, images, transportationID, startDate, endDate, (err, result) => {
+    userModel.createTour(townID, tourName, description, category, price, images, transportationID, startDate, endDate, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -442,9 +445,9 @@ app.get('/api/tours', (req, res) => {
 
 app.put('/api/tours/:tourName', authenticateToken, (req, res) => {
     const { tourName } = req.params;
-    const { description, totalTime, transport, startDate, endDate, price, images } = req.body;
+    const { description, category, totalTime, transport, startDate, endDate, price, images } = req.body;
 
-    userModel.updateTour(tourName, description, totalTime, transport, startDate, endDate, price, images, (err) => {
+    userModel.updateTour(tourName, description, category, totalTime, transport, startDate, endDate, price, images, (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
