@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './TourDetailPage.css'
+<<<<<<< Updated upstream:Tour-De-Viet/src/DetailPage/TourDetailPage.jsx
 import bg from '.././assets/Background/TourPageDetailed_bg.png';
 import ToursService from '../../server/TourService';
 import CommentService from '../../server/CommentService';
+=======
+import bg from './assets/Background/TourPageDetailed_bg.png';
+import ToursService from '../server/TourService';
+import CommentService from '../server/CommentService';
+import CommnetSection from './tourPageDetailComponent/commentSection';
+>>>>>>> Stashed changes:Tour-De-Viet/src/TourDetailPage.jsx
 
 const TourDetailPage = () => {
     const { townID, tourName } = useParams(); // Get the tourId from the route parameters
     const [tourDetails, setTourDetails] = useState([]);
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showCommentSection, setShowCommentSection] = useState(false);
 
     useEffect(() => {
         const fetchTourDetails = async () => {
@@ -40,6 +48,20 @@ const TourDetailPage = () => {
 
         fetchComments();
     }, [comments]);
+
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') {
+                setShowCommentSection(false);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
 
     useEffect(() => {
         console.log("Stars: ", document.querySelectorAll(".stars i"));
@@ -73,13 +95,15 @@ const TourDetailPage = () => {
         return <div>Tour not found</div>;
     }
 
+    
+
+    const toggleCommentSection = () => {
+        console.log("I click on this");
+        setShowCommentSection(!showCommentSection);
+      };
+
+
     return (
-        // <div>
-        //     {console.log(tourDetails, comments)}
-        //     <h1>{tourDetails.tourName}</h1>
-        //     <p>{tourDetails.description}</p>
-        //     {/* Add more details as needed */}
-        // </div>
         <>
             <main className='overflow-y-scroll overflow-hidden h-screen w-screen'>
             {console.log(tourDetails, comments)}
@@ -124,7 +148,7 @@ const TourDetailPage = () => {
                             </div>
                                     {/* <div className="number absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-2 text-2xl">1</div> */}
                                 </div>
-                                <div className='bg-light-green h-[296px] w-[280px] rounded-2xl flex flex-col'>
+                                <div className='bg-light-green h-[296px] w-[280px] rounded-2xl flex flex-col cursor-pointer' onClick={toggleCommentSection}>
                                     <div className='mt-5 mb-3 flex ml-6 border-b-2 h-[45px] w-[230px]'>
                                         <div className='bg-dark-green h-8 w-10 rounded-xl mr-2 flex flex-col justify-center items-center'>
                                             <div className='bg-bone-white h-1 w-5 rounded-lg'></div>
@@ -143,14 +167,6 @@ const TourDetailPage = () => {
                                     <div className='bg-bone-white w-[250px] h-[60px] comment self-center my-1 rounded-lg'></div>
                                 </div>
                             </div>
-                            {/* <div className='rateStar bg-bright-yellow col-span-2 rounded-2xl flex items-center justify-center'>
-                                <i className='fa-solid fa-star mx-2'></i>
-                                <i className='fa-solid fa-star mx-2'></i>
-                                <i className='fa-solid fa-star mx-2'></i>
-                                <i className='fa-solid fa-star mx-2'></i>
-                                <i className='fa-solid fa-star mx-2'></i>
-                            </div>
-                            <div className='bg-light-green row-span-2 col-span-2 rounded-2xl'></div>></div> */}
                         </div>
 
                         <div className='w-auto h-40 bg-orange-400 grid grid-cols-10 gap-3 rounded-2xl mt-14'>
@@ -166,6 +182,7 @@ const TourDetailPage = () => {
                     </div>
                 </div>
             </main>
+            {showCommentSection && <CommnetSection/>}
         </>
     );
 };

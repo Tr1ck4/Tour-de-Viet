@@ -1,0 +1,18 @@
+.TypingArea {
+    padding: 5px 10px;
+    color: #345246 ;
+    border: none; 
+    outline: none; 
+    overflow: hidden;
+  }
+
+.custom-scrollbar {
+    overflow: auto;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+  
