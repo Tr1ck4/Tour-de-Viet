@@ -324,7 +324,7 @@ export default function TourPage() {
                                     <div className='text-2xl font-itim mt-3 ml-6 h-auto'>{tourData.totalTime}</div>
                                     <div className='text-2xl font-itim mt-3 ml-6 h-auto'> {tourData.transport !== null ? tourData.transport : "N/A"} </div>
                                     <div className='text-2xl font-itim mt-3 ml-6 h-auto grid-cols-2 gap-4 flex justify-between'>
-                                        <div>{tourData.avg_rating !== null ? tourData.avg_rating : "N/A"}</div>
+                                        <div>{tourData.avg_rating !== null ? tourData.avg_rating.toFixed(1) : "N/A"}</div>
                                         <div className='mr-5'>{tourData.price}</div>
                                     </div>
                                 </div>

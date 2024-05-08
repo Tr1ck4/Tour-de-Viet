@@ -17,7 +17,6 @@ class CommentService {
       });
   }
   async fetchComments(townID, tourName) {
-    console.log("aaaaaaaaaaaaaaaaaaaaaa");
     return fetch(`${this.baseUrl}/api/comments/${townID}/${tourName}`)
       .then(response => response.json())
       .catch(error => {

@@ -17,8 +17,8 @@ const TourDetailPage = () => {
     useEffect(() => {
         const fetchTourDetails = async () => {
             try {
-                // const service = new ToursService();
-                // const response = await service.fetchTour(townID, tourName);
+                const service = new ToursService();
+                const response = await service.fetchTour(townID, tourName);
                 setTourDetails(response);
             } catch (error) {
                 console.error("Error fetching tour details", error);
@@ -31,8 +31,8 @@ const TourDetailPage = () => {
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                // const Cservice = new CommentService();
-                // const response = await Cservice.fetchComments(townID, tourName);
+                const Cservice = new CommentService();
+                const response = await Cservice.fetchComments(townID, tourName);
                 setComments(response);
             } catch (error) {
                 console.error("Error fetching comments", error);
@@ -90,20 +90,19 @@ const TourDetailPage = () => {
         return <div>Tour not found</div>;
     }
 
-    
+
 
     const toggleCommentSection = () => {
         console.log("I click on this");
         setShowCommentSection(!showCommentSection);
-      };
+    };
 
 
     return (
         <>
             <main className='overflow-y-scroll overflow-hidden h-screen w-screen'>
-            {console.log(tourDetails, comments)}
-                <div className='w-screen h-screen ' style={{ backgroundImage: `url(${bg})`, backgroundSize:'100% 100%', height:'175vh'}}>
-                <h1 className='text-dark-green text-5xl font-extrabold mt-36 ml-96'>{tourDetails.tourName}</h1>
+                <div className='w-screen h-screen ' style={{ backgroundImage: `url(${bg})`, backgroundSize: '100% 100%', height: '175vh' }}>
+                    <h1 className='text-dark-green text-5xl font-extrabold mt-36 ml-96'>{tourDetails.tourName}</h1>
 
                     <div className=' h-auto w-3/5 mx-auto mt-10'>
 
@@ -132,15 +131,15 @@ const TourDetailPage = () => {
                         <div className='w-auto h-[400px] inline-flex gap-1'>
                             <div className='bg-light-green row-span-3 col-span-6 rounded-2xl h-[400px] w-[856px]'></div>
                             <div>
-                            <div className='rateStar bg-bright-yellow rounded-2xl flex flex-col items-center justify-center w-[280px] h-[100px] mb-1 relative'>
-                            <div className="stars flex items-center justify-center">
-                                <div className="text-4xl mr-2 font-bold ml-2">1</div>
-                                <i className='fa-solid fa-star mx-2'></i>
-                                <i className='fa-solid fa-star mx-2'></i>
-                                <i className='fa-solid fa-star mx-2'></i>
-                                <i className='fa-solid fa-star mx-2'></i>
-                                <i className='fa-solid fa-star mx-2'></i>
-                            </div>
+                                <div className='rateStar bg-bright-yellow rounded-2xl flex flex-col items-center justify-center w-[280px] h-[100px] mb-1 relative'>
+                                    <div className="stars flex items-center justify-center">
+                                        <div className="text-4xl mr-2 font-bold ml-2">1</div>
+                                        <i className='fa-solid fa-star mx-2'></i>
+                                        <i className='fa-solid fa-star mx-2'></i>
+                                        <i className='fa-solid fa-star mx-2'></i>
+                                        <i className='fa-solid fa-star mx-2'></i>
+                                        <i className='fa-solid fa-star mx-2'></i>
+                                    </div>
                                     {/* <div className="number absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-2 text-2xl">1</div> */}
                                 </div>
                                 <div className='bg-light-green h-[296px] w-[280px] rounded-2xl flex flex-col cursor-pointer' onClick={toggleCommentSection}>
@@ -150,16 +149,16 @@ const TourDetailPage = () => {
                                             <div className='bg-bone-white h-1 w-5 rounded-lg my-1'></div>
                                             <div className='bg-bone-white h-1 w-5 rounded-lg'></div>
                                         </div>
-                                            <div className='font-itim text-3xl'>Comment</div>
+                                        <div className='font-itim text-3xl'>Comment</div>
                                     </div>
-                                    <div className='bg-bone-white w-[250px] h-[60px] comment self-center my-1 rounded-lg commentBox'>
-                                        <div className='userName text-dark-green font-semibold ml-2 m'>Loc An</div>
-                                        <div className='info text-dark-green mx-3 overflow-hidden whitespace-nowrap text-overflow-ellipsis'>
-                                            This is a very beautiful place to visit, I am sure to comeback.
+                                    {comments.slice(-3).map((commentObj, index) => (
+                                        <div key={index} className='bg-bone-white w-[250px] h-[60px] comment self-center my-1 rounded-lg commentBox'>
+                                            <div className='userName text-dark-green font-semibold ml-2'>{commentObj.userName}</div>
+                                            <div className='info text-dark-green mx-3 overflow-hidden whitespace-nowrap text-overflow-ellipsis'>
+                                                {commentObj.comment}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className='bg-bone-white w-[250px] h-[60px] comment self-center my-1 rounded-lg'></div>
-                                    <div className='bg-bone-white w-[250px] h-[60px] comment self-center my-1 rounded-lg'></div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -177,7 +176,7 @@ const TourDetailPage = () => {
                     </div>
                 </div>
             </main>
-            {showCommentSection && <CommnetSection/>}
+            {showCommentSection && <CommnetSection />}
         </>
     );
 };
