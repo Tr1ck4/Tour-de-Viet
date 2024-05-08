@@ -10,7 +10,7 @@ const CommentSection = () => {
     return (
         <div className='fixed inset-0 flex justify-center items-center' style={{ zIndex: 9999 }}>
             <div className='h-[500px] w-[900px] bg-bone-white rounded-2xl relative'>
-                <div className='h-[380px] mt-5 flex items-center flex-col custom-scrollbar'>
+                <div className='h-[380px] mt-5 flex items-center flex-col overflow-y-auto' style={{ '-ms-overflow-style': 'none', 'scrollbar-width': 'none' }}>
                     <div className='bg-[#d9d9d9] w-[850px] h-[60px] comment self-center my-1 rounded-lg commentBox mb-3'>
                         <div className='userName text-dark-green font-semibold ml-2 m'>Loc An</div>
                         <div className='info text-dark-green mx-3 overflow-hidden whitespace-nowrap text-overflow-ellipsis'>
