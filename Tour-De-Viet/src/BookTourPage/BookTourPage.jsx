@@ -41,7 +41,7 @@ export default function History() {
                 <div className=' h-5/6 inset-0 mt-20 mx-auto absolute no-scrollbar overflow-y-auto text-3xl '>
                     {showOngoing ? (
                         <ul>
-                            <li className='w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-bone-white inset-0 mx-auto mt-7 font-Itim text-black  content-center pl-10 '>
+                            <li className='w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-bone-white inset-0 mx-auto mt-7 font-itim text-black  content-center pl-10 '>
                                 <p>Tour's name</p>
                                 <p>Start Date</p>
                                 <p>End Date</p>
@@ -50,7 +50,7 @@ export default function History() {
 
                             {onBook.map((booking) => {
                                 return (
-                                    <li className='w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-light-green-2 inset-0 mx-auto mt-7 font-Itim text-black  content-center pl-10 '>
+                                    <li className='w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-bone-white inset-0 mx-auto mt-7 font-itim text-black  content-center pl-10 '>
                                         <p>{booking.tourName}</p>
                                         <p>{new Date(booking.startDate).toLocaleDateString(('en-GB'))}</p>
                                         <p>{new Date(booking.endDate).toLocaleDateString(('en-GB'))}</p>
@@ -61,7 +61,7 @@ export default function History() {
                         </ul>
                     ) : (
                         <ul>
-                            <li className='w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-light-green-2 inset-0 mx-auto mt-7 font-Itim text-black  content-center pl-10 '>
+                            <li className='w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-light-green inset-0 mx-auto mt-7 font-itim text-white  content-center pl-10 '>
                                 <p>Tour's name</p>
                                 <p>Start Date</p>
                                 <p >End Date</p>
@@ -69,7 +69,7 @@ export default function History() {
                             </li>
                             {closeBook.map((booking) => {
                                 return (
-                                    <li className='w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-light-green-2 inset-0 mx-auto mt-7 font-Itim text-black  content-center pl-10 '>
+                                    <li className='w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-light-green inset-0 mx-auto mt-7 font-itim text-white  content-center pl-10 '>
                                         <p>{booking.tourName}</p>
                                         <p>{new Date(booking.startDate).toLocaleDateString(('en-GB'))}</p>
                                         <p>{new Date(booking.endDate).toLocaleDateString(('en-GB'))}</p>
