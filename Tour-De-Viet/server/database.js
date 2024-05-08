@@ -92,9 +92,11 @@ class UserModel {
   }
 
   getTour(townID, tourName, callback) {
-    let sql = `SELECT 
-    t.*,
-    tr.Name AS transportation,
+    let sql = `SELECT t.*,
+    CASE
+        WHEN t.transportationID IS NULL THEN NULL
+        ELSE tr.type
+    END AS transportation,
     td.startDate,
     td.endDate,
     AVG(c.rating) AS averageRating
@@ -102,7 +104,7 @@ class UserModel {
         tours AS t
     JOIN 
         tour_date AS td ON t.tourName = td.tourName
-    JOIN 
+    LEFT JOIN 
         transportations AS tr ON t.transportationID = tr.ID
     LEFT JOIN 
         comments AS c ON t.tourName = c.tourName AND t.townID = c.townID
