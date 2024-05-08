@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './TourDetailPage.css'
-import bg from '../.assets/Background/TourPageDetailed_bg.png';
-import ToursService from '../server/TourService';
-import CommentService from '../server/CommentService';
-import CommnetSection from './tourPageDetailComponent/commentSection';
+import bg from '.././assets/Background/TourPageDetailed_bg.png';
+import ToursService from '../../server/TourService';
+import CommentService from '../../server/CommentService';
+import CommnetSection from '.././tourPageDetailComponent/commentSection';
 
 const TourDetailPage = () => {
     const { townID, tourName } = useParams(); // Get the tourId from the route parameters
