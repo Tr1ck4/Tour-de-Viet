@@ -38,11 +38,11 @@ class ToursService {
           'townID': newData.townID,
           'tourName': newData.tourName,
           'description': newData.description,
-          'category' : newData.category,
+          'category': newData.category,
           'startDate': newData.startDate,
           'endDate': newData.endDate,
           'price': newData.price,
-          'images': newData.images
+          'transportationID': newData.transportationID
         })
       });
 
@@ -71,7 +71,7 @@ class ToursService {
           'townID': newData.townID,
           'tourName': newData.tourName,
           'description': newData.description,
-          'category' : newData.category,
+          'category': newData.category,
           'startDate': newData.startDate,
           'endDate': newData.endDate,
           'price': newData.price,

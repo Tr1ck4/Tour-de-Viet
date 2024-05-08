@@ -117,7 +117,7 @@ app.get('/api/authenticate', authenticateToken, (req, res) => {
     const userName = jwt.decode(token).username;
     const accountname = jwt.decode(token).accountname;
 
-    res.json({"username":userName, "accountname" :accountname});
+    res.json({ "username": userName, "accountname": accountname });
 });
 
 app.post('/api/logout', (req, res) => {
@@ -135,7 +135,7 @@ app.post('/api/login', async (req, res) => {
             return res;
         })
 
-    
+
     if (!user) {
         return res.status(401).json({ message: 'Invalid username or password' });
     }
@@ -418,9 +418,9 @@ app.get('/api/tours/:townID/:tourName', (req, res) => {
 });
 
 app.post('/api/tours', authenticateToken, (req, res) => {
-    const { townID, tourName, description, category, price, images, transportationID, startDate, endDate } = req.body;
+    const { townID, tourName, description, category, price, transportationID, startDate, endDate } = req.body;
 
-    userModel.createTour(townID, tourName, description, category, price, images, transportationID, startDate, endDate, (err, result) => {
+    userModel.createTour(townID, tourName, description, category, price, transportationID, startDate, endDate, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
