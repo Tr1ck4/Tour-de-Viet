@@ -6,12 +6,3 @@
   outline: none; 
   overflow: hidden;
 }
-
-.scrollbar-hidden {
-  overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
-}
-
-.scrollbar-hidden::-webkit-scrollbar {
-  display: none; /* WebKit */
-}
