@@ -19,7 +19,12 @@ const TourDetailPage = () => {
             try {
                 const service = new ToursService();
                 const response = await service.fetchTour(townID, tourName);
-                setTourDetails(response);
+                const parsedResponse = {
+                    ...response,
+                    description: JSON.parse(response.description)
+                };
+
+                setTourDetails(parsedResponse);
             } catch (error) {
                 console.error("Error fetching tour details", error);
             }
@@ -57,7 +62,6 @@ const TourDetailPage = () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, []);
-
     useEffect(() => {
         console.log("Stars: ", document.querySelectorAll(".stars i"));
 
@@ -129,16 +133,20 @@ const TourDetailPage = () => {
                         </div> */}
 
                         <div className='w-auto h-[400px] inline-flex gap-1'>
-                            <div className='bg-light-green row-span-3 col-span-6 rounded-2xl h-[400px] w-[856px]'></div>
+                            <div className='bg-light-green rounded-2xl h-[400px] w-[856px]'>
+                                <div>{tourDetails.description == null ? null : tourDetails.description.Header}</div>
+                                <div>{tourDetails.description == null ? null : tourDetails.description.Content}</div>
+                            </div>
+
                             <div>
                                 <div className='rateStar bg-bright-yellow rounded-2xl flex flex-col items-center justify-center w-[280px] h-[100px] mb-1 relative'>
                                     <div className="stars flex items-center justify-center">
-                                        <div className="text-4xl mr-2 font-bold ml-2">1</div>
-                                        <i className='fa-solid fa-star mx-2'></i>
-                                        <i className='fa-solid fa-star mx-2'></i>
-                                        <i className='fa-solid fa-star mx-2'></i>
-                                        <i className='fa-solid fa-star mx-2'></i>
-                                        <i className='fa-solid fa-star mx-2'></i>
+                                        <div className="text-4xl mr-2 font-bold ml-2">{tourDetails.averageRating == null ? 1 : tourDetails.averageRating.toFixed(1)}</div>
+                                        <i className='fa-solid fa-star mx-1'></i>
+                                        <i className='fa-solid fa-star mx-1'></i>
+                                        <i className='fa-solid fa-star mx-1'></i>
+                                        <i className='fa-solid fa-star mx-1'></i>
+                                        <i className='fa-solid fa-star mx-1'></i>
                                     </div>
                                     {/* <div className="number absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-2 text-2xl">1</div> */}
                                 </div>
