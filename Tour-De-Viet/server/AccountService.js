@@ -30,7 +30,7 @@ class AccountService {
     }
     async login(username, password) {
         try {
-            const response = await fetch('${this.baseUrl}/api/login', {
+            const response = await fetch(`${this.baseUrl}/api/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

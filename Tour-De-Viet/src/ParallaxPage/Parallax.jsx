@@ -7,7 +7,6 @@ import des from  '../assets/des.png'
 
 export default function ParallaxPage() {
   const cur = parseInt(localStorage.getItem('current'));
-  console.log(cur);
   const [state, setState] = useState(cur? cur:1);
   const array = arr.find(item => item.id === state).source;
   const head = arr.find(item => item.id === state).header;
@@ -72,7 +71,6 @@ function ParallaxElement({ src, alt, rotation, speedx, speedy, speedz, w, z, cto
       top: ctop, 
       left: cleft, 
       width:w,
-      objectFit:'fill'
       }} />
   );
 }

@@ -14,24 +14,21 @@ export default function AdminPage() {
                 console.error('Error fetching role:', error);
             }
         };
-
         fetchRole();
     }, []);
 
     return (
         <>
-            {role === 'admin' && (
-                <div>
-                    {/* Render content specific to admin */}
-                    <h1>Welcome Admin!</h1>
-                </div>
-            )}
+            {/* {role === 'admin' && ( */}
+            <main>
+                <p> Hello</p>
+            </main>
+            {/* )}
             {role !== 'admin' && (
                 <div>
-                    {/* Render content for non-admin users */}
                     <h1>Access Denied</h1>
                 </div>
-            )}
+            )} */}
         </>
     );
 }

@@ -1,5 +1,5 @@
 import './index.css'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
@@ -14,7 +14,6 @@ import ProfilePage from './ProfilePage/Profile.jsx';
 import Bot from './Bot/Bot.jsx';
 
 import AdminPage from './AdminPage/Admin.jsx';
-import axios from 'axios';
 
 export default function App() {
   
@@ -44,27 +43,34 @@ const root = createRoot(document.getElementById('root'),);
 root.render(<App></App>);
 
 
-document.addEventListener('mousemove', parallax);
+let x = 0 , y=  0, rotatedeg = 0;
+x = window.innerWidth / 2;
+y = window.innerHeight / 2;
+rotatedeg = 0;
+update(x, rotatedeg);
 
-function parallax(e) {
-  this.querySelectorAll('.parallax').forEach(layer => {
-
-    const x = e.pageX - window.innerWidth / 2;
-    const y = e.pageY - window.innerHeight / 2;
-
+function update(cursorPosition,rotateDeg){
+  document.querySelectorAll(".parallax").forEach((layer) => {
     let speedx = layer.dataset.speedx;
     let speedy = layer.dataset.speedy;
+    let speedz = layer.dataset.speedz;
 
     let isInLeft = parseFloat(getComputedStyle(layer).left) < window.innerWidth / 2 ? 1 : -1;
-    let zValue = e.pageX - parseFloat(getComputedStyle(layer).left) * isInLeft * 0.1;
-    let speedz = layer.dataset.speedz;
+    let zValue = cursorPosition - parseFloat(getComputedStyle(layer).left) * isInLeft * 0.1;
     let rote = layer.dataset.rotation;
-
-    let rotateDeg = (x / (window.innerWidth / 2)) * 10;
-
 
     layer.style.transform = `translateX(calc(-50% + ${-x * speedx}px)) translateY(calc(-50% + ${y * speedy}px)) 
     perspective(2300px) translateZ(${zValue * speedz}px) rotateY(${rotateDeg * rote}deg)`;
   });
 }
+
+window.addEventListener("mousemove",(e)=>{
+  x = e.clientX - window.innerWidth/2;
+  y = e.clientY - window.innerHeight/2;
+
+  rotatedeg = (x / (window.innerWidth/2))*10;
+  update(e.clientX,rotatedeg);
+});
+
+
 
