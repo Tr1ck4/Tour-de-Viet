@@ -102,7 +102,7 @@ function ProfilePage() {
                         Username: 
                         
                     </label>
-                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3 ' type="text" id="userName" defaultValue='hiiiiiiii' onChange={handleChange}/>
+                    <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" id="userName" defaultValue={profile.userName} onChange={handleChange}/>
                     <label className=''> 
                         Password: 
                         
