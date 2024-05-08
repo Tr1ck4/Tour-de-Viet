@@ -12,7 +12,7 @@ import TourDetailPage from './DetailPage/TourDetailPage.jsx';
 import BookTourPage from './BookTourPage/BookTourPage.jsx';
 import ProfilePage from './ProfilePage/Profile.jsx';
 import Bot from './Bot/Bot.jsx';
-
+import Calendar from './DetailPage/Calender.jsx';
 import AdminPage from './AdminPage/Admin.jsx';
 
 export default function App() {
@@ -34,6 +34,7 @@ export default function App() {
         <Route path='/profile' element={<ProfilePage />} />
         <Route path='/bot' element={<Bot />}/>
         <Route path='/admin' element={<AdminPage />}/>
+        <Route path='/calendar/:townID/:tourName' element={<Calendar/>}/>
       </Routes>
     </Router>
   );

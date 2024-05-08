@@ -18,7 +18,24 @@ class ToursService {
         console.error('Error fetching tours:', error);
       });
   }
-
+  async fetchTourByDate() {
+    try {
+      const response = await fetch(`${this.baseUrl}/api/tours/${this.townID}/${this.tourName}/${this.startDate}`);
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const data = await response.json(); // Parse response body as JSON
+      return data;
+    } catch (error) {
+      console.error('Error fetching tours:', error);
+      throw error; // Rethrow the error to be caught by the caller if needed
+    }
+  }
+  
+  
+  
   async fetchAllTour(townID) {
     return fetch(`${this.baseUrl}/api/tours/${townID}`)
       .then(response => response.json())
