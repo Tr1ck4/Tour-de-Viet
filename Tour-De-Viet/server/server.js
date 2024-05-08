@@ -284,9 +284,10 @@ app.put('/api/accounts/info', authenticateToken, (req, res) => {
     const token = getTokenFromCookie(req);
 
     const userName = jwt.decode(token).accountname;
-    const { password, citizenID, name, address, age, tel, email } = req.body;
+    const { password, citizenID, name, address, age, telNum, email } = req.body;
+    // const { name,age,telNum,address,email,citizenID,userName,password } = req.body;
 
-    userModel.updateRating(userName, password, citizenID, name, address, age, tel, email, (err) => {
+    userModel.updateAccount(userName, password, citizenID, name, address, age, telNum, email, (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
