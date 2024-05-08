@@ -316,7 +316,7 @@ export default function TourPage() {
                 <div className='w-2/3 mt-28 ml-10 justify overflow-y-auto ' style={{ '-ms-overflow-style': 'none', 'scrollbar-width': 'none' }}>
                     {filterTour.map((tourData, index) => (
                         <Link to={`/tourpage/${tourData.townID}/${tourData.tourName}`} key={index} className=''>
-                            <div key={index} className='bg-light-green w-3/4 h-64 mt-6 rounded-[20px] flex'>
+                            <div key={index} className='bg-light-green w-3/4 h-64 mt-6 rounded-[20px] flex hover:text-bone-white hover:bg-dark-green'>
                                 <div className='w-2/5 bg-slate-700 h-full rounded-[20px]'></div>
                                 <div className='w-3/5 h-full'>
                                     <div className='text-4xl font-itim font-semibold mt-6 ml-6 h-auto'>{tourData.tourName}</div>

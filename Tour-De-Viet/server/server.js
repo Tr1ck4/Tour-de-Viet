@@ -284,9 +284,10 @@ app.put('/api/accounts/info', authenticateToken, (req, res) => {
     const token = getTokenFromCookie(req);
 
     const userName = jwt.decode(token).accountname;
-    const { password, citizenID, name, address, age, tel, email } = req.body;
+    const { password, citizenID, name, address, age, telNum, email } = req.body;
+    // const { name,age,telNum,address,email,citizenID,userName,password } = req.body;
 
-    userModel.updateRating(userName, password, citizenID, name, address, age, tel, email, (err) => {
+    userModel.updateAccount(userName, password, citizenID, name, address, age, telNum, email, (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -341,28 +342,6 @@ app.put('/api/transportations/:transportationID', authenticateToken, (req, res) 
     });
 });
 
-// app.get('/api/tours/:townID', (req, res) => {
-//     userModel.getAllTour((err, rows) => {
-//         if (err) {
-//             res.status(500).json({ error: err.message });
-//             return;
-//         }
-//         res.json(rows);
-//     });
-// });
-
-// app.get('/api/tours/:tourName', (req, res) => {
-//     const { tourName } = req.params;
-
-//     userModel.getTour(tourName, (err, row) => {
-//         if (err) {
-//             res.status(500).json({ error: err.message });
-//             return;
-//         }
-//         res.json(row);
-//     });
-// });
-
 app.post('/api/transportations', authenticateToken, (req, res) => {
     const { name, startDate, endDate, price, goFrom, arriveAt } = req.body;
 
@@ -393,7 +372,17 @@ app.put('/api/transportations/:transportationID', authenticateToken, (req, res) 
         });
     });
 });
-
+app.get('/api/tours/:townID/:tourName/:startDate', (req, res) => {
+    const {townID, tourName, startDate} = req.params;
+    console.log(townID, tourName, startDate);
+    userModel.getTourbyDate(townID, tourName, startDate, (err, rows) => {
+        if (err) {
+            res.status(404).json({ error: err.message });
+            return;
+        }
+        res.json(rows);
+    })
+})
 app.get('/api/tours/:townID', (req, res) => {
     const { townID } = req.params;
     userModel.getAllTour(townID, (err, rows) => {
