@@ -120,7 +120,10 @@ class UserModel {
     t.description,
     t.category,
     CAST(julianday(td.endDate) - julianday(td.startDate) + 1 AS INTEGER) || ' day(s)' AS totalTime,
-    tr.type AS transport,
+    CASE
+        WHEN t.transportationID IS NULL THEN NULL
+        ELSE tr.type
+    END AS transport,
     t.price,
     t.townID,
     AVG(c.rating) AS avg_rating
@@ -128,13 +131,14 @@ class UserModel {
         tours AS t
     JOIN 
         tour_date AS td ON t.tourName = td.tourName
-    JOIN 
+    LEFT JOIN 
         transportations AS tr ON t.transportationID = tr.ID
     LEFT JOIN 
         comments AS c ON t.tourName = c.tourName
     WHERE t.townID = ?
     GROUP BY 
-        t.tourName`;
+        t.tourName;
+    `;
     this.db.all(sql, townID, callback)
   }
 
