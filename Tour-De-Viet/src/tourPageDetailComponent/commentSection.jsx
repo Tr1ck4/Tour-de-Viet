@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CommentService from '../../server/CommentService';
+import './commentSection.css';
 
 const CommentSection = () => {
     const { townID, tourName } = useParams();
@@ -24,7 +25,7 @@ const CommentSection = () => {
     return (
         <div className='fixed inset-0 flex justify-center items-center' style={{ zIndex: 9999 }}>
             <div className='h-[500px] w-[900px] bg-bone-white rounded-2xl relative'>
-                <div className='h-[380px] mt-5 flex items-center flex-col custom-scrollbar'>
+                <div className='h-[380px] mt-5 flex items-center flex-col overflow-y-auto' style={{ '-ms-overflow-style': 'none', 'scrollbar-width': 'none' }}>
                     {comment.map((commentObj, index) => (
                         <div key={index} className='bg-[#d9d9d9] w-[850px] h-[60px] comment self-center my-1 rounded-lg commentBox mb-3'>
                             <div className='userName text-dark-green font-semibold ml-2 m'>{commentObj.userName}</div>
