@@ -1,7 +1,6 @@
 import React from 'react';
 import './Home.css'
 import { useState, useRef } from 'react';
-import { updateID } from './data'
 import { useNavigate } from 'react-router-dom';
 
 export default function VNMap() {
@@ -16,7 +15,6 @@ export default function VNMap() {
   function handleClick(event) {
     const clickedID = event.target.getAttribute('id');
     if (clickedID) {
-      updateID(clickedID);
       window.location = `/tourpage/${clickedID}`;
     }
   }

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import BookingService from '../../Tour-De-Viet/server/BookingService'
-import background from './images/background.png'
-import corner from './images/corner.png'
-import table_bg from './images/bg.png'
+import BookingService from '../../server/BookingService'
+import background from '.././images/background.png'
+import corner from '.././images/corner.png'
+import table_bg from '.././images/bg.png'
 import './BookTourPage.css'
 
 export default function History() {

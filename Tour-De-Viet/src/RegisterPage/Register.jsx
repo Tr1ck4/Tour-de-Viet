@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './Register.css';
 import { useNavigate } from 'react-router-dom';
-import bg from './assets/Background/RegisterPage_bg.png';
-import AccountService from '../server/AccountService';
+import bg from '.././assets/Background/RegisterPage_bg.png';
+import AccountService from '../../server/AccountService';
 
 export default function Register() {
     const navigate = useNavigate();

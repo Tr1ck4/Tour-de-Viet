@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Header.css';
-import LoginPopUp from './headerComponent/LoginPopUp';
+import LoginPopUp from '../headerComponent/LoginPopUp';
 import axios from 'axios';
 function Header() {
   const [showLoginPopup, setShowLoginPopup] = useState(false);

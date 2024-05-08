@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import bg from './assets/Background/TourPage_bg.png';
+import bg from '.././assets/Background/TourPage_bg.png';
 import Slider from 'react-slider'
 import './TourPage.css'
 import { Link, useParams } from 'react-router-dom'
-import ToursService from '../server/TourService';
+import ToursService from '../../server/TourService';
 
 const MIN = 500000;
 const MAX = 20000000;

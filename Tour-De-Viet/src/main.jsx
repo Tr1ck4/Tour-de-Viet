@@ -3,17 +3,17 @@ import React, { useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
-import Header from './Header.jsx'
-import ParallaxPage from './Parallax.jsx'
-import HomePage from './Home.jsx'
-import TourPage from './TourPage.jsx'
-import Register from './Register.jsx';
-import TourDetailPage from './TourDetailPage.jsx';
-import BookTourPage from './BookTourPage.jsx';
-import ProfilePage from './Profile.jsx';
-import Bot from './Bot.jsx';
+import Header from './Header/Header.jsx'
+import ParallaxPage from './ParallaxPage/Parallax.jsx'
+import HomePage from './HomePage/Home.jsx'
+import TourPage from './TourPage/TourPage.jsx'
+import Register from './RegisterPage/Register.jsx';
+import TourDetailPage from './DetailPage/TourDetailPage.jsx';
+import BookTourPage from './BookTourPage/BookTourPage.jsx';
+import ProfilePage from './ProfilePage/Profile.jsx';
+import Bot from './Bot/Bot.jsx';
 
-import AdminPage from './Admin.jsx';
+import AdminPage from './AdminPage/Admin.jsx';
 import axios from 'axios';
 
 export default function App() {

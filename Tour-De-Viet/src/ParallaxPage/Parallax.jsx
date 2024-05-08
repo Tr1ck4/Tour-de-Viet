@@ -1,21 +1,24 @@
 import { useState } from 'react';
 import './Parallax.css';
-import { current_id, arr, updateID } from './data';
-import inc from  './assets/inc.png'
-import des from  './assets/des.png'
+import { arr } from '../data';
+import inc from  '../assets/inc.png'
+import des from  '../assets/des.png'
 
 
 export default function ParallaxPage() {
-  const array = arr.find(item => item.id === current_id).source;
-  const head = arr.find(item => item.id === current_id).header;
-  const [state, setState] = useState(current_id);
+  const cur = parseInt(localStorage.getItem('current'));
+  console.log(cur);
+  const [state, setState] = useState(cur? cur:1);
+  const array = arr.find(item => item.id === state).source;
+  const head = arr.find(item => item.id === state).header;
+
   const IncreaseClick = () =>{
-    updateID(current_id+1);
-    setState(current_id+1);
+    setState(state+1);
+    localStorage.setItem('current',state + 1);
   }
   const DecreaseClick = () =>{
-    updateID(current_id-1);
-    setState(current_id-1);
+    setState(state-1);
+    localStorage.setItem('current',state - 1);
   }
 
   const CheckoutClick = () =>{

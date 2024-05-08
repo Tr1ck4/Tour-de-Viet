@@ -132,22 +132,6 @@ import island3_60 from './assets/60/island3.png'
 import ocean_60 from './assets/60/ocean.png'
 import sky_60 from './assets/60/sky.png'
 
-
-export let current_id = 1;
-export function updateID(newValue){
-    if (newValue===0){
-        newValue = 64;
-        current_id = 64;
-    }
-    if (newValue===65){
-        newValue = 1;
-        current_id = 1;
-    }
-    if (newValue <=64 && newValue >=1){
-        current_id = newValue;
-    }
-}
-
 export const arr = [
     {
         "id":1,

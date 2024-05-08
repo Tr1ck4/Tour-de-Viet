@@ -1,6 +1,6 @@
-import background from './images/background.png'
-import wave_up from './images/waveup.png'
-import wave_down from './images/wavedown.png'
+import background from '.././images/background.png'
+import wave_up from '.././images/waveup.png'
+import wave_down from '.././images/wavedown.png'
 
 import './Profile.css'
 import { useEffect } from 'react'
