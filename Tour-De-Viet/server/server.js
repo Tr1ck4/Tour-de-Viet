@@ -374,7 +374,6 @@ app.put('/api/transportations/:transportationID', authenticateToken, (req, res) 
 });
 app.get('/api/tours/:townID/:tourName/:startDate', (req, res) => {
     const {townID, tourName, startDate} = req.params;
-    console.log(townID, tourName, startDate);
     userModel.getTourbyDate(townID, tourName, startDate, (err, rows) => {
         if (err) {
             res.status(404).json({ error: err.message });

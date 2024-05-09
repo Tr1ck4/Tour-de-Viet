@@ -26,11 +26,11 @@ class ToursService {
         throw new Error('Network response was not ok');
       }
   
-      const data = await response.json(); // Parse response body as JSON
+      const data = await response.json();
       return data;
     } catch (error) {
       console.error('Error fetching tours:', error);
-      throw error; // Rethrow the error to be caught by the caller if needed
+      throw error; 
     }
   }
   
