@@ -358,6 +358,18 @@ app.post('/api/transportations', authenticateToken, (req, res) => {
     });
 });
 
+
+
+app.get('/api/transportations',authenticateToken, (req, res) => {
+    userModel.getAllTransportations((err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(rows);
+    });
+});
+
 app.put('/api/transportations/:transportationID', authenticateToken, (req, res) => {
     const { ID } = req.params;
     const { name, startDate, endDate, price, goFrom, arriveAt } = req.body;
@@ -422,13 +434,15 @@ app.post('/api/tours', authenticateToken, (req, res) => {
     });
 });
 
-app.get('/api/tours', (req, res) => {
-    userModel.getAllTour((err, row) => {
+
+
+app.get('/api/tours',authenticateToken, (req, res) => {
+    userModel.getAllTours((err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
         }
-        res.json(row);
+        res.json(rows);
     });
 });
 
