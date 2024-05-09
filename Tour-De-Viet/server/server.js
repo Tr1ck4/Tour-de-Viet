@@ -7,7 +7,8 @@ import { expressjwt } from "express-jwt";
 
 import nodemailer from 'nodemailer';
 import OpenAI from 'openai';
-import {storeImage} from './ImageBuilder.js'
+import {storeImage, createFolder} from './ImageBuilder.js'
+import multer from 'multer';
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -31,7 +32,7 @@ var mailOptions = {
 //     console.log('Email sent: ' + info.response);
 //   }
 // });
-
+const upload = multer(); 
 
 const openai = new OpenAI({
     baseURL: 'http://localhost:11434/v1',
@@ -461,13 +462,15 @@ app.put('/api/tours/:tourName', authenticateToken, (req, res) => {
         });
     });
 });
-
-app.post('/upload', async (req, res) => {
-    const { townID, tournament } = req.query;
-    const imageFile = req.files.image; // Assuming multipart/form-data is used for image upload
+app.post('/upload', upload.single('image'), async (req, res) => {
+    const { townID, tourName } = req.body; // Access townID and tourName from req.body
+    const imageFile = req.file; // Access image file from req.file
 
     try {
-        await storeImage(imageFile.data, townID, tournament, imageFile.name);
+        // Create folder and store image
+        await createFolder(tourName);
+        await storeImage(imageFile.buffer, tourName, imageFile.originalname);
+
         res.status(200).send('Image uploaded successfully');
     } catch (error) {
         console.error('Error uploading image:', error);
