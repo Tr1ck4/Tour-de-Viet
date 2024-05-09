@@ -70,7 +70,9 @@ class UserModel {
     this.db.run(sql, [rating, townID, tourName, userName], callback);
   }
 
-
+  getAllTransportations(callback) {
+    this.db.all("SELECT * FROM transportations ", callback);
+  }
   getTranportations(ID, callback) {
     this.db.all("SELECT * FROM transportations WHERE ID = ?", [ID], callback)
   }
@@ -87,8 +89,9 @@ class UserModel {
     this.db.run(sql, [Name, startDate, endDate, price, goFrom, arriveAt, type, ID], callback);
   }
 
-  getAllTour(callback) {
-    this.db.all("SELECT * FROM tours", callback);
+
+  getAllTours(callback) {
+    this.db.all("SELECT * FROM tours JOIN tour_date ON tours.tourName = tour_date.tourName", callback);
   }
   getTourbyDate(townID, tourName, startDate, callback) {
     let sql = `SELECT 

@@ -36,8 +36,8 @@ export default function History() {
                 <img src={corner} alt="" className='absolute w-2/3 right-0 top-0' />
             </div>
             <div className='absolute w-4/5 h-4/5 rounded-xl inset-0 mx-auto mt-32 bg-dark-green bg-opacity-90 drop-shadow-2xl shadow-2xl'>
-                <button className='bg-bright-yellow absolute my-5 mx-12 w-1/12 h-14 text-xl rounded-xl font-Itim shadow-lg drop-shadow-2xl' onClick={() => setShowOngoing(true)}> On Going</button>
-                <button className='bg-bright-yellow absolute mx-52 my-5 w-1/12 h-14 text-xl rounded-xl font-Itim shadow-lg drop-shadow-2xl' onClick={() => setShowOngoing(false)}> History</button>
+                <button className='bg-bright-yellow absolute my-5 mx-12 w-1/12 h-14 text-xl rounded-xl font-itim shadow-lg drop-shadow-2xl' onClick={() => setShowOngoing(true)}> On Going</button>
+                <button className='bg-bright-yellow absolute mx-52 my-5 w-1/12 h-14 text-xl rounded-xl font-itim shadow-lg drop-shadow-2xl' onClick={() => setShowOngoing(false)}> History</button>
                 <div className=' h-5/6 inset-0 mt-20 mx-auto absolute no-scrollbar overflow-y-auto text-3xl '>
                     {showOngoing ? (
                         <ul>
