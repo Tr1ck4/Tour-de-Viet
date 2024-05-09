@@ -7,6 +7,7 @@ import { expressjwt } from "express-jwt";
 
 import nodemailer from 'nodemailer';
 import OpenAI from 'openai';
+import {storeImage} from './ImageBuilder.js'
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -445,6 +446,19 @@ app.put('/api/tours/:tourName', authenticateToken, (req, res) => {
             data: req.body
         });
     });
+});
+
+app.post('/upload', async (req, res) => {
+    const { townID, tournament } = req.query;
+    const imageFile = req.files.image; // Assuming multipart/form-data is used for image upload
+
+    try {
+        await storeImage(imageFile.data, townID, tournament, imageFile.name);
+        res.status(200).send('Image uploaded successfully');
+    } catch (error) {
+        console.error('Error uploading image:', error);
+        res.status(500).send('Internal server error');
+    }
 });
 
 app.get("*", (req, res) => {
