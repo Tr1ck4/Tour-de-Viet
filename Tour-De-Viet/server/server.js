@@ -51,12 +51,6 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use(cors({
-    origin: 'http://localhost:3000', // Adjust this to your frontend URL or use '*' to allow all origins
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'x-stainless-os'], // Add 'x-stainless-os' here
-}));
-
 app.post('/api/chat', async (req, res) => {
     const { message } = req.body;
 

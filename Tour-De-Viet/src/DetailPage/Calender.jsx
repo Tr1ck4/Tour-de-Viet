@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './TourDetailPage.css';
 import TourService from '../../server/TourService.js';
+import './Calendar.css'
 
 export default function Calendar({townID, tourName}) {
     const currentDate = new Date();
@@ -48,23 +49,23 @@ export default function Calendar({townID, tourName}) {
 
     return (
         <>
-            <div className="w-auto h-40 bg-bone-white flex gap-3 rounded-2xl mt-14 content-center items-center justify-between px-4">
-            <button onClick={handlePrevPage} className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full">
-                <svg className="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="w-auto h-32 bg-bone-white flex gap-3 rounded-2xl mt-14 content-center items-center justify-between px-4 calendarRow">
+            <button onClick={handlePrevPage} className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full hover:outline-none hover:border-none hover:bg-light-green focus:outline-none focus:border-none">
+                <svg className="w-6 h-6 text-gray-600 hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"></path>
                 </svg>
             </button>
                 {visibleArray.map((data, index) => (
-                    <div key={index} className="flex text-center">
+                    <div key={index} className="">
                         <button onClick={() => handleClick(data)} 
-                        className=' px-10 bg-[#D9D9D9] text-black size-14 mx-3 shadow-lg text-center'>
-                                <p>{data.Month}</p>
-                                <p>{data.Day}</p>
+                        className=' bg-[#D9D9D9] text-black size-20 mx-3 shadow-lg calendarCell'>
+                                <div className="text-dark-green text-xl font-semibold">{data.Month}</div>
+                                <div className="text-dark-green text-2xl font-semibold">{data.Day}</div>
                         </button>
                     </div>
                 ))}
-                <button onClick={handleNextPage} className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full">
-                <svg className="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" transform='scale(-1,1)'>
+                <button onClick={handleNextPage} className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full hover:outline-none hover:border-none hover:bg-light-green focus:outline-none focus:border-none">
+                <svg className="w-6 h-6 text-gray-600 hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" transform='scale(-1,1)'>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"></path>
                 </svg>
             </button>
