@@ -28,6 +28,24 @@ class AccountService {
         }
 
     }
+    async authenticate() {
+        try {
+            const response = await fetch(`${this.baseUrl}/api/authenticate`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Failed to authenticate');
+            }
+            return true;
+        } catch (error) {
+            console.error('Authentication error:', error.message);
+            return false;
+        }
+    }
+    
     async login(username, password) {
         try {
             const response = await fetch(`${this.baseUrl}/api/login`, {

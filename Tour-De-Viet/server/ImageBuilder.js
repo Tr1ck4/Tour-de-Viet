@@ -4,7 +4,6 @@ import path from 'path';
 export async function createFolder(folderName, dir = './src/image') {
     try {
         dir = path.normalize(dir);
-
         const currentDir = process.cwd();
         const folderPath = path.resolve(currentDir, dir, folderName);
 
@@ -34,4 +33,3 @@ export async function storeImage(imageData, tourName, fileName) {
         console.error(`Error storing image: ${err}`);
     }
 }
-

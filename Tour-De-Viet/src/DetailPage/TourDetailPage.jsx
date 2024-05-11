@@ -6,6 +6,7 @@ import bg from '../assets/Background/TourPageDetailed_bg.png';
 import ToursService from '../../server/TourService';
 import CommentService from '../../server/CommentService';
 import CommnetSection from '../tourPageDetailComponent/commentSection';
+import Calendar from './Calender';
 
 const TourDetailPage = () => {
     const { townID, tourName } = useParams(); // Get the tourId from the route parameters
@@ -171,16 +172,9 @@ const TourDetailPage = () => {
                             </div>
                         </div>
 
-                        <div className='w-auto h-40 bg-orange-400 grid grid-cols-10 gap-3 rounded-2xl mt-14'>
-                            <div className='col-span-2'></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
+                        {/* </div><div className='w-auto h-40 bg-bone-white flex gap-3 rounded-2xl mt-14 content-center items-center justify-between'> */}
+                            <Calendar townID={townID} tourName={tourName}></Calendar>
+                        
                     </div>
                 </div>
             </main>
