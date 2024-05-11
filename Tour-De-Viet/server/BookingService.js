@@ -32,7 +32,7 @@ class BookingService {
         body: JSON.stringify({
           "userName": newData.userName,
           "tourName": newData.tourName,
-          "flightID": newData.flightID,
+          "flightID": newData.transportationID,
           "cardID": newData.cardID,
         })
       });

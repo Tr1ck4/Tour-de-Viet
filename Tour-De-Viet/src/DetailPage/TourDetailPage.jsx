@@ -6,7 +6,7 @@ import bg from '../assets/Background/TourPageDetailed_bg.png';
 import ToursService from '../../server/TourService';
 import CommentService from '../../server/CommentService';
 import CommnetSection from '../tourPageDetailComponent/commentSection';
-import Calendar from './Calender';
+import Calendar from '../tourPageDetailComponent/Calender';
 
 const TourDetailPage = () => {
     const { townID, tourName } = useParams(); // Get the tourId from the route parameters
@@ -14,6 +14,7 @@ const TourDetailPage = () => {
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showCommentSection, setShowCommentSection] = useState(false);
+    
 
     useEffect(() => {
         const fetchTourDetails = async () => {
@@ -135,7 +136,7 @@ const TourDetailPage = () => {
 
                         <div className='w-auto h-[400px] inline-flex gap-1'>
                             <div className='bg-light-green rounded-2xl h-[400px] w-[856px]'>
-                                <div>{tourDetails.description == null ? null : tourDetails.description.Header}</div>
+                                <div>{tourDetails.description == null ? tourName : tourDetails.description.Header}</div>
                                 <div>{tourDetails.description == null ? null : tourDetails.description.Content}</div>
                             </div>
 
