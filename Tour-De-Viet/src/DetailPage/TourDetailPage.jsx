@@ -6,7 +6,7 @@ import bg from '../assets/Background/TourPageDetailed_bg.png';
 import ToursService from '../../server/TourService';
 import CommentService from '../../server/CommentService';
 import CommnetSection from '../tourPageDetailComponent/commentSection';
-import Calendar from '../tourPageDetailComponent/Calender';
+import Calendar from './Calender'
 
 const TourDetailPage = () => {
     const { townID, tourName } = useParams(); // Get the tourId from the route parameters

@@ -11,7 +11,7 @@ function Header() {
     const fetchUsername = async () => {
       try {
         const response = await account.authenticate();
-        setUsername(response.data.username);
+        setUsername(response.username);
         setIsLogged(true);
       } catch (error) {
         console.error('Error fetching username:', error);

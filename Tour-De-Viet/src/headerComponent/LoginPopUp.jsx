@@ -7,10 +7,12 @@ const LoginPopUp = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const handleSubmit = async (event) => {
-        event.preventDefault();
         const newAccount = new AccountService();
         try {
             const res = await newAccount.login(username, password);
+            if (!res.ok){
+                throw new Error('Cannot loggin with this account');
+            }
             window.location.reload();
         }
         catch (err) {

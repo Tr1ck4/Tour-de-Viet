@@ -101,7 +101,7 @@ class UserModel {
         tour_date AS td ON t.tourName = td.tourName
     WHERE  t.townID = ? AND t.tourName = ? AND td.startDate = ?
     `
-    this.db.all(sql, [townID, tourName, startDate], callback)
+    this.db.get(sql, [townID, tourName, startDate], callback)
   }
   getTour(townID, tourName, callback) {
     let sql = `SELECT t.*,

@@ -1,5 +1,5 @@
 import './index.css'
-import React from 'react'
+import React from 'react';
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
@@ -8,11 +8,10 @@ import ParallaxPage from './ParallaxPage/Parallax.jsx'
 import HomePage from './HomePage/Home.jsx'
 import TourPage from './TourPage/TourPage.jsx'
 import Register from './RegisterPage/Register.jsx';
-import TourDetailPage from './DetailPage/TourDetailPage.jsx';
+import TourDetailPage from './DetailPage/TourDetailPage.jsx'
 import BookTourPage from './BookTourPage/BookTourPage.jsx';
 import ProfilePage from './ProfilePage/Profile.jsx';
 import Bot from './Bot/Bot.jsx';
-import Calendar from './DetailPage/Calender.jsx';
 import AdminPage from './AdminPage/Admin.jsx';
 
 export default function App() {
@@ -34,7 +33,6 @@ export default function App() {
         <Route path='/profile' element={<ProfilePage />} />
         <Route path='/bot' element={<Bot />}/>
         <Route path='/admin' element={<AdminPage />}/>
-        <Route path='/calendar/:townID/:tourName' element={<Calendar/>}/>
       </Routes>
     </Router>
   );
