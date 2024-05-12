@@ -121,7 +121,6 @@ const TourDetailPage = () => {
                                 <div className='bg-gray-400 rounded-br-2xl'></div>
                             </div>
                         </div>
-
                         {/* <div className='w-auto h-[400px] my-4 grid grid-rows-3 grid-flow-col gap-2 '>
                             <div className='bg-light-green row-span-3 col-span-6 rounded-2xl'></div>
                             <div className='rateStar bg-bright-yellow col-span-2 rounded-2xl flex items-center justify-center'>
@@ -133,11 +132,15 @@ const TourDetailPage = () => {
                             </div>
                             <div className='bg-light-green row-span-2 col-span-2 rounded-2xl'></div>
                         </div> */}
-
                         <div className='w-auto h-[400px] inline-flex gap-1'>
                             <div className='bg-light-green rounded-2xl h-[400px] w-[856px]'>
+<<<<<<< Updated upstream
                                 <div>{tourDetails.description == null ? tourName : tourDetails.description.Header}</div>
                                 <div>{tourDetails.description == null ? null : tourDetails.description.Content}</div>
+=======
+                                <div className='text-3xl font-itim font-semibold my-3 mx-10'>{tourDetails.description == null ? null : tourDetails.description.Header}</div>
+                                <div className='text-lg my-2 mx-3'>{tourDetails.description == null ? null : tourDetails.description.Content}</div>
+>>>>>>> Stashed changes
                             </div>
 
                             <div>
