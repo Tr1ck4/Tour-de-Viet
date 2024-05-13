@@ -32,7 +32,6 @@ export default function Calendar({townID, tourName}) {
     const handleClick = async (data) => {
         try {
             const date = `${data.Year}-${data.Month < 10 ? `0${data.Month}` : data.Month}-${data.Day < 10 ? `0${data.Day}` : data.Day}`;
-
             const tourservice = new TourService(townID, tourName, null, null, date, null, null, null);
             const response = await tourservice.fetchTourByDate();
             

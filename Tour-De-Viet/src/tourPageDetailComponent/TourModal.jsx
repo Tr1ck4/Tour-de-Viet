@@ -43,27 +43,31 @@ export default function TourModal({ data, isOpen, onClose}) {
         <>
             {isOpen &&
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                    <div className="popup-content">
-                        <form>
-                            <ul>
-                                <li>{data.tourName}</li>
-                                <li>{info.userName}</li>
-                                <li>{info.telNum}</li>
-                                <li>{info.email}</li>
-                                <li>{data.price}</li>
-                                <li>{data.startDate} - {data.endDate}</li>
-                                <li>{data.transportationID ? data.transportationID : 'No transportation specified'}</li>
-                                <li>
-                                    <input type="text" placeholder="Enter Card ID" 
-                                    value={cardID} 
-                                    onChange={(e)=>{setCardId(e.target.value)}}/>
-                                </li>
-                                <li>
-                                    <button onClick={handleBook}>Checkout</button>
-                                </li>
-                            </ul>
-                        </form>
-                        <div className="close-btn" onClick={onClose}>Close</div>
+                    <div className=" bg-white/10 rounded-lg p-8 relative h-3/5 w-1/3 backdrop-blur-md shadow-lg font-itim text-3xl ">                           
+                            <div className="h-12"><label className="col-span-1 text-black  ">Tour Name: </label>{data.tourName}</div>
+
+                            <div className="h-12"><label className="col-span-1 text-black ">Your Name: </label>{info.userName}</div>
+
+                            <div className="h-12"><label className="col-span-1 text-black ">Phone number: </label>{info.telNum}</div>
+
+                            <div className="h-12"><label className="col-span-1 text-black ">Email: </label>{info.email}</div>
+
+                            <div className="h-12"><label className="col-span-1 text-black ">Trip date: </label>{data.startDate} - {data.endDate}</div>
+
+                            <div className="h-12"><label className="col-span-1 text-black ">Transportation: </label>{data.transportationID ? data.transportationID : 'No transportation specified'}</div>
+
+                            <div className="h-12"><label className="col-span-1 text-black ">Total Price: </label>{data.price}</div>
+                            <div className="h-12">
+                                <label className="col-span-1 text-black">Card ID: </label>
+                                <input type="text" placeholder="Enter Card ID" 
+                                value={cardID} 
+                                onChange={(e)=>{setCardId(e.target.value)}}/>
+                            </div>
+
+                            <div >
+                                <button className = "absolute bottom-0 right-0 p-4" onCdivck={handleBook}>Book now</button>
+                            </div>
+                        <button className = "absolute top-0 right-0 p-4"onCdivck={onClose}>x</button>
                     </div>
                 </div>
             }
