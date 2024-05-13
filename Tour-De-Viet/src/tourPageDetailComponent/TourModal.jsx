@@ -4,6 +4,7 @@ import BookingService from '../../server/BookingService';
 
 export default function TourModal({ data, isOpen, onClose}) {
     const [info, setInfo] = useState({});
+    const [cardID, setCardId] = useState('');
     const accountService = new AccountService();
     const bookingService = new BookingService();
 
@@ -28,11 +29,10 @@ export default function TourModal({ data, isOpen, onClose}) {
             const response = await bookingService.createBooking({
                 "tourName": data.tourName,
                 "transportationID": data.transportationID,
-                "cardID": info.cardID,
+                "cardID": cardID,
             });
             if (response) {
-                console.log(response);
-                //isClose(true);
+                isClose(true);
             }
         } catch (error) {
             console.error('Error booking tour:', error);
@@ -54,7 +54,9 @@ export default function TourModal({ data, isOpen, onClose}) {
                                 <li>{data.startDate} - {data.endDate}</li>
                                 <li>{data.transportationID ? data.transportationID : 'No transportation specified'}</li>
                                 <li>
-                                    <input type="text" placeholder="Enter Card ID" />
+                                    <input type="text" placeholder="Enter Card ID" 
+                                    value={cardID} 
+                                    onChange={(e)=>{setCardId(e.target.value)}}/>
                                 </li>
                                 <li>
                                     <button onClick={handleBook}>Checkout</button>

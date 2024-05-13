@@ -35,6 +35,7 @@ export default function Calendar({townID, tourName}) {
 
             const tourservice = new TourService(townID, tourName, null, null, date, null, null, null);
             const response = await tourservice.fetchTourByDate();
+            
             setPopupData(response);
             setPopupOpen(true);
         } catch (error) {

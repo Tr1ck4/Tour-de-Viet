@@ -165,9 +165,9 @@ app.get('/api/bookings/info', authenticateToken, (req, res) => {
 
 app.post('/api/bookings', authenticateToken, (req, res) => {
     const token = getTokenFromCookie(req);
-
     const userName = jwt.decode(token).accountname;
     const { tourName, transportationID, cardID } = req.body;
+    
     userModel.createBooking(userName, tourName, transportationID, cardID, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -382,6 +382,7 @@ app.put('/api/transportations/:transportationID', authenticateToken, (req, res) 
 });
 app.get('/api/tours/:townID/:tourName/:startDate', (req, res) => {
     const {townID, tourName, startDate} = req.params;
+    console.log(townID, tourName, startDate)
     userModel.getTourbyDate(townID, tourName, startDate, (err, rows) => {
         if (err) {
             res.status(404).json({ error: err.message });
