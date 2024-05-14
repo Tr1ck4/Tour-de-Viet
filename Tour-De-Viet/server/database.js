@@ -95,10 +95,12 @@ class UserModel {
   }
   getTourbyDate(townID, tourName, startDate, callback) {
     let sql = `SELECT 
-    t.*, td.startDate, td.endDate
+    t.*, td.startDate, td.endDate, tr.*
     FROM tours as t 
     JOIN 
-        tour_date AS td ON t.tourName = td.tourName
+      tour_date AS td ON t.tourName = td.tourName
+    LEFT JOIN 
+      transportations AS tr ON t.transportationID = tr.ID
     WHERE  t.townID = ? AND t.tourName = ? AND td.startDate = ?
     `
     this.db.get(sql, [townID, tourName, startDate], callback)
