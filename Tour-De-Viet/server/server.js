@@ -327,11 +327,13 @@ app.post('/api/transportations', authenticateToken, (req, res) => {
     });
 });
 
-app.put('/api/transportations/:transportationID', authenticateToken, (req, res) => {
+app.put('/api/transportations/:ID', authenticateToken, (req, res) => {
+    
     const { ID } = req.params;
-    const { name, startDate, endDate, price, goFrom, arriveAt, type } = req.body;
+    const {Name, startDate, endDate, price, goFrom, arriveAt, type } = req.body;
+    console.log(Name, startDate, endDate, price, goFrom, arriveAt, type);
 
-    userModel.updateTransportations(ID, name, startDate, endDate, price, goFrom, arriveAt, type, (err) => {
+    userModel.updateTransportations(ID, Name, startDate, endDate, price, goFrom, arriveAt, type, (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -343,20 +345,20 @@ app.put('/api/transportations/:transportationID', authenticateToken, (req, res) 
     });
 });
 
-app.post('/api/transportations', authenticateToken, (req, res) => {
-    const { name, startDate, endDate, price, goFrom, arriveAt } = req.body;
+// app.post('/api/transportations', authenticateToken, (req, res) => {
+//     const { name, startDate, endDate, price, goFrom, arriveAt } = req.body;
 
-    userModel.createTransportations(name, startDate, endDate, price, goFrom, arriveAt, (err, result) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json({
-            message: 'Transportation created',
-            data: req.body,
-        });
-    });
-});
+//     userModel.createTransportations(name, startDate, endDate, price, goFrom, arriveAt, (err, result) => {
+//         if (err) {
+//             res.status(500).json({ error: err.message });
+//             return;
+//         }
+//         res.json({
+//             message: 'Transportation created',
+//             data: req.body,
+//         });
+//     });
+// });
 
 
 
@@ -370,21 +372,21 @@ app.get('/api/transportations',authenticateToken, (req, res) => {
     });
 });
 
-app.put('/api/transportations/:transportationID', authenticateToken, (req, res) => {
-    const { ID } = req.params;
-    const { name, startDate, endDate, price, goFrom, arriveAt } = req.body;
+// app.put('/api/transportations/:transportationID', authenticateToken, (req, res) => {
+//     const { ID } = req.params;
+//     const { name, startDate, endDate, price, goFrom, arriveAt } = req.body;
 
-    userModel.updateTransportations(ID, name, startDate, endDate, price, goFrom, arriveAt, (err) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json({
-            message: 'Transportation updated',
-            data: req.body
-        });
-    });
-});
+//     userModel.updateTransportations(ID, name, startDate, endDate, price, goFrom, arriveAt, (err) => {
+//         if (err) {
+//             res.status(500).json({ error: err.message });
+//             return;
+//         }
+//         res.json({
+//             message: 'Transportation updated',
+//             data: req.body
+//         });
+//     });
+// });
 app.get('/api/tours/:townID/:tourName/:startDate', (req, res) => {
     const {townID, tourName, startDate} = req.params;
     userModel.getTourbyDate(townID, tourName, startDate, (err, rows) => {
@@ -458,6 +460,34 @@ app.put('/api/tours/:tourName', authenticateToken, (req, res) => {
         res.json({
             message: 'Tour updated',
             data: req.body
+        });
+    });
+});
+
+app.delete('/api/tours/:tourName', authenticateToken, (req, res) => {
+    const { tourName } = req.params;
+
+    userModel.deleteTour(tourName, (err) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json({
+            message: 'Tour deleted',
+        });
+    });
+});
+
+app.delete('/api/transportation/:transportationID', authenticateToken, (req, res) => {
+    const { transportationID } = req.params;
+
+    userModel.deleteTransportations(transportationID, (err) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json({
+            message: 'Transportation deleted',
         });
     });
 });

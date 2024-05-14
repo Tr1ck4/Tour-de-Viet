@@ -8,7 +8,8 @@ const TransportationModal = ({ transportation, onClose, onSave }) => {
         seteditedTransportation((prev) => ({ ...prev, [id]: value }));
     };
 
-    const handleSave = () => {
+    const handleSave = (e) => {
+        e.preventDefault();
         onSave(editedTransportation);
         onClose();
     };
@@ -18,7 +19,8 @@ const TransportationModal = ({ transportation, onClose, onSave }) => {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div className="bg-white/10 rounded-lg shadow-lg p-8 relative h-4/5 w-1/3 backdrop-blur-md shadow-lg font-itim text-3xl">
                 <h2 className=" text-4xl font-bold mb-4 text-black">Edit transportation</h2>
-                <form className="grid grid-cols-3 gap-4" onSubmit={(e) => e.preventDefault()}>
+                <form className="grid grid-cols-3 gap-4">
+
                     <label className="col-span-1 text-black">ID:</label>
                     <input className='bg-white text-black h-12 rounded-lg shadow-lg col-span-2 mr-7 pl-3' type="text" id="ID" 
                     defaultValue={editedTransportation.ID} onChange={handleChange} />

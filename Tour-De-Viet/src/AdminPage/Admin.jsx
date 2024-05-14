@@ -63,7 +63,7 @@ export default function AdminPage() {
             }
         };
 
-        const fetchBookings = async () => {
+        const fetchTours = async () => {
             try {
                 const response = await axios.get('/api/tours');
                 console.log(response.data);
@@ -94,16 +94,33 @@ export default function AdminPage() {
         };
 
         fetchRole();
-        fetchBookings();
+        fetchTours();
         fetchTransporations();
     }, []);
 
-    const handleDelete = async (id) => {
+    const handleDeletePastTour = async (tourName) => {
         try {
-            await axios.delete(`/api/tours/${id}`); // Adjust this to your API endpoint
-            setBookings((prev) => prev.filter((booking) => booking.id !== id));
+            await axios.delete(`/api/tours/${tourName}`);
+            setClose((prev) => prev.filter((tour) => tour.tourName !== tourName));
         } catch (error) {
-            console.error('Error deleting booking:', error);
+            console.error('Error deleting Tour:', error);
+        }
+    };
+    const handleDeleteOngoingTour = async (tourName) => {
+        try {
+            await axios.delete(`/api/tours/${tourName}`);
+            setOn((prev) => prev.filter((tour) => tour.tourName !== tourName));
+        } catch (error) {
+            console.error('Error deleting Tour:', error);
+        }
+    };
+
+    const handleDeleteTransportation = async (transportationID) => {
+        try {
+            await axios.delete(`/api/transportation/${transportationID}`);
+            setTransportation((prev) => prev.filter((transportation) => transportation.ID !== transportationID));
+        } catch (error) {
+            console.error('Error deleting Transportation:', error);
         }
     };
 
@@ -124,16 +141,41 @@ export default function AdminPage() {
         setSelectedTransporation(null);
     };
 
-    const handleSave = async (updatedBooking) => {
+    const handleSaveTour = async (updatedTour) => {
         try {
-            await axios.put(`/api/bookings/${updatedBooking.id}`, updatedBooking); // Update API endpoint
-            setBookings((prev) =>
-                prev.map((booking) =>
-                    booking.id === updatedBooking.id ? updatedBooking : booking
+            await axios.put(`/api/tours/${updatedTour.tourName}`, updatedTour); // Update API endpoint
+            setTours((prev) =>
+                prev.map((tour) =>
+                    tour.tourName === updatedTour.tourName ? updatedTour : tour
                 )
             );
         } catch (error) {
-            console.error('Error updating booking:', error);
+            console.error('Error updating Tour:', error);
+        }
+        handleModalClose();
+    };
+
+    const handleSaveTransportation = async (updatedTransportation) => {
+        try {
+            await axios.put(`/api/transportations/${updatedTransportation.ID}`, updatedTransportation); // Update API endpoint
+            setTransportation((prev) =>
+                prev.map((transportation) =>
+                    transportation.ID === updatedTransportation.ID ? updatedTransportation : transportation
+                )
+            );
+        } catch (error) {
+            console.error('Error updating transportation:', error);
+        }
+        handleModalClose();
+    };
+
+    
+    const handleCreate = async (newTour) => {
+        try {
+            await axios.put('/api/tours/', newTour); // Update API endpoint
+            window.location.reload();
+        } catch (error) {
+            console.error('Error creating booking:', error);
         }
         handleModalClose();
     };
@@ -159,7 +201,7 @@ export default function AdminPage() {
                                     <p>{new Date(booking.endDate).toLocaleDateString(('en-GB'))}</p>
                                     <p>{booking.price}</p>
                                 </li>
-                                <button className='absolute top-5 right-20 w-1/12 h-14 bg-bright-yellow text-xl rounded-xl font-itim shadow-lg drop-shadow-2xl' onClick={() => handleDelete(booking.id)}>
+                                <button className='absolute top-5 right-20 w-1/12 h-14 bg-bright-yellow text-xl rounded-xl font-itim shadow-lg drop-shadow-2xl' onClick={() => handleDeleteOngoingTour(booking.tourName)}>
                                     Delete
                                 </button>
                             </div>
@@ -189,7 +231,7 @@ export default function AdminPage() {
                                     <p>{new Date(booking.endDate).toLocaleDateString(('en-GB'))}</p>
                                     <p>{booking.price}</p>
                                 </li>
-                                <button className='absolute top-5 right-20 w-1/12 h-14 bg-bright-yellow text-xl rounded-xl font-itim shadow-lg drop-shadow-2xl' onClick={() => handleDelete(booking.id)}>
+                                <button className='absolute top-5 right-20 w-1/12 h-14 bg-bright-yellow text-xl rounded-xl font-itim shadow-lg drop-shadow-2xl' onClick={() => handleDeletePastTour(booking.tourName)}>
                                     Delete
                                 </button>
                             </div>
@@ -204,23 +246,30 @@ export default function AdminPage() {
             return <div>Loading...</div>; // Or a similar fallback for when data isn't ready
         }
         return (
-            <ul>
-                <li className='w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-light-green inset-0 mx-auto mt-7 font-itim text-white  content-center pl-10 ' >
-                    <p>Transportation ID:</p>
-                    <p>Name:</p>
-                    <p >Start Date:</p>
-                    <p>End Date:</p>
+            <ul className="relative">
+                <li className='sticky w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-light-green inset-0 mx-auto mt-7 font-itim text-white  content-center pl-10 ' >
+                    <p>ID</p>
+                    <p>Name</p>
+                    <p >Start Date</p>
+                    <p>End Date</p>
                 </li>
+                <div className="h-96 no-scrollbar overflow-y-auto">
                 {transportations.map((transportation) => {
                     return (
+                        <div className='relative'>
                         <li className='w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-light-green inset-0 mx-auto mt-7 font-itim text-white  content-center pl-10 ' onClick={() => handleTransportationClick(transportation)}>
                             <p>{transportation.ID}</p>
                             <p>{transportation.Name}</p>
                             <p>{transportation.startDate}</p>
                             <p>{transportation.endDate}</p>
                         </li>
+                        <button className='absolute top-5 right-20 w-1/12 h-14 bg-bright-yellow text-xl rounded-xl font-itim shadow-lg drop-shadow-2xl' onClick={() => handleDeleteTransportation(transportation.ID)}>
+                                    Delete
+                                </button>
+                        </div>
                     )
                 })}
+                </div>
             </ul>
         )
     }
@@ -275,14 +324,14 @@ export default function AdminPage() {
                         <BookingModal
                             booking={selectedBooking}
                             onClose={handleModalClose}
-                            onSave={handleSave}
+                            onSave={handleSaveTour}
                         />
                     )}
                     {isTransportationModalOpen && selectedTransportation && (
                         <TransportationModal
                             transportation={selectedTransportation}
                             onClose={handleModalClose}
-                            onSave={handleSave}
+                            onSave={handleSaveTransportation}
                         />
                     )}
                 </div>

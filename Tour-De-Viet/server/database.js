@@ -5,9 +5,11 @@ class UserModel {
       if (err) {
         console.error('Error connecting to database:', err.message);
       } else {
+
+        // this.db.run("PRAGMA foreign_keys = ON");
         this.db.run("CREATE TABLE IF NOT EXISTS \
         comments (townID INT, tourName TEXT, comment TEXT, userName TEXT, rating REAL,\
-          FOREIGN KEY (tourName) REFERENCES tours(tourName),\
+          FOREIGN KEY (tourName) REFERENCES tours(tourName) ON DELETE CASCADE,\
           FOREIGN KEY (userName) REFERENCES accounts(userName))");
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
@@ -17,7 +19,7 @@ class UserModel {
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
         tour_date(tourName TEXT NOT NULL, startDate TEXT NOT NULL, endDate TEXT NOT NULL,\
-          FOREIGN KEY (tourName) REFERENCES tours(tourName))");
+          FOREIGN KEY (tourName) REFERENCES tours(tourName) ON DELETE CASCADE)");
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
         transportations (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, startDate TEXT NOT NULL, endDate TEXT NOT NULL, price REAL NOT NULL, goFrom TEXT NOT NULL, arriveAt TEXT NOT NULL, type TEXT)");
@@ -28,7 +30,7 @@ class UserModel {
 
         this.db.run("CREATE TABLE IF NOT EXISTS \
         bookings (userName TEXT NOT NULL, tourName TEXT NOT NULL, transportationID INT, cardID INT NOT NULL,\
-          FOREIGN KEY (tourName) REFERENCES tours(tourName),\
+          FOREIGN KEY (tourName) REFERENCES tours(tourName)ON DELETE CASCADE,\
           FOREIGN KEY (userName) REFERENCES accounts(userName),\
           FOREIGN KEY (transportationID) REFERENCES transportations(ID))");
 
@@ -85,8 +87,15 @@ class UserModel {
   }
 
   updateTransportations(ID, Name, startDate, endDate, price, goFrom, arriveAt, type, callback) {
+    console.log(ID);
+    console.log(Name, startDate, endDate, price, goFrom, arriveAt, type);
     let sql = "UPDATE transportations SET Name = ?, startDate=?, endDate=? , price=? , goFrom=? , arriveAt=?,type=? WHERE ID = ?"
-    this.db.run(sql, [Name, startDate, endDate, price, goFrom, arriveAt, type, ID], callback);
+     this.db.run(sql, [Name, startDate, endDate, price, goFrom, arriveAt, type, ID], callback);
+  }
+
+  deleteTransportations(ID,callback){
+    let sql = "DELETE FROM transportations WHERE ID = ?"
+      this.db.run(sql,ID,callback);
   }
 
 
@@ -175,6 +184,17 @@ class UserModel {
   updateTour(tourName, description, category, transportationID, startDate, endDate, price, callback) {
     let sql = "UPDATE tours SET tourName = ?, description=?, category = ?, transportationID = ?, startDate=? , endDate=? , price=?  WHERE tourName = ?"
     this.db.run(sql, [tourName, description, category, transportationID, startDate, endDate, price], callback);
+  }
+
+  deleteTour(tourName,callback){
+    let sql1 = "DELETE FROM tours WHERE tourName = ?"
+    this.db.run(sql1,tourName,callback);
+
+    // let sql2 = "DELETE FROM tour_date WHERE tourName = ?"
+    // this.db.run(sql2,tourName,callback);
+
+    // let sql3 = "DELETE FROM comments ƯHERE"
+
   }
 
 
