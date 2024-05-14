@@ -30,17 +30,16 @@ class BookingService {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          "userName": newData.userName,
           "tourName": newData.tourName,
-          "flightID": newData.flightID,
+          "transportationID": newData.transportationID,
           "cardID": newData.cardID,
         })
       });
-
+      console.log(response);
       if (!response.ok) {
         throw new Error('Failed to create booking');
       }
-
+      
       return response.status;
     } catch (error) {
       console.error('Error fetching bookings:', error);

@@ -1,10 +1,9 @@
 import fs from 'fs/promises';
 import path from 'path';
 
-export async function createFolder(folderName, dir = './Tour-de-Viet/src/image') {
+export async function createFolder(folderName, dir = './src/image') {
     try {
         dir = path.normalize(dir);
-
         const currentDir = process.cwd();
         const folderPath = path.resolve(currentDir, dir, folderName);
 
@@ -19,19 +18,17 @@ export async function createFolder(folderName, dir = './Tour-de-Viet/src/image')
     }
 }
 
-export async function storeImage(imageData, townID, tournament, fileName) {
+export async function storeImage(imageData, tourName, fileName) {
     try {
-        const baseDir = path.join(__dirname, '..', 'src', 'image'); 
-        const townDir = path.join(baseDir, townID.toString()); 
-        const tournamentDir = path.join(townDir, tournament.toString());
+        const baseDir = `./src/image/${tourName}`;
 
-        await fs.mkdir(townDir, { recursive: true });
-        await fs.mkdir(tournamentDir, { recursive: true });
+        await fs.mkdir(baseDir, { recursive: true });
 
-        const newPath = path.join(tournamentDir, fileName);
+        const newPath = path.join(baseDir, fileName);
+
         await fs.writeFile(newPath, imageData);
 
-        console.log(`Image '${fileName}' stored successfully in '${tournamentDir}'.`);
+        console.log(`Image '${fileName}' stored successfully in '${baseDir}'.`);
     } catch (err) {
         console.error(`Error storing image: ${err}`);
     }

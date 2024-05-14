@@ -3,9 +3,12 @@ import { useParams } from 'react-router-dom';
 import CommentService from '../../server/CommentService';
 import './commentSection.css';
 
+import AccountService from '../../server/AccountService';
+
 const CommentSection = () => {
     const { townID, tourName } = useParams();
     const [comment, setComment] = useState([]);
+    const [loggedIn, setLoggedIn] = useState(false);
     useEffect(() => {
         const fetchComments = async () => {
             try {
@@ -19,6 +22,22 @@ const CommentSection = () => {
 
         fetchComments();
     }, [comment]);
+
+    useEffect(() => {
+        const fetchLoggedIn = async () => {
+            try {
+                const account = new AccountService();
+                const response = await account.authenticate();
+                if (response.accountname) {
+                    setLoggedIn(true);
+                }
+            } catch (error) {
+                console.error('Error fetching username:', error);
+            }
+        };
+        fetchLoggedIn();
+    }, []);
+
     const handleInputChange = (event) => {
         setComment(event.target.value);
     };
@@ -35,20 +54,23 @@ const CommentSection = () => {
                         </div>
                     ))}
                 </div>
-                <div className='absolute bottom-0 left-0 right-0 mx-auto w-[850px] h-[60px] mb-5 flex justify-center items-center'>
-                    <textarea
-                        className='w-full h-full bg-[#d9d9d9] rounded-lg mx-3 TypingArea'
-                        placeholder="Write a comment..."
+                <div>
+                    {loggedIn && (<div className='absolute bottom-0 left-0 right-0 mx-auto w-[850px] h-[60px] mb-5 flex justify-center items-center'>
+                        <textarea
+                            className='w-full h-full bg-[#d9d9d9] rounded-lg mx-3 TypingArea'
+                            placeholder="Write a comment..."
 
-                    ></textarea>
-                    <div>
-                        <svg className="h-10 w-10 text-dark-green cursor-pointer" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                            onChange={handleInputChange}>
-                            <line x1="22" y1="2" x2="11" y2="13" />
-                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                        </svg>
-                    </div>
+                        ></textarea>
+                        <div>
+                            <svg className="h-10 w-10 text-dark-green cursor-pointer" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                                onChange={handleInputChange}>
+                                <line x1="22" y1="2" x2="11" y2="13" />
+                                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                            </svg>
+                        </div>
+                    </div>)}
                 </div>
+
             </div>
         </div>
     );

@@ -6,6 +6,8 @@ import bg from '../assets/Background/TourPageDetailed_bg.png';
 import ToursService from '../../server/TourService';
 import CommentService from '../../server/CommentService';
 import CommnetSection from '../tourPageDetailComponent/commentSection';
+import Calendar from './Calender';
+import AccountService from '../../server/AccountService';
 
 const TourDetailPage = () => {
     const { townID, tourName } = useParams(); // Get the tourId from the route parameters
@@ -13,6 +15,38 @@ const TourDetailPage = () => {
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showCommentSection, setShowCommentSection] = useState(false);
+    const [username, setUsername] = useState();
+    const [rating, setRating] = useState(null);
+
+    useEffect(() => {
+        const fetchUsername = async () => {
+            try {
+                const account = new AccountService();
+                const response = await account.authenticate();
+                if (response.accountname) {
+                    setUsername(response.accountname);
+                }
+            } catch (error) {
+                console.error('Error fetching username:', error);
+            }
+        };
+        fetchUsername();
+    }, [username]);
+
+    useEffect(() => {
+        const fetchRating = async () => {
+            try {
+                const service = new CommentService();
+                const response = await service.getUserRating(tourName, username);
+                setRating(response[0].rating)
+            } catch (error) {
+                console.error("Error fetching rating", error);
+            }
+        };
+
+        fetchRating();
+    }, [username]);
+
 
     useEffect(() => {
         const fetchTourDetails = async () => {
@@ -94,13 +128,10 @@ const TourDetailPage = () => {
         return <div>Tour not found</div>;
     }
 
-
-
     const toggleCommentSection = () => {
         console.log("I click on this");
         setShowCommentSection(!showCommentSection);
     };
-
 
     return (
         <>
@@ -134,7 +165,7 @@ const TourDetailPage = () => {
 
                         <div className='w-auto h-[400px] inline-flex gap-1'>
                             <div className='bg-light-green rounded-2xl h-[400px] w-[856px]'>
-                                <div>{tourDetails.description == null ? null : tourDetails.description.Header}</div>
+                                <div>{tourDetails.description == null ? tourName : tourDetails.description.Header}</div>
                                 <div>{tourDetails.description == null ? null : tourDetails.description.Content}</div>
                             </div>
 
@@ -171,16 +202,9 @@ const TourDetailPage = () => {
                             </div>
                         </div>
 
-                        <div className='w-auto h-40 bg-orange-400 grid grid-cols-10 gap-3 rounded-2xl mt-14'>
-                            <div className='col-span-2'></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
+                        {/* </div><div className='w-auto h-40 bg-bone-white flex gap-3 rounded-2xl mt-14 content-center items-center justify-between'> */}
+                        <Calendar townID={townID} tourName={tourName}></Calendar>
+
                     </div>
                 </div>
             </main>

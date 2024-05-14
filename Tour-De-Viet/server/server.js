@@ -7,7 +7,8 @@ import { expressjwt } from "express-jwt";
 
 import nodemailer from 'nodemailer';
 import OpenAI from 'openai';
-import {storeImage} from './ImageBuilder.js'
+import { storeImage, createFolder } from './ImageBuilder.js'
+import multer from 'multer';
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -31,7 +32,7 @@ var mailOptions = {
 //     console.log('Email sent: ' + info.response);
 //   }
 // });
-
+const upload = multer();
 
 const openai = new OpenAI({
     baseURL: 'http://localhost:11434/v1',
@@ -49,12 +50,6 @@ export const authenticateJWT = expressjwt({ secret: secretKey, algorithms: ['HS2
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'dist')));
-
-app.use(cors({
-    origin: 'http://localhost:3000', // Adjust this to your frontend URL or use '*' to allow all origins
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'x-stainless-os'], // Add 'x-stainless-os' here
-}));
 
 app.post('/api/chat', async (req, res) => {
     const { message } = req.body;
@@ -219,6 +214,29 @@ app.get('/api/comments/:townID/:tourName', (req, res) => {
     });
 });
 
+app.get('/api/checkcomments/:tourName/:username', (req, res) => {
+    const { tourName, username } = req.params;
+    userModel.checkComment(tourName, username, (err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(row);
+    });
+});
+
+app.get('/api/rating/:tourName/:username', (req, res) => {
+    const { tourName, username } = req.params;
+    userModel.getUserRating(username, tourName, (err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(row);
+    });
+});
+
+
 app.post('/api/comments', (req, res) => {
     const { townID, tourName, userName, comment, rating } = req.body;
 
@@ -362,7 +380,7 @@ app.put('/api/transportations/:ID', authenticateToken, (req, res) => {
 
 
 
-app.get('/api/transportations',authenticateToken, (req, res) => {
+app.get('/api/transportations', authenticateToken, (req, res) => {
     userModel.getAllTransportations((err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -388,7 +406,7 @@ app.get('/api/transportations',authenticateToken, (req, res) => {
 //     });
 // });
 app.get('/api/tours/:townID/:tourName/:startDate', (req, res) => {
-    const {townID, tourName, startDate} = req.params;
+    const { townID, tourName, startDate } = req.params;
     userModel.getTourbyDate(townID, tourName, startDate, (err, rows) => {
         if (err) {
             res.status(404).json({ error: err.message });
@@ -438,7 +456,7 @@ app.post('/api/tours', authenticateToken, (req, res) => {
 
 
 
-app.get('/api/tours',authenticateToken, (req, res) => {
+app.get('/api/tours', authenticateToken, (req, res) => {
     userModel.getAllTours((err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -492,12 +510,15 @@ app.delete('/api/transportation/:transportationID', authenticateToken, (req, res
     });
 });
 
-app.post('/upload', async (req, res) => {
-    const { townID, tournament } = req.query;
-    const imageFile = req.files.image; // Assuming multipart/form-data is used for image upload
+app.post('/upload', upload.single('image'), async (req, res) => {
+    const { townID, tourName } = req.body; // Access townID and tourName from req.body
+    const imageFile = req.file; // Access image file from req.file
 
     try {
-        await storeImage(imageFile.data, townID, tournament, imageFile.name);
+        // Create folder and store image
+        await createFolder(tourName);
+        await storeImage(imageFile.buffer, tourName, imageFile.originalname);
+
         res.status(200).send('Image uploaded successfully');
     } catch (error) {
         console.error('Error uploading image:', error);

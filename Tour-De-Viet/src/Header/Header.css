@@ -35,57 +35,12 @@ header ul{
   list-style:none;
   align-items: center;
 }
-header ul a{
-  text-decoration: none;
-  color: #333;
-  padding: 0 1.5rem;
-  text-transform: uppercase;
-  font-weight: 300;
-  font-size: 0.83 rem;
-}
+
 .search a{
   font-size :1.05 rem;
   padding : 0 3rem;
 }
-.hamburger{
-  padding-left : 1.5rem;
-}
-.hamburger a{
-  padding:0;
-  width:37px;
-  height: 39px;
-  border-radius:50%;
-  
-  display : flex;
-  justify-content: center;
-  align-items: center;
-  background : transparent;
-}
 
-.hamburger .bar{
-  position: relative;
-  width: 52%;
-  height:2px;
-  background-color: black;
-  border-radius:5px;
-}
-.hamburger .bar::before,
-.hamburger .bar::after{
-  content:"";
-  position: absolute;
-  width: 60%;
-  height: 100%;
-  left:50%;
-  background-color: inherit;
-  border-radius: 2px;
-  transform: translate(-50%);
-}
-.hamburger .bar::before{
-  top:-4.5px;
-}
-.hamburger .bar::after{
-  top:5px;
-}
 
 #loginButton:focus,
 #loginButton:active {

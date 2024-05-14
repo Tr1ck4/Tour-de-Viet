@@ -24,6 +24,22 @@ class CommentService {
       });
   }
 
+  async checkComments(tourName, userName) {
+    return fetch(`${this.baseUrl}/api/checkcomments/${tourName}/${userName}`)
+      .then(response => response.json())
+      .catch(error => {
+        console.error('Error checking comments:', error);
+      });
+  }
+
+  async getUserRating(tourName, userName) {
+    return fetch(`${this.baseUrl}/api/rating/${tourName}/${userName}`)
+      .then(response => response.json())
+      .catch(error => {
+        console.error('Error checking comments:', error);
+      });
+  }
+
   async createComment(newData) {
     try {
       const response = await fetch(`${this.baseUrl}/api/comments`, {

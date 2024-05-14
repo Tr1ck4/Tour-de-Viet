@@ -67,6 +67,25 @@ class UserModel {
     );
   }
 
+  checkComment(tourName, userName, callback) {
+    let sql =
+      `SELECT EXISTS (
+        SELECT 1
+        FROM bookings
+        WHERE userName = ? AND tourName = ?
+    ) AS hasBooked`;
+    this.db.all(sql, [userName, tourName], callback)
+  }
+
+  getUserRating(userName, tourName, callback) {
+    let sql =
+      `SELECT comments.rating
+    FROM comments
+    WHERE userName = ? AND tourName = ? AND rating NOT NULL`
+    this.db.all(sql, [userName, tourName], callback)
+  }
+
+
   updateRating(townID, tourName, userName, rating, callback) {
     let sql = "UPDATE comments SET rating = ? WHERE townID = ? AND tourName = ? and userName = ?";
     this.db.run(sql, [rating, townID, tourName, userName], callback);
@@ -104,13 +123,15 @@ class UserModel {
   }
   getTourbyDate(townID, tourName, startDate, callback) {
     let sql = `SELECT 
-    t.*, td.startDate, td.endDate
+    t.*, td.startDate, td.endDate, tr.*
     FROM tours as t 
     JOIN 
-        tour_date AS td ON t.tourName = td.tourName
+      tour_date AS td ON t.tourName = td.tourName
+    LEFT JOIN 
+      transportations AS tr ON t.transportationID = tr.ID
     WHERE  t.townID = ? AND t.tourName = ? AND td.startDate = ?
     `
-    this.db.all(sql, [townID, tourName, startDate], callback)
+    this.db.get(sql, [townID, tourName, startDate], callback)
   }
   getTour(townID, tourName, callback) {
     let sql = `SELECT t.*,

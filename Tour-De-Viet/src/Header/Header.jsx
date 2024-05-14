@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './Header.css';
 import LoginPopUp from '../headerComponent/LoginPopUp';
-import axios from 'axios';
+import AccountService from '../../server/AccountService';
+import Dropdown from './Dropdown';
 function Header() {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [isLoggedIn, setIsLogged] = useState(false);
   const [username, setUsername] = useState('');
-
+  const account = new AccountService();
   useEffect(() => {
-
     const fetchUsername = async () => {
       try {
-        const response = await axios.get('/api/authenticate');
-        setUsername(response.data.username);
-        setIsLogged(true);
+        const response = await account.authenticate();
+        if(response){
+          setUsername(response.username);
+          setIsLogged(true);
+        }
       } catch (error) {
         console.error('Error fetching username:', error);
       }
@@ -40,7 +42,7 @@ function Header() {
 
   const toggleLoggedOut = async () => {
     try {
-      await axios.post('/api/logout');
+      await account.logout();
       setIsLogged(false);
       setUsername('');
       window.location.reload();
@@ -63,19 +65,10 @@ function Header() {
             ) : (
               <>
                 <li><button id="loginButton" className='border-none text-black text-opacity-65 outline-none' onClick={toggleLoginPopup}>  LOGIN </button></li>
-                <li><a href="/register">Sign up</a></li>
+                <li><a href="/register" className='border-none text-black text-opacity-65 outline-none px-6'>SIGN UP</a></li>
               </>
             )}
-            <li className="search">
-              <a href="#">
-                <i className="fa-solid fa-magnifying-glass"></i>
-              </a>
-            </li>
-            <li className="hamburger">
-              <a href="#" className="border-2 rounded-full border-black">
-                <div className="bar"></div>
-              </a>
-            </li>
+            <Dropdown/>
           </ul>
         </nav>
       </header>

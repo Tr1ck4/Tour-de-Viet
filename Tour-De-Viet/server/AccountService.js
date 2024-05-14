@@ -28,6 +28,24 @@ class AccountService {
         }
 
     }
+    async authenticate() {
+        try {
+            const response = await fetch(`${this.baseUrl}/api/authenticate`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Failed to authenticate');
+            }
+            return response.json();
+        } catch (error) {
+            console.error('Authentication error:', error.message);
+            return false;
+        }
+    }
+    
     async login(username, password) {
         try {
             const response = await fetch(`${this.baseUrl}/api/login`, {
@@ -48,7 +66,8 @@ class AccountService {
         }
     }
     async fetchAccount() {
-        const response = await fetch(`${this.baseUrl}/api/accounts/info}`, {
+    try {
+        const response = await fetch(`${this.baseUrl}/api/accounts/info`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,14 +76,17 @@ class AccountService {
         if (!response.ok) {
             throw new Error('Failed to get user');
         }
-        return response.json();
-    } catch(error) {
+        const data = await response.json(); 
+        return data; 
+    } catch (error) {
         console.error('Error getting user:', error);
         if (error.message === 'Token not found') {
-            window.location.href('/login');
+            window.location.href = '/login';
         }
         throw error;
     }
+}
+
 
     async createAccount(newData) {
         return fetch(`${this.baseUrl}/api/accounts`, {

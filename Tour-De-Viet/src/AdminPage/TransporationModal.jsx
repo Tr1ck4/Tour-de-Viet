@@ -17,7 +17,7 @@ const TransportationModal = ({ transportation, onClose, onSave }) => {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white/10 rounded-lg shadow-lg p-8 relative h-4/5 w-1/3 backdrop-blur-md shadow-lg font-itim text-3xl">
+            <div className="bg-white/10 rounded-lg p-8 relative h-4/5 w-1/3 backdrop-blur-md shadow-lg font-itim text-3xl">
                 <h2 className=" text-4xl font-bold mb-4 text-black">Edit transportation</h2>
                 <form className="grid grid-cols-3 gap-4">
 
