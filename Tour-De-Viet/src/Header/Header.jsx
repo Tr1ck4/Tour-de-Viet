@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Header.css';
 import LoginPopUp from '../headerComponent/LoginPopUp';
 import AccountService from '../../server/AccountService';
+import Dropdown from './Dropdown';
 function Header() {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [isLoggedIn, setIsLogged] = useState(false);
@@ -67,16 +68,7 @@ function Header() {
                 <li><a href="/register" className='border-none text-black text-opacity-65 outline-none px-6'>SIGN UP</a></li>
               </>
             )}
-            <li className="search">
-              <a href="#">
-                <i className="fa-solid fa-magnifying-glass"></i>
-              </a>
-            </li>
-            <li className="hamburger">
-              <a href="#" className="border-2 rounded-full border-black">
-                <div className="bar"></div>
-              </a>
-            </li>
+            <Dropdown/>
           </ul>
         </nav>
       </header>
