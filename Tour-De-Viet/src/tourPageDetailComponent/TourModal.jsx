@@ -68,7 +68,7 @@ export default function TourModal({ data, isOpen, onClose}) {
                             <div >
                                 <button className = "absolute bottom-0 right-0 p-4" onCdivck={handleBook}>Book now</button>
                             </div>
-                        <button className = "absolute top-0 right-0 p-4"onCdivck={onClose}>x</button>
+                        <button className = "absolute top-0 right-0 p-4" onClick={onClose}>x</button>
                     </div>
                 </div>
             }

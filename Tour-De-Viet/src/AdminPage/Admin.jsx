@@ -176,7 +176,7 @@ export default function AdminPage() {
                 <li className=' sticky w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-light-green inset-0 mx-auto mt-7 font-itim text-white  content-center pl-10 '>
                     <p>Tour's name</p>
                     <p>Start Date</p>
-                    <p >End Date</p>
+                    <p>End Date</p>
                     <p>Total payment</p>
                 </li>
                 <div className="h-96 no-scrollbar overflow-y-auto">
