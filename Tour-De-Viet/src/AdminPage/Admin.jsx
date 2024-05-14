@@ -51,7 +51,17 @@ export default function AdminPage() {
     const [closeBook, setClose] = useState([]);
     const [transportations, setTransportation] = useState([]);
     const [currentPage, setCurrentPage] = useState('onGoing Tour');
+    const [createTransportation,setCreateTransportation] = useState(false);
+    const [createTour,setCreateTour]= useState(false);
+    // const [emptyTransporation,setEmptyTransportation] = useState({
 
+    // })
+    const emptyTransporation = {
+        ID:'',Name:'', startDate:'', endDate:'', price:'', goFrom:'', arriveAt:'', type :''
+    }
+    const emptyTour = {
+        townID:'', tourName:'', newDescription:'', category:'', price:'', transportationID:''
+    }
     useEffect(() => {
         const fetchRole = async () => {
             try {
@@ -126,12 +136,24 @@ export default function AdminPage() {
 
     const handleBookingClick = (booking) => {
         setSelectedBooking(booking);
+        setCreateTour(false);
         setIsBookingModalOpen(true);
     };
 
     const handleTransportationClick = (transportation) => {
         setSelectedTransporation(transportation);
+        setCreateTransportation(false);
         setIsTransportationModalOpen(true);
+    };
+
+    const handleCreateTransportationModal = () => {
+        setCreateTransportation(true);
+        setIsTransportationModalOpen(true);
+    };
+
+    const handleCreateTourModal = () => {
+        setCreateTour(true);
+        setIsBookingModalOpen(true);
     };
 
     const handleModalClose = () => {
@@ -145,6 +167,16 @@ export default function AdminPage() {
         try {
             await axios.put(`/api/tours/${updatedTour.tourName}`, updatedTour); // Update API endpoint
             setTours((prev) =>
+                prev.map((tour) =>
+                    tour.tourName === updatedTour.tourName ? updatedTour : tour
+                )
+            );
+            setOn((prev) =>
+                prev.map((tour) =>
+                    tour.tourName === updatedTour.tourName ? updatedTour : tour
+                )
+            );
+            setClose((prev) =>
                 prev.map((tour) =>
                     tour.tourName === updatedTour.tourName ? updatedTour : tour
                 )
@@ -169,15 +201,35 @@ export default function AdminPage() {
         handleModalClose();
     };
 
-    
-    const handleCreate = async (newTour) => {
+    const handleCreateTour = async (newTour) => {
         try {
-            await axios.put('/api/tours/', newTour); // Update API endpoint
-            window.location.reload();
+            // Make a POST request to the API endpoint to create a new transportation
+            const response = await axios.post('/api/tours', newTour);
+            
+            // Update the local state with the new transportation
+            setTours((prev) => [...prev, response.data]);
+            
+            // Optionally, you can display a success message or handle the response data in any other way
+            console.log('New tour created:', response.data);
         } catch (error) {
-            console.error('Error creating booking:', error);
+            console.error('Error creating tour:', error);
+            // Optionally, you can display an error message or handle the error in any other way
         }
-        handleModalClose();
+    };
+    const handleCreateTransportation = async (newTransportation) => {
+        try {
+            // Make a POST request to the API endpoint to create a new transportation
+            const response = await axios.post('/api/transportations', newTransportation);
+            
+            // Update the local state with the new transportation
+            setTransportation((prev) => [...prev, response.data]);
+            
+            // Optionally, you can display a success message or handle the response data in any other way
+            console.log('New transportation created:', response.data);
+        } catch (error) {
+            console.error('Error creating transportation:', error);
+            // Optionally, you can display an error message or handle the error in any other way
+        }
     };
     let content; // Variable to hold the content to render
 
@@ -290,32 +342,29 @@ export default function AdminPage() {
         <>
             {/* {role === 'admin' ? ( */}
             <main>
-                {/* <h1>Admin Page</h1>
-                    <div>
-                        {bookings.map((booking) => (
-                            <div key={booking.id} className="booking-card">
-                                <li className='w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-light-green inset-0 mx-auto mt-7 font-itim text-white  content-center pl-10 '>
-                                        <p>{booking.tourName}</p>
-                                        <p>{new Date(booking.startDate).toLocaleDateString(('en-GB'))}</p>
-                                        <p>{new Date(booking.endDate).toLocaleDateString(('en-GB'))}</p>
-                                        <p>{booking.price}</p>
-                                </li>
-                                <button onClick={() => handleDelete(booking.id)}>
-                                    Delete
-                                </button>
-                            </div>
-                        ))}
-                    </div> */}
                 <div className='relative overflow-hidden h-screen'>
                     <div>
                         <img src={background} alt="" />
                         <img src={corner} alt="" className='absolute w-2/3 right-0 top-0' />
                     </div>
                     <div className='absolute w-4/5 h-4/5 rounded-xl inset-0 mx-auto mt-32 bg-dark-green bg-opacity-90 drop-shadow-2xl shadow-2xl font-itim'>
-                        <button className='bg-bright-yellow absolute my-5 mx-12 w-1/12 h-14 text-xl rounded-xl font-itim shadow-lg drop-shadow-2xl' onClick={() => setCurrentPage('onGoing Tour')}> On Going</button>
-                        <button className='bg-bright-yellow absolute mx-52 my-5 w-1/12 h-14 text-xl rounded-xl font-itim shadow-lg drop-shadow-2xl' onClick={() => setCurrentPage('past Tour')}> History</button>
-                        <button className='bg-bright-yellow absolute ml-96 my-5 w-1/12 h-14 text-xl rounded-xl font-itim shadow-lg drop-shadow-2xl' onClick={() => setCurrentPage('transportation Page')}> Transportation</button>
-
+                        <div className='flex justify-between mx-12 my-5 '>
+                            <button className='bg-bright-yellow w-1/4 h-14 text-xl rounded-xl font-itim shadow-lg drop-shadow-2xl'
+                                onClick={() => setCurrentPage('onGoing Tour')}>
+                                On Going
+                            </button>
+                            <button className='bg-bright-yellow w-1/4 h-14 ml-5 text-xl rounded-xl font-itim shadow-lg drop-shadow-2xl'
+                                onClick={() => setCurrentPage('past Tour')}>
+                                History
+                            </button>
+                            <button className='bg-bright-yellow w-1/4 h-14 text-xl ml-5 rounded-xl font-itim shadow-lg drop-shadow-2xl'
+                                onClick={() => setCurrentPage('transportation Page')}>
+                                Transportation
+                            </button>
+                            <button className='bg-bright-yellow w-1/12 h-14 text-xl rounded-xl font-itim shadow-lg drop-shadow-2xl ml-auto flex items-center justify-center' onClick={() => currentPage === 'transportation Page' ? handleCreateTransportationModal() : handleCreateTourModal()}>
+                        Add
+                </button>
+                        </div>
                         <div className=' h-5/6 inset-0 mt-20 mx-auto absolute no-scrollbar overflow-y-auto text-3xl '>
                             {content}
                         </div>
@@ -333,6 +382,22 @@ export default function AdminPage() {
                             onClose={handleModalClose}
                             onSave={handleSaveTransportation}
                         />
+                    )}
+
+                    {isTransportationModalOpen && createTransportation && (
+                        <TransportationModal
+                            transportation={emptyTransporation}
+                            onClose={handleModalClose}
+                            onSave={handleCreateTransportation}
+                        />
+                    )}
+
+                    {isBookingModalOpen && createTour && (
+                        <BookingModal
+                        booking={emptyTour}
+                        onClose={handleModalClose}
+                        onSave={handleCreateTour}
+                    />
                     )}
                 </div>
 

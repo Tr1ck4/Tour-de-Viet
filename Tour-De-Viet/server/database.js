@@ -187,6 +187,7 @@ class UserModel {
   }
 
   createTour(townID, tourName, description, category, price, transportationID, startDate, endDate, callback) {
+    console.log('Create tour',tourName,townID,description, category, transportationID, startDate, endDate, price)
     let newDescription = JSON.stringify(description);
     this.db.run("INSERT INTO tours (townID, tourName, description, category, price, transportationID) VALUES (?, ?, ?, ?, ?, ?)",
       [townID, tourName, newDescription, category, price, transportationID],
@@ -202,9 +203,20 @@ class UserModel {
       callback)
   }
 
-  updateTour(tourName, description, category, transportationID, startDate, endDate, price, callback) {
-    let sql = "UPDATE tours SET tourName = ?, description=?, category = ?, transportationID = ?, startDate=? , endDate=? , price=?  WHERE tourName = ?"
-    this.db.run(sql, [tourName, description, category, transportationID, startDate, endDate, price], callback);
+  updateTour(townID,tourName, description, category, transportationID, startDate, endDate, price, callback) {
+    console.log(tourName,townID,description, category, transportationID, startDate, endDate, price)
+    let sql1 = "UPDATE tours SET townID = ?, description=?, category = ?, transportationID = ?, price=?  WHERE tourName = ?"
+    this.db.run(sql1, [townID, description, category, transportationID, price,tourName],
+      function (err) {
+        if (err) {
+          callback(err);
+          return;
+        }
+      }
+    );
+
+    let sql2 = "UPDATE tour_date SET startDate = ?, endDate = ? WHERE tourName = ?"
+    this.db.run(sql2,[startDate,endDate,tourName],callback);
   }
 
   deleteTour(tourName,callback){

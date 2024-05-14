@@ -331,9 +331,9 @@ app.get('/api/transportations/:ID', (req, res) => {
 });
 
 app.post('/api/transportations', authenticateToken, (req, res) => {
-    const { name, startDate, endDate, price, goFrom, arriveAt, type } = req.body;
-
-    userModel.createTransportations(name, startDate, endDate, price, goFrom, arriveAt, type, (err, result) => {
+    const { Name, startDate, endDate, price, goFrom, arriveAt, type } = req.body;
+    console.log(Name, startDate, endDate, price, goFrom, arriveAt, type);
+    userModel.createTransportations(Name, startDate, endDate, price, goFrom, arriveAt, type, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -468,9 +468,10 @@ app.get('/api/tours', authenticateToken, (req, res) => {
 
 app.put('/api/tours/:tourName', authenticateToken, (req, res) => {
     const { tourName } = req.params;
-    const { description, category, totalTime, transport, startDate, endDate, price, images } = req.body;
+    const { townID,description, category, transportationID, startDate, endDate, price } = req.body;
+    console.log(tourName,townID,description, category, transportationID, startDate, endDate, price)
 
-    userModel.updateTour(tourName, description, category, totalTime, transport, startDate, endDate, price, images, (err) => {
+    userModel.updateTour(townID,tourName, description, category, transportationID, startDate, endDate, price, (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
