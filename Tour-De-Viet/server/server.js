@@ -7,7 +7,7 @@ import { expressjwt } from "express-jwt";
 
 import nodemailer from 'nodemailer';
 import OpenAI from 'openai';
-import {storeImage, createFolder} from './ImageBuilder.js'
+import { storeImage, createFolder } from './ImageBuilder.js'
 import multer from 'multer';
 
 var transporter = nodemailer.createTransport({
@@ -32,7 +32,7 @@ var mailOptions = {
 //     console.log('Email sent: ' + info.response);
 //   }
 // });
-const upload = multer(); 
+const upload = multer();
 
 const openai = new OpenAI({
     baseURL: 'http://localhost:11434/v1',
@@ -165,9 +165,9 @@ app.get('/api/bookings/info', authenticateToken, (req, res) => {
 
 app.post('/api/bookings', authenticateToken, (req, res) => {
     const token = getTokenFromCookie(req);
+
     const userName = jwt.decode(token).accountname;
     const { tourName, transportationID, cardID } = req.body;
-    
     userModel.createBooking(userName, tourName, transportationID, cardID, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -213,6 +213,29 @@ app.get('/api/comments/:townID/:tourName', (req, res) => {
         res.json(row);
     });
 });
+
+app.get('/api/checkcomments/:tourName/:username', (req, res) => {
+    const { tourName, username } = req.params;
+    userModel.checkComment(tourName, username, (err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(row);
+    });
+});
+
+app.get('/api/rating/:tourName/:username', (req, res) => {
+    const { tourName, username } = req.params;
+    userModel.getUserRating(username, tourName, (err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(row);
+    });
+});
+
 
 app.post('/api/comments', (req, res) => {
     const { townID, tourName, userName, comment, rating } = req.body;
@@ -355,7 +378,7 @@ app.post('/api/transportations', authenticateToken, (req, res) => {
 
 
 
-app.get('/api/transportations',authenticateToken, (req, res) => {
+app.get('/api/transportations', authenticateToken, (req, res) => {
     userModel.getAllTransportations((err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -381,8 +404,7 @@ app.put('/api/transportations/:transportationID', authenticateToken, (req, res) 
     });
 });
 app.get('/api/tours/:townID/:tourName/:startDate', (req, res) => {
-    const {townID, tourName, startDate} = req.params;
-    console.log(townID, tourName, startDate)
+    const { townID, tourName, startDate } = req.params;
     userModel.getTourbyDate(townID, tourName, startDate, (err, rows) => {
         if (err) {
             res.status(404).json({ error: err.message });
@@ -432,7 +454,7 @@ app.post('/api/tours', authenticateToken, (req, res) => {
 
 
 
-app.get('/api/tours',authenticateToken, (req, res) => {
+app.get('/api/tours', authenticateToken, (req, res) => {
     userModel.getAllTours((err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });

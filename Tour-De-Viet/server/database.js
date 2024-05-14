@@ -65,6 +65,25 @@ class UserModel {
     );
   }
 
+  checkComment(tourName, userName, callback) {
+    let sql =
+      `SELECT EXISTS (
+        SELECT 1
+        FROM bookings
+        WHERE userName = ? AND tourName = ?
+    ) AS hasBooked`;
+    this.db.all(sql, [userName, tourName], callback)
+  }
+
+  getUserRating(userName, tourName, callback) {
+    let sql =
+      `SELECT comments.rating
+    FROM comments
+    WHERE userName = ? AND tourName = ? AND rating NOT NULL`
+    this.db.all(sql, [userName, tourName], callback)
+  }
+
+
   updateRating(townID, tourName, userName, rating, callback) {
     let sql = "UPDATE comments SET rating = ? WHERE townID = ? AND tourName = ? and userName = ?";
     this.db.run(sql, [rating, townID, tourName, userName], callback);
