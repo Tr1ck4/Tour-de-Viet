@@ -32,7 +32,7 @@ export default function TourModal({ data, isOpen, onClose}) {
                 "cardID": cardID,
             });
             if (response) {
-                isClose(true);
+                onClose(true);
             }
         } catch (error) {
             console.error('Error booking tour:', error);
@@ -66,7 +66,7 @@ export default function TourModal({ data, isOpen, onClose}) {
                             </div>
 
                             <div >
-                                <button className = "absolute bottom-0 right-0 p-4" onCdivck={handleBook}>Book now</button>
+                                <button className = "absolute bottom-0 right-0 p-4" onClick={handleBook}>Book now</button>
                             </div>
                         <button className = "absolute top-0 right-0 p-4" onClick={onClose}>x</button>
                     </div>

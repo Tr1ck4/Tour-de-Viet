@@ -99,7 +99,6 @@ class ToursService {
       if (!response.ok) {
         throw new Error('Failed to update tour');
       }
-
       return response.status;
     } catch (error) {
       console.error('Error updating tour:', error);
