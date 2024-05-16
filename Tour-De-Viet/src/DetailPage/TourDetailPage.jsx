@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { UNSAFE_useScrollRestoration, useParams } from 'react-router-dom';
 import './TourDetailPage.css'
 import bg from '../assets/Background/TourPageDetailed_bg.png';
@@ -18,6 +18,12 @@ const TourDetailPage = () => {
     const [username, setUsername] = useState();
     const [rating, setRating] = useState(null);
     const [hasComment, setHasComment] = useState(false);
+    const [hasBooked, setHasBooked] = useState(false);
+    const hasBookedRef = useRef(hasBooked);
+
+    useEffect(() => {
+        hasBookedRef.current = hasBooked;
+    }, [hasBooked]);
 
     useEffect(() => {
         const fetchUsername = async () => {
@@ -86,6 +92,19 @@ const TourDetailPage = () => {
     }, [comments]);
 
     useEffect(() => {
+        const checkBooking = async () => {
+            try {
+                const service = new CommentService();
+                const response = await service.checkComments(tourName, username);
+                setHasBooked(response[0].hasBooked)
+            } catch (error) {
+                console.error('Error fetching username:', error);
+            }
+        };
+        checkBooking();
+    }, [username]);
+
+    useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.key === 'Escape') {
                 setShowCommentSection(false);
@@ -104,11 +123,14 @@ const TourDetailPage = () => {
         const stars = document.querySelectorAll(".stars i");
 
         const handleClick = (index1) => {
-            console.log("Clicked on star: ", index1);
-            setRating(index1 + 1);
-            stars.forEach((star, index2) => {
-                index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
-            });
+            if (hasBookedRef.current) {
+                console.log("Clicked on star: ", index1);
+                setRating(index1 + 1);
+                stars.forEach((star, index2) => {
+                    index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
+                });
+            }
+            else alert("You have to book the tour to rate");
         };
 
         stars.forEach((star, index1) => {
@@ -158,7 +180,6 @@ const TourDetailPage = () => {
     // if (loading) {
     //     return <div>Loading...</div>;
     // }
-
     if (!tourDetails) {
         return <div>Tour not found</div>;
     }
