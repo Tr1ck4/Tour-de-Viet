@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { UNSAFE_useScrollRestoration, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import './TourDetailPage.css'
 import bg from '../assets/Background/TourPageDetailed_bg.png';
 
@@ -20,6 +20,7 @@ const TourDetailPage = () => {
     const [hasComment, setHasComment] = useState(false);
     const [hasBooked, setHasBooked] = useState(false);
     const hasBookedRef = useRef(hasBooked);
+    const starsRef = useRef([]); 
 
     useEffect(() => {
         hasBookedRef.current = hasBooked;
@@ -38,23 +39,23 @@ const TourDetailPage = () => {
             }
         };
         fetchUsername();
-    }, [username]);
+    }, []);
 
     useEffect(() => {
         const fetchRating = async () => {
             try {
                 const service = new CommentService();
                 const response = await service.getUserRating(tourName, username);
-                setRating(response[0].rating);
-                if (response[0].userName) setHasComment(true);
+                const userRating = response[0]?.rating || 0;
+                setRating(userRating);
+                if (response[0]?.userName) setHasComment(true);
             } catch (error) {
                 console.error("Error fetching rating", error);
             }
         };
 
-        fetchRating();
-    }, [username, hasComment]);
-
+        if (username) fetchRating();
+    }, [username, tourName]);
 
     useEffect(() => {
         const fetchTourDetails = async () => {
@@ -89,7 +90,7 @@ const TourDetailPage = () => {
         };
 
         fetchComments();
-    }, [comments]);
+    }, [townID, tourName]);
 
     useEffect(() => {
         const checkBooking = async () => {
@@ -98,11 +99,11 @@ const TourDetailPage = () => {
                 const response = await service.checkComments(tourName, username);
                 setHasBooked(response[0].hasBooked)
             } catch (error) {
-                console.error('Error fetching username:', error);
+                console.error('Error checking booking:', error);
             }
         };
-        checkBooking();
-    }, [username]);
+        if (username) checkBooking();
+    }, [username, tourName]);
 
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -117,32 +118,39 @@ const TourDetailPage = () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, []);
+
     useEffect(() => {
-        console.log("Stars: ", document.querySelectorAll(".stars i"));
+        const stars = starsRef.current;
 
-        const stars = document.querySelectorAll(".stars i");
-
-        const handleClick = (index1) => {
+        const handleClick = (index) => {
             if (hasBookedRef.current) {
-                console.log("Clicked on star: ", index1);
-                setRating(index1 + 1);
-                stars.forEach((star, index2) => {
-                    index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
+                setRating(index + 1);
+                stars.forEach((star, idx) => {
+                    idx <= index ? star.classList.add("active") : star.classList.remove("active");
                 });
+            } else {
+                alert("You have to book the tour to rate");
             }
-            else alert("You have to book the tour to rate");
         };
 
-        stars.forEach((star, index1) => {
-            star.addEventListener("click", () => handleClick(index1));
+        stars.forEach((star, index) => {
+            star.addEventListener("click", () => handleClick(index));
         });
 
         return () => {
-            stars.forEach((star) => {
-                star.removeEventListener("click", () => handleClick);
+            stars.forEach((star, index) => {
+                star.removeEventListener("click", () => handleClick(index));
             });
         };
-    }, []);
+    }, [hasBooked]);
+
+    useEffect(() => {
+        if (rating !== null) {
+            starsRef.current.forEach((star, index) => {
+                index < rating ? star.classList.add("active") : star.classList.remove("active");
+            });
+        }
+    }, [rating]);
 
     useEffect(() => {
         if (username) {
@@ -150,10 +158,8 @@ const TourDetailPage = () => {
                 try {
                     const service = new CommentService();
                     if (hasComment) {
-                        const response = await service.updateCommentRating(townID, tourName, username, rating);
-                        console.log(response);
-                    }
-                    else {
+                        await service.updateCommentRating(townID, tourName, username, rating);
+                    } else {
                         const newData = {
                             townID: townID,
                             tourName: tourName,
@@ -161,31 +167,22 @@ const TourDetailPage = () => {
                             comment: null,
                             rating: rating
                         };
-
-                        const response = await service.createComment(newData);
+                        await service.createComment(newData);
                         setHasComment(true);
-                        console.log(response);
                     }
-
-
                 } catch (error) {
-                    console.error("Error fetching rating", error);
+                    console.error("Error updating rating", error);
                 }
             };
             updateRating();
         }
+    }, [rating, username, hasComment, townID, tourName]);
 
-    }, [rating]);
-
-    // if (loading) {
-    //     return <div>Loading...</div>;
-    // }
     if (!tourDetails) {
         return <div>Tour not found</div>;
     }
 
     const toggleCommentSection = () => {
-        console.log("I click on this");
         setShowCommentSection(!showCommentSection);
     };
 
@@ -195,9 +192,8 @@ const TourDetailPage = () => {
                 <div className='w-screen h-screen ' style={{ backgroundImage: `url(${bg})`, backgroundSize: '100% 100%', height: '175vh' }}>
                     <h1 className='text-dark-green text-5xl font-extrabold mt-36 ml-96'>{tourDetails.tourName}</h1>
 
-                    <div className=' h-auto w-3/5 mx-auto mt-10'>
-
-                        <div className='w-auto h-[400px]  my-4 grid grid-cols-2 gap-2'>
+                    <div className='h-auto w-3/5 mx-auto mt-10'>
+                        <div className='w-auto h-[400px] my-4 grid grid-cols-2 gap-2'>
                             <div className='bg-neutral-400 rounded-2xl'></div>
                             <div className='grid grid-cols-2 grid-rows-2 gap-1'>
                                 <div className='bg-gray-400 rounded-tl-2xl'></div>
@@ -206,18 +202,6 @@ const TourDetailPage = () => {
                                 <div className='bg-gray-400 rounded-br-2xl'></div>
                             </div>
                         </div>
-
-                        {/* <div className='w-auto h-[400px] my-4 grid grid-rows-3 grid-flow-col gap-2 '>
-                            <div className='bg-light-green row-span-3 col-span-6 rounded-2xl'></div>
-                            <div className='rateStar bg-bright-yellow col-span-2 rounded-2xl flex items-center justify-center'>
-                                <i className='fa-solid fa-star mx-2'></i>
-                                <i className='fa-solid fa-star mx-2'></i>
-                                <i className='fa-solid fa-star mx-2'></i>
-                                <i className='fa-solid fa-star mx-2'></i>
-                                <i className='fa-solid fa-star mx-2'></i>
-                            </div>
-                            <div className='bg-light-green row-span-2 col-span-2 rounded-2xl'></div>
-                        </div> */}
 
                         <div className='w-auto h-[400px] inline-flex gap-1'>
                             <div className='bg-light-green rounded-2xl h-[400px] w-[856px]'>
@@ -229,13 +213,10 @@ const TourDetailPage = () => {
                                 <div className='rateStar bg-bright-yellow rounded-2xl flex flex-col items-center justify-center w-[280px] h-[100px] mb-1 relative'>
                                     <div className="stars flex items-center justify-center">
                                         <div className="text-4xl mr-2 font-bold ml-2">{tourDetails.averageRating == null ? 1 : tourDetails.averageRating.toFixed(1)}</div>
-                                        <i className='fa-solid fa-star mx-1'></i>
-                                        <i className='fa-solid fa-star mx-1'></i>
-                                        <i className='fa-solid fa-star mx-1'></i>
-                                        <i className='fa-solid fa-star mx-1'></i>
-                                        <i className='fa-solid fa-star mx-1'></i>
+                                        {[...Array(5)].map((_, index) => (
+                                            <i key={index} ref={(el) => starsRef.current[index] = el} className='fa-solid fa-star mx-1'></i>
+                                        ))}
                                     </div>
-                                    {/* <div className="number absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-2 text-2xl">1</div> */}
                                 </div>
                                 <div className='bg-light-green h-[296px] w-[280px] rounded-2xl flex flex-col cursor-pointer' onClick={toggleCommentSection}>
                                     <div className='mt-5 mb-3 flex ml-6 border-b-2 h-[45px] w-[230px]'>
@@ -260,10 +241,7 @@ const TourDetailPage = () => {
                                 </div>
                             </div>
                         </div>
-
-                        {/* </div><div className='w-auto h-40 bg-bone-white flex gap-3 rounded-2xl mt-14 content-center items-center justify-between'> */}
                         <Calendar townID={townID} tourName={tourName}></Calendar>
-
                     </div>
                 </div>
             </main>
