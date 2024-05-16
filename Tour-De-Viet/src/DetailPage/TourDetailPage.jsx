@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { UNSAFE_useScrollRestoration, useParams } from 'react-router-dom';
 import './TourDetailPage.css'
 import bg from '../assets/Background/TourPageDetailed_bg.png';
 
@@ -17,6 +17,7 @@ const TourDetailPage = () => {
     const [showCommentSection, setShowCommentSection] = useState(false);
     const [username, setUsername] = useState();
     const [rating, setRating] = useState(null);
+    const [hasComment, setHasComment] = useState(false);
 
     useEffect(() => {
         const fetchUsername = async () => {
@@ -38,14 +39,15 @@ const TourDetailPage = () => {
             try {
                 const service = new CommentService();
                 const response = await service.getUserRating(tourName, username);
-                setRating(response[0].rating)
+                setRating(response[0].rating);
+                if (response[0].userName) setHasComment(true);
             } catch (error) {
                 console.error("Error fetching rating", error);
             }
         };
 
         fetchRating();
-    }, [username]);
+    }, [username, hasComment]);
 
 
     useEffect(() => {
@@ -103,6 +105,7 @@ const TourDetailPage = () => {
 
         const handleClick = (index1) => {
             console.log("Clicked on star: ", index1);
+            setRating(index1 + 1);
             stars.forEach((star, index2) => {
                 index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
             });
@@ -119,6 +122,38 @@ const TourDetailPage = () => {
         };
     }, []);
 
+    useEffect(() => {
+        if (username) {
+            const updateRating = async () => {
+                try {
+                    const service = new CommentService();
+                    if (hasComment) {
+                        const response = await service.updateCommentRating(townID, tourName, username, rating);
+                        console.log(response);
+                    }
+                    else {
+                        const newData = {
+                            townID: townID,
+                            tourName: tourName,
+                            userName: username,
+                            comment: null,
+                            rating: rating
+                        };
+
+                        const response = await service.createComment(newData);
+                        setHasComment(true);
+                        console.log(response);
+                    }
+
+
+                } catch (error) {
+                    console.error("Error fetching rating", error);
+                }
+            };
+            updateRating();
+        }
+
+    }, [rating]);
 
     // if (loading) {
     //     return <div>Loading...</div>;
@@ -190,14 +225,17 @@ const TourDetailPage = () => {
                                         </div>
                                         <div className='font-itim text-3xl'>Comment</div>
                                     </div>
-                                    {comments.slice(-3).map((commentObj, index) => (
-                                        <div key={index} className='bg-bone-white w-[250px] h-[60px] comment self-center my-1 rounded-lg commentBox'>
-                                            <div className='userName text-dark-green font-semibold ml-2'>{commentObj.userName}</div>
-                                            <div className='info text-dark-green mx-3 overflow-hidden whitespace-nowrap text-overflow-ellipsis'>
-                                                {commentObj.comment}
+                                    {comments
+                                        .filter(commentObj => commentObj.comment !== null)
+                                        .slice(-3)
+                                        .map((commentObj, index) => (
+                                            <div key={index} className='bg-bone-white w-[250px] h-[60px] comment self-center my-1 rounded-lg commentBox'>
+                                                <div className='userName text-dark-green font-semibold ml-2'>{commentObj.userName}</div>
+                                                <div className='info text-dark-green mx-3 overflow-hidden whitespace-nowrap text-overflow-ellipsis'>
+                                                    {commentObj.comment}
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        ))}
                                 </div>
                             </div>
                         </div>

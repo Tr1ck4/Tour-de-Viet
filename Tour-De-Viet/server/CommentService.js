@@ -70,9 +70,9 @@ class CommentService {
     }
   }
 
-  async updateCommentRating(townID, tourName, rating) {
+  async updateCommentRating(townID, tourName, userName, rating) {
     try {
-      const response = await fetch(`${this.baseUrl}/api/comments/${townID}/${tourName}`, {
+      const response = await fetch(`${this.baseUrl}/api/comments/${townID}/${tourName}/${userName}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

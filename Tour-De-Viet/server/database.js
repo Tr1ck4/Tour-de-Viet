@@ -79,9 +79,17 @@ class UserModel {
 
   getUserRating(userName, tourName, callback) {
     let sql =
-      `SELECT comments.rating
-    FROM comments
-    WHERE userName = ? AND tourName = ? AND rating NOT NULL`
+      `SELECT comments.rating, comments.userName
+      FROM comments
+      WHERE userName = ? AND tourName = ? AND rating IS NOT NULL
+      
+      UNION
+      
+      SELECT comments.rating, comments.userName
+      FROM comments
+      WHERE userName = ? AND tourName = ? AND rating IS NULL
+      
+      LIMIT 1;`
     this.db.all(sql, [userName, tourName], callback)
   }
 
@@ -109,12 +117,12 @@ class UserModel {
     console.log(ID);
     console.log(Name, startDate, endDate, price, goFrom, arriveAt, type);
     let sql = "UPDATE transportations SET Name = ?, startDate=?, endDate=? , price=? , goFrom=? , arriveAt=?,type=? WHERE ID = ?"
-     this.db.run(sql, [Name, startDate, endDate, price, goFrom, arriveAt, type, ID], callback);
+    this.db.run(sql, [Name, startDate, endDate, price, goFrom, arriveAt, type, ID], callback);
   }
 
-  deleteTransportations(ID,callback){
+  deleteTransportations(ID, callback) {
     let sql = "DELETE FROM transportations WHERE ID = ?"
-      this.db.run(sql,ID,callback);
+    this.db.run(sql, ID, callback);
   }
 
 
@@ -134,14 +142,15 @@ class UserModel {
     this.db.get(sql, [townID, tourName, startDate], callback)
   }
   getTour(townID, tourName, callback) {
-    let sql = `SELECT t.*,
+    let sql = `SELECT 
+    t.*,
     CASE
         WHEN t.transportationID IS NULL THEN NULL
         ELSE tr.type
     END AS transportation,
     td.startDate,
     td.endDate,
-    AVG(c.rating) AS averageRating
+    AVG(uc.avg_rating) AS averageRating
     FROM 
         tours AS t
     JOIN 
@@ -149,45 +158,66 @@ class UserModel {
     LEFT JOIN 
         transportations AS tr ON t.transportationID = tr.ID
     LEFT JOIN 
-        comments AS c ON t.tourName = c.tourName AND t.townID = c.townID
+        (
+            SELECT 
+                tourName,
+                townID,
+                username,
+                AVG(rating) AS avg_rating
+            FROM 
+                comments
+            GROUP BY 
+                tourName, townID, username
+        ) AS uc ON t.tourName = uc.tourName AND t.townID = uc.townID
     WHERE 
         t.townID = ? AND t.tourName = ?
     GROUP BY 
-        t.tourName`
+        t.tourName;
+    `
 
     this.db.get(sql, [townID, tourName], callback);
   }
 
   getAllTour(townID, callback) {
     let sql = `SELECT 
-    t.tourName,
-    t.description,
-    t.category,
-    CAST(julianday(td.endDate) - julianday(td.startDate) + 1 AS INTEGER) || ' day(s)' AS totalTime,
-    CASE
-        WHEN t.transportationID IS NULL THEN NULL
-        ELSE tr.type
-    END AS transport,
-    t.price,
-    t.townID,
-    AVG(c.rating) AS avg_rating
-    FROM 
-        tours AS t
-    JOIN 
-        tour_date AS td ON t.tourName = td.tourName
-    LEFT JOIN 
-        transportations AS tr ON t.transportationID = tr.ID
-    LEFT JOIN 
-        comments AS c ON t.tourName = c.tourName
-    WHERE t.townID = ?
-    GROUP BY 
-        t.tourName;
+          t.tourName,
+          t.description,
+          t.category,
+          CAST(julianday(td.endDate) - julianday(td.startDate) + 1 AS INTEGER) || ' day(s)' AS totalTime,
+          CASE
+              WHEN t.transportationID IS NULL THEN NULL
+              ELSE tr.type
+          END AS transport,
+          t.price,
+          t.townID,
+          AVG(uc.avg_rating) AS avg_rating
+      FROM 
+          tours AS t
+      JOIN 
+          tour_date AS td ON t.tourName = td.tourName
+      LEFT JOIN 
+          transportations AS tr ON t.transportationID = tr.ID
+      LEFT JOIN 
+          (SELECT 
+              tourName,
+              userName,
+              AVG(rating) AS avg_rating
+          FROM 
+              comments
+          GROUP BY 
+              tourName, userName
+          ) AS uc ON t.tourName = uc.tourName
+      WHERE 
+          t.townID = ?
+      GROUP BY 
+          t.tourName;
+
     `;
     this.db.all(sql, townID, callback)
   }
 
   createTour(townID, tourName, description, category, price, transportationID, startDate, endDate, callback) {
-    console.log('Create tour',tourName,townID,description, category, transportationID, startDate, endDate, price)
+    console.log('Create tour', tourName, townID, description, category, transportationID, startDate, endDate, price)
     let newDescription = JSON.stringify(description);
     this.db.run("INSERT INTO tours (townID, tourName, description, category, price, transportationID) VALUES (?, ?, ?, ?, ?, ?)",
       [townID, tourName, newDescription, category, price, transportationID],
@@ -203,10 +233,10 @@ class UserModel {
       callback)
   }
 
-  updateTour(townID,tourName, description, category, transportationID, startDate, endDate, price, callback) {
-    console.log(tourName,townID,description, category, transportationID, startDate, endDate, price)
+  updateTour(townID, tourName, description, category, transportationID, startDate, endDate, price, callback) {
+    console.log(tourName, townID, description, category, transportationID, startDate, endDate, price)
     let sql1 = "UPDATE tours SET townID = ?, description=?, category = ?, transportationID = ?, price=?  WHERE tourName = ?"
-    this.db.run(sql1, [townID, description, category, transportationID, price,tourName],
+    this.db.run(sql1, [townID, description, category, transportationID, price, tourName],
       function (err) {
         if (err) {
           callback(err);
@@ -216,12 +246,12 @@ class UserModel {
     );
 
     let sql2 = "UPDATE tour_date SET startDate = ?, endDate = ? WHERE tourName = ?"
-    this.db.run(sql2,[startDate,endDate,tourName],callback);
+    this.db.run(sql2, [startDate, endDate, tourName], callback);
   }
 
-  deleteTour(tourName,callback){
+  deleteTour(tourName, callback) {
     let sql1 = "DELETE FROM tours WHERE tourName = ?"
-    this.db.run(sql1,tourName,callback);
+    this.db.run(sql1, tourName, callback);
 
     // let sql2 = "DELETE FROM tour_date WHERE tourName = ?"
     // this.db.run(sql2,tourName,callback);

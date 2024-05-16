@@ -252,7 +252,7 @@ app.post('/api/comments', (req, res) => {
     });
 });
 
-app.put('/api/comments/:townID/:tourName', (req, res) => {
+app.put('/api/comments/:townID/:tourName/:userName', (req, res) => {
     const { townID, tourName, userName } = req.params;
     const { rating } = req.body;
 
@@ -346,9 +346,9 @@ app.post('/api/transportations', authenticateToken, (req, res) => {
 });
 
 app.put('/api/transportations/:ID', authenticateToken, (req, res) => {
-    
+
     const { ID } = req.params;
-    const {Name, startDate, endDate, price, goFrom, arriveAt, type } = req.body;
+    const { Name, startDate, endDate, price, goFrom, arriveAt, type } = req.body;
     console.log(Name, startDate, endDate, price, goFrom, arriveAt, type);
 
     userModel.updateTransportations(ID, Name, startDate, endDate, price, goFrom, arriveAt, type, (err) => {
@@ -468,10 +468,10 @@ app.get('/api/tours', authenticateToken, (req, res) => {
 
 app.put('/api/tours/:tourName', authenticateToken, (req, res) => {
     const { tourName } = req.params;
-    const { townID,description, category, transportationID, startDate, endDate, price } = req.body;
-    console.log(tourName,townID,description, category, transportationID, startDate, endDate, price)
+    const { townID, description, category, transportationID, startDate, endDate, price } = req.body;
+    console.log(tourName, townID, description, category, transportationID, startDate, endDate, price)
 
-    userModel.updateTour(townID,tourName, description, category, transportationID, startDate, endDate, price, (err) => {
+    userModel.updateTour(townID, tourName, description, category, transportationID, startDate, endDate, price, (err) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
