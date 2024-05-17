@@ -466,6 +466,17 @@ app.get('/api/tours', authenticateToken, (req, res) => {
     });
 });
 
+app.get('/api/checkdate/:date/:tourName', (req, res) => {
+    const { date, tourName } = req.params;
+    userModel.checkForTour(date, tourName, (err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(row);
+    });
+})
+
 app.put('/api/tours/:tourName', authenticateToken, (req, res) => {
     const { tourName } = req.params;
     const { townID, description, category, transportationID, startDate, endDate, price } = req.body;

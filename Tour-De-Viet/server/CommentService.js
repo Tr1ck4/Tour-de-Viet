@@ -36,7 +36,7 @@ class CommentService {
     return fetch(`${this.baseUrl}/api/rating/${tourName}/${userName}`)
       .then(response => response.json())
       .catch(error => {
-        console.error('Error checking comments:', error);
+        console.error('Error fetching rating', error);
       });
   }
 

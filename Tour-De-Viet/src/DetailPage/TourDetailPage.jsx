@@ -20,7 +20,7 @@ const TourDetailPage = () => {
     const [hasComment, setHasComment] = useState(false);
     const [hasBooked, setHasBooked] = useState(false);
     const hasBookedRef = useRef(hasBooked);
-    const starsRef = useRef([]); 
+    const starsRef = useRef([]);
 
     useEffect(() => {
         hasBookedRef.current = hasBooked;
@@ -176,7 +176,7 @@ const TourDetailPage = () => {
             };
             updateRating();
         }
-    }, [rating, username, hasComment, townID, tourName]);
+    }, [rating]);
 
     if (!tourDetails) {
         return <div>Tour not found</div>;

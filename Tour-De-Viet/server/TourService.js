@@ -21,26 +21,34 @@ class ToursService {
   async fetchTourByDate() {
     try {
       const response = await fetch(`${this.baseUrl}/api/tours/${this.townID}/${this.tourName}/${this.startDate}`);
-  
+
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      
+
       return data;
     } catch (error) {
       console.error('Error fetching tours:', error);
-      throw error; 
+      throw error;
     }
   }
-  
-  
-  
+
+
+
   async fetchAllTour(townID) {
     return fetch(`${this.baseUrl}/api/tours/${townID}`)
       .then(response => response.json())
       .catch(error => {
         console.error('Error fetching tours:', error);
+      });
+  }
+
+  async checkDate(date, tourName) {
+    return fetch(`${this.baseUrl}/api/checkdate/${date}/${tourName}`)
+      .then(response => response.json())
+      .catch(error => {
+        console.error('Error checking dates:', error);
       });
   }
 

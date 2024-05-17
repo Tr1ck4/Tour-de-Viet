@@ -3,7 +3,7 @@ import AccountService from '../../server/AccountService';
 import BookingService from '../../server/BookingService';
 import './TourModal.css'
 
-export default function TourModal({ data, isOpen, onClose}) {
+export default function TourModal({ data, isOpen, onClose }) {
     const [info, setInfo] = useState({});
     const [cardID, setCardId] = useState('');
     const accountService = new AccountService();
