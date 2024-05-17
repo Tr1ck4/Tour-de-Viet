@@ -1,0 +1,41 @@
+.inputCard{
+    font-size: xx-large !important;
+    border: none;
+    outline: none;
+    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.3);
+    transition: 300ms ease-in-out;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+}  
+
+.inputCard:focus {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+  }
+
+button {
+    outline: none;
+    border: none;
+}
+
+button:hover {
+    outline: none;
+    border: none;
+}
+
+button:focus {
+    outline: none;
+    border: none;
+}
+
+.bookingButton  {
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    box-shadow: 0 8px 20px rgba(239, 239, 239, 0.3);
+    transition: box-shadow 0.5s ease, transform 0.5s ease; ;
+  }
+  
+.bookingButton:hover {
+    box-shadow: 0 12px 30px rgba(239, 239, 239, 0.5);
+    transform: translateY(-4px);
+  }
