@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import AccountService from '../../server/AccountService';
 import BookingService from '../../server/BookingService';
 
-export default function TourModal({ data, isOpen, onClose}) {
+export default function TourModal({ data, isOpen, onClose }) {
     const [info, setInfo] = useState({});
     const [cardID, setCardId] = useState('');
     const accountService = new AccountService();
@@ -43,32 +43,32 @@ export default function TourModal({ data, isOpen, onClose}) {
         <>
             {isOpen &&
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                    <div className=" bg-white/10 rounded-lg p-8 relative h-2/3 w-1/3 backdrop-blur-md shadow-lg font-itim text-3xl ">                           
-                            <div className="h-12"><label className="col-span-1 text-black  ">Tour Name: </label>{data.tourName}</div>
+                    <div className=" bg-white/10 rounded-lg p-8 relative h-2/3 w-1/3 backdrop-blur-md shadow-lg font-itim text-3xl ">
+                        <div className="h-12"><label className="col-span-1 text-black  ">Tour Name: </label>{data.tourName}</div>
 
-                            <div className="h-12"><label className="col-span-1 text-black ">Your Name: </label>{info.userName}</div>
+                        <div className="h-12"><label className="col-span-1 text-black ">Your Name: </label>{info.userName}</div>
 
-                            <div className="h-12"><label className="col-span-1 text-black ">Phone number: </label>{info.telNum}</div>
+                        <div className="h-12"><label className="col-span-1 text-black ">Phone number: </label>{info.telNum}</div>
 
-                            <div className="h-12"><label className="col-span-1 text-black ">Email: </label>{info.email}</div>
+                        <div className="h-12"><label className="col-span-1 text-black ">Email: </label>{info.email}</div>
 
-                            <div className="h-12"><label className="col-span-1 text-black ">Trip date: </label>{data.startDate} to {data.endDate}</div>
+                        <div className="h-12"><label className="col-span-1 text-black ">Trip date: </label>{data.startDate} to {data.endDate}</div>
 
-                            <div className="h-12"><label className="col-span-1 text-black ">Transportation: </label>{data.Name ? data.Name : 'No transportation specified'}</div>
+                        <div className="h-12"><label className="col-span-1 text-black ">Transportation: </label>{data.Name ? data.Name : 'N/A'}</div>
 
-                            <div className="h-12"><label className="col-span-1 text-black ">Hub: </label>{data.goFrom ? `${data.goFrom} Arrival : ${data.arriveAt}` : 'No transportation specified'}</div>
-                            <div className="h-12"><label className="col-span-1 text-black ">Total Price: </label>{data.price}</div>
-                            <div className="h-12">
-                                <label className="col-span-1 text-black">Card ID: </label>
-                                <input type="text" placeholder="Enter Card ID" 
-                                value={cardID} 
-                                onChange={(e)=>{setCardId(e.target.value)}}/>
-                            </div>
+                        <div className="h-12"><label className="col-span-1 text-black ">Hub: </label>{data.goFrom ? `${data.goFrom} Arrival : ${data.arriveAt}` : 'N/A'}</div>
+                        <div className="h-12"><label className="col-span-1 text-black ">Total Price: </label>{data.price}</div>
+                        <div className="h-12">
+                            <label className="col-span-1 text-black">Card ID: </label>
+                            <input type="text" placeholder="Enter Card ID"
+                                value={cardID}
+                                onChange={(e) => { setCardId(e.target.value) }} />
+                        </div>
 
-                            <div >
-                                <button className = "absolute bottom-0 right-0 p-4" onClick={handleBook}>Book now</button>
-                            </div>
-                        <button className = "absolute top-0 right-0 p-4" onClick={onClose}>x</button>
+                        <div >
+                            <button className="absolute bottom-0 right-0 p-4" onClick={handleBook}>Book now</button>
+                        </div>
+                        <button className="absolute top-0 right-0 p-4" onClick={onClose}>x</button>
                     </div>
                 </div>
             }

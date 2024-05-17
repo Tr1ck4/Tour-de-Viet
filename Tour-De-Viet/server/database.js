@@ -260,7 +260,18 @@ class UserModel {
 
   }
 
-
+  checkForTour(date, tourName, callback) {
+    let sql = `SELECT
+    CASE
+        WHEN EXISTS (
+            SELECT 1
+            FROM tour_date
+            WHERE startDate = ? AND tourName = ?)
+        THEN 'true'
+        ELSE 'false'
+    END AS isTour;`
+    this.db.all(sql, [date, tourName], callback)
+  }
 
   getAccount(username, callback) {
     this.db.get(`SELECT * FROM accounts WHERE userName = ?`, [username], callback);

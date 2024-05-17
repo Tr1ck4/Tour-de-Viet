@@ -4,8 +4,8 @@ import TourService from '../../server/TourService.js';
 import './Calendar.css'
 import './TourDetailPage.css';
 
-export default function Calendar({townID, tourName}) {
-    
+export default function Calendar({ townID, tourName }) {
+
     const [array, setArray] = useState([]);
     const [page, setPage] = useState(1);
     const [popupOpen, setPopupOpen] = useState(false);
@@ -25,16 +25,31 @@ export default function Calendar({townID, tourName}) {
             }
             setArray(newArray);
         };
-        
+
         fetchData();
     }, []);
-    
+
+    useEffect(() => {
+        const checkDate = async () => {
+            const service = new TourService();
+            const updatedArray = [...array]; // Make a copy of the original array
+            for (let i = 0; i < 28; i++) {
+                const date = updatedArray[i].Year + "-" + (updatedArray[i].Month < 10 ? `0${updatedArray[i].Month}` : updatedArray[i].Month) + "-" + (updatedArray[i].Day < 10 ? `0${updatedArray[i].Day}` : updatedArray[i].Day);
+                const response = await service.checkDate(date, tourName);
+                updatedArray[i].hasTour = response[0].isTour; // Add the new property to the object
+            }
+            setArray(updatedArray); // Update the state with the new array
+        };
+        checkDate();
+    }, [array]);
+
+
     const handleClick = async (data) => {
         try {
             const date = `${data.Year}-${data.Month < 10 ? `0${data.Month}` : data.Month}-${data.Day < 10 ? `0${data.Day}` : data.Day}`;
             const tourservice = new TourService(townID, tourName, null, null, date, null, null, null);
             const response = await tourservice.fetchTourByDate();
-            
+
             setPopupData(response);
             setPopupOpen(true);
         } catch (error) {
@@ -46,18 +61,17 @@ export default function Calendar({townID, tourName}) {
     };
 
     const handleNextPage = () => {
-        if (array.length > page * 7){
+        if (array.length > page * 7) {
             setPage(page + 1);
         }
     };
     const handlePrevPage = () => {
-        if (page > 1){
+        if (page > 1) {
             setPage(page - 1);
         }
     };
 
     const visibleArray = array.slice((page - 1) * 7, page * 7);
-
     return (
         <>
             <div className="w-auto h-32 bg-bone-white flex gap-3 rounded-2xl mt-14 content-center items-center justify-between px-4 calendarRow">
@@ -66,22 +80,25 @@ export default function Calendar({townID, tourName}) {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"></path>
                     </svg>
                 </button>
-                    {visibleArray.map((data, index) => (
-                        <div key={index} className="">
-                            <button onClick={() => handleClick(data)} 
-                            className=' bg-[#D9D9D9] text-black size-20 mx-3 shadow-lg calendarCell'>
-                                    <div className="text-dark-green text-xl font-semibold">{data.Month}</div>
-                                    <div className="text-dark-green text-2xl font-semibold">{data.Day}</div>
-                            </button>
-                        </div>
-                    ))}
-                    <button onClick={handleNextPage} className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full hover:outline-none hover:border-none hover:bg-light-green focus:outline-none focus:border-none">
+                {visibleArray.map((data, index) => (
+                    <div key={index} className="">
+                        <button
+                            onClick={() => handleClick(data)}
+                            className={`text-black size-20 mx-3 shadow-lg calendarCell ${data.hasTour === "true" ? 'bg-[#DEDEDE]' : 'bg-gray-500'}`}
+                        >
+                            <div className="text-dark-green text-xl font-semibold">{data.Month}</div>
+                            <div className="text-dark-green text-2xl font-semibold">{data.Day}</div>
+                        </button>
+                    </div>
+                ))}
+
+                <button onClick={handleNextPage} className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full hover:outline-none hover:border-none hover:bg-light-green focus:outline-none focus:border-none">
                     <svg className="w-6 h-6 text-gray-600 hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" transform='scale(-1,1)'>
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"></path>
                     </svg>
                 </button>
             </div>
-            {popupOpen &&<TourModal isOpen={popupOpen} onClose={handleClosePopup} data={popupData} />}
+            {popupOpen && <TourModal isOpen={popupOpen} onClose={handleClosePopup} data={popupData} />}
         </>
     );
 }
