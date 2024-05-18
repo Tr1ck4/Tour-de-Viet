@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import './Bot.css';
+
 export default function Bot() {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
-  const [isVisible, setVisibility] = useState(true);
+  const [isMinimized, setIsMinimized] = useState(false);
 
   const sendMessage = async () => {
     if (inputValue.trim() === '') return;
     setMessages(prevMessages => [...prevMessages, { sender: 'User', content: inputValue }]);
+    setInputValue('');
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
@@ -36,42 +39,68 @@ export default function Bot() {
     if (e.key === 'Enter') {
       e.preventDefault();
       sendMessage();
-      setInputValue(() => '');
     }
   };
 
-  const toggleChat = () => {
-    setVisibility(!isVisible);
+  const toggleMinimize = () => {
+    setIsMinimized(prevState => !prevState);
+  };
+
+  const toggleOpen = () => {
+    setIsMinimized(false);
   };
 
   return (
-    <div className="container">
-      <div className="toggle-icon" onClick={toggleChat}>
-        {isVisible ? '▼' : '▲'}
-      </div>
-      {isVisible && (
-        <>
-          <div className="Bot-messages">
-            {messages.map((message, index) => (
-              <div key={index} className={`message-${message.sender.toLowerCase()}`}>
-                <div className="message-header">{message.sender}</div>
-                <div className="message-content">{message.content}</div>
-              </div>
-            ))}
+    <>
+    <div className = 'botchat'>
+      {isMinimized && <button style={{transform: 'translate(18vw,33vh)', borderRadius:'50%', backgroundColor:'black', width:'50px',height:'50px'}} className="minimize-button" onClick={toggleMinimize}>
+                {isMinimized ? '+' : '-'}
+              </button>}
+      {!isMinimized &&
+        <div className={`container ${isMinimized ? 'minimized' : ''}`}>
+          <div className="chat-window">
+            <div className="chat-header">
+              <h3>Chat with Bot</h3>
+              <button className="minimize-button" onClick={toggleMinimize}>
+                {isMinimized ? '+' : '-'}
+              </button>
+              {isMinimized && (
+                <button className="open-button" onClick={toggleOpen}>
+                  Open
+                </button>
+              )}
+            </div>
+            {!isMinimized && (
+              <>
+                <div className="chat-messages">
+                  {messages.map((message, index) => (
+                    <div key={index} className={`message ${message.sender}`}>
+                      <div className="message-content">
+                        {message.sender === 'Bot' ? (
+                          <ReactMarkdown>{message.content}</ReactMarkdown>
+                        ) : (
+                          message.content
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="chat-input">
+                  <input
+                    type="text"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Type your message..."
+                  />
+                  <button onClick={sendMessage}>Send</button>
+                </div>
+              </>
+            )}
           </div>
-          <div className="Bot-input">
-            <form onSubmit={(e) => { e.preventDefault(); sendMessage(); }}>
-              <input
-                type="text"
-                value={inputValue}
-                onChange={handleInputChange}
-                placeholder="Type your message..."
-              />
-              <button type="submit">Send</button>
-            </form>
-          </div>
-        </>
-      )}
+        </div>
+      }
     </div>
+    </>
   );
 };
