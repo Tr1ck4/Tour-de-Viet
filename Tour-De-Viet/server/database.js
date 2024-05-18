@@ -1,3 +1,4 @@
+
 import sqlite3 from 'sqlite3';
 class UserModel {
   constructor(dbFilePath) {
@@ -126,8 +127,17 @@ class UserModel {
   }
 
 
+  // getAllTours(callback) {
+  //   this.db.all("SELECT * FROM tours JOIN tour_date ON tours.tourName = tour_date.tourName", callback);
+  // }
   getAllTours(callback) {
-    this.db.all("SELECT * FROM tours JOIN tour_date ON tours.tourName = tour_date.tourName", callback);
+    let sql = `SELECT t.townID, t.tourName, t.description, t.category, t.price, t.transportationID, 
+              td.startDate, td.endDate, COUNT(b.tourName) AS numBookings
+              FROM tours AS t
+              JOIN tour_date AS td ON t.tourName = td.tourName
+              LEFT JOIN bookings AS b ON t.tourName = b.tourName
+              GROUP BY t.tourName;`
+    this.db.all(sql,callback);
   }
   getTourbyDate(townID, tourName, startDate, callback) {
     let sql = `SELECT 

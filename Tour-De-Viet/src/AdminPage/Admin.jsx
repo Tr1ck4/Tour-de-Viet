@@ -237,20 +237,22 @@ export default function AdminPage() {
     const CurrentTourPage = () => {
         return (
             <ul className="relative">
-                <li className='sticky w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-bone-white inset-0 mx-auto mt-7 font-itim text-black  content-center pl-10 ' >
+                <li className='sticky w-11/12 h-24 rounded-xl grid grid-cols-6 gap-10 bg-bone-white inset-0 mx-auto mt-7 font-itim text-black  content-center pl-10 ' >
                     <p>Tour's name</p>
                     <p>Start Date</p>
                     <p>End Date</p>
+                    <p>Total bookings</p>
                     <p>Total payment</p>
                 </li>
                 <div className="h-96 no-scrollbar overflow-y-auto">
                     {onBook.map((booking) => {
                         return (
                             <div className='relative'>
-                                <li className='w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-bone-white inset-0 mx-auto mt-7 font-itim text-black  content-center pl-10 ' onClick={() => handleBookingClick(booking)}>
+                                <li className='w-11/12 h-24 rounded-xl grid grid-cols-6 gap-10 bg-bone-white inset-0 mx-auto mt-7 font-itim text-black  content-center pl-10 ' onClick={() => handleBookingClick(booking)}>
                                     <p>{booking.tourName}</p>
                                     <p>{new Date(booking.startDate).toLocaleDateString(('en-GB'))}</p>
                                     <p>{new Date(booking.endDate).toLocaleDateString(('en-GB'))}</p>
+                                    <p>{booking.numBookings}</p>
                                     <p>{booking.price}</p>
                                 </li>
                                 <button className='absolute top-5 right-20 w-1/12 h-14 bg-bright-yellow text-xl rounded-xl font-itim shadow-lg drop-shadow-2xl' onClick={() => handleDeleteOngoingTour(booking.tourName)}>
@@ -267,20 +269,22 @@ export default function AdminPage() {
     const PastTourPage = () => {
         return (
             <ul className="relative">
-                <li className=' sticky w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-light-green inset-0 mx-auto mt-7 font-itim text-white  content-center pl-10 '>
+                <li className=' sticky w-11/12 h-24 rounded-xl grid grid-cols-6 gap-10 bg-light-green inset-0 mx-auto mt-7 font-itim text-white  content-center pl-10 '>
                     <p>Tour's name</p>
                     <p>Start Date</p>
                     <p>End Date</p>
+                    <p>Total bookings</p>
                     <p>Total payment</p>
                 </li>
                 <div className="h-96 no-scrollbar overflow-y-auto">
                     {closeBook.map((booking) => {
                         return (
                             <div className='relative'>
-                                <li className='w-11/12 h-24 rounded-xl grid grid-cols-5 gap-10 bg-light-green inset-0 mx-auto mt-7 font-itim text-white  content-center pl-10 ' onClick={() => handleBookingClick(booking)}>
+                                <li className='w-11/12 h-24 rounded-xl grid grid-cols-6 gap-10 bg-light-green inset-0 mx-auto mt-7 font-itim text-white  content-center pl-10 ' onClick={() => handleBookingClick(booking)}>
                                     <p>{booking.tourName}</p>
                                     <p>{new Date(booking.startDate).toLocaleDateString(('en-GB'))}</p>
                                     <p>{new Date(booking.endDate).toLocaleDateString(('en-GB'))}</p>
+                                    <p>{booking.numBookings}</p>
                                     <p>{booking.price}</p>
                                 </li>
                                 <button className='absolute top-5 right-20 w-1/12 h-14 bg-bright-yellow text-xl rounded-xl font-itim shadow-lg drop-shadow-2xl' onClick={() => handleDeletePastTour(booking.tourName)}>

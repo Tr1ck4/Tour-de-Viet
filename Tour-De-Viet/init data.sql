@@ -52,21 +52,7 @@ INSERT INTO tours (townID, tourName, description, category, price,  transportati
 INSERT INTO tours (townID, tourName, description, category, price,  transportationID) VALUES(34,"Tour 34", '{"Header": null,"Content":"What ever"}', "Spa",10500000,null);
 INSERT INTO tours (townID, tourName, description, category, price,  transportationID) VALUES(35,"Tour 35", '{"Header": null,"Content":"What ever"}', "Spa",10430000,null);
 
-INSERT INTO tour_date (tourName, startDate, endDate) VALUES("Tour 1", "2024-06-05" ,"2024-06-06");
-INSERT INTO tour_date (tourName, startDate, endDate) VALUES("Tour 2", "2024-06-05" ,"2024-06-05");
-INSERT INTO tour_date (tourName, startDate, endDate) VALUES("Tour 3", "2024-06-05" ,"2024-06-05");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 4", "2024-06-05" ,"2024-06-06");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 5", "2024-06-05" ,"2024-06-07");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 6", "2024-06-05" ,"2024-06-08");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 7", "2024-06-05" ,"2024-06-08");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 8", "2024-06-05" ,"2024-06-08");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 9", "2024-06-05" ,"2024-06-07");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 10", "2024-06-05" ,"2024-06-07");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 11", "2024-06-05" ,"2024-06-07");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 12", "2024-06-05" ,"2024-06-09");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 13", "2024-06-05" ,"2024-06-09");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 14", "2024-06-05" ,"2024-07-01");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 15", "2024-06-05" ,"2024-07-01");
+
 INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 16", "2024-06-05" ,"2024-06-07");
 INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 17", "2024-06-05" ,"2024-06-07");
 INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 18", "2024-06-05" ,"2024-06-05");
@@ -103,26 +89,7 @@ INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 12", "2023-06
 INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 13", "2023-06-05" ,"2023-06-09");
 INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 14", "2023-06-05" ,"2023-07-01");
 INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 15", "2023-06-05" ,"2023-07-01");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 16", "2023-06-05" ,"2023-06-07");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 17", "2023-06-05" ,"2023-06-07");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 18", "2023-06-05" ,"2023-06-05");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 19", "2023-06-05" ,"2023-06-05");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 20", "2023-06-07" ,"2023-06-10");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 21", "2023-06-08" ,"2023-06-08");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 22", "2023-06-09" ,"2023-06-10");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 23", "2023-06-07" ,"2023-06-07");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 24", "2023-06-05" ,"2023-06-07");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 25", "2023-06-05" ,"2023-06-07");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 26", "2023-06-05" ,"2023-06-07");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 27", "2023-06-05" ,"2023-06-09");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 28", "2023-06-05" ,"2023-06-09");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 29", "2023-06-05" ,"2023-06-09");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 30", "2023-06-05" ,"2023-06-09");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 31", "2023-06-05" ,"2023-06-05");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 32", "2023-06-05" ,"2023-06-05");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 33", "2023-06-05" ,"2023-06-05");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 34", "2023-06-05" ,"2023-06-05");
-INSERT INTO tour_date ( tourName, startDate, endDate) VALUES("Tour 35", "2023-06-05" ,"2023-06-05");
+
 
 INSERT INTO bookings (userName, tourName, transportationID, cardID) VALUES ("exampleUser1", "Tour 1", 1, 354786293);
 INSERT INTO bookings (userName, tourName, transportationID, cardID) VALUES ("exampleUser1", "Tour 2", 9, 354786293);
