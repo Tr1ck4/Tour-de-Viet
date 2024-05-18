@@ -4,34 +4,42 @@ import path from 'path';
 import jwt from 'jsonwebtoken';
 import cors from 'cors';
 import { expressjwt } from "express-jwt";
-
-import nodemailer from 'nodemailer';
 import OpenAI from 'openai';
 import { storeImage, createFolder } from './ImageBuilder.js'
 import multer from 'multer';
 
-var transporter = nodemailer.createTransport({
+import nodemailer from 'nodemailer';
+
+function createBookingEmailContent(tourName, username, telNum, startDate, endDate, goFrom, arriveAt, price) {
+    return `
+        <h1>Confirm booking: ${tourName}</h1>
+        <p>Your tour is ready to be scheduled. Please check the below information:</p>
+        <ul>
+            <li><strong>Tour Name:</strong> ${tourName}</li>
+            <li><strong>Your Name:</strong> ${username}</li>
+            <li><strong>Contact Number:</strong> ${telNum}</li>
+            <li><strong>Start Date:</strong> ${startDate}</li>
+            <li><strong>End Date:</strong> ${endDate}</li>
+            <li><strong>Departure:</strong> ${goFrom}</li>
+            <li><strong>Arrival:</strong> ${arriveAt}</li>
+            <li><strong>Price:</strong> ${price}</li>
+        </ul>
+        <p>We are excited to have you join us on this tour. If you have any questions, please feel free to contact us.</p>
+        <p>Thank you for booking with us!</p>
+    `;
+}
+
+const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'tbnrfragsprest123@gmail.com',
-        pass: 'vfrsjpltshlnarxd'
+        user: 'rishviet@gmail.com',
+        pass: 'rfvjskryezkzgnvn'
     }
 });
 
-var mailOptions = {
-    from: 'tbnrfragsprest123@gmail.com',
-    to: 'triet0612@gmail.com',
-    subject: 'Sending Email using Node.js',
-    text: 'This is not a spam'
-};
 
-// transporter.sendMail(mailOptions, function(error, info){
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log('Email sent: ' + info.response);
-//   }
-// });
+
+
 const upload = multer();
 
 const openai = new OpenAI({
@@ -50,6 +58,33 @@ export const authenticateJWT = expressjwt({ secret: secretKey, algorithms: ['HS2
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'dist')));
+
+app.post('/api/send', (req, res) => {
+    const { tourName, username, telNum, startDate, endDate, goFrom, arriveAt, price, email } = req.body;
+
+    if (!tourName || !username || !telNum || !startDate || !endDate || !goFrom || !arriveAt || !price || !email) {
+        console.log("Error: Missing required parameters for sending email.");
+        return res.status(400).send("Missing required parameters");
+    }
+
+    const mailOptions = {
+        from: 'rishviet@gmail.com',
+        to: email,
+        subject: `Confirmation to ${tourName}`,
+        html: createBookingEmailContent(tourName, username, telNum, startDate, endDate, goFrom, arriveAt, price),
+    };
+
+    transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+            console.log("Error sending email:", error);
+            return res.status(500).send("Error sending email");
+        } else {
+            console.log('Email sent:', info.response);
+            return res.status(200).send("Email sent successfully");
+        }
+    });
+});
+
 
 app.post('/api/chat', async (req, res) => {
     const { message } = req.body;

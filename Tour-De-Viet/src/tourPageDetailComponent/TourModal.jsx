@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import AccountService from '../../server/AccountService';
 import BookingService from '../../server/BookingService';
 import './TourModal.css'
+import axios from 'axios';
 
 export default function TourModal({ data, isOpen, onClose }) {
     const [info, setInfo] = useState({});
@@ -33,6 +34,25 @@ export default function TourModal({ data, isOpen, onClose }) {
                 "cardID": cardID,
             });
             if (response) {
+                const bookingData = {
+                    tourName: data.tourName,
+                    username: info.Name,
+                    telNum: info.telNum,
+                    startDate: data.startDate,
+                    endDate: data.endDate,
+                    goFrom: data.goFrom,
+                    arriveAt: data.arriveAt,
+                    price: data.price,
+                    email: info.email
+                };
+            
+                axios.post('http://localhost:3000/api/send', bookingData)
+                    .then(response => {
+                        console.log('Email sent successfully:', response.data);
+                    })
+                    .catch(error => {
+                        console.error('Error sending email:', error);
+                    });
                 onClose(true);
             }
         } catch (error) {
