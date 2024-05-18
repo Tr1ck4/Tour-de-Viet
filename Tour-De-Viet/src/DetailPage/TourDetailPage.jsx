@@ -205,8 +205,8 @@ const TourDetailPage = () => {
 
                         <div className='w-auto h-[400px] inline-flex gap-1'>
                             <div className='bg-light-green rounded-2xl h-[400px] w-[856px]'>
-                                <div>{tourDetails.description == null ? tourName : tourDetails.description.Header}</div>
-                                <div>{tourDetails.description == null ? null : tourDetails.description.Content}</div>
+                                <div className='text-4xl font-serif font-extrabold my-3 mx-10'>{tourDetails.description == null ? null : tourDetails.description.Header}</div>
+                                <div className='text-lg my-2 mx-3'>{tourDetails.description == null ? null : tourDetails.description.Content}</div>
                             </div>
 
                             <div>

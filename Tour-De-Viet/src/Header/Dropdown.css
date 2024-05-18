@@ -57,13 +57,13 @@
   .dropdown-menu {
     display: none;
     position: absolute;
-    top: 100%;
-    left: -20%;
+    top: 120%;
+    left: -40%;
     padding: 10,10;
     background-color: white;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    min-width: 160px;
+    min-width: 60px;
     opacity: 0;
     transform: translateY(-10px);
     transition: all 0.3s ease-in-out;

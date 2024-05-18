@@ -86,8 +86,8 @@ export default function Calendar({ townID, tourName }) {
                             onClick={() => handleClick(data)}
                             className={`text-black size-20 mx-3 shadow-lg calendarCell ${data.hasTour === "true" ? 'bg-[#DEDEDE]' : 'bg-gray-500'}`}
                         >
-                            <div className="text-dark-green text-xl font-semibold">{data.Month}</div>
-                            <div className="text-dark-green text-2xl font-semibold">{data.Day}</div>
+                            <div className='text-dark-green text-xl font-semibold'>{data.Month}</div>
+                            <div className='text-dark-green text-2xl font-semibold'>{data.Day}</div>
                         </button>
                     </div>
                 ))}
