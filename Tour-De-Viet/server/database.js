@@ -131,7 +131,7 @@ class UserModel {
   }
   getTourbyDate(townID, tourName, startDate, callback) {
     let sql = `SELECT 
-    t.*, td.startDate, td.endDate, tr.*
+    t.*, td.startDate, td.endDate, tr.ID, tr.Name, tr.goFrom, tr.arriveAt, tr.type
     FROM tours as t 
     JOIN 
       tour_date AS td ON t.tourName = td.tourName
