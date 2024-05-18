@@ -346,9 +346,9 @@ export default function TourPage() {
                         return (
                             <Link to={`/tourpage/${tourData.townID}/${tourData.tourName}`} key={index} className=''>
                                 <div className='bg-light-green w-3/4 h-64 mt-6 rounded-[20px] flex hover:text-bone-white hover:bg-dark-green'>
-                                    <div className='w-2/5 bg-slate-700 h-full rounded-[20px]'>
+                                    <div className='w-2/5 bg-slate-700 h-full rounded-[20px] object-fill'>
                                         {imageSrc ? (
-                                            <img src={imageSrc} alt={`${tourData.tourName} Image`} className="tour-image" />
+                                            <img src={imageSrc} alt={`${tourData.tourName} Image`} className="tour-image rounded-[20px]" style={{ width: '100%', height: '100%' }} />
                                         ) : (
                                             <p>Image not available</p>
                                         )}
