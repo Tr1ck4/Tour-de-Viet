@@ -2,14 +2,37 @@ import { useState, useEffect } from 'react';
 import AccountService from '../../server/AccountService';
 import BookingService from '../../server/BookingService';
 import './TourModal.css'
+import { MailService } from '../../server/MailService';
+
+function createBookingEmailContent(tourName, username, telNum, startDate, endDate, goFrom, arriveAt, price) {
+    return `
+        <h1>Confirm booking: ${tourName}</h1>
+        <p>Your tour is ready to be scheduled. Please check the below information:</p>
+        <ul>
+            <li>Tour Name: ${tourName}</li>
+            <li>Your Name: ${username}</li>
+            <li>Contact Number: ${telNum}</li>
+            <li>Start Date: ${startDate}</li>
+            <li>End Date: ${endDate}</li>
+            <li>Departure: ${goFrom}</li>
+            <li>Arrival: ${arriveAt}</li>
+            <li>Price: ${price}</li>
+        </ul>
+        <p>We are excited to have you join us on this tour. If you have any questions, please feel free to contact us.</p>
+        <p>Thank you for booking with us!</p>
+    `;
+}
 
 export default function TourModal({ data, isOpen, onClose }) {
     const [info, setInfo] = useState({});
     const [cardID, setCardId] = useState('');
     const accountService = new AccountService();
     const bookingService = new BookingService();
+    const mailService = new MailService();
+
 
     useEffect(() => {
+        console.log(data);
         const fetchAccountInfo = async () => {
             try {
                 const response = await accountService.fetchAccount();
@@ -33,6 +56,19 @@ export default function TourModal({ data, isOpen, onClose }) {
                 "cardID": cardID,
             });
             if (response) {
+
+                const htmlContent = createBookingEmailContent(
+                    data.tourName,
+                    info.username,
+                    info.telNum,
+                    data.startDate,
+                    data.endDate,
+                    data.goFrom,
+                    data.arriveAt,
+                    data.price
+                );
+
+                mailService.sendMail(info.email, `Confirm booking ${data.tourName}`, 'Your tour is ready to be scheduled. Please check the below information', htmlContent)
                 onClose(true);
             }
         } catch (error) {

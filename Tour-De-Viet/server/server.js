@@ -5,33 +5,15 @@ import jwt from 'jsonwebtoken';
 import cors from 'cors';
 import { expressjwt } from "express-jwt";
 
-import nodemailer from 'nodemailer';
 import OpenAI from 'openai';
 import { storeImage, createFolder } from './ImageBuilder.js'
 import multer from 'multer';
 
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'tbnrfragsprest123@gmail.com',
-        pass: 'vfrsjpltshlnarxd'
-    }
-});
 
-var mailOptions = {
-    from: 'tbnrfragsprest123@gmail.com',
-    to: 'triet0612@gmail.com',
-    subject: 'Sending Email using Node.js',
-    text: 'This is not a spam'
-};
 
-// transporter.sendMail(mailOptions, function(error, info){
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log('Email sent: ' + info.response);
-//   }
-// });
+
+
+
 const upload = multer();
 
 const openai = new OpenAI({
