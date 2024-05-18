@@ -13,7 +13,7 @@ const TourDetailPage = () => {
     const { townID, tourName } = useParams(); // Get the tourId from the route parameters
     const [tourDetails, setTourDetails] = useState([]);
     const [comments, setComments] = useState([]);
-    const [loading, setLoading] = useState(true);
+    //const [loading, setLoading] = useState(true);
     const [showCommentSection, setShowCommentSection] = useState(false);
     const [username, setUsername] = useState();
     const [rating, setRating] = useState(null);
