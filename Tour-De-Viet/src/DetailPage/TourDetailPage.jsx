@@ -22,6 +22,29 @@ const TourDetailPage = () => {
     const hasBookedRef = useRef(hasBooked);
     const starsRef = useRef([]);
 
+    const [images, setImages] = useState({});
+
+    const importImages = async (townID, tourName) => {
+        const images = [];
+        for (let i = 1; i <= 5; i++) {
+            try {
+                const image = await import(`../assets/${townID}/${tourName}/${i}.png`);
+                images.push(image.default);
+            } catch (err) {
+                console.error(`Image ${i}.png not found for townID: ${townID}, tourName: ${tourName}`);
+            }
+        }
+        return images;
+    };
+
+    useEffect(() => {
+        const loadImages = async () => {
+            const imageSrcs = await importImages(tourDetails.townID, tourDetails.tourName);
+            setImages(imageSrcs);
+        };
+        loadImages();
+    }, [tourDetails]);
+
     useEffect(() => {
         hasBookedRef.current = hasBooked;
     }, [hasBooked]);
@@ -194,12 +217,42 @@ const TourDetailPage = () => {
 
                     <div className='h-auto w-3/5 mx-auto mt-10'>
                         <div className='w-auto h-[400px] my-4 grid grid-cols-2 gap-2'>
-                            <div className='bg-neutral-400 rounded-2xl'></div>
+                            <div className='bg-neutral-400 rounded-2xl'>
+                                {images[0] ? (
+                                    <img src={images[0]} alt={`${tourDetails.tourName} Image 1`} className='h-full w-full rounded-2xl object-cover' />
+                                ) : (
+                                    <p>Image not available</p>
+                                )}
+                            </div>
                             <div className='grid grid-cols-2 grid-rows-2 gap-1'>
-                                <div className='bg-gray-400 rounded-tl-2xl'></div>
-                                <div className='bg-gray-400 rounded-tr-2xl'></div>
-                                <div className='bg-gray-400 rounded-bl-2xl'></div>
-                                <div className='bg-gray-400 rounded-br-2xl'></div>
+                                <div className='bg-gray-400 rounded-tl-2xl'>
+                                    {images[1] ? (
+                                        <img src={images[1]} alt={`${tourDetails.tourName} Image 2`} className='bg-gray-400 rounded-tl-2xl h-full w-full object-cover' />
+                                    ) : (
+                                        <div className='bg-gray-400 rounded-tl-2xl'></div>
+                                    )}
+                                </div>
+                                <div className='bg-gray-400 rounded-tr-2xl'>
+                                    {images[2] ? (
+                                        <img src={images[2]} alt={`${tourDetails.tourName} Image 3`} className='bg-gray-400 rounded-tr-2xl h-full w-full object-cover' />
+                                    ) : (
+                                        <div className='bg-gray-400 rounded-tr-2xl'></div>
+                                    )}
+                                </div>
+                                <div className='bg-gray-400 rounded-bl-2xl'>
+                                    {images[3] ? (
+                                        <img src={images[3]} alt={`${tourDetails.tourName} Image 4`} className='bg-gray-400 rounded-bl-2xl h-full w-full object-cover' />
+                                    ) : (
+                                        <div className='bg-gray-400 rounded-bl-2xl'></div>
+                                    )}
+                                </div>
+                                <div className='bg-gray-400 rounded-br-2xl'>
+                                    {images[4] ? (
+                                        <img src={images[4]} alt={`${tourDetails.tourName} Image 5`} className='bg-gray-400 rounded-br-2xl h-full w-full object-cover' />
+                                    ) : (
+                                        <div className='bg-gray-400 rounded-br-2xl'></div>
+                                    )}
+                                </div>
                             </div>
                         </div>
 

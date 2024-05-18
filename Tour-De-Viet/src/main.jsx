@@ -31,9 +31,9 @@ export default function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/bookinghistory' element={<BookTourPage />} />
         <Route path='/profile' element={<ProfilePage />} />
-        <Route path='/bot' element={<Bot />}/>
         <Route path='/admin' element={<AdminPage />}/>
       </Routes>
+      <Bot/>
     </Router>
   );
 }
