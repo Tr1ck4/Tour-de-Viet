@@ -8,6 +8,7 @@ import ToursService from '../../server/TourService';
 const MIN = 500000;
 const MAX = 20000000;
 
+
 export default function TourPage() {
     const { current_id } = useParams();
     const [tourList, SetTourList] = useState([]);
@@ -15,6 +16,30 @@ export default function TourPage() {
     const [selectedTransportationValues, setSelectedTransportationValues] = useState([]); // transportation
     const [selectedValues, setSelectedValues] = useState([]); // category
     const [filterTour, setFilterTour] = useState([]);
+
+    const [images, setImages] = useState({});
+
+    const importImage = async (townID, tourName) => {
+        try {
+            const image = await import(`../assets/${townID}/${tourName}/1.png`);
+            return image.default;
+        } catch (err) {
+            console.error(`Image not found for townID: ${townID}, tourName: ${tourName}`);
+            return null; // Return null if not found
+        }
+    };
+
+    useEffect(() => {
+        const loadImages = async () => {
+            const loadedImages = {};
+            for (const tourData of filterTour) {
+                const imageSrc = await importImage(tourData.townID, tourData.tourName);
+                loadedImages[`${tourData.townID}-${tourData.tourName}`] = imageSrc;
+            }
+            setImages(loadedImages);
+        };
+        loadImages();
+    }, [filterTour]);
 
     const filterObjects = (tourList, selectedValues, selectedTransportationValues, values) => {
         return tourList.filter(tour => {
@@ -44,8 +69,7 @@ export default function TourPage() {
                 SetTourList(parsedResponse);
                 const tmpFilterTour = filterObjects(parsedResponse, selectedValues, selectedTransportationValues, values);
                 setFilterTour(tmpFilterTour);
-
-
+                console.log(tmpFilterTour);
             } catch (error) {
                 console.error("Error fetching tours", error);
             }
@@ -313,24 +337,38 @@ export default function TourPage() {
                         </div>
                     </div>
                 </div>
-                <div className='w-2/3 mt-28 ml-10 justify overflow-y-auto ' style={{ '-ms-overflow-style': 'none', 'scrollbar-width': 'none' }}>
-                    {filterTour.map((tourData, index) => (
-                        <Link to={`/tourpage/${tourData.townID}/${tourData.tourName}`} key={index} className=''>
-                            <div key={index} className='bg-light-green w-3/4 h-64 mt-6 rounded-[20px] flex hover:text-bone-white hover:bg-dark-green'>
-                                <div className='w-2/5 bg-slate-700 h-full rounded-[20px]'></div>
-                                <div className='w-3/5 h-full'>
-                                    <div className='text-4xl font-itim font-semibold mt-6 ml-6 h-auto'>{tourData.tourName}</div>
-                                    <div className='text-2xl font-itim mt-3 ml-6 h-auto'>{tourData.category}</div>
-                                    <div className='text-2xl font-itim mt-3 ml-6 h-auto'>{tourData.totalTime}</div>
-                                    <div className='text-2xl font-itim mt-3 ml-6 h-auto'> {tourData.transport !== null ? tourData.transport : "N/A"} </div>
-                                    <div className='text-2xl font-itim mt-3 ml-6 h-auto grid-cols-2 gap-4 flex justify-between'>
-                                        <div>{tourData.avg_rating !== null ? tourData.avg_rating.toFixed(1) : "N/A"}</div>
-                                        <div className='mr-5'>{tourData.price}</div>
+                <div
+                    className='w-2/3 mt-28 ml-10 justify overflow-y-auto'
+                    style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
+                >
+                    {filterTour.map((tourData, index) => {
+                        const imageSrc = images[`${tourData.townID}-${tourData.tourName}`];
+                        return (
+                            <Link to={`/tourpage/${tourData.townID}/${tourData.tourName}`} key={index} className=''>
+                                <div className='bg-light-green w-3/4 h-64 mt-6 rounded-[20px] flex hover:text-bone-white hover:bg-dark-green'>
+                                    <div className='w-2/5 bg-slate-700 h-full rounded-[20px]'>
+                                        {imageSrc ? (
+                                            <img src={imageSrc} alt={`${tourData.tourName} Image`} className="tour-image" />
+                                        ) : (
+                                            <p>Image not available</p>
+                                        )}
+                                    </div>
+                                    <div className='w-3/5 h-full'>
+                                        <div className='text-4xl font-itim font-semibold mt-6 ml-6 h-auto'>{tourData.tourName}</div>
+                                        <div className='text-2xl font-itim mt-3 ml-6 h-auto'>{tourData.category}</div>
+                                        <div className='text-2xl font-itim mt-3 ml-6 h-auto'>{tourData.totalTime}</div>
+                                        <div className='text-2xl font-itim mt-3 ml-6 h-auto'>
+                                            {tourData.transport !== null ? tourData.transport : "N/A"}
+                                        </div>
+                                        <div className='text-2xl font-itim mt-3 ml-6 h-auto grid-cols-2 gap-4 flex justify-between'>
+                                            <div>{tourData.avg_rating !== null ? tourData.avg_rating.toFixed(1) : "N/A"}</div>
+                                            <div className='mr-5'>{tourData.price}</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </Link>
-                    ))}
+                            </Link>
+                        );
+                    })}
                 </div>
             </main>
         </>
