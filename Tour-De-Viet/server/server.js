@@ -142,6 +142,7 @@ function getTokenFromCookie(req) {
 
     return jwtCookie.split('=')[1];
 }
+
 app.get('/api/authenticate', authenticateToken, (req, res) => {
     const token = getTokenFromCookie(req);
 

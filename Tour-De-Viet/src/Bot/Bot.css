@@ -70,6 +70,7 @@
   margin-bottom: 10px;
   background-color: #007bff;
   color:white;
+  border-radius: 30%;
 }
 
 .message.Bot {
@@ -106,4 +107,26 @@
 
 .container.minimized .chat-window {
   display: none;
+}
+
+.chatInput{
+  background-color:#ebebeb ;
+  outline: none;
+  border: none;
+}
+
+.chatInput:focus {
+  outline: none;
+  border: none;
+  color: black;
+  font-weight: 700;
+}
+
+.chatInput::placeholder {
+  outline: none;
+  border: none;
+  color: black;
+  text-align: start;
+  opacity: 0.8;
+  font-weight: 700;
 }

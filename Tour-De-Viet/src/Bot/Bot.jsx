@@ -60,7 +60,7 @@ export default function Bot() {
         <div className={`container ${isMinimized ? 'minimized' : ''}`}>
           <div className="chat-window">
             <div className="chat-header">
-              <h3>Chat with Bot</h3>
+              <h3 className='text-xl font-semibold'>Chat with Bot</h3>
               <button className="minimize-button" onClick={toggleMinimize}>
                 {isMinimized ? '+' : '-'}
               </button>
@@ -92,6 +92,7 @@ export default function Bot() {
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
                     placeholder="Type your message..."
+                    className='chatInput'
                   />
                   <button onClick={sendMessage}>Send</button>
                 </div>
