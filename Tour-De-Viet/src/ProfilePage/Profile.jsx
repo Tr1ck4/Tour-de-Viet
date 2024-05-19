@@ -63,7 +63,8 @@ function ProfilePage() {
         console.log(profile);
     };
     return (
-        <div className='relative h-screen overflow-hidden'>
+        <main>
+            <div className='relative h-screen overflow-hidden'>
             <div>
                 <img src={background} alt="" />
                 <img src={wave_up} alt="" className='absolute left-0 top-0' />
@@ -116,6 +117,9 @@ function ProfilePage() {
 
             </div>
         </div>
+        </main>
+        
+        
     )
 }
 

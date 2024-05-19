@@ -18,6 +18,7 @@ export default function Dropdown (){
                 <a href="/homepage">HomePage</a>
                 <a href="/parallax">All Tours</a>
                 <a href="/profile">Profile</a>
+                <a href="/bookinghistory">Booking History</a>
             </div>
         </div>
     )

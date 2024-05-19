@@ -1,42 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import BookingModal from './BookingModal';
-// import TransportationModal from './TransporationModal'
-// import background from '.././images/background.png'
-// import corner from '.././images/corner.png'
-
-// export default function AdminPage() {
-//     const [role, setRole] = useState('');
-
-//     useEffect(() => {
-//         const fetchRole = async () => {
-//             try {
-//                 const response = await axios.get('/api/authenticate');
-//                 console.log(response.data.accountname);
-//                 setRole(response.data.accountname);
-//             } catch (error) {
-//                 console.error('Error fetching role:', error);
-//             }
-//         };
-//         fetchRole();
-//     }, []);
-
-    // return (
-    //     <>
-    //         {/* {role === 'admin' && ( */}
-    //         <main>
-    //             <p> Hello</p>
-    //         </main>
-    //         {/* )}
-    //         {role !== 'admin' && (
-    //             <div>
-    //                 <h1>Access Denied</h1>
-    //             </div>
-    //         )} */}
-    //     </>
-    // );
-// }
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import BookingModal from './BookingModal';
@@ -412,11 +373,14 @@ export default function AdminPage() {
             </main>
              ) : 
             (
-                <div className="flex flex-col items-center justify-center h-screen w-screen bg-gray-100 text-gray-800">
+                <main>
+                    <div className="flex flex-col items-center justify-center h-screen w-screen bg-gray-100 text-gray-800">
                     <div className="text-6xl mb-4 text-red-500">🚫</div>
                     <h1 className="text-4xl font-bold mb-2">Access Denied</h1>
                     <p className="text-lg text-gray-600">You don't have permission to enter this page.</p>
                 </div>
+                </main>
+                
             )
         }
         </>
