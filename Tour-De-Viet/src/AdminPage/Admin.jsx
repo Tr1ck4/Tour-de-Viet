@@ -1,5 +1,9 @@
 // import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
+// import BookingModal from './BookingModal';
+// import TransportationModal from './TransporationModal'
+// import background from '.././images/background.png'
+// import corner from '.././images/corner.png'
 
 // export default function AdminPage() {
 //     const [role, setRole] = useState('');
@@ -17,20 +21,20 @@
 //         fetchRole();
 //     }, []);
 
-//     return (
-//         <>
-//             {/* {role === 'admin' && ( */}
-//             <main>
-//                 <p> Hello</p>
-//             </main>
-//             {/* )}
-//             {role !== 'admin' && (
-//                 <div>
-//                     <h1>Access Denied</h1>
-//                 </div>
-//             )} */}
-//         </>
-//     );
+    // return (
+    //     <>
+    //         {/* {role === 'admin' && ( */}
+    //         <main>
+    //             <p> Hello</p>
+    //         </main>
+    //         {/* )}
+    //         {role !== 'admin' && (
+    //             <div>
+    //                 <h1>Access Denied</h1>
+    //             </div>
+    //         )} */}
+    //     </>
+    // );
 // }
 
 import React, { useState, useEffect } from 'react';
@@ -344,7 +348,7 @@ export default function AdminPage() {
     }
     return (
         <>
-            {/* {role === 'admin' ? ( */}
+            {role === 'admin' ? (
             <main>
                 <div className='relative overflow-hidden h-screen'>
                     <div>
@@ -406,12 +410,15 @@ export default function AdminPage() {
                 </div>
 
             </main>
-            {/* ) : 
+             ) : 
             (
-                <div>
-                    <h1>Access Denied</h1>
+                <div className="flex flex-col items-center justify-center h-screen w-screen bg-gray-100 text-gray-800">
+                    <div className="text-6xl mb-4 text-red-500">🚫</div>
+                    <h1 className="text-4xl font-bold mb-2">Access Denied</h1>
+                    <p className="text-lg text-gray-600">You don't have permission to enter this page.</p>
                 </div>
-            )} */}
+            )
+        }
         </>
     );
 }
