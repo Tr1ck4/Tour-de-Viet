@@ -27,9 +27,6 @@ const BookingModal = ({ booking, onClose, onSave }) => {
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div className="bg-white/10 rounded-lg p-8 relative h-fit w-1/3 backdrop-blur-md shadow-lg font-itim text-3xl">
-                <h2 className=" text-4xl font-bold mb-4 text-black">
-                    {editedBooking.townID ? 'Edit Tour' : 'Input new tour'}
-                </h2>
                 <form className="grid grid-cols-3 gap-4">
                     <label className="col-span-1 text-black">Town ID:</label>
                     <input
