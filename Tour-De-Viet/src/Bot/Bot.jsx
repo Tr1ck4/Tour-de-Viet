@@ -76,11 +76,7 @@ export default function Bot() {
                   {messages.map((message, index) => (
                     <div key={index} className={`message ${message.sender}`}>
                       <div className="message-content">
-                        {message.sender === 'Bot' ? (
                           <ReactMarkdown>{message.content}</ReactMarkdown>
-                        ) : (
-                          message.content
-                        )}
                       </div>
                     </div>
                   ))}

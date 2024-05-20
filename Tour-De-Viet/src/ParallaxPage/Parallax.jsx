@@ -21,7 +21,7 @@ export default function ParallaxPage() {
   }
 
   const CheckoutClick = () =>{
-    window.location = (`/tour/${state}`);
+    window.location = (`/tourpage/${state}`);
   }
   return (
     <main>
