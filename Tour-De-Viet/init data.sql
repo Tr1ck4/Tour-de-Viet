@@ -3,6 +3,8 @@ INSERT INTO accounts (userName, password, citizenID, name, address, age, telNum,
 INSERT INTO accounts (userName, password, citizenID, name, address, age, telNum, email) VALUES ("exampleUser3","password3","VN23192748","User3","Random address",18,"125-215-2678","anything3@gmail.com");
 INSERT INTO accounts (userName, password, citizenID, name, address, age, telNum, email) VALUES ("exampleUser4","password4","VN23192748","User4","Random address",18,"125-215-2678","anything4@gmail.com");
 INSERT INTO accounts (userName, password, citizenID, name, address, age, telNum, email) VALUES ("exampleUser5","password5","VN23192748","User5","Random address",18,"125-215-2678","anything5@gmail.com");
+INSERT INTO accounts (userName, password, citizenID, name, address, age, telNum, email) VALUES ("admin","admin","VN23192748","admin","Random address",18,"125-215-2678","anything5@gmail.com");
+
 
 INSERT INTO transportations (Name, startDate, endDate, price, goFrom, arriveAt, type) VALUES("P3123","2024-06-05","2024-06-07",100000,"Station 1 Port A","Station 1 Port B","Plane");
 INSERT INTO transportations (Name, startDate, endDate, price, goFrom, arriveAt, type) VALUES("P231","2024-06-05","2024-06-07",100000,"Station 2 Port A","Station 2 Port B","Plane");
@@ -48,7 +50,7 @@ INSERT INTO tours (townID, tourName, description, category, price,  transportati
 INSERT INTO tours (townID, tourName, description, category, price,  transportationID) VALUES(30,"Tour 30", '{"Header": null,"Content":"What ever"}', "Entertainment location",10300000,null);
 INSERT INTO tours (townID, tourName, description, category, price,  transportationID) VALUES(31,"Tour 31", '{"Header": null,"Content":"What ever"}', "Tour",10794000,null);
 INSERT INTO tours (townID, tourName, description, category, price,  transportationID) VALUES(32,"Tour 32", '{"Header": null,"Content":"What ever"}', "Tour",10600000,null);
-INSERT INTO tours (townID, tourName, description, category, price,  transportationID) VALUES(33,"Tour 33", '{"Header": null,"Content":"What ever"}', "Culinary",10400000,null);
+INSERT INTO tours (townID, tourName, description, category, price,  transportationID) VALUES(33,"Tour 33", '{"Header": "Ba Na Hill","Content":"Ba Na Hills, located near Da Nang in Vietnam, is a popular tourist destination known for its stunning landscapes, French colonial architecture, and the iconic Golden Bridge. The area is set in the Annamite Range and features a cool, temperate climate. Visitors can reach Ba Na Hills via a scenic cable car ride, which holds a world record for the longest non-stop single track cable car at over 5 kilometers."}', "Culinary",10400000,null);
 INSERT INTO tours (townID, tourName, description, category, price,  transportationID) VALUES(34,"Tour 34", '{"Header": null,"Content":"What ever"}', "Spa",10500000,null);
 INSERT INTO tours (townID, tourName, description, category, price,  transportationID) VALUES(35,"Tour 35", '{"Header": null,"Content":"What ever"}', "Spa",10430000,null);
 

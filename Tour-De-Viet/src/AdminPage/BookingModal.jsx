@@ -20,6 +20,7 @@ const BookingModal = ({ booking, onClose, onSave }) => {
     const handleSave = (e) => {
         e.preventDefault();
         const newDescription = JSON.stringify({ Header: header, Content: content });
+        console.log(newDescription);
         onSave({ ...editedBooking, description: newDescription });
         onClose();
     };

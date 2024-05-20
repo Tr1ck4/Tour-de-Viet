@@ -432,7 +432,7 @@ app.get('/api/tours/:townID/:tourName', (req, res) => {
 
 app.post('/api/tours', authenticateToken, (req, res) => {
     const { townID, tourName, description, category, price, transportationID, startDate, endDate } = req.body;
-
+    console.log(townID, tourName, description, category, price, transportationID, startDate, endDate);
     userModel.createTour(townID, tourName, description, category, price, transportationID, startDate, endDate, (err, result) => {
         if (err) {
             res.status(500).json({ error: err.message });

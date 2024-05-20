@@ -228,9 +228,8 @@ class UserModel {
 
   createTour(townID, tourName, description, category, price, transportationID, startDate, endDate, callback) {
     console.log('Create tour', tourName, townID, description, category, transportationID, startDate, endDate, price)
-    let newDescription = JSON.stringify(description);
     this.db.run("INSERT INTO tours (townID, tourName, description, category, price, transportationID) VALUES (?, ?, ?, ?, ?, ?)",
-      [townID, tourName, newDescription, category, price, transportationID],
+      [townID, tourName, description, category, price, transportationID],
       function (err) {
         if (err) {
           callback(err);
